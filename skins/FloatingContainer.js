@@ -1,0 +1,1 @@
+var FloatingContainerSkin = {def:{name:"inner"}};

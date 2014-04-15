@@ -1,0 +1,5 @@
+var PanelSkin = {};
+PanelSkin.def = {
+	
+};
+

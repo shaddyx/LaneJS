@@ -1,0 +1,97 @@
+<html>
+    <head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    </head>
+    <body>
+    	<script type="text/javascript" src="js/Util.js"></script>
+    	<script type="text/javascript" src="js/BaseObject.js"></script>
+    	<script type="text/javascript" src="js/Browser.js"></script>
+    	
+    	<script type="text/javascript" src="js/Util/LocalStorage.js"></script>
+    	<script type="text/javascript" src="js/Util/TextUtils.js"></script>
+    	<script type="text/javascript" src="js/BoxElement/BoxElement.js"></script>
+    	<script type="text/javascript" src="js/BoxElement/BoxElementCore.js"></script>
+    	<script type="text/javascript" src="js/BoxElement/BoxElementProperties.js"></script>
+    	<script type="text/javascript" src="js/BoxElement/BoxElementPropertyManager.js"></script>
+    	<script type="text/javascript" src="js/BoxElement/BoxElementRedrawManager.js"></script>
+    	<script type="text/javascript" src="js/BoxElement/BoxElementRenderManager.js"></script>
+    	
+    </body>
+    <script type="text/javascript">
+    	console.log("initializing onerror...");
+    	var OldErrorObject = Error;
+    	window.onerror = function(errorMsg, url, lineNumber, err){
+    		console.log("error:",errorMsg, url, lineNumber, err);
+    		return false;
+    	}
+    	
+    	var a = new BoxElement();
+    	a.virtualize({target:document.body});
+    	document.body.style.position = "absolute";
+    	document.body.style.overflow = "hidden";
+    	var childProto = {
+    				hs:true,
+    				vs:true,
+    				borderWidth:[1,1,1,1],
+    				elementType:"testElement2",
+    				c:[
+    					{
+    						//caption:"a"
+	    				},
+	    				{
+	    					hs:true,
+	    					vs:true,
+	    					borderWidth:[1,1,1,1],
+	    					borderColor:"#000"
+	    				}
+    				]
+    				
+    				
+    	};
+    	var childs = Util.cloneObject(childProto);
+    	var oldChilds = childs;
+    	for (var k =0;k<100;k++){
+    		childs.c[1].c = [Util.cloneObject(childProto)];
+    		childs = childs.c[1].c[0];
+    	}
+    	var struct = {
+    		//width:1,
+    		//height:1,
+    		/*hs:true,
+    		vs:true,*/
+    		horizontal:true,
+    		borderWidth:[1,1,1,1],
+    		borderColor:"#0F0"
+    		,c:[{
+    				hs:true,
+    				vs:true,
+    				left:10
+    				,top:10
+    				,width:100
+    				,height:100
+    				,borderWidth:[1,9,1,1]
+    				,borderColor:"#000"
+    				,elementType:"testElement1"
+    			}
+    			,{
+    				hs:true,
+    				vs:true,
+    				width:100
+    				,height:100
+    				,borderWidth:[1,1,8,8]
+    				,borderColor:"#f00"
+    				,elementType:"testElement2"
+    				,c:[oldChilds]
+    				
+    			}
+    			
+    		]
+    	};
+    	console.log(struct);
+    	a.build(struct);
+    	browser.on("sizeChanged",function(){
+    		a.width(this.width()-10);
+    		a.height(this.height());
+    	});
+    </script>
+</html>

@@ -1,0 +1,59 @@
+<html>
+    <head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    </head>
+    <body>
+    	<script type="text/javascript" src="js/Util.js"></script>
+    	<script type="text/javascript" src="js/BaseObject.js"></script>
+    	<script type="text/javascript" src="js/Browser.js"></script>
+    	
+    	<script type="text/javascript" src="js/Util/LocalStorage.js"></script>
+    	<script type="text/javascript" src="js/Util/TextUtils.js"></script>
+    	<script type="text/javascript" src="js/Util/SpeedUtil.js"></script>
+    	<script type="text/javascript" src="js/BoxElement/BoxElement.js"></script>
+    	<script type="text/javascript" src="js/BoxElement/BoxElementCore.js"></script>
+    	<script type="text/javascript" src="js/BoxElement/BoxElementProperties.js"></script>
+    	<script type="text/javascript" src="js/BoxElement/BoxElementPropertyManager.js"></script>
+    	<script type="text/javascript" src="js/BoxElement/BoxElementRedrawManager.js"></script>
+    	<script type="text/javascript" src="js/BoxElement/BoxElementRenderManager.js"></script>
+    	
+    	<script type="text/javascript" src="js/FormElements/FormElement.js"></script>
+    	<script type="text/javascript" src="js/FormElements/Container.js"></script>
+    	<script type="text/javascript" src="js/FormElements/FloatingContainer.js"></script>
+    	<script type="text/javascript" src="js/FormElements/Span.js"></script>
+    	
+    	
+    	
+    	<script type="text/javascript" src="skins/Span.js"></script>
+    	
+    </body>
+    <script type="text/javascript">
+    	console.log("initializing onerror...");
+    	var OldErrorObject = Error;
+    	window.onerror = function(errorMsg, url, lineNumber, err){
+    		console.log("error:",errorMsg, url, lineNumber, err);
+    		return false;
+    	}
+    	SpeedUtil.start("main cycle");
+    	var rootElement = BoxElement.virtualizeBody();
+    	console.log(rootElement);
+    	for (var k=0; k<30;k++){
+    		var be = new BoxElement();
+    		be.horizontal(true);
+    		be.hs(true);
+    		be.borderWidth([1,1,1,1]);
+    		rootElement.appendChild(be);
+    		for (var x=0; x<20;x++){
+	    		var span = new Span();
+		    	span.draw({target:be});
+		    	span.caption("Span test");
+		    	span.hs(true);
+	    	}
+    	}
+    	/*SpeedUtil.start("drawRec");
+    	
+    	rootElement.drawRec();
+    	SpeedUtil.end("drawRec");*/
+    	SpeedUtil.end("main cycle");
+    </script>
+</html>

@@ -1,0 +1,172 @@
+body{
+	padding:0;
+	margin:0;
+	font-family: arial, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	line-height: 13px;
+}
+table {
+	font-family: Courier;
+	font-size: 13px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	line-height: 16px;
+}
+input:focus{
+	outline:none;
+}
+
+.DirectDropDown{
+	position:absolute;
+	cursor:pointer;
+}
+.DirectDropDown:hover{
+	background-color:#979797;
+}
+
+/*
+ * Tree
+ */
+.Selected {
+	background: #beebff;
+	/*border: 1px solid #99defd;
+	padding: 0 0 0 0px;*/
+}
+
+.Container {
+    padding: 0;
+    margin: 0;
+}
+
+.Container li {
+    list-style-type: none;
+}
+
+
+
+/* indent for all tree children excepts root */
+.Node {
+    background-image : url(../img/TreeList/i.gif);
+    background-position : top left;
+    background-repeat : repeat-y;
+    margin-left: 18px;
+    zoom: 1;
+    cursor:pointer;
+    
+    font-family: arial, sans-serif;
+	/*font-size: 90%;*/
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	line-height: 16px;
+	
+}
+
+.IsRoot {
+    margin-left: 0;
+}
+
+
+/* left vertical line (grid) for all nodes */
+.IsLast {
+    background-image: url(../img/TreeList/i_half.gif);
+    background-repeat : no-repeat;
+}
+ 
+.ExpandOpen .Expand {
+    background-image: url(../img/TreeList/expand_minus.gif);
+}
+ 
+/* closed is higher priority than open */
+.ExpandClosed .Expand {
+    background-image: url(../img/TreeList/expand_plus.gif);
+}
+ 
+/* highest priority */
+.ExpandLeaf .Expand {
+    background-image: url(../img/TreeList/expand_leaf.gif);
+}
+
+.Content {
+    min-height: 18px;
+    margin-left:18px;
+}
+
+* html  .Content {
+    height: 18px; 
+}
+
+.Expand {
+    width: 18px;
+    height: 18px;
+    float: left;
+}
+
+
+.ExpandLoading   {
+    width: 18px;
+    height: 18px;
+    float: left;
+    background-image: url(../img/TreeList/expand_loading.gif);
+}
+
+
+
+.ExpandOpen .Container {
+	display: block;
+}
+
+.ExpandClosed .Container {
+	display: none;
+}
+
+.ExpandOpen .Expand, .ExpandClosed .Expand {
+	cursor: pointer;
+}
+.ExpandLeaf .Expand {
+	cursor: auto;
+}
+.Text {
+	font-family: arial, sans-serif;
+	font-size: 90%;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	line-height: 16px;
+}
+
+
+.Image {
+	float: left;
+	height: 16px;
+	width: 16px;
+	display: block;
+}
+
+.CheckBox {
+	margin-top:1px;
+	margin-right:2px;
+	margin-left:2px;
+	float: left;
+	height: 14px;
+	width: 14px;
+	display: block;
+	background-image:url(../img/TreeList/check.png);
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+}
+
+.CheckBox:hover {
+	background-position: 0px -18px !important;
+}
+.CheckBox.Checked:hover {
+	background-position: 0px -54px !important;
+}
+
+.Checked {
+	background-position: 0px -36px !important;
+}
