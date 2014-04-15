@@ -13,6 +13,16 @@ BasicMap.addProperty("count",0);
 BasicMap.prototype.hasKey = function(name){
 	return this._data[name] != undefined;
 }
+BasicMap.prototype.put = function(name,element){
+	if (this._data[name] == undefined){
+		this.add(name, element);
+	} else {
+		if (this.trigger("beforeUpdate", name, element) !== false){
+			this._data[name] = element;
+			this.trigger("updated", element, name);
+		}
+	}
+}
 /**
  * @param name an element name
  * @param element an element too add into the collection
@@ -75,5 +85,14 @@ BasicMap.prototype.remove = function(name){
 BasicMap.prototype.clear = function(){
 	while(this._keys.length){
 		this.remove(this._keys[0]);
+	}
+};
+
+
+BasicMap.prototype.forEach = function(callBack){
+	for (var k in this._keys){
+		var key = this._keys[k];
+		var obj = this.get(key);
+		callBack.call(obj, obj, key);
 	}
 };

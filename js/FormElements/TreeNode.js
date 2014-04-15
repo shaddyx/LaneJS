@@ -321,10 +321,43 @@ TreeNode.prototype.remove = function () {
 	this.c.length = 0;
 	this.htmlElement.parentNode.removeChild(this.htmlElement);
 	this.tree.trigger("beforeRemove", this);
-	for (var k in this.parent.c){
+	for (var k in this.parent.c) {
 		if (this.parent.c[k] == this){
 			this.parent.c.splice(k,1);
 			return;
 		}
 	}
+};
+
+TreeNode.prototype.removeNotFound = function(idList, params) {
+	params = params || {};
+	if (idList instanceof Array) {
+		//
+		//		list to map optimization
+		//
+		var l = {};
+		for (var k in idList){
+			l[idList[k]] = 1;
+		}
+		idList = l;
+	}
+	
+	var absentList = [];
+	
+	for (var k in this.c) {
+		var node = this.c[k];
+		if (!idList[node.id]){
+			absentList.push(node);
+		}
+	}
+	
+	for (var k in absentList) {
+		absentList[k].remove();
+	}
+	
+	if (params.recursive){
+		for (var k in this.c) {
+			this.c[k].removeNotFound(idList, params);
+		}
+	}	 
 };

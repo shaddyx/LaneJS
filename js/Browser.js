@@ -143,10 +143,7 @@ BrowserObject.mouseMoveFunction = function(e) {
 		}
 		var tmpE = {};
 		for ( var k in e) {
-			if (k != "returnValue"){
-				tmpE[k] = e[k];
-			}
-			
+			tmpE[k] = e[k];
 		}
 		tmpE.type = "mousemove";
 		browser.mouseX(x);

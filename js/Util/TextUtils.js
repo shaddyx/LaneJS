@@ -10,6 +10,8 @@ var TextUtils = function(){
 };
 Util.extend(TextUtils,BaseObject);
 
+TextUtils.disableCache = true;
+
 TextUtils.prototype._init = function(){
 	/*
 	 * creating element to width determination
@@ -83,7 +85,7 @@ TextUtils.prototype.determineFontData = function(key){
 		throw new Error("TextUtils error, key must set");
 	}
 	var fontData;
-	if (!browser.ie){
+	if (!browser.ie && !TextUtils.disableCache){
 		fontData = lStorage.getObject("tuCache_" + key) || this.fontData[key];
 	} else {
 		fontData = this.fontData[key];
@@ -110,7 +112,7 @@ TextUtils.prototype.determineFontData = function(key){
 	fontData['"'] = this._getTextWidth(fontSpan, '&quot;');
 	fontData['\''] = this._getTextWidth(fontSpan, '&#039;');
 	this.fontData[key] = fontData;
-	if (!browser.ie){
+	if (!browser.ie && !TextUtils.disableCache){
 		try{
 			lStorage.setObject("tuCache_" + key, fontData);
 		} catch (e){

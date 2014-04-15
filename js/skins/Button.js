@@ -4,10 +4,10 @@ ButtonSkin.def = {
 	borderRadius:[5,5,5,5],
 	cursor:"pointer",
 	horizontal:true,
-	minWidth:30,
-	minHeight:30,
 	defaults:{
-		captionWidth:false
+		captionWidth:false,
+		minWidth:30,
+		minHeight:30,
 	},
 	hovered:{
 		style:{
@@ -49,8 +49,10 @@ ButtonSkin.img = {
 		borderRadius:[5,5,5,5],
 		cursor:"pointer",
 		horizontal:true,
-		minWidth:30,
-		minHeight:30,
+		defaults:{
+			minWidth:30,
+			minHeight:30,
+		},
 		hovered:{
 			style:{
 				disabled:{
@@ -121,10 +123,10 @@ ButtonSkin.imgButton = {
 		borderRadius:[5,5,5,5],
 		cursor:"pointer",
 		horizontal:true,
-		minWidth:30,
-		minHeight:30,
 		vAlign:BoxElement.ALIGN.middle,
 		defaults:{
+			minWidth:30,
+			minHeight:30,
 			captionWidth:false
 		},
 		hovered:{

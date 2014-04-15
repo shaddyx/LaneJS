@@ -30,10 +30,6 @@ TreeList.func.afterDraw = function() {
 			parent.element.selected(true);
 		}
 	});
-	debugger;
-	Util.addListener(this._values.inner.htmlElement,"scroll",function(){
-		console.log("scroll");
-	});
 };
 
 TreeList.func.processKeyEvent = function(e){
@@ -136,6 +132,14 @@ TreeList.prototype.remove = function(id) {
 	this.data[id].remove();
 };
 
+TreeList.prototype.clear = function(){
+	if (this.head){
+		while (this.head.c.length) {
+			this.head.c[0].remove(true);
+		}
+	}
+};
+
 TreeList.prototype.getRoot = function() {
 	return this.head;
 };
@@ -156,3 +160,17 @@ TreeList.prototype.setData = function(data) {
 		this.add(data[k]);
 	}
 };
+
+TreeList.prototype.syncNode = function(data){
+	var node = this.getNodeById(data.id);
+	if (!node) {
+		return this.add(data);
+	} else {
+		node.__successUpdated = true;
+		node.text(data.text);
+		node.img(data.img);
+		node.canBeChecked(data.canBeChecked);
+	}
+	return node;
+}
+

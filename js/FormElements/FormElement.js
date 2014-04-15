@@ -5,7 +5,7 @@ var FormElement = function(){
 	this.inner(this.outer());
 	this.type = "FormElement";
 	this._propertyTranslators = {};
-	this.addPropertyTranslator(['opacity','hs', 'vs', {name:'width', back:true}, {name:'height', back:true}, 'sizeRatio', {name: "margin", back:true}, "visible"]);
+	this.addPropertyTranslator(['opacity','hs', 'vs', {name:'width', back:true}, {name:'height', back:true}, 'sizeRatio', {name: "margin", back:true}, "visible", "minWidth", "minHeight"]);
 	this.logicalChildren = [];
 };
 Util.extend(FormElement,BaseObject);
@@ -21,6 +21,8 @@ FormElement.addProperty("outer",false);
 FormElement.addProperty("isDrawn",false);
 FormElement.addProperty("width",0);
 FormElement.addProperty("height",20);
+FormElement.addProperty("minWidth",0);
+FormElement.addProperty("minHeight",0);
 FormElement.addProperty("hs",false);
 FormElement.addProperty("vs",false);
 FormElement.addProperty("visible",true);

@@ -277,3 +277,8 @@ Util.o = function(params){
 	}
 	return o;
 };
+Util.fillObject = function(object, data){
+	for (var k in data) {
+		object[k](data[k]);
+	}
+};
