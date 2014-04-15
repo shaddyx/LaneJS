@@ -71,7 +71,7 @@ TreeList.func.processKeyEvent = function(e){
 
 TreeList.on("keydown", TreeList.func.processKeyEvent);
 TreeList.on("afterDraw", TreeList.func.afterDraw);
-TreeList.on("beforeRemove",function(node){
+TreeList.on("beforeNodeRemove",function(node){
 	delete this.data[node.id];
 //	
 //	TODO:make safe node removal
@@ -125,7 +125,7 @@ TreeList.prototype.add = function(data) {
 	return newElement;
 };
 
-TreeList.prototype.remove = function(id) {
+TreeList.prototype.removeNode = function(id) {
 	if (!this.data[id]) {
 		throw new Error("TreeNode with id: " + id + " is not exists" );
 	}
@@ -172,5 +172,5 @@ TreeList.prototype.syncNode = function(data){
 		node.canBeChecked(data.canBeChecked);
 	}
 	return node;
-}
+};
 

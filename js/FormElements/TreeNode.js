@@ -320,7 +320,7 @@ TreeNode.prototype.remove = function () {
 	}
 	this.c.length = 0;
 	this.htmlElement.parentNode.removeChild(this.htmlElement);
-	this.tree.trigger("beforeRemove", this);
+	this.tree.trigger("beforeNodeRemove", this);
 	for (var k in this.parent.c) {
 		if (this.parent.c[k] == this){
 			this.parent.c.splice(k,1);
