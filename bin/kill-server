@@ -1,0 +1,4 @@
+# kill server based on the stored server.pid
+kill `cat server.pid`
+rm server.pid
+
