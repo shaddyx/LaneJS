@@ -1,0 +1,10 @@
+# Note: the content of htbin/ should be marked as executable
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+cd $DIR
+cd ..
+nohup python -m CGIHTTPServer 8080 > bin/server.log 2>&1&
+
+cd -
+echo $! > server.pid

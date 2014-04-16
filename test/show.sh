@@ -1,6 +1,6 @@
 #!/bin/bash
 
-url=index.html
+url=lane.html
 
 [[ -x $BROWSER ]] && exec "$BROWSER" "$url"
 path=$(which xdg-open || which gnome-open) && exec "$path" "$url"
