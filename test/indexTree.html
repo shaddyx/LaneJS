@@ -55,9 +55,11 @@
     		return false;
     	}
     	SpeedUtil.start("main cycle");
+    	browser.imageBase("../lane/");
     	var rootElement = BoxElement.virtualizeBody();
     	var win;
     	browser.on("ready",function(){
+    		
 	    	win = FormElement.build({
 	    		type:"Window",
 	    		caption:"Test window",
