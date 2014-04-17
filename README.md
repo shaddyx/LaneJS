@@ -1,8 +1,8 @@
 LaneJS
 ======
 
-An object-oriented JavasScript framework
-It allows to design the web page without any CSS and HTML with 100% cross-browser compatibility. 
+An object-oriented JavasScript framework. <br />
+Lane allows to design the web page without any CSS and HTML with 100% cross-browser compatibility. 
 
 <b>Targeted Platforms: </b> <br />
 — Internet Explorer 6.0 or above.<br />
