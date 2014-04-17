@@ -10,6 +10,7 @@ Lane allows to design the web page without any CSS and HTML with 100% cross-brow
 — Apple Safari 2.0 or above.<br />
 — Opera 9.25 or above.<br />
 — Chrome 1.0 or above.<br />
+In theory, it should work on any web-browser, which supports JavaScript.
 
 Before looking at examples, let's have a glance at some basic concepts of this Framework. 
 The core idea of Lane is that you define the layout of your page in a JavaScript file using JSON 
