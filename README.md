@@ -26,7 +26,7 @@ It means that you always know where exactly your element is put on the page.
 ========================================================================
 
 
-Now let's look Lane in detail.
+Now let's look at Lane in detail.
 FormElement is a part of BoxElement. FormElements contains all kind of Form elements: 
 radiobuttons, text fields, buttons, select options etc.
 
