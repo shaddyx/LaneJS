@@ -4,12 +4,12 @@ LaneJS
 An object-oriented JavasScript framework
 It allows to design the web page without any CSS and HTML with 100% cross-browser compatibility. 
 
-Targeted Platforms
-— Internet Explorer 6.0 or above.
-— Mozilla Firefox 1.5 or above.
-— Apple Safari 2.0 or above.
-— Opera 9.25 or above.
-— Chrome 1.0 or above.
+<b>Targeted Platforms: </b> <br />
+— Internet Explorer 6.0 or above.<br />
+— Mozilla Firefox 1.5 or above.<br />
+— Apple Safari 2.0 or above.<br />
+— Opera 9.25 or above.<br />
+— Chrome 1.0 or above.<br />
 
 Before looking at examples, let's have a glance at some basic concepts of this Framework. 
 The core idea of Lane is that you define the layout of your page in a JavaScript file using JSON 
@@ -74,7 +74,7 @@ In order to avoid XML and HTML - JSON is used to describe elements we want to cr
 		    		},
 
 
-You can have any amount of inner children objects you want:
+You can have any amount of inner child objects you want:
 
 	    		caption:"Some random window",
 	    		width:400,
