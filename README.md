@@ -113,7 +113,7 @@ Container.addProperty("horizontal", false, {type:"boolean"});
 =========================================================================
 
 
-<b> Event driven model. <b/> <br />
+<b> Event driven model. </b> <br />
 When you change property of some element, this element gets a flag, that it's been changed. 
 Then this element is put into the hash map, which is later recalculated in order to redraw the elements. 
 For example, if you change the size of a button, it's parent element (let it be some random div) checks 
