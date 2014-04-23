@@ -6,7 +6,13 @@ Window.type = "Window";
 Window.func = {};
 Window.buttons = {
 	CLOSE:1,
-	MINIMIZE:2	
+	MINIMIZE:2,
+	check:function(value){
+		if (value != 1 && value != 2){
+			throw new CoreException("Value: [" + value + "] is not in type Window.buttons");
+		}
+		return value;
+	}
 };
 Window.addProperty("dragStarted", false);
 Window.addProperty("openCentered", false);

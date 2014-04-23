@@ -42,12 +42,12 @@ BaseObject.addProperty = function(name,defValue,params){
 			}
 			
 		}
-		if (params.type && params.type.type) {
-			strict = params.type;
-			params.type = Types.BaseObjectInstance;
-		} 
-		
-		
+		if (params.type && !params.type.check){
+			if (params.type.type) {
+				strict = params.type;
+				params.type = Types.BaseObjectInstance;
+			}
+		}
 	}
 	
 	

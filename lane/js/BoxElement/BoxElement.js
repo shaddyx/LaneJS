@@ -101,7 +101,19 @@ BoxElement.REDRAW_MODE = {
 	,applyBefore:2
 	,full:10
 	,redrawParent:11
-	,fullAndRenderMe:12
+	,fullAndRenderMe:12,
+	check:function(value){
+		if (value == 0 ||
+			value == 1 ||
+			value == 2 ||
+			value == 10 ||
+			value == 11 ||
+			value == 12
+		) {
+			return value;
+		}
+		throw new CoreException("Value: [" + value + "] is not in type BoxElement.REDRAW_MODE");
+	}
 };
 BoxElement.OVERFLOW_MODE = {
 	none:0
@@ -111,16 +123,49 @@ BoxElement.OVERFLOW_MODE = {
 	,overflowY:4
 	,hiddenX:5
 	,hiddenY:6
+	,check:function(value){
+		if (value == 0 ||
+				value == 1 ||
+				value == 2 ||
+				value == 3 ||
+				value == 4 ||
+				value == 5 ||
+				value == 6
+			) {
+				return value;
+			}
+			throw new CoreException("Value: [" + value + "] is not in type BoxElement.OVERFLOW_MODE");
+	}
 };
 BoxElement.PROPERTY_TYPE = {
 	none:0
 	,array:1
 	,string:2
+	,check:function(value){
+		if (value == 0 ||
+				value == 1 ||
+				value == 2 
+				
+			) {
+				return value;
+			}
+			throw new CoreException("Value: [" + value + "] is not in type BoxElement.PROPERTY_TYPE");
+	}
 };
 BoxElement.ALIGN = {
 	begin:0,
 	middle:1,
-	end:2
+	end:2,
+	check:function(value){
+		if (value == 0 ||
+				value == 1 ||
+				value == 2 
+				
+			) {
+				return value;
+			}
+			throw new CoreException("Value: [" + value + "] is not in type BoxElement.ALIGN");
+	}
 };
 
 /*
