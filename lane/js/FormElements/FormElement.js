@@ -3,12 +3,12 @@ var FormElement = function(){
 	this.id = FormElement.idCounter++;
 	this.outer(new BoxElement());
 	this.inner(this.outer());
-	this.type = "FormElement";
 	this._propertyTranslators = {};
 	this.addPropertyTranslator(['opacity','hs', 'vs', {name:'width', back:true}, {name:'height', back:true}, 'sizeRatio', {name: "margin", back:true}, "visible", "minWidth", "minHeight"]);
 	this.logicalChildren = [];
 };
 Util.extend(FormElement,BaseObject);
+FormElement.type = "FormElement";
 FormElement.funcs = {};
 FormElement.idCounter = 0;
 FormElement.addProperty("opacity",1);

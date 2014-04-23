@@ -1,8 +1,8 @@
 var MenuItem = function(){
 	FormElement.call(this);
-	this.type = "MenuItem";
 };
 Util.extend(MenuItem,FormElement);
+MenuItem.type = "MenuItem";
 MenuItem.addProperty("img", false, {type:"image"});
 MenuItem.setDefault("hs",true);
 MenuItem.func = {};

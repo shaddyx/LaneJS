@@ -1,11 +1,11 @@
 var TabBar = function() {
 	Container.call(this);
-	this.type = "TabBar";
 	this.children().on("beforeAdd", this._beforeadd, this);
 	this.children().on("added", this._added, this);
 	this.children().on("removed", this._removed, this);
 };
 Util.extend(TabBar, Container);
+TabBar.type = "TabBar";
 TabBar.funcs = {};
 
 TabBar.addProperty("selectedTab", false,{type:"Tab"});

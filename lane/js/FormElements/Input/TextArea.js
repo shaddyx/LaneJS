@@ -1,8 +1,8 @@
 var TextArea = function() {
 	InputElement.call(this);
-	this.type = "TextArea";
 };
 Util.extend(TextArea, InputElement);
+TextArea.type = "TextArea";
 TextArea.setDefault("value", "");
 TextArea.setDefault("width", 100);
 TextArea.setDefault("height", 100);

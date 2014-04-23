@@ -16,9 +16,9 @@ var BaseObject = function(){
 	for (var k in this._baseClass._properties){
 		this._values[k] = this._baseClass._properties[k].def;
 	}
-	this.type = BaseObject;
+	this.type = this._baseClass.type;
 };
-
+BaseObject.type = "BaseObject";
 BaseObject._events = {};
 BaseObject._properties = {};
 /**
@@ -26,24 +26,58 @@ BaseObject._properties = {};
  */
 BaseObject.addProperty = function(name,defValue,params){
 	params = params || {};
+	var strict = false;
+	if (params.type){
+		if (typeof params.type == "string"){
+			var tmpType = Types[params.type];
+			if (!tmpType) {
+				tmpType = window[params.type];
+			}
+			if (!tmpType) {
+				debugger;
+				console.log("Type: [" + params.type + "] is not found");
+				delete params.type;
+				//throw new CoreException("Type: [" + params.type + "] is not found");
+			} else {
+				params.type = tmpType;
+			}
+			
+		}
+		if (params.type && params.type.type) {
+			strict = params.type;
+			params.type = Types.BaseObjectInstance;
+		}
+	}
+	
+	
 	this._properties[name] = {
 		def:defValue,
 		params:params
 	};
 	
+		
 	if (!params.changedAlways){
 		this.prototype[name] = function(val){
-			if (val != undefined && val !== this._values[name]){
-				if (this.trigger(name + "BeforeChanged" , val) !== false){
-					this._values[name] = val;
-					this.trigger(name + "Changed" , val);
-				};
+			if (val != undefined){
+				if (params.type) {
+					val = params.type.check(val, strict);
+				}
+				if (val !== this._values[name]){
+					if (this.trigger(name + "BeforeChanged" , val) !== false){
+						this._values[name] = val;
+						this.trigger(name + "Changed" , val);
+					};
+				}
 			}
+			
 			return this._values[name];
 		};
 	} else {
 		this.prototype[name] = function(val){
 			if (val != undefined){
+				if (params.type) {
+					val = params.type.check(val, strict);
+				}
 				if (this.trigger(name + "BeforeChanged" , val) !== false){
 					this._values[name] = val;
 					this.trigger(name + "Changed" , val);

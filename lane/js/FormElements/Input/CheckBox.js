@@ -1,8 +1,8 @@
 var CheckBox = function() {
 	InputElement.call(this);
-	this.type = "CheckBox";
 };
 Util.extend(CheckBox, InputElement);
+CheckBox.type = "CheckBox";
 CheckBox.setDefault("value",false);
 CheckBox.func = {};
 CheckBox.func.afterDraw = function() {

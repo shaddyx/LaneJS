@@ -4,6 +4,7 @@ var BasicList = function(){
 };
 
 Util.extend(BasicList,BaseObject);
+BasicList.type = "BasicList";
 /**
  * @param element an element too add into the collection
  * this method triggers <b>beforeAdd</b> and <b>added</b> events

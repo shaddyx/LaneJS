@@ -3,3 +3,4 @@ var BasicCollection = function(){
 };
 
 Util.extend(BasicCollection,BaseObject);
+BasicCollection.type = "BasicCollection";

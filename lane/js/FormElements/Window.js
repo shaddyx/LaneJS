@@ -1,8 +1,8 @@
 var Window = function() {
 	FloatingContainer.call(this);
-	this.type = "Window";
 };
 Util.extend(Window, FloatingContainer);
+Window.type = "Window";
 Window.func = {};
 Window.buttons = {
 	CLOSE:1,

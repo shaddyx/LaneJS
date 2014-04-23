@@ -1,8 +1,8 @@
 var Tab = function(){
 	Container.call(this);
-	this.type = "Tab";
 };
 Util.extend(Tab,Container);
+Tab.type = "Tab";
 Tab.funcs = {};
 
 Tab.setDefault("visible", false);

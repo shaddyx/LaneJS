@@ -5,6 +5,7 @@ var BasicMap = function(){
 };
 
 Util.extend(BasicMap,BaseObject);
+BasicMap.type = "BasicMap";
 /*
  * returns element count
  */

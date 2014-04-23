@@ -63,11 +63,10 @@ var BoxElement = function(params){
 	this.__updateHorizontal();
 	this._marginDx = 0;
 	this._marginDy = 0;
-	this.type = "BoxElement";
 };
 
 Util.extend(BoxElement,BaseObject);
-
+BoxElement.type = "BoxElement";
 
 BoxElement.virtualizeBody = function(){
 	if (!document.body.boxElement){

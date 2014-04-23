@@ -39,11 +39,10 @@ var TreeNode = function(params){
 	} else {
 		this.htmlElement = params.htmlElement;
 	}
-	this.type = "TreeNode";
 };
 
 Util.extend(TreeNode, BaseObject);
-
+TreeNode.type = "TreeNode";
 TreeNode.addProperty("text", undefined);
 TreeNode.addProperty("img", undefined);
 TreeNode.addProperty("opened", undefined);

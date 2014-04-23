@@ -3,7 +3,7 @@ var ElementMap = function(){
 };
 
 Util.extend(ElementMap,BasicMap);
-
+ElementMap.type = "ElementMap";
 ElementMap.defaultKeygenFunction = function(element, k){
 	return k;
 };

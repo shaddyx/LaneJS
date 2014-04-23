@@ -1,9 +1,9 @@
 var Canvas = function() {
 	Panel.call(this);
 	this._ieMode = browser.ie;
-	this.type = "Canvas";
 };
 Util.extend(Canvas, Panel);
+Canvas.type = "Canvas";
 Canvas.func = {};
 Canvas.addProperty("drawColor","#000000",{type:"color"});
 Canvas.addProperty("lineWidth",1,{type:"int", changedAlways:true});

@@ -1,10 +1,10 @@
 var TreeList = function() {
 	Panel.call(this);
-	this.type = "TreeList";
 	this.data = {};
 	this.head = undefined;
 };
 Util.extend(TreeList, Panel);
+TreeList.type = "TreeList";
 TreeList.addProperty("selectedNode", false);
 // FormElement.addProperty("data",{},{type:"object"});
 TreeList.uniqId = 0;

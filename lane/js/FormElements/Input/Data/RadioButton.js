@@ -1,8 +1,8 @@
 var RadioButton = function() {
 	DataElement.call(this);
-	this.type = "RadioButton";
 };
 Util.extend(RadioButton, DataElement);
+RadioButton.type = "RadioButton";
 RadioButton.setDefault("value",false);
 RadioButton.addProperty("triggerValue",0,{type:"int"});
 RadioButton.addProperty("checked",0,{type:"boolean"});

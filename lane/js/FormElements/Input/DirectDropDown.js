@@ -1,9 +1,9 @@
 var DirectDropDown = function(){
 	FormElement.call(this);
-	this.type = "DirectDropDown";
 	this.childElements = [];
 };
 Util.extend(DirectDropDown,FormElement);
+DirectDropDown.type = "DirectDropDown";
 DirectDropDown.addProperty("minRows",15);
 DirectDropDown.addProperty("maxRows",30);
 DirectDropDown.funcs = {};

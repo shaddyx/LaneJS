@@ -1,11 +1,10 @@
 var ChartLegend = function() {
 	FormElement.call(this);
-	this.type = "ChartLegend";
 	this._oldCacheString = "";
 };
 
 Util.extend(ChartLegend, FormElement);
-
+ChartLegend.type = "ChartLegend";
 ChartLegend.addProperty("chartField",false);
 
 ChartLegend.types = {};

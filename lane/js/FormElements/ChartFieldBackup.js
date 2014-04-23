@@ -1,8 +1,8 @@
 var ChartField = function() {
 	Canvas.call(this);
-	this.type = "ChartField";
 };
 Util.extend(ChartField, Canvas);
+ChartField.type = "ChartField";
 ChartField.func = {};
 ChartField.addProperty("data",undefined);
 ChartField.addProperty("xLineOffset",20);

@@ -7,9 +7,9 @@ var Container = function(){
 	this._childRemovedFunction = function(){
 		my.removeChild(this);
 	};
-	this.type = "Container";
 };
 Util.extend(Container,FormElement);
+Container.type = "Container";
 Container.funcs = {};
 Container.addProperty("children", false, {type:"BasicList", hidden:true});
 Container.addProperty("horizontal", false, {type:"boolean"});

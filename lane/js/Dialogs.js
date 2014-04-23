@@ -6,7 +6,7 @@ Dialogs = {
 	confirm: function(caption, text, callBack){
 		var struct = Util.cloneObject(DialogsSkin.confirm);
 		struct.caption = caption;
-		var win = FormElement.build(struct, rootElement)
+		var win = FormElement.build(struct, rootElement);
 		win.elements.text.caption(text);
 		var calledCallBack = false;
 		win.elements.okButton.on("click", function(){
@@ -28,4 +28,4 @@ Dialogs = {
 			
 		},this);
 	}
-}
+};

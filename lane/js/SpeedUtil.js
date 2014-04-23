@@ -29,12 +29,12 @@ var SpeedUtil = new function (){
 				case "calls":
 					sortFunc = function(a,b){
 						return a.calls - b.calls;
-					}
+					};
 					break;
 				default:
 					sortFunc = function(a,b){
 						return a.time - b.time;
-					}
+					};
 				
 			}
 			toSort.sort(sortFunc);

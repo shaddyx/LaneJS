@@ -25,7 +25,7 @@ var BrowserObject = function() {
 };
 
 Util.extend(BrowserObject, BaseObject);
-
+BrowserObject.type = "BrowserObject";
 BrowserObject.addProperty("imageBase", "");
 BrowserObject.addProperty("width", false);
 BrowserObject.addProperty("height", false);

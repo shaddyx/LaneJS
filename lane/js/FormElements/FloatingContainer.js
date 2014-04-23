@@ -1,6 +1,5 @@
 var FloatingContainer = function(){
 	Container.call(this);
-	this.type = "FloatingContainer";
 	this.addPropertyTranslator(['left','top', "zIndex", "relativity"]);
 };
 
@@ -9,6 +8,7 @@ FloatingContainer.getNextZIndex = function(){
 	return FloatingContainer.zIndex ++;
 };
 Util.extend(FloatingContainer,Container);
+FloatingContainer.type = "FloatingContainer";
 FloatingContainer.funcs = {};
 FloatingContainer.addProperty("zIndex",0,{type:"int"});
 FloatingContainer.addProperty("left",0,{type:"int"});

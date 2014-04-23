@@ -1,8 +1,8 @@
 var Label = function(){
 	FormElement.call(this);
-	this.type = "Label";
 };
 Util.extend(Label,FormElement);
+Label.type = "Label";
 Label.funcs = {};
 Label.addProperty("value", "");
 

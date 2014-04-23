@@ -4,9 +4,9 @@ var Splitter = function(){
 	this.removePropertyTranslator("vs");
 	this.removePropertyTranslator("width");
 	this.removePropertyTranslator("height");
-	this.type = "Splitter";
 };
 Util.extend(Splitter,FormElement);
+Splitter.type = "Splitter";
 FormElement.addProperty("percent",100, {type:"float"});
 /**
  * overriding component builder

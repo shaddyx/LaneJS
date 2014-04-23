@@ -1,8 +1,8 @@
 var Image = function() {
 	Panel.call(this);
-	this.type = "Image";
 };
 Util.extend(Image, Panel);
+Image.type = "Image";
 //Image.addProperty("img", false, {type:"image"});
 /*Image.func = {};
 Image.func.afterDraw = function() {

@@ -1,8 +1,8 @@
 var HourPicker = function() {
 	InputElement.call(this);
-	this.type = "HourPicker";
 };
 Util.extend(HourPicker, InputElement);
+HourPicker.type = "HourPicker";
 //HourPicker.addProperty("value","",{type:"text"});
 HourPicker.setDefault("value", "", {type:"int"});
 HourPicker.func = {};

@@ -1,9 +1,9 @@
 var FieldSet = function() {
 	Container.call(this);
-	this.type = "FieldSet";
 };
 
 Util.extend(FieldSet, Container);
+FieldSet.type = "FieldSet";
 FieldSet.funcs = {};
 
 FieldSet.funcs.updateCollapsed = function(){

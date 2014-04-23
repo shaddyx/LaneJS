@@ -1,8 +1,8 @@
 var DataElement = function(){
 	InputElement.call(this);
-	this.type = "DataElement";
 };
 Util.extend(DataElement, InputElement);
+DataElement.type = "DataElement";
 DataElement.func = {};
 DataElement.addProperty("dataSource",undefined,{type:"DataSource"});
 DataElement.setDefault("value",undefined);

@@ -1,8 +1,8 @@
 var Slider = function() {
 	InputElement.call(this);
-	this.type = "Slider";
 };
 Util.extend(Slider, InputElement);
+Slider.type = "Slider";
 Slider.setDefault("value",0);
 Slider.addProperty("range",0);
 

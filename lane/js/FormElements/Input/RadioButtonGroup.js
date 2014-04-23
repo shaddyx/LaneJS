@@ -1,9 +1,9 @@
 var RadioButtonGroup = function() {
 	Container.call(this);
 	this._values.children.on("added",this._added);
-	this.type = "RadioButtonGroup";
 };
 Util.extend(RadioButtonGroup, Container);
+RadioButtonGroup.type = "RadioButtonGroup";
 RadioButtonGroup.addProperty("checked",false,{type:"boolean"});
 RadioButtonGroup.func = {};
 

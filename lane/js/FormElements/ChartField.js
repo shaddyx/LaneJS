@@ -1,9 +1,9 @@
 var ChartField = function() {
 	Canvas.call(this);
-	this.type = "ChartField";
 };
 
 Util.extend(ChartField, Canvas);
+ChartField.type = "ChartField";
 ChartField.types = {};
 ChartField.func = {};
 ChartField.addProperty("data",undefined);
