@@ -13,8 +13,8 @@ Container.type = "Container";
 Container.funcs = {};
 Container.addProperty("children", false, {type:"BasicList", hidden:true});
 Container.addProperty("horizontal", false, {type:"boolean"});
-Container.addProperty("hAlign", BoxElement.ALIGN.begin, {type:"BoxElement.ALIGN"});
-Container.addProperty("vAlign", BoxElement.ALIGN.begin, {type:"BoxElement.ALIGN"});
+Container.addProperty("hAlign", BoxElement.ALIGN.begin, {type:BoxElement.ALIGN});
+Container.addProperty("vAlign", BoxElement.ALIGN.begin, {type:BoxElement.ALIGN});
 Container.addProperty("padding", [0,0,0,0], {type:"intArray", hidden:true});
 
 Container.prototype.addChild = function(child){

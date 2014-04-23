@@ -42,16 +42,47 @@ var Types = {};
 	});
 	
 	Types.boolean = Util.cloneType("boolean",Types.object, function(value, strict){
-		return value.toString();
+		return !!value;
 	});
 	
+	Types.array = Util.cloneType("array",Types.object, function(value, strict){
+		if (value instanceof Array){
+			return value;
+		}
+		if (typeof value == "string"){
+			var result = [];
+			for (var i = 0; i < value.length; i++) {
+				result.push(value[i]);
+			}
+			return result;
+		} else {
+			throw new CoreException("Value: [" + value + "] is not of type:" + this.name);
+		}
+	});
+
+	Types.intArray = Util.cloneType("intArray",Types.array, function(value, strict){
+		value = this.parentType.check(value);
+		for (var i = 0; i < value.length; i++){
+			value[i] = Types.int.check(value[i]);
+		}
+		return value;
+	});
 	//	this is a BaseObject-specific type
-	Types.BaseObjectInstance = Util.cloneType("Object",Types.object, function(value, baseObjectType){
+	Types.BaseObjectInstance = Util.cloneType("BaseObjectInstance",Types.object, function(value, baseObjectType){
 		if (value instanceof baseObjectType){
 			return value;
 		}
 				
 		throw new CoreException("Value: [" + value + "] is not instance of type:" + baseObjectType.type);
+	});
+	//	this is a Object-specific type
+	Types.ObjectValue= Util.cloneType("ObjectValue",Types.object, function(value, objectType){
+		for (var k in objectType){
+			if (value == objectType[k]){
+				return value;
+			}
+		} 
+		throw new CoreException("Value: [" + value + "] is not in type:" + objectType.type);
 	});
 	
 })();

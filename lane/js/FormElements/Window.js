@@ -10,8 +10,8 @@ Window.buttons = {
 };
 Window.addProperty("dragStarted", false);
 Window.addProperty("openCentered", false);
-Window.addProperty("draggable", true, {type:"boolean"});
-Window.addProperty("buttons", Window.buttons.CLOSE, {type:"Window.buttons"});
+Window.addProperty("draggable", true, {type:Types.boolean});
+Window.addProperty("buttons", Window.buttons.CLOSE, {type:Window.buttons});
 Window.addProperty("modal",false);
 Window.prototype.checkButtons = function(){
 	if(this._values.isDrawn){

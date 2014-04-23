@@ -34,7 +34,6 @@ BaseObject.addProperty = function(name,defValue,params){
 				tmpType = window[params.type];
 			}
 			if (!tmpType) {
-				debugger;
 				console.log("Type: [" + params.type + "] is not found");
 				delete params.type;
 				//throw new CoreException("Type: [" + params.type + "] is not found");
@@ -46,7 +45,9 @@ BaseObject.addProperty = function(name,defValue,params){
 		if (params.type && params.type.type) {
 			strict = params.type;
 			params.type = Types.BaseObjectInstance;
-		}
+		} 
+		
+		
 	}
 	
 	
