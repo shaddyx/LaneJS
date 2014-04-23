@@ -11,7 +11,7 @@ if (typeof console == "undefined"){
 		},
 		warn:function(){
 		}
-	}
+	};
 }
 
 var Util = {};
@@ -25,7 +25,7 @@ var Util = {};
  */
 if (typeof Object.create !== 'function') {
     Object.create = function (o) {
-        function F() { }
+        function F() { };
         F.prototype = o;
         return new F();
     };
@@ -155,7 +155,7 @@ Util.swapDomElements = function (obj1, obj2) {
 
     // remove temporary marker node
     temp.parentNode.removeChild(temp);
-}
+};
 
 Util.trim = function(str){
 	str = str.toString();
@@ -164,7 +164,7 @@ Util.trim = function(str){
     while (begin <= end && str.charCodeAt(begin) < 33) { ++begin; }
     while (end > begin && str.charCodeAt(end) < 33) { --end; }
     return str.substr(begin, end - begin + 1);
-}
+};
 
 Util.createShutter = function(params){
 	if (!params) {
@@ -196,10 +196,10 @@ Util.createShutter = function(params){
 Util.padLeft = function(s, symbol, n){
 	s = s.toString();
 	while(s.length < n) {
-		s = symbol + s
+		s = symbol + s;
 	}
 	return s;
-}
+};
 Util.addListener = function(elem, evnt, func){
 	if (elem.addEventListener) {
 		return elem.addEventListener(evnt, function(e) {
@@ -236,9 +236,9 @@ if (!window.getComputedStyle) {
                 });
             }
             return el.currentStyle[prop] ? el.currentStyle[prop] : null;
-        }
+        };
         return this;
-    }
+    };
 };
 Util.o = function(params){
 	if (!params.constructor){
@@ -253,7 +253,7 @@ Util.o = function(params){
 		this.extend(o, params.extend);
 		o.prototype.__super = function(){
 			params.extend.apply(this,arguments);
-		}
+		};
 	}
 	if (params.properties){
 		for (var k in params.properties){
@@ -281,4 +281,16 @@ Util.fillObject = function(object, data){
 	for (var k in data) {
 		object[k](data[k]);
 	}
+};
+
+/**
+ * function clones Type object
+ */
+Util.cloneType = function(name, parentType, checkFunction){
+	
+	var newType = this.cloneObject(parentType);
+	newType.name = name;
+	newType.parentType = parentType;
+	newType.check = checkFunction;
+	return newType;
 };

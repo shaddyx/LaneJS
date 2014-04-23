@@ -65,7 +65,7 @@ BaseObject.setDefault = function(name, def){
 		throw new Error("No property with name: " + name);
 	}
 	this._properties[name].def = def;	
-}
+};
 /**
  * add's event listener to the object
  */
@@ -132,7 +132,7 @@ BaseObject.prototype.trigger = function(name){
  */
 BaseObject.prototype.hasListener = function(name){
 	return (!!this._events[name] || !!this._baseClass._events[name]);
-}
+};
 
 /**
  * add's event listener to the object

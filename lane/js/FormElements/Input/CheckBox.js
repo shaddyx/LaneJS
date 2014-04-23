@@ -6,7 +6,6 @@ Util.extend(CheckBox, InputElement);
 CheckBox.setDefault("value",false);
 CheckBox.func = {};
 CheckBox.func.afterDraw = function() {
-	debugger;
 	this._values.outer.on("click",function(){
 		if (this.enabled()){
 			this.trigger("click");
