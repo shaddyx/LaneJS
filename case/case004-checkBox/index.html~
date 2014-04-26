@@ -1,0 +1,88 @@
+<html>
+    <head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    	<link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+    	<script type="text/javascript" src="/lane/js/Util/Util.js"></script>
+    	<script type="text/javascript" src="/lane/js/Util/LocalStorage.js"></script>
+    	<script type="text/javascript" src="/lane/js/Util/SpeedUtil.js"></script>
+    	
+    	<script type="text/javascript" src="/lane/js/BaseObject.js"></script>
+    	<script type="text/javascript" src="/lane/js/Types.js"></script>
+    	
+    	<script type="text/javascript" src="/lane/js/Collections/BasicList.js"></script>
+    	<script type="text/javascript" src="/lane/js/Browser.js"></script>
+    	<script type="text/javascript" src="/lane/js/Util/TextUtils.js"></script>
+    	<script type="text/javascript" src="/lane/js/BoxElement/BoxElement.js"></script>
+    	<script type="text/javascript" src="/lane/js/BoxElement/BoxElementCore.js"></script>
+    	<script type="text/javascript" src="/lane/js/BoxElement/BoxElementProperties.js"></script>
+    	<script type="text/javascript" src="/lane/js/BoxElement/BoxElementPropertyManager.js"></script>
+    	<script type="text/javascript" src="/lane/js/BoxElement/BoxElementRedrawManager.js"></script>
+    	<script type="text/javascript" src="/lane/js/BoxElement/BoxElementRenderManager.js"></script>
+    	<script type="text/javascript" src="/lane/js/BoxElement/BoxElementEvents.js"></script>
+    	
+    	<script type="text/javascript" src="/lane/js/FormElements/FormElement.js"></script>
+    	<script type="text/javascript" src="/lane/js/FormElements/Container.js"></script>
+    	<script type="text/javascript" src="/lane/js/FormElements/Panel.js"></script>
+    	<script type="text/javascript" src="/lane/js/FormElements/FloatingContainer.js"></script>
+    	<script type="text/javascript" src="/lane/js/FormElements/Span.js"></script>
+    	<script type="text/javascript" src="/lane/js/FormElements/Window.js"></script>
+    	<script type="text/javascript" src="/lane/js/FormElements/Label.js"></script>
+    	<script type="text/javascript" src="/lane/js/FormElements/Button.js"></script>
+	<script type="text/javascript" src="/lane/js/FormElements/InputElement.js"></script>    	
+        <script type="text/javascript" src="/lane/js/FormElements/Input/TextArea.js"></script>
+    	
+    	<script type="text/javascript" src="/lane/js/skins/Span.js"></script>
+    	<script type="text/javascript" src="/lane/js/skins/Window.js"></script>
+    	<script type="text/javascript" src="/lane/js/skins/Container.js"></script>
+    	<script type="text/javascript" src="/lane/js/skins/Label.js"></script>
+    	<script type="text/javascript" src="/lane/js/skins/Button.js"></script>
+
+	<script type="text/javascript" src="/lane/js/skins/TextArea.js"></script>
+    	
+    </body>
+    <script type="text/javascript">
+    	var OldErrorObject = Error;
+    	window.onerror = function(errorMsg, url, lineNumber, err){
+    		console.log("error:",errorMsg, url, lineNumber, err);
+    		return false;
+    	}
+    	SpeedUtil.start("main cycle");
+    	var rootElement = BoxElement.virtualizeBody();
+    	var win;
+    	browser.imageBase("../../lane/");
+    	browser.on("ready",function(){
+	    	win = FormElement.build({
+	    		type:"Window",
+		   	left: 300,
+	    		caption:"lane.js window",
+	    		width:600,
+	    		height:400,
+	    		c:[
+	    			{
+	    				type:"Container",
+	    				hs:true,
+	    				horizontal:true,
+	    				c:[
+		    				{       
+ 							height: 30,
+		    					type:"Label",
+		    					width:350,
+		    					value:"It's a text area"
+		    				},
+		    				{
+							type:"TextArea",
+							caption:"This is where you can type a lot of text without worrying there's not enought space",
+							name:"sometext"
+					   
+		    				},
+                        ]
+	    			},
+	    			
+	    		]
+	    	}, rootElement);
+	    });
+	    
+    </script>
+</html>
