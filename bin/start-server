@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 PORT=8080
 # Note: the content of htbin/ should be marked as executable
 
