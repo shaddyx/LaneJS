@@ -74,7 +74,7 @@ BoxElement.copyEvent = function(e){
 		res[k] = e[k];
 	}
 	return res;
-}
+};
 
 
 Util.addListener(document.body, 'mousedown',BoxElement.targetEventFunction);

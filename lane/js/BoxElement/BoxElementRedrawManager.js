@@ -65,7 +65,7 @@ BoxElement.runGlobalRedraw = function(innerCall) {
 			this.lastRedrawed[k].trigger("redrawed");
 		}
 		for ( var temp in this._reDrawMap) {
-			BoxElement.__redrawInitiators = {}
+			BoxElement.__redrawInitiators = {};
 			this.runGlobalRedraw(true);
 			break;
 		}

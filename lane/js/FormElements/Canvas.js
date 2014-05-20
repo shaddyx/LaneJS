@@ -18,9 +18,9 @@ Canvas.prototype.getContext = function(){
 	}
 	return this._context;
 	
-}
+};
 Canvas.prototype.clear = function(){
-	this._elements.canvas.htmlElement.width = this._elements.canvas.htmlElement.width
+	this._elements.canvas.htmlElement.width = this._elements.canvas.htmlElement.width;
 };
 
 Canvas.prototype.drawLines = function(lines){
@@ -43,7 +43,7 @@ Canvas.prototype.drawLines = function(lines){
 Canvas.prototype.drawLine = function(x, y, x1, y1) {
 	this.getContext().moveTo(x,y);
 	this.getContext().lineTo(x1,y1);
-}
+};
 
 Canvas.prototype.applySizes = function(){
 	if (this._elements.canvas.htmlElement.width != this._elements.canvas.width() ||

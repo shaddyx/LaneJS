@@ -192,7 +192,6 @@ FormElement.funcs.afterDraw = function(){
 					this[propTranslator.name](value);
 				},my);
 			})(propTranslator);
-			
 		}
 	}
 	this._values.outer.htmlElement.setAttribute("elementName",this._values.name);
@@ -306,6 +305,13 @@ FormElement.build = function(struct, target, map){
 		} 
 		if (k === "name"){
 			map[struct.name] = el;
+		}
+		if (el[k] == undefined) {
+			var objString = el;
+			if (el.type) {
+				objString = "[" + el.type + "]";
+			}
+			throw new Error("Object " + objString + " has no property " + k);
 		}
 		el[k](struct[k]);
 	}
