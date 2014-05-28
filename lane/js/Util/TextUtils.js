@@ -130,7 +130,7 @@ TextUtils.prototype.determineFontData = function(key){
 TextUtils.prototype._getTextWidth = function(c,t){
 	c.innerHTML= t;
 	if (browser.ie) {
-		return c.offsetWidth
+		return c.offsetWidth;
 	}
 	return c.getBoundingClientRect().width;
 };

@@ -45,7 +45,7 @@ BoxElement.runGlobalRedraw = function(innerCall) {
 	}
 
 	for ( var temp in this._reDrawMap) {
-		BoxElement.__redrawInitiators = {}
+		BoxElement.__redrawInitiators = {};
 		this.runGlobalRedraw(true);
 		break;
 	}
@@ -59,7 +59,6 @@ BoxElement.runGlobalRedraw = function(innerCall) {
 	 */
 	if (!innerCall) {
 		this.runGlobalRender();
-		
 		
 		for (var k in this.lastRedrawed) {
 			this.lastRedrawed[k].trigger("redrawed");
@@ -100,7 +99,7 @@ BoxElement.initGlobalRedraw = function() {
 			console.log("initGlobalRedraw called...");
 			my._redrawTimer = false;
 			if (!browser.initialized){
-				BoxElement.initGlobalRedraw
+				BoxElement.initGlobalRedraw();
 			} else {
 				my.runGlobalRedraw();
 			}

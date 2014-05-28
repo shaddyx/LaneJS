@@ -7,7 +7,7 @@ BoxElement.prototype.buildTo = function(struct) {
 	var el = new BoxElement();
 	el.build(struct);
 	el.drawRec({target:this});
-	return el;
+	return target;
 };
 
 /**

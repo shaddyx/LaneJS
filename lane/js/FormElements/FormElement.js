@@ -91,15 +91,20 @@ FormElement.prototype.removePropertyTranslator = function(name){
 };
 
 FormElement.prototype.componentBuilder = function(opts){
-	if (!window[this.type + "Skin"]){
-		throw new Error("No skin for:" + this.type);
-	}
-	if (!window[this.type + "Skin"][this.skin()]){
-		throw new Error("No skin for:" + this.type);
-	}
-	this.buildComponent(window[this.type + "Skin"][this.skin()]);
+	var skin = FormElement.getSkinForType(this.type, this._values.skin);
+	this.buildComponent(skin);
+	
 };
-
+FormElement.getSkinForType = function (type, skin){
+	var skinStr = type + "Skin";
+	if (!window[skinStr]){
+		throw new Error("No skin for:" + type);
+	}
+	if (!window[skinStr][skin]){
+		throw new Error("No skin [" + skin + "] for:" + type);
+	}
+	return window[type + "Skin"][skin];
+};
 /**
  * function builds an component from structure
  * @param struct
