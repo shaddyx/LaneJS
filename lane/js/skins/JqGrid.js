@@ -8,10 +8,15 @@ JqGridSkin.def = {
 	   		vs:true,
 	   		//borderWidth:[1,1,1,1],
 	   		borderColor:"#000",
-	   		params:{
-				tag:"table"
-				//css: 'background-color:white;padding:0;border:0;display:block !important; '
-		    }
+	   		/*params:{
+				tag:"table",
+				css: 'display:table'
+		    }*/
+	   	},
+	   	{
+	   		name:"navigator",
+	   		hs:true,
+	   		height:25
 	   	}
 	]
 };

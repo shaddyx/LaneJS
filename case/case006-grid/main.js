@@ -24,7 +24,4 @@ browser.on("ready",function(){
 			}
 		]
 	}, rootElement);
-	
-	/*var graph = win.elements.timeGraph;
-	graph.data(data);*/
 });

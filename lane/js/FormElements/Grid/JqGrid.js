@@ -1,15 +1,23 @@
 var JqGrid = function() {
 	FormElement.call(this);
+	a=this;
 };
 Util.extend(JqGrid, FormElement);
 JqGrid.type = "JqGrid";
 JqGrid.func = {};
 
 JqGrid.prototype.afterDraw = function(){
-	this.grid = jQuery(this._elements.table.htmlElement).jqGrid({
+	this._tableElement = document.createElement("table");
+	this._tableElement.setAttribute("id", "table" + this.id);
+	this._elements.table.htmlElement.appendChild(this._tableElement);
+	this.grid = jQuery(this._tableElement).jqGrid({
 		datatype: "local",
 		height: this._values.height,
 		width: this._values.width,
+		hidegrid:false,
+		//viewrecords: true,
+		caption:this._values.caption,
+		pager:this._elements.table.navigator,
 	   	colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
 	   	colModel:[
 	   		{name:'id',index:'id', width:60, sorttype:"int"},
@@ -20,8 +28,7 @@ JqGrid.prototype.afterDraw = function(){
 	   		{name:'total',index:'total', width:80,align:"right",sorttype:"float"},		
 	   		{name:'note',index:'note', width:150, sortable:false}		
 	   	],
-	   	//multiselect: true,
-	   	//caption: "Manipulating Array Data"
+	   	multiselect: true
 	});
 	var mydata = [
 			{id:"1",invdate:"2007-10-01",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
@@ -35,25 +42,17 @@ JqGrid.prototype.afterDraw = function(){
 			{id:"9",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"}
 			];
 	for(var i=0;i<=mydata.length;i++)
-		jQuery(this._elements.table.htmlElement).jqGrid('addRowData',i+1,mydata[i]);
+		jQuery(this._tableElement).jqGrid('addRowData',i+1,mydata[i]);
 };
 
 JqGrid.on("afterDraw", JqGrid.prototype.afterDraw);
-/*JqGrid.on("afterDraw", function(){
-	var my = this;
-	setTimeout(function(){
-		my.afterDraw();
-	},1000);
-});*/
 JqGrid.on(["widthChanged","heightChanged"], function(){
 	var my = this;
-	/*my.grid&&my.grid.setGridWidth(my._values.width);
-	my.grid&&my.grid.setGridHeight(my._values.height);*/
 	if (!this.timeout){
 		this.timeout = setTimeout(function(){
 			this.timeout = false;
 			my.grid&&my.grid.setGridWidth(my._values.width);
-			my.grid&&my.grid.setGridHeight(my._values.height-22);
+			my.grid&&my.grid.setGridHeight(my._values.height - 72);
 		},0);
 	}
 });
