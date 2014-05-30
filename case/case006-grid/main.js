@@ -21,21 +21,25 @@ browser.on("ready",function(){
 				name:"grid",
 				hs:true,
 				vs:true,
-				columns:[
-				   {
-					   name:"test",
-					   width:100,
-					   caption:"testC"
-				   },
-				   {
-					   name:"test1",
-					   caption:"testC1"
-				   },
-				   {
-					   name:"test2",
-					   caption:"testC2"
-				   }
-				]
+				columns:{
+					   test:{
+						   name:"test",
+						   width:100,
+						   caption:"testC",
+						   sortable:true/*,
+						   formatter:function (cellvalue, options, rowObject ) {
+						        return "<img src='" + cellvalue + "' />";
+						   }*/
+					   },
+					   test1:{
+						   name:"test1",
+						   caption:"testC1"
+					   },
+					   test2:{
+						   name:"test2",
+						   caption:"testC2"
+					   }
+				}
 			}
 		]
 	}, rootElement);

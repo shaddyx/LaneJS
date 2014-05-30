@@ -13,6 +13,7 @@ JqGridColumn.addProperty("index", "");
 JqGridColumn.addProperty("align", "right");
 JqGridColumn.addProperty("sortType", "");
 JqGridColumn.addProperty("sortable", false);
+JqGridColumn.addProperty("formatter", false);
 
 JqGridColumn.prototype.toJqGridModel = function(){
 	var model = {
