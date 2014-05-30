@@ -67,6 +67,8 @@ var Types = {};
 		}
 		return value;
 	});
+
+
 	//	this is a BaseObject-specific type
 	Types.BaseObjectInstance = Util.cloneType("BaseObjectInstance",Types.object, function(value, baseObjectType){
 		if (value instanceof baseObjectType){
@@ -75,6 +77,29 @@ var Types = {};
 				
 		throw new CoreException("Value: [" + value + "] is not instance of type:" + baseObjectType.type);
 	});
+	
+	Types.TypedMap = Util.cloneType("TypedMap",Types.object, function(value, basicMapType, map){
+		if (value instanceof TypedMap){
+			return value;
+		}
+		if (typeof value === "object" && map instanceof TypedMap) {
+			//debugger;
+			for (var k in value) {
+				var objClass = value[k];
+				if (!(objClass instanceof map.elementType())){
+					var objClass = map.elementType();
+					objClass = new objClass();
+					if (objClass instanceof BaseObject) {
+						objClass.applyValues(value[k]);
+					}
+				}
+				map.add(k, objClass);
+			}
+			return map;
+		}
+		throw new CoreException("Value: [" + value + "] is not instance of type:" + baseObjectType.type);
+	});
+	
 	//	this is a Object-specific type
 	Types.ObjectValue= Util.cloneType("ObjectValue",Types.object, function(value, objectType){
 		for (var k in objectType){

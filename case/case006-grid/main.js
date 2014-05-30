@@ -20,8 +20,28 @@ browser.on("ready",function(){
 				caption:"This is a grid",
 				name:"grid",
 				hs:true,
-				vs:true
+				vs:true,
+				columns:[
+				   {
+					   name:"test",
+					   width:100,
+					   caption:"testC"
+				   },
+				   {
+					   name:"test1",
+					   caption:"testC1"
+				   },
+				   {
+					   name:"test2",
+					   caption:"testC2"
+				   }
+				]
 			}
 		]
 	}, rootElement);
+	win.elements.grid.add(1, {id:1, test:"234523452354", test1:"34563563456", test2:"12234523542354"});
+	win.elements.grid.add("asdfasdfadsf", {id:1, test:"234523452354", test1:"34563563456", test2:"12234523542354"});
+	win.elements.grid.add(3, {id:1, test:"234523452354", test1:"34563563456", test2:"12234523542354"});
+	win.elements.grid.add(4, {id:1, test:"234523452354", test1:"34563563456", test2:"12234523542354"});
+	win.elements.grid.update("asdfasdfadsf", {id:1, test:"updated", test1:"34563563456", test2:"sfgsdfgsdfg"});
 });

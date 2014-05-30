@@ -318,6 +318,19 @@ FormElement.build = function(struct, target, map){
 			}
 			throw new Error("Object " + objString + " has no property " + k);
 		}
+		/*
+		if (el._values[k] instanceof BasicMap) {
+			for (var x in struct[k]){
+				el._values[k].add(x, struct[k][x]);
+			}
+		}
+		
+		if (el._values[k] instanceof BasicList) {
+			for (var x in struct[k]){
+				el._values[k].add(struct[k][x]);
+			}
+		}
+		*/
 		el[k](struct[k]);
 	}
 	el.draw({ target: target });

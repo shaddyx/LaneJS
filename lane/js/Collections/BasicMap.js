@@ -13,7 +13,7 @@ BasicMap.addProperty("count",0);
 
 BasicMap.prototype.hasKey = function(name){
 	return this._data[name] != undefined;
-}
+};
 BasicMap.prototype.put = function(name,element){
 	if (this._data[name] == undefined){
 		this.add(name, element);
@@ -23,7 +23,7 @@ BasicMap.prototype.put = function(name,element){
 			this.trigger("updated", element, name);
 		}
 	}
-}
+};
 /**
  * @param name an element name
  * @param element an element too add into the collection
@@ -31,7 +31,7 @@ BasicMap.prototype.put = function(name,element){
  */
 BasicMap.prototype.add = function(name,element){
 	if (this._data[name] != undefined){
-		throw new Error("element with key " + name + "already exists in HashMap")
+		throw new Error("element with key " + name + "already exists in HashMap");
 	}
 	if (this.trigger("beforeAdd", name, element) !== false){
 		this._keys.push(name);
@@ -50,14 +50,14 @@ BasicMap.prototype.getByIndex = function(index){
 		throw new Error("There are no element with index " + index + " in map");
 	}
 	return this._data[name];
-}
+};
 BasicMap.prototype.get = function(name){
 	return this._data[name];
 };
 
 BasicMap.prototype.getKeys = function(){
 	return this._keys;
-}
+};
 
 /**
  * @param index an index of the element to remove
@@ -89,8 +89,7 @@ BasicMap.prototype.clear = function(){
 	}
 };
 
-
-BasicMap.prototype.forEach = function(callBack){
+BasicMap.prototype.each = function(callBack){
 	for (var k in this._keys){
 		var key = this._keys[k];
 		var obj = this.get(key);

@@ -29,7 +29,7 @@ ElementMap.prototype.update = function(params){
 		var paramK = params.keyGenerator.call(this, params.data[k], k, params);
 		var element;
 		if (this.hasKey(paramK)){
-			element = this.get(paramK)
+			element = this.get(paramK);
 			if (params.update.call(this, element, params.data[k], k, params)){
 				this.trigger("updated", element, params.data[k], k, params);
 			}
@@ -52,4 +52,4 @@ ElementMap.prototype.update = function(params){
 		this.remove(key);
 		this.trigger("removed", element, key);
 	}
-}
+};

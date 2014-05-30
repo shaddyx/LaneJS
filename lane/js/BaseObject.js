@@ -61,7 +61,7 @@ BaseObject.addProperty = function(name,defValue,params){
 		this.prototype[name] = function(val){
 			if (val != undefined){
 				if (params.type) {
-					val = params.type.check(val, strict);
+					val = params.type.check(val, strict, this._values[name]);
 				}
 				if (val !== this._values[name]){
 					if (this.trigger(name + "BeforeChanged" , val) !== false){
@@ -209,4 +209,15 @@ BaseObject.prototype.removeListener = function(name,func,obj){
 		}
 	}
 	return false;
+};
+
+
+BaseObject.prototype.applyValues = function(struct) {
+	for (var k in struct) {
+		if (typeof this[k] === "function") {
+			this[k](struct[k]);
+		} else {
+			throw new Error("Error, [" + this.type + "] has no property " + k);
+		}
+	}
 };
