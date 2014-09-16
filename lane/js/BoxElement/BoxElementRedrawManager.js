@@ -298,13 +298,7 @@ BoxElement.prototype.reDraw = function(innerCall) {
 		// first stretch
 		//		
 
-		var		inner = this._v.horizontal ? this._v.innerWidth : this._v.innerHeight, 
-				lastFreeSpace = this._v[stretchValue] - this._v[stretchvMin], 	
-				lastInner = inner - nonStretchable,
-				skipInner = 0,
-				skipCount = 0,
-				foundSmaller,
-				ratio;
+		
 		
 		
 		
@@ -313,6 +307,13 @@ BoxElement.prototype.reDraw = function(innerCall) {
 //		TODO: optimize this!!!
 //		
 		do {
+			var		inner = this._v.horizontal ? this._v.innerWidth : this._v.innerHeight, 
+					lastFreeSpace = this._v[stretchValue] - this._v[stretchvMin], 	
+					lastInner = inner - nonStretchable,
+					skipInner = 0,
+					skipCount = 0,
+					foundSmaller,
+					ratio;
 			foundSmaller = false;
 			for ( var k = 0; k < toStretch.length; k++) {
 				var newSize = Math.floor((lastInner - skipInner) / (toStretch.length - skipCount));
@@ -372,7 +373,6 @@ BoxElement.prototype.reDraw = function(innerCall) {
 				case this._baseClass.ALIGN.middle:
 					this._alignDelta(Math.floor(lastValue/2));
 					break;
-				
 				case this._baseClass.ALIGN.end:
 					this._alignDelta(lastValue);
 				break;
