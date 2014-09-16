@@ -60,7 +60,7 @@ ChartField.prototype.refresh = function(){
 	 * drawing coordinateLines
 	 */
 	this.applySizes();
-	if (!this._values.data) {
+	if (!this._v.data) {
 		return;
 	}
 	this.drawColor("#000000");
@@ -86,7 +86,7 @@ ChartField.prototype.refresh = function(){
 	}
 	
 	
-	if (this._values.scaleX){
+	if (this._v.scaleX){
 		this.xStep(xFieldWidth / data.datasets[0].data.length);
 	}
 	this.drawGuideLines(data, max);
@@ -112,14 +112,14 @@ ChartField.prototype.drawGuideLines = function(data, max){
 	var yPosition = this._elements.canvas.width() - yLineOffset;
 	this.beginPath();
 	for (var k in data.labels) {
-		var x = yLineOffset + k * this._values.xStep;
-		this.drawLine(x,xPosition + this._values.guideLineWidth / 2, x ,xPosition - this._values.guideLineWidth / 2);
-		//console.log(x,xPosition + this._values.guideLineWidth / 2);
-		if (this._values.showXLabels){
-			this.fillText(data.labels[k], x, xPosition + this._values.guideLineWidth / 2 + this.yTextOffset());
+		var x = yLineOffset + k * this._v.xStep;
+		this.drawLine(x,xPosition + this._v.guideLineWidth / 2, x ,xPosition - this._v.guideLineWidth / 2);
+		//console.log(x,xPosition + this._v.guideLineWidth / 2);
+		if (this._v.showXLabels){
+			this.fillText(data.labels[k], x, xPosition + this._v.guideLineWidth / 2 + this.yTextOffset());
 		}
 	}
-	if (this._values.showYLabels){
+	if (this._v.showYLabels){
 		this.fillText(max, yLineOffset - 20, xLineOffset);
 	}
 	this.stroke();
@@ -134,10 +134,10 @@ ChartField.prototype.drawDataSet = function(dataSet, ratio){
 	var xFieldWidth = this._elements.canvas.width() - xLineOffset * 2;
 	var yFieldHeight = this._elements.canvas.height() - yLineOffset * 2;
 	
-	var count = xFieldWidth / this._values.xStep;
+	var count = xFieldWidth / this._v.xStep;
 	var lines = [];
 	for (var x = 0; x < count; x ++){
-		var realX = x * this._values.xStep + yLineOffset;
+		var realX = x * this._v.xStep + yLineOffset;
 		var realY = yFieldHeight - (dataSet.data[x] * ratio) + xLineOffset;
 		lines.push([realX, realY]);
 	}
@@ -145,7 +145,7 @@ ChartField.prototype.drawDataSet = function(dataSet, ratio){
 }
 
 ChartField.func.dataChanged = function(){
-	/*var data = this._values.data;
+	/*var data = this._v.data;
 	var length = data.labels.length;
 	var ratio = this._elements.canvas.width() / length; 
 	for (var k in data.labels){

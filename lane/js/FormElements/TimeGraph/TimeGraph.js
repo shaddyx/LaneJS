@@ -22,7 +22,7 @@ TimeGraph.on("afterDraw", TimeGraph.prototype._afterDraw);
 
 
 TimeGraph.prototype.refresh = function(){
-	var data = this._values.data;
+	var data = this._v.data;
 	
 	var dataMap = {};
 	var lineList = [];
@@ -31,7 +31,7 @@ TimeGraph.prototype.refresh = function(){
 	var maxWidth = 0;
 	for (var k in data) {
 		 var element = data[k];
-		 maxWidth = Math.max(maxWidth, (element._values.time + element._values.length) * this._values.xRatio);
+		 maxWidth = Math.max(maxWidth, (element._v.time + element._v.length) * this._v.xRatio);
 		 var line = element.line();
 		 if (!dataMap[line]) {
 			 dataMap[line] = [];
@@ -87,7 +87,7 @@ TimeGraph.prototype.refresh = function(){
 			data[k].build(this);
 		}
 		data[k].height(lineHeight - 3);
-		data[k].top(lineMap[data[k]._values.line]._values.top);
+		data[k].top(lineMap[data[k]._v.line]._v.top);
 		data[k].refresh();
 	}
 	this.trigger("refreshed");

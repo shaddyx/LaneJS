@@ -22,23 +22,23 @@ TimeGraphBar.prototype.refresh = function(){
 	if (!this._element) {
 		throw new Exception("TimeGraphBar is not initialized!");
 	}
-	var xRatio = this.timeGraph._values.xRatio;
-	var leftValue = this._values.time;
-	var lengthValue = this._values.length;
-	var heightValue = this._values.height;
+	var xRatio = this.timeGraph._v.xRatio;
+	var leftValue = this._v.time;
+	var lengthValue = this._v.length;
+	var heightValue = this._v.height;
 	this._element.left(leftValue * xRatio);
-	this._element.top(this._values.top);
+	this._element.top(this._v.top);
 	this._element.height(heightValue);
 	this._element.width(lengthValue * xRatio);
-	this._element.backgroundColor(this._values.backgroundColor);
+	this._element.backgroundColor(this._v.backgroundColor);
 	
 	/*this._element.style.left = (leftValue * xRatio) + "px";
-	this._element.style.top =  this._values.top + "px";
+	this._element.style.top =  this._v.top + "px";
 	this._element.style.width = (lengthValue * xRatio) + "px";
 	console.log(lengthValue, this._element.style.width);
 	this._element.style.height = heightValue + "px";
-	this._element.style.backgroundColor = this._values.backgroundColor;
-	this._element.style.borderColor = this._values.borderColor;
+	this._element.style.backgroundColor = this._v.backgroundColor;
+	this._element.style.borderColor = this._v.borderColor;
 	this._element.style.borderWidth = "1px";
 	this._element.style.borderStyle = "solid";
 	this._element.style.display = "block";

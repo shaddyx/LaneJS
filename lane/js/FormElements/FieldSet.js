@@ -7,11 +7,11 @@ FieldSet.type = "FieldSet";
 FieldSet.funcs = {};
 
 FieldSet.funcs.updateCollapsed = function(){
-	this.elements.container.visible(this._values.collapsed);
+	this.elements.container.visible(this._v.collapsed);
 };
 
 FieldSet.funcs.updateCollapsable = function(){
-	this.elements.collapseButton.visible(this._values.collapsable);
+	this.elements.collapseButton.visible(this._v.collapsable);
 };
 
 FieldSet.on("collapsedChanged", FieldSet.funcs.updateCollapsed);

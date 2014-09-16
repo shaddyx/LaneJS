@@ -81,11 +81,11 @@ Canvas.prototype.circle = function(x,y,r,fill){
 	}
 };
 Canvas.prototype.applyColor = function(){
-	this.getContext().strokeStyle = this._values.drawColor;
+	this.getContext().strokeStyle = this._v.drawColor;
 };
 
 Canvas.prototype.applyLineWidh = function(){
-	this.getContext().lineWidth = this._values.lineWidth;
+	this.getContext().lineWidth = this._v.lineWidth;
 };
 
 Canvas.on("drawColorChanged", Canvas.prototype.applyColor);

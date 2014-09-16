@@ -50,13 +50,13 @@ ChartField.prototype.refresh = function(){
 	 * drawing coordinateLines
 	 */
 	this.applySizes();
-	if (!this._values.data) {
+	if (!this._v.data) {
 		return;
 	}
 	
 	
-	params.max = this._values.options.scaleStepWidth * this._values.options.scaleSteps;
-	if (this._values.scaleX){
+	params.max = this._v.options.scaleStepWidth * this._v.options.scaleSteps;
+	if (this._v.scaleX){
 		this.xStep(params.xFieldWidth / data.datasets[0].data.length);
 	}
 	
@@ -66,10 +66,10 @@ ChartField.prototype.refresh = function(){
 		var dataSet = data.datasets[k];
 		switch(dataSet.type){
 			case "curve":
-				ChartField.types.curve.call(this,dataSet, this._values.options, params);
+				ChartField.types.curve.call(this,dataSet, this._v.options, params);
 				break;
 			case "lines":
-				ChartField.types.lines.call(this,dataSet, this._values.options, params);
+				ChartField.types.lines.call(this,dataSet, this._v.options, params);
 				break;
 			default:
 				console.error("No chart type:" + dataSet.type);
@@ -83,7 +83,7 @@ ChartField.prototype.drawGuideLines = function(data, params){
 	var yLineOffset = this.yLineOffset();
 	var xPosition = this._elements.canvas.height() - xLineOffset;
 	var yPosition = this._elements.canvas.width() - yLineOffset;
-	var opts = this._values.options;
+	var opts = this._v.options;
 	var xTextOffset = 20;
 	var stepRatio = params.yFieldHeight / opts.scaleSteps;
 	
@@ -92,12 +92,12 @@ ChartField.prototype.drawGuideLines = function(data, params){
 	this.beginPath();
 	this.drawColor("#eeeeee");
 	for (var k in data.labels) {
-		var x = yLineOffset + k * this._values.xStep;
+		var x = yLineOffset + k * this._v.xStep;
 		this.drawLine(x,xPosition, x ,xPosition - params.yFieldHeight);
 	}
 	
 	for (var i = 0; i < opts.scaleSteps; i++) {
-		var y = this._values.height - xLineOffset - (i + 1) * stepRatio;
+		var y = this._v.height - xLineOffset - (i + 1) * stepRatio;
 		var x = yLineOffset;
 		this.drawLine(x, y, x + params.xFieldWidth ,y);
 	}
@@ -107,19 +107,19 @@ ChartField.prototype.drawGuideLines = function(data, params){
 	this.drawColor("#000000");
 	
 	for (var k in data.labels) {
-		var x = yLineOffset + k * this._values.xStep;
-		this.drawLine(x,xPosition + this._values.guideLineWidth / 2, x ,xPosition - this._values.guideLineWidth / 2);
-		if (this._values.showXLabels) {
-			this.fillText(data.labels[k], x, xPosition + this._values.guideLineWidth / 2 + this.yTextOffset());
+		var x = yLineOffset + k * this._v.xStep;
+		this.drawLine(x,xPosition + this._v.guideLineWidth / 2, x ,xPosition - this._v.guideLineWidth / 2);
+		if (this._v.showXLabels) {
+			this.fillText(data.labels[k], x, xPosition + this._v.guideLineWidth / 2 + this.yTextOffset());
 		}
 	}
-	if (this._values.showYLabels) {
+	if (this._v.showYLabels) {
 		for (var i = 0; i < opts.scaleSteps; i++) {
 			var val = (i + 1) * opts.scaleStepWidth;
-			var y = this._values.height - xLineOffset - (i + 1) * stepRatio;
+			var y = this._v.height - xLineOffset - (i + 1) * stepRatio;
 			var x = yLineOffset;
 			this.fillText(val, x - xTextOffset, y);
-			this.drawLine(x + this._values.guideLineWidth / 2, y, x - this._values.guideLineWidth / 2 ,y);
+			this.drawLine(x + this._v.guideLineWidth / 2, y, x - this._v.guideLineWidth / 2 ,y);
 		}
 	}
 	this.stroke();
@@ -140,10 +140,10 @@ ChartField.prototype.drawDataSet = function(dataSet, ratio){
 	var xFieldWidth = this._elements.canvas.width() - xLineOffset * 2;
 	var yFieldHeight = this._elements.canvas.height() - yLineOffset * 2;
 	
-	var count = xFieldWidth / this._values.xStep;
+	var count = xFieldWidth / this._v.xStep;
 	var lines = [];
 	for (var x = 0; x < count; x ++){
-		var realX = x * this._values.xStep + yLineOffset;
+		var realX = x * this._v.xStep + yLineOffset;
 		var realY = yFieldHeight - (dataSet.data[x] * ratio) + xLineOffset;
 		lines.push([realX, realY]);
 	}
@@ -151,7 +151,7 @@ ChartField.prototype.drawDataSet = function(dataSet, ratio){
 }
 
 ChartField.func.dataChanged = function(){
-	/*var data = this._values.data;
+	/*var data = this._v.data;
 	var length = data.labels.length;
 	var ratio = this._elements.canvas.width() / length; 
 	for (var k in data.labels){

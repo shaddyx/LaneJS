@@ -17,8 +17,8 @@ TextArea.func.afterDraw = function() {
 };
 
 TextArea.prototype.updateValues = function() {
-	if (this._values.isDrawn){
-		this._elements.input.htmlElement.value = this._values.value;
+	if (this._v.isDrawn){
+		this._elements.input.htmlElement.value = this._v.value;
 	}
 };
 

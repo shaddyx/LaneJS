@@ -18,11 +18,11 @@ TimeGraphCaption.prototype.refresh = function(){
 	if (!this._element) {
 		throw new Error("TimeGraphCaption is not initialized!");
 	}
-	var topPos = this._values.top + this.timeGraph.lineHeight / 2 - 7;
+	var topPos = this._v.top + this.timeGraph.lineHeight / 2 - 7;
 	this._element.style.top =  topPos + "px";
 	this._element.style.position = "absolute";
 	this._element.style.zIndex = "0";
-	this._element.innerHTML = this._values.caption;
+	this._element.innerHTML = this._v.caption;
 };
 
 TimeGraphCaption.prototype.remove = function(){

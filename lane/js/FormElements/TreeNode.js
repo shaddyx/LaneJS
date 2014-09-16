@@ -93,7 +93,7 @@ TreeNode.on("openedChanged",function(opened){
 TreeNode.on("imgChanged",function(img){
 	this.imageElement.style.display = img ? "block" : "none";
 	if (img) {
-		this.imageElement.style.backgroundImage = "url(" + browser._values.imageBase + img + ")";
+		this.imageElement.style.backgroundImage = "url(" + browser._v.imageBase + img + ")";
 	} else {
 		this.imageElement.style.backgroundImage = "";
 	}
@@ -246,7 +246,7 @@ TreeNode.prototype.refresh = function() {
 	
 	for ( var k in this.c) {
 		if (k != this.c.length - 1) {
-			if (this.c[k]._values.last) {
+			if (this.c[k]._v.last) {
 				this.c[k].last(false);
 			}
 		} else {

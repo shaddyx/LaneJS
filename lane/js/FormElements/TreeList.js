@@ -14,12 +14,12 @@ TreeList.func.afterDraw = function() {
 		var htmlElement =  ev.srcElement || ev.target;
 		if (htmlElement.getAttribute("expander")) {
 			var element = htmlElement.parentNode.element;
-			element.opened(!element._values.opened);
+			element.opened(!element._v.opened);
 		}
 		
 		if (htmlElement.getAttribute("checker")) {
 			var element = htmlElement.parentNode.parentNode.element;
-			element.checked(!element._values.checked);
+			element.checked(!element._v.checked);
 		}
 		
 		var parent = htmlElement;
@@ -37,29 +37,29 @@ TreeList.func.processKeyEvent = function(e){
 	console.log("key:", k);
 	switch(k) {
 		case 40:
-			if (this._values.selectedNode){
-				var next = this._values.selectedNode.getNext();
+			if (this._v.selectedNode){
+				var next = this._v.selectedNode.getNext();
 				if (next && next != this.head){
 					next.selected(true);
 				}
 			}
 			break;
 		case 38:
-			if (this._values.selectedNode){
-				var prev = this._values.selectedNode.getPrev();
+			if (this._v.selectedNode){
+				var prev = this._v.selectedNode.getPrev();
 				if (prev && prev != this.head){
 					prev.selected(true);
 				}
 			}
 			break;
 		case 13:
-			if (this._values.selectedNode){
-				this._values.selectedNode.opened(!this._values.selectedNode.opened());
+			if (this._v.selectedNode){
+				this._v.selectedNode.opened(!this._v.selectedNode.opened());
 			}
 			break;
 		case 32:
-			if (this._values.selectedNode){
-				this._values.selectedNode.checked(!this._values.selectedNode.checked());
+			if (this._v.selectedNode){
+				this._v.selectedNode.checked(!this._v.selectedNode.checked());
 			}
 			break;
 		default:
@@ -78,7 +78,7 @@ TreeList.on("beforeNodeRemove",function(node){
 //	
 });
 TreeList.on("selectedNodeBeforeChanged", function(value) {
-	var old = this._values.selectedNode;
+	var old = this._v.selectedNode;
 	if (old && old != value) {
 		old.selected(false);
 	}

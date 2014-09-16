@@ -12,9 +12,9 @@ var BaseObject = function(){
 	//			this line is harmfull!!!!
 	this._baseClass = this.__proto__?this.__proto__.constructor:this.constructor;
 	this._events = {};
-	this._values = {};
+	this._v = {};
 	for (var k in this._baseClass._properties){
-		this._values[k] = this._baseClass._properties[k].def;
+		this._v[k] = this._baseClass._properties[k].def;
 	}
 	this.type = this._baseClass.type;
 };
@@ -61,17 +61,17 @@ BaseObject.addProperty = function(name,defValue,params){
 		this.prototype[name] = function(val){
 			if (val != undefined){
 				if (params.type) {
-					val = params.type.check(val, strict, this._values[name]);
+					val = params.type.check(val, strict, this._v[name]);
 				}
-				if (val !== this._values[name]){
+				if (val !== this._v[name]){
 					if (this.trigger(name + "BeforeChanged" , val) !== false){
-						this._values[name] = val;
+						this._v[name] = val;
 						this.trigger(name + "Changed" , val);
 					};
 				}
 			}
 			
-			return this._values[name];
+			return this._v[name];
 		};
 	} else {
 		this.prototype[name] = function(val){
@@ -80,11 +80,11 @@ BaseObject.addProperty = function(name,defValue,params){
 					val = params.type.check(val, strict);
 				}
 				if (this.trigger(name + "BeforeChanged" , val) !== false){
-					this._values[name] = val;
+					this._v[name] = val;
 					this.trigger(name + "Changed" , val);
 				};
 			}
-			return this._values[name];
+			return this._v[name];
 		};
 	}
 	

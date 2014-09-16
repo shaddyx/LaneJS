@@ -23,28 +23,28 @@ BoxElement.runGlobalRender = function(){
  * function renders coordinates of our childs
  */
 BoxElement.prototype.render = function(){
-	var left=this._values.padding[3];
-	var top=this._values.padding[0];
-	if (this._values.horizontal){
-		left += this._values._alignDelta;
+	var left=this._v.padding[3];
+	var top=this._v.padding[0];
+	if (this._v.horizontal){
+		left += this._v._alignDelta;
 	} else {
-		top += this._values._alignDelta;
+		top += this._v._alignDelta;
 	}
 	for (var k = 0 ; k < this.c.length ; k++){
 		var child = this.c[k];
-		if (!child._values._virtualized && !child._values.floating && child._values.visible) {
-			left += child._values._vMargin[3];
-			top += child._values._vMargin[0];
+		if (!child._v._virtualized && !child._v.floating && child._v.visible) {
+			left += child._v._vMargin[3];
+			top += child._v._vMargin[0];
 			
-			child.left(left + child._values._hDelta);
-			child.top(top + child._values._vDelta);
+			child.left(left + child._v._hDelta);
+			child.top(top + child._v._vDelta);
 			
-			if (this._values.horizontal) {
-				left += child._values.width + child._values._vMargin[1];
-				top -= child._values._vMargin[0];
+			if (this._v.horizontal) {
+				left += child._v.width + child._v._vMargin[1];
+				top -= child._v._vMargin[0];
 			} else {
-				top += child._values.height + child._values._vMargin[2];
-				left -= child._values._vMargin[3];
+				top += child._v.height + child._v._vMargin[2];
+				left -= child._v._vMargin[3];
 			}
 		}
 	}
@@ -53,7 +53,7 @@ BoxElement.prototype.render = function(){
  * adds us to render queue, but only if our parent exists
  */
 BoxElement.prototype.addToRenderQueue = function(me){
-	if (this.parent&&!this._values.floating) {
+	if (this.parent&&!this._v.floating) {
 		if (me){
 			this._baseClass._renderMap[this.id] = this;
 		} else {

@@ -35,7 +35,7 @@ PopupMenu.on("visibleChanged", PopupMenu.prototype.recalcPosition);
 PopupMenu.on("removed", PopupMenu.func.removed);
 PopupMenu.on("menuItemPressed", function(el){
 	//console.log(el.caption());
-	if (this._values.component) {
-		this._values.component.trigger("menuItemPressed", el);
+	if (this._v.component) {
+		this._v.component.trigger("menuItemPressed", el);
 	}
 });

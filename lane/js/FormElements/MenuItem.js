@@ -8,7 +8,7 @@ MenuItem.setDefault("hs",true);
 MenuItem.func = {};
 MenuItem.func.afterDraw = function() {
 	var my = this;
-	this._values.outer.on("click",function(){
+	this._v.outer.on("click",function(){
 		this.enumParents(function(element){
 			if (element instanceof PopupMenu){
 				element.trigger("menuItemPressed", my);
@@ -18,8 +18,8 @@ MenuItem.func.afterDraw = function() {
 	this.applyImg();
 };
 MenuItem.prototype.applyImg = function(){
-	if (this._values.isDrawn && this._elements.img){
-		this._elements.img.backgroundImage(this._values.img);
+	if (this._v.isDrawn && this._elements.img){
+		this._elements.img.backgroundImage(this._v.img);
 	}
 };
 

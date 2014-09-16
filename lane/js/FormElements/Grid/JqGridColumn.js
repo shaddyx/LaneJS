@@ -17,15 +17,15 @@ JqGridColumn.addProperty("formatter", false);
 
 JqGridColumn.prototype.toJqGridModel = function(){
 	var model = {
-			name:this._values.name,
-			index:this._values.name,
-			width:this._values.width,
-			align:this._values.align,
-			sorttype:this._values.sortType,
-			sortable:this._values.sortable
+			name:this._v.name,
+			index:this._v.name,
+			width:this._v.width,
+			align:this._v.align,
+			sorttype:this._v.sortType,
+			sortable:this._v.sortable
 	};
-	if (this._values.formatter) {
-		model.formatter = this._values.formatter;
+	if (this._v.formatter) {
+		model.formatter = this._v.formatter;
 	}
 	return model; 
 };

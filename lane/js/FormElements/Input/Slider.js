@@ -12,8 +12,8 @@ Slider.prototype.afterDraw = function(){
 	this.updateRange();
 };
 Slider.prototype.updateRange = function(){
-	 if (this._values.isDrawn){
-		 this._dxStep = (this._elements.sliderContainer._values.width - this._elements.slider._values.width) / this._values.range;
+	 if (this._v.isDrawn){
+		 this._dxStep = (this._elements.sliderContainer._v.width - this._elements.slider._v.width) / this._v.range;
 		 this._elements.slider.top(0);
 		 this._elements.slider.draggable({
 		   dragXStep:this._dxStep
@@ -23,14 +23,14 @@ Slider.prototype.updateRange = function(){
 };
 
 Slider.prototype.updateValue = function(){
-	if (this._values.isDrawn){
-		this._elements.slider.left(this._dxStep * this._values.value);
+	if (this._v.isDrawn){
+		this._elements.slider.left(this._dxStep * this._v.value);
 	}
 };
 
 Slider.prototype.updateSliderPos = function(){
-	if (this._values.isDrawn){
-		this.value(this._elements.slider._values.left / this._dxStep);
+	if (this._v.isDrawn){
+		this.value(this._elements.slider._v.left / this._dxStep);
 	}
 };
 

@@ -20,9 +20,9 @@ Window.addProperty("draggable", true, {type:Types.boolean});
 Window.addProperty("buttons", Window.buttons.CLOSE, {type:Window.buttons});
 Window.addProperty("modal",false);
 Window.prototype.checkButtons = function(){
-	if(this._values.isDrawn){
-		this._elements.minimizeButton && this._elements.minimizeButton.visible(this._values.buttons & Window.buttons.MINIMIZE);
-		this._elements.closeButton && this._elements.closeButton.visible(this._values.buttons & Window.buttons.CLOSE);
+	if(this._v.isDrawn){
+		this._elements.minimizeButton && this._elements.minimizeButton.visible(this._v.buttons & Window.buttons.MINIMIZE);
+		this._elements.closeButton && this._elements.closeButton.visible(this._v.buttons & Window.buttons.CLOSE);
 	}
 };
 Window.prototype.close = function(){
@@ -44,7 +44,7 @@ Window.func.afterDraw = function() {
 			return;
 		}
 		console.warn("drag started");
-		var outer = my._values.outer;
+		var outer = my._v.outer;
 		oldPosition.left = browser.mouseX();
 		oldPosition.top = browser.mouseY();
 		oldPosition.xOffset = browser.mouseX() - outer.left();
@@ -63,9 +63,9 @@ Window.func.afterDraw = function() {
 	};
 	rootElement.on("mouseup", this._dragStop);
 	this._move = function() {
-		if (my._values.dragStarted) {
-			my._values.outer.htmlElement.style.left = (browser.mouseX() - oldPosition.xOffset) + 'px';
-			my._values.outer.htmlElement.style.top = (browser.mouseY() - oldPosition.yOffset) + 'px';
+		if (my._v.dragStarted) {
+			my._v.outer.htmlElement.style.left = (browser.mouseX() - oldPosition.xOffset) + 'px';
+			my._v.outer.htmlElement.style.top = (browser.mouseY() - oldPosition.yOffset) + 'px';
 		}
 	};
 	rootElement.on("mousemove", this._move);
@@ -77,8 +77,8 @@ Window.func.afterDraw = function() {
 		this.close();
 	},this);
 	this.checkButtons();
-	this._values.outer.on("redrawed", function(){
-		if (this._values.openCentered && !this.startTimer){
+	this._v.outer.on("redrawed", function(){
+		if (this._v.openCentered && !this.startTimer){
 			this.startTimer = setTimeout(function(){
 				my.left(rootElement.width()/2 - my.width()/2);
 				my.top(rootElement.height()/2 - my.height()/2);

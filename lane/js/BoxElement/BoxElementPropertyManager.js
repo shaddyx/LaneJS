@@ -9,15 +9,15 @@ BoxElement.prototype.applyProperties = function(before){
 		
 		var propParams = properties[prop];
 		if (propParams.applyer){
-			propParams.applyer.call(this,this._values[prop]);
+			propParams.applyer.call(this,this._v[prop]);
 		} else {
 			try{
-				this.htmlElement.style[prop] = this._values[prop] + (propParams.htmlEnding || "");
+				this.htmlElement.style[prop] = this._v[prop] + (propParams.htmlEnding || "");
 			} catch (e){
-				console.log("error property [" + prop + "]:" + this._values[prop] + (propParams.htmlEnding || ""));
+				console.log("error property [" + prop + "]:" + this._v[prop] + (propParams.htmlEnding || ""));
 			}
 			
-			//console.log("applying[" + prop + "]:" + this._values[prop],this.htmlElement);
+			//console.log("applying[" + prop + "]:" + this._v[prop],this.htmlElement);
 		}
 	}
 	if (before){
@@ -71,7 +71,7 @@ BoxElement.addPropertyApplyer("elementType",function(value){
 });
 
 BoxElement.addPropertyApplyer("width",function(value){
-	var elementRealWidth = value - ((browser.ie && browser.version != 10)?0:this._values._dx);
+	var elementRealWidth = value - ((browser.ie && browser.version != 10)?0:this._v._dx);
 	this.htmlElement.style.width = elementRealWidth + 'px';
 });
 BoxElement.addPropertyApplyer("hAlign",function(value){
@@ -90,7 +90,7 @@ BoxElement.addPropertyApplyer("hAlign",function(value){
 });
 
 BoxElement.addPropertyApplyer("height",function(value){
-	var elementRealHeight = value - ((browser.ie && browser.version != 10)?0:this._values._dy);
+	var elementRealHeight = value - ((browser.ie && browser.version != 10)?0:this._v._dy);
 	this.htmlElement.style.height = elementRealHeight + 'px';
 	
 });
@@ -103,7 +103,7 @@ BoxElement.addPropertyApplyer("backgroundImage",function(value){
 	if (value){
 		if (value != 'none'){
 			value = value.split(' ').join('');
-			this.htmlElement.style.backgroundImage = "url(" + browser._values.imageBase + value + ")";
+			this.htmlElement.style.backgroundImage = "url(" + browser._v.imageBase + value + ")";
 		}
 		else{
 			this.htmlElement.style.backgroundImage = "none";

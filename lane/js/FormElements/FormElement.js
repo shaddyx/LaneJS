@@ -42,8 +42,8 @@ FormElement.currentFocus = false;
 
 
 FormElement.prototype.applyImg = function(){
-	if (this._values.isDrawn && this._elements.img){
-		this._elements.img.backgroundImage(this._values.img);
+	if (this._v.isDrawn && this._elements.img){
+		this._elements.img.backgroundImage(this._v.img);
 	}
 };
 
@@ -51,8 +51,8 @@ FormElement.prototype.enumParents = function(callBack){
 	if (callBack(this) === false) {
 		return false;
 	}
-	if (this._values.parent){
-		return this._values.parent.enumParents(callBack);
+	if (this._v.parent){
+		return this._v.parent.enumParents(callBack);
 	}
 };
 
@@ -73,8 +73,8 @@ FormElement.prototype.addPropertyTranslator = function(property){
 		throw new Error("Property has no parameter name");
 	}
 	property.propertyTranslator = function(value){
-		if (this._values.isDrawn){
-			this._values[property.target][property.name](value);
+		if (this._v.isDrawn){
+			this._v[property.target][property.name](value);
 		}
 	};
 	this.on(property.name + "Changed",property.propertyTranslator,this);
@@ -91,7 +91,7 @@ FormElement.prototype.removePropertyTranslator = function(name){
 };
 
 FormElement.prototype.componentBuilder = function(opts){
-	var skin = FormElement.getSkinForType(this.type, this._values.skin);
+	var skin = FormElement.getSkinForType(this.type, this._v.skin);
 	this.buildComponent(skin);
 	
 };
@@ -117,7 +117,7 @@ FormElement.prototype.buildComponent = function(struct){
 		//delete struct.defaults;
 	}
 	
-	this._elements = this._values.outer.build(struct);
+	this._elements = this._v.outer.build(struct);
 };
 
 FormElement.prototype.draw = function(opts){
@@ -130,26 +130,26 @@ FormElement.prototype.draw = function(opts){
 	
 	if (opts.target instanceof Container) {
 		opts.target.addChild(this);
-		opts.target._values.inner.appendChild(this._values.outer);
+		opts.target._v.inner.appendChild(this._v.outer);
 	} else if (opts.target instanceof BoxElement) {
-		opts.target.appendChild(this._values.outer);
+		opts.target.appendChild(this._v.outer);
 	}
 	this.isDrawn(true);
 	
-	this._values.outer.elementType(this.type);
-	this._values.outer.htmlElement.setAttribute("elementSkin", this._values.skin || "def");
+	this._v.outer.elementType(this.type);
+	this._v.outer.htmlElement.setAttribute("elementSkin", this._v.skin || "def");
 	if (this instanceof Container){
 		this.inner(this._elements.inner);
 	}
-	this._values.outer.on("contextMenu", function(e){
+	this._v.outer.on("contextMenu", function(e){
 		this.trigger("contextMenu", e);
 	}, this);
-	this._values.outer.on("removed", function(){
+	this._v.outer.on("removed", function(){
 		this.trigger("removed");
 	}, this);
 	this.trigger("afterDraw",opts);
 	this.applyHint();
-	this._values.outer.on("click", function(e){
+	this._v.outer.on("click", function(e){
 		if (!e.usedForFocus){
 			FormElement.currentFocus && FormElement.currentFocus.focus(false);
 			this.focus(true);
@@ -161,46 +161,46 @@ FormElement.prototype.draw = function(opts){
 FormElement.prototype.remove = function(){
 	this._removed = true;
 	if (this.trigger("beforeRemove") !== false){
-		this._values.outer.remove();
+		this._v.outer.remove();
 		this.trigger("removed");
 	}
 	
 };
 
 FormElement.funcs.captionChanged = function(value){
-	if (this._values.isDrawn && this._elements.caption){
+	if (this._v.isDrawn && this._elements.caption){
 		this._elements.caption.caption(value);
 	}
 };
 FormElement.prototype._captionWidthChanged = function(){
-	if (this._values.isDrawn && this._elements.caption) {
-		if (this._values.captionWidth === false) {
+	if (this._v.isDrawn && this._elements.caption) {
+		if (this._v.captionWidth === false) {
 			this._elements.caption.hs(true);
 		} else {
 			this._elements.caption.hs(false);
-			this._elements.caption.width(this._values.captionWidth);
+			this._elements.caption.width(this._v.captionWidth);
 		}
 	}
 };
 
 FormElement.funcs.afterDraw = function(){
 	var my = this;
-	this._values.outer.formElement = this;
-	this._values.inner.formElement = this;
-	this._elements.caption&&this._elements.caption.caption(this._values.caption);
+	this._v.outer.formElement = this;
+	this._v.inner.formElement = this;
+	this._elements.caption&&this._elements.caption.caption(this._v.caption);
 	for (var propName in this._propertyTranslators){
 		var propTranslator = this._propertyTranslators[propName];
-		this._values[propTranslator.target][propName](this._values[propName]);
+		this._v[propTranslator.target][propName](this._v[propName]);
 		if (propTranslator.back){
 			(function(propTranslator){
-				my._values[propTranslator.target].on(propTranslator.name + "Changed", function(value){
+				my._v[propTranslator.target].on(propTranslator.name + "Changed", function(value){
 					this[propTranslator.name](value);
 				},my);
 			})(propTranslator);
 		}
 	}
-	this._values.outer.htmlElement.setAttribute("elementName",this._values.name);
-	this._values.outer.htmlElement.setAttribute("formElementId",this.id);
+	this._v.outer.htmlElement.setAttribute("elementName",this._v.name);
+	this._v.outer.htmlElement.setAttribute("formElementId",this.id);
 	this._captionWidthChanged();
 	this.refreshEnabled();
 	this.applyStyleClass();
@@ -216,7 +216,7 @@ FormElement.prototype.addLogicalChild = function(child){
  */
 FormElement.prototype.triggerRec = function(name, event){
 	if (this instanceof Container){
-		this._values.children.each(function(el){
+		this._v.children.each(function(el){
 			el.triggerRec(name,event);
 		});
 	}
@@ -224,16 +224,16 @@ FormElement.prototype.triggerRec = function(name, event){
 };
 
 FormElement.prototype.refreshEnabled = function(){
-	if (this._values.isDrawn){
-		var outer = this._values.outer;
-		this._setStyleClass(outer, this._values.enabled?"enabled":"disabled");
-		this._values.outer.opacity(this._values.enabled ? 1: 0.5);
+	if (this._v.isDrawn){
+		var outer = this._v.outer;
+		this._setStyleClass(outer, this._v.enabled?"enabled":"disabled");
+		this._v.outer.opacity(this._v.enabled ? 1: 0.5);
 	}
 };
 
 FormElement.prototype._setStyleClass = function(element, styleName){
 	element.styleClass(styleName);
-	if (element != this._values.outer && element.formElement) {
+	if (element != this._v.outer && element.formElement) {
 		return;
 	}
 	for (var k in element.c) {
@@ -241,21 +241,21 @@ FormElement.prototype._setStyleClass = function(element, styleName){
 	}
 };
 FormElement.prototype.applyStyleClass = function(){
-	if (this._values.isDrawn){
-		this._setStyleClass(this._values.outer, this._values.styleClass);
+	if (this._v.isDrawn){
+		this._setStyleClass(this._v.outer, this._v.styleClass);
 	}
 };
 FormElement.prototype.applyFocus = function(){
-	if (this._values.focus){
+	if (this._v.focus){
 		FormElement.currentFocus = this;
 	}
 };
 FormElement.prototype.applyHint = function(){
-	if (this._values.isDrawn){
-		if (this._values.hint){
-			this._values.outer.htmlElement.setAttribute("title",this._values.hint);
+	if (this._v.isDrawn){
+		if (this._v.hint){
+			this._v.outer.htmlElement.setAttribute("title",this._v.hint);
 		} else {
-			this._values.outer.htmlElement.removeAttribute("title");
+			this._v.outer.htmlElement.removeAttribute("title");
 		}
 		
 	}
@@ -319,15 +319,15 @@ FormElement.build = function(struct, target, map){
 			throw new Error("Object " + objString + " has no property " + k);
 		}
 		/*
-		if (el._values[k] instanceof BasicMap) {
+		if (el._v[k] instanceof BasicMap) {
 			for (var x in struct[k]){
-				el._values[k].add(x, struct[k][x]);
+				el._v[k].add(x, struct[k][x]);
 			}
 		}
 		
-		if (el._values[k] instanceof BasicList) {
+		if (el._v[k] instanceof BasicList) {
 			for (var x in struct[k]){
-				el._values[k].add(struct[k][x]);
+				el._v[k].add(struct[k][x]);
 			}
 		}
 		*/
@@ -369,13 +369,13 @@ FormElement.getData = function(topElement, options, data){
 	data = data || {};
 	
 	if (topElement instanceof Container) {
-		for (var k in topElement._values.children._data){
-			var el = topElement._values.children._data[k];
+		for (var k in topElement._v.children._data){
+			var el = topElement._v.children._data[k];
 			FormElement.getData(el, options, data);
 		}
 	}
-	if ((topElement instanceof InputElement) && topElement._values.name) {
-		data[topElement._values.name] = topElement._values.value;
+	if ((topElement instanceof InputElement) && topElement._v.name) {
+		data[topElement._v.name] = topElement._v.value;
 	}
 	return data;
 };
@@ -383,7 +383,7 @@ FormElement.func.contextMenu = function(e){
 	if (FormElement.func.popupMenu){
 		FormElement.func.popupMenu.hide();
 	}
-	var menu = this._values.contextMenu;
+	var menu = this._v.contextMenu;
 	if (menu) {
 		if (!(menu instanceof PopupMenu)){
 			menu = PopupMenu.build(menu);

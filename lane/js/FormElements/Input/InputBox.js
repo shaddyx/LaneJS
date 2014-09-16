@@ -11,14 +11,14 @@ InputBox.func.afterDraw = function() {
 	var my = this;
 	this.updateValues();
 	this._input = this._elements.input;
-	//this._input.htmlElement.setAttribute("type",this._values.password?"password":"text");
+	//this._input.htmlElement.setAttribute("type",this._v.password?"password":"text");
 	this._updateListeners();
 	this.updatePassword();
 };
 
 InputBox.prototype.updateValues = function() {
-	if (this._values.isDrawn && this._elements.input.htmlElement.value != this._values.value){
-		this._elements.input.htmlElement.value = this._values.value;
+	if (this._v.isDrawn && this._elements.input.htmlElement.value != this._v.value){
+		this._elements.input.htmlElement.value = this._v.value;
 	}
 };
 InputBox.prototype._updateListeners = function(){
@@ -42,9 +42,9 @@ InputBox.prototype._updateListeners = function(){
 	});
 };
 InputBox.prototype.updatePassword = function(){
-	if (this._values.isDrawn) {
+	if (this._v.isDrawn) {
 		var old = this._input.htmlElement;
-		var newValue = this._values.password?"password":"text";
+		var newValue = this._v.password?"password":"text";
 		if (old.getAttribute("type") != newValue){
 			var container = old.parentNode;
 			var newInput = document.createElement("input");

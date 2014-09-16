@@ -120,82 +120,123 @@ BoxElement.prototype._parentInQueue = function() {
 		/*
 		 * 
 		 */
-		if (parent._values.floating) {
+		if (parent._v.floating) {
 			return false;
 		}
 		parent = parent.parent;
 	}
 	return false;
 };
+BoxElement.prototype.isCanOverflowInMainDirection = function(){
+	//
+	//		todo optimize this function
+	//
+	if (this._v.overflow == BoxElement.OVERFLOW_MODE.none){
+		return false;
+	}
+	if (
+			this._v.overflow == BoxElement.OVERFLOW_MODE.hidden ||
+			this._v.overflow == BoxElement.OVERFLOW_MODE.auto  ||
+			(this._v.overflow == BoxElement.OVERFLOW_MODE.overflowX && this._v.horizontal) ||
+			(this._v.overflow == BoxElement.OVERFLOW_MODE.overflowY && !this._v.horizontal)
+			
+    ) {
+		return true;
+	}
+};
+BoxElement.prototype.isCanOverflowIn2Direction = function(){
+	//
+	//		todo optimize this function
+	//
+	if (this._v.overflow == BoxElement.OVERFLOW_MODE.none){
+		return false;
+	}
+	if (
+			this._v.overflow == BoxElement.OVERFLOW_MODE.hidden ||
+			this._v.overflow == BoxElement.OVERFLOW_MODE.auto  ||
+			(this._v.overflow == BoxElement.OVERFLOW_MODE.overflowX && !this._v.horizontal) ||
+			(this._v.overflow == BoxElement.OVERFLOW_MODE.overflowY && this._v.horizontal)
+			
+    ) {
+		return true;
+	}
+};
+
 BoxElement.prototype.recalcMinSizes = function() {
-	if (this.c.length && this._values.visible) {
+	if (this.c.length && this._v.visible) {
 		/*
 		 * pre-calculating childs
 		 */
 		for ( var k = 0; k < this.c.length; k++) {
-			this.c[k]._values.visible && !this.c[k]._values.floating && this.c[k].recalcMinSizes();
+			this.c[k]._v.visible && !this.c[k]._v.floating && this.c[k].recalcMinSizes();
 		}
 		/*
 		 * values to use for orientational side
 		 */
-		var sizeValue = this._values.horizontal ? 'width' : 'height';
-		var vmSizeValue = this._values.horizontal ? 'vMinWidth' : 'vMinHeight';
-		var msizeValue = this._values.horizontal ? 'minWidth' : 'minHeight';
-		var stretchValue = this._values.horizontal ? 'hs' : 'vs';
+		var sizeValue = this._v.horizontal ? 'width' : 'height';
+		var vmSizeValue = this._v.horizontal ? 'vMinWidth' : 'vMinHeight';
+		var msizeValue = this._v.horizontal ? 'minWidth' : 'minHeight';
+		var stretchValue = this._v.horizontal ? 'hs' : 'vs';
 		/*
 		 * calculating summ's
 		 */
-		var summ = 0;
-		var marginSumm = 0;
-		for ( var k = 0; k < this.c.length; k++) {
-			var child = this.c[k];
-			if(child._values.visible && !child._values.floating){
-				if (child._values[stretchValue]) {
-					summ += child._values[vmSizeValue];
-				} else {
-					summ += child._values[sizeValue];
-				}
-				marginSumm += child[this._values.horizontal?"_marginDx":"_marginDy"];
-			}
-		}
-		summ += this._values.horizontal ? this._values._dx : this._values._dy;
 		
-		var newValue = Math.max(summ, this._values[msizeValue]);
-		if (isNaN(newValue)) {
-			debugger;
-		}
-		/*
-		 * setting result
-		 */
-		this[vmSizeValue](newValue + marginSumm);
-		/*
-		 * value to use on anti-orientational side
-		 */
-		vmSizeValue = this._values.horizontal ? 'vMinHeight' : 'vMinWidth';
-		sizeValue = this._values.horizontal ? 'height' : 'width';
-		stretchValue = this._values.horizontal ? 'vs' : 'hs';
-		var marginD = this._values.horizontal?"_marginDy":"_marginDx";
-		var max = 0;
-		var marginMax = 0;
-		for ( var k = 0; k < this.c.length; k++) {
-			var child = this.c[k];
-			if(child._values.visible && !child._values.floating){
-				if (child._values[stretchValue]) {
-					max = Math.max(child._values[vmSizeValue] + child[marginD], max);
-				} else {
-					max = Math.max(child._values[sizeValue] + child[marginD], max);
+		if (!this.isCanOverflowInMainDirection()) {
+			
+			var summ = 0;
+			var marginSumm = 0;
+			for ( var k = 0; k < this.c.length; k++) {
+				var child = this.c[k];
+				if(child._v.visible && !child._v.floating){
+					if (child._v[stretchValue]) {
+						summ += child._v[vmSizeValue];
+					} else {
+						summ += child._v[sizeValue];
+					}
+					marginSumm += child[this._v.horizontal?"_marginDx":"_marginDy"];
 				}
-				//marginMax = Math.max(marginMax, this[this._values.horizontal?"_marginDy":"_marginDx"]);
 			}
+			summ += this._v.horizontal ? this._v._dx : this._v._dy;
+		
+			var newValue = Math.max(summ, this._v[msizeValue]);
+			if (isNaN(newValue)) {
+				debugger;
+			}
+			/*
+			 * setting result
+			 */
+			this[vmSizeValue](newValue + marginSumm);
 		}
-		max += this._values.horizontal ? this._values._dy : this._values._dx;
-		/*
-		 * setting result
-		 */
-		this[vmSizeValue](max + marginMax);
+		if (!this.isCanOverflowIn2Direction()) {
+			/*
+			 * value to use on anti-orientational side
+			 */
+			vmSizeValue = this._v.horizontal ? 'vMinHeight' : 'vMinWidth';
+			sizeValue = this._v.horizontal ? 'height' : 'width';
+			stretchValue = this._v.horizontal ? 'vs' : 'hs';
+			var marginD = this._v.horizontal?"_marginDy":"_marginDx";
+			var max = 0;
+			var marginMax = 0;
+			for ( var k = 0; k < this.c.length; k++) {
+				var child = this.c[k];
+				if(child._v.visible && !child._v.floating){
+					if (child._v[stretchValue]) {
+						max = Math.max(child._v[vmSizeValue] + child[marginD], max);
+					} else {
+						max = Math.max(child._v[sizeValue] + child[marginD], max);
+					}
+					//marginMax = Math.max(marginMax, this[this._v.horizontal?"_marginDy":"_marginDx"]);
+				}
+			}
+			max += this._v.horizontal ? this._v._dy : this._v._dx;
+			/*
+			 * setting result
+			 */
+			this[vmSizeValue](max + marginMax);
+		}
 	} else {
-		this._values.hs || this.vMinWidth(this._values._dx + this._captionWidth);
-		this._values.vs || this.vMinHeight(this._values._dy + this._captionHeight);
+		this._v.hs || this.vMinWidth(this._v._dx + this._captionWidth);
+		this._v.vs || this.vMinHeight(this._v._dy + this._captionHeight);
 	}
 };
 
@@ -204,7 +245,7 @@ BoxElement.prototype.reDraw = function(innerCall) {
 	/*
 	 * optimization TODO: optimize this to recalc only top element ALWAYS!!!
 	 */
-	if (!this._values.visible) {
+	if (!this._v.visible) {
 		return;
 	}
 	this._baseClass.lastRedrawed[this.id] = this;
@@ -215,15 +256,15 @@ BoxElement.prototype.reDraw = function(innerCall) {
 	//
 	//	recalculating width if compress
 	//
-	if (this._values.hCompress && !this._values.hs){
-		this.width(this._values.vMinWidth);
+	if (this._v.hCompress && !this._v.hs){
+		this.width(this._v.vMinWidth);
 	}
-	var stretchValue = this._values.horizontal ? 'width' : 'height';
-	var secondaryStretchValue = this._values.horizontal ? 'height' : 'width';
-	var secondaryStretchInnerValue = this._values.horizontal ? 'innerHeight' : 'innerWidth';
-	var stretchvMin = this._values.horizontal ? 'vMinWidth' : 'vMinHeight';
-	var secondaryAlign = this._values.horizontal ? 'vAlign' : 'hAlign';
-	var marginD = this._values.horizontal ? '_marginDx' : '_marginDy';
+	var stretchValue = this._v.horizontal ? 'width' : 'height';
+	var secondaryStretchValue = this._v.horizontal ? 'height' : 'width';
+	var secondaryStretchInnerValue = this._v.horizontal ? 'innerHeight' : 'innerWidth';
+	var stretchvMin = this._v.horizontal ? 'vMinWidth' : 'vMinHeight';
+	var secondaryAlign = this._v.horizontal ? 'vAlign' : 'hAlign';
+	var marginD = this._v.horizontal ? '_marginDx' : '_marginDy';
 	var stretchable = 0, 
 		nonStretchable = 0, 
 		toStretch = [], 
@@ -236,18 +277,18 @@ BoxElement.prototype.reDraw = function(innerCall) {
 			//			
 			// gathering childs information to stretch
 			//			
-			if (child._values.visible && !child._values.floating) {
+			if (child._v.visible && !child._v.floating) {
 				nonStretchable += child[marginD];
-				if (this._values.horizontal && child._values.hs
-						|| !this._values.horizontal && child._values.vs) {
-					stretchable += child._values[stretchValue];
+				if (this._v.horizontal && child._v.hs
+						|| !this._v.horizontal && child._v.vs) {
+					stretchable += child._v[stretchValue];
 					toStretch.push(child);
 				} else {
 					nonStretch.push(child);
-					nonStretchable += child._values[stretchValue];
+					nonStretchable += child._v[stretchValue];
 				}
-				if (this._values.horizontal && child._values.vs
-					|| !this._values.horizontal && child._values.hs){
+				if (this._v.horizontal && child._v.vs
+					|| !this._v.horizontal && child._v.hs){
 					toStretchSecondary.push(child);
 				} 
 			}
@@ -257,8 +298,8 @@ BoxElement.prototype.reDraw = function(innerCall) {
 		// first stretch
 		//		
 
-		var		inner = this._values.horizontal ? this._values.innerWidth : this._values.innerHeight, 
-				lastFreeSpace = this._values[stretchValue] - this._values[stretchvMin], 	
+		var		inner = this._v.horizontal ? this._v.innerWidth : this._v.innerHeight, 
+				lastFreeSpace = this._v[stretchValue] - this._v[stretchvMin], 	
 				lastInner = inner - nonStretchable,
 				skipInner = 0,
 				skipCount = 0,
@@ -276,12 +317,12 @@ BoxElement.prototype.reDraw = function(innerCall) {
 			for ( var k = 0; k < toStretch.length; k++) {
 				var newSize = Math.floor((lastInner - skipInner) / (toStretch.length - skipCount));
 				var child = toStretch[k];
-				if (child && child._values.visible && !child._values.floating){
-					ratio = child._values.sizeRatio / 100;
+				if (child && child._v.visible && !child._v.floating){
+					ratio = child._v.sizeRatio / 100;
 					var sizeToApply = newSize * ratio;
-					if (sizeToApply < child._values[stretchvMin]) {
-						child[stretchValue](child._values[stretchvMin]);
-						skipInner += child._values[stretchValue];
+					if (sizeToApply < child._v[stretchvMin]) {
+						child[stretchValue](child._v[stretchvMin]);
+						skipInner += child._v[stretchValue];
 						foundSmaller = true;
 						toStretch[k] = undefined;
 						skipCount ++;
@@ -297,11 +338,11 @@ BoxElement.prototype.reDraw = function(innerCall) {
 		
 		for ( var k = 0; k < toStretch.length; k++) {
 			var child = toStretch[k];
-			if (child && child._values.visible && !child._values.floating) {
-				ratio = child._values.sizeRatio / 100;
+			if (child && child._v.visible && !child._v.floating) {
+				ratio = child._v.sizeRatio / 100;
 				var sizeToApply = Math.ceil(newSize * ratio);
-				if (sizeToApply - child._values[stretchvMin] > lastFreeSpace) {
-					sizeToApply = lastFreeSpace + child._values[stretchvMin];
+				if (sizeToApply - child._v[stretchvMin] > lastFreeSpace) {
+					sizeToApply = lastFreeSpace + child._v[stretchvMin];
 				}
 				
 				if (toStretch.length - skipCount != k + 1){
@@ -310,12 +351,12 @@ BoxElement.prototype.reDraw = function(innerCall) {
 					child[stretchValue](lastValue);
 					lastValue = 0;
 				}
-				lastFreeSpace -= child._values[stretchValue] - child._values[stretchvMin];
+				lastFreeSpace -= child._v[stretchValue] - child._v[stretchvMin];
 			}
 		}
-		marginD = this._values.horizontal ? '_marginDy' : '_marginDx';
+		marginD = this._v.horizontal ? '_marginDy' : '_marginDx';
 		for ( var k = 0; k < toStretchSecondary.length; k++) {
-			toStretchSecondary[k][secondaryStretchValue](this._values[secondaryStretchInnerValue] - toStretchSecondary[k][marginD]);
+			toStretchSecondary[k][secondaryStretchValue](this._v[secondaryStretchInnerValue] - toStretchSecondary[k][marginD]);
 		}
 		
 		for (var k = 0; k < this.c.length; k++) {
@@ -326,8 +367,8 @@ BoxElement.prototype.reDraw = function(innerCall) {
 //		
 		
 		if (lastValue) {
-			var aToProcess = this._values.horizontal ? "hAlign": "vAlign";
-			switch (this._values[aToProcess]){
+			var aToProcess = this._v.horizontal ? "hAlign": "vAlign";
+			switch (this._v[aToProcess]){
 				case this._baseClass.ALIGN.middle:
 					this._alignDelta(Math.floor(lastValue/2));
 					break;
@@ -340,14 +381,14 @@ BoxElement.prototype.reDraw = function(innerCall) {
 			this._alignDelta = 0;
 		}
 		for (var k = 0; k < this.c.length; k++) {
-			var secondaryDelta = this._values.horizontal ? '_vDelta' : '_hDelta';
-			var sizeValue = this._values[secondaryStretchInnerValue];
+			var secondaryDelta = this._v.horizontal ? '_vDelta' : '_hDelta';
+			var sizeValue = this._v[secondaryStretchInnerValue];
 			for (var k = 0; k < this.c.length; k++) {
 				var child = this.c[k];
-				if (this._values[secondaryAlign] === BoxElement.ALIGN.middle){
-					child[secondaryDelta] ( Math.floor((sizeValue - child._values[secondaryStretchValue])/2));
-				} else if (this._values[secondaryAlign] === BoxElement.ALIGN.end){
-					child[secondaryDelta] (sizeValue - child._values[secondaryStretchValue]);
+				if (this._v[secondaryAlign] === BoxElement.ALIGN.middle){
+					child[secondaryDelta] ( Math.floor((sizeValue - child._v[secondaryStretchValue])/2));
+				} else if (this._v[secondaryAlign] === BoxElement.ALIGN.end){
+					child[secondaryDelta] (sizeValue - child._v[secondaryStretchValue]);
 				}
 			}
 		}

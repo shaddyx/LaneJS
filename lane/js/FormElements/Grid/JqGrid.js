@@ -22,15 +22,15 @@ JqGrid.prototype.afterDraw = function(){
 	console.log(colModel);
 	this.grid = jQuery(this._tableElement).jqGrid({
 		datatype: "local",
-		height: this._values.height,
-		width: this._values.width,
+		height: this._v.height,
+		width: this._v.width,
 		hidegrid:false,
 		//viewrecords: true,
-		caption:this._values.caption,
+		caption:this._v.caption,
 		pager:this._elements.table.navigator,
 	   	colNames:colNames,
 	   	colModel:colModel,
-	   	multiselect: this._values.multiSelect
+	   	multiselect: this._v.multiSelect
 	});
 };
 
@@ -54,8 +54,8 @@ JqGrid.on(["widthChanged","heightChanged"], function(){
 	if (!this.timeout && this.grid){
 		this.timeout = setTimeout(function(){
 			this.timeout = false;
-			my.grid&&my.grid.setGridWidth(my._values.width);
-			my.grid&&my.grid.setGridHeight(my._values.height - 72);
+			my.grid&&my.grid.setGridWidth(my._v.width);
+			my.grid&&my.grid.setGridHeight(my._v.height - 72);
 		},0);
 	}
 });

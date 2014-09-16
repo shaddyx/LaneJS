@@ -9,7 +9,7 @@ RadioButton.addProperty("checked",0,{type:"boolean"});
 RadioButton.func = {};
 
 RadioButton.on("click", function(){
-	this.value(this._values.triggerValue);
+	this.value(this._v.triggerValue);
 });
 
 RadioButton.func.afterDraw = function() {
@@ -17,15 +17,15 @@ RadioButton.func.afterDraw = function() {
 };
 
 RadioButton.prototype.checkedChanged = function(){
-	if (this._values.checked){
-		this.value(this._values.triggerValue);
+	if (this._v.checked){
+		this.value(this._v.triggerValue);
 	}
 	console.log("chedked[" + this.name() + "]:", this.checked());
-	this._elements.img.backgroundImage(this._values.checked?"img/RadioButton/yes.png":"img/RadioButton/no.png");
+	this._elements.img.backgroundImage(this._v.checked?"img/RadioButton/yes.png":"img/RadioButton/no.png");
 };
 
 RadioButton.prototype.updateChecked = function() {
-	this.checked(this._values.value == this._values.triggerValue);
+	this.checked(this._v.value == this._v.triggerValue);
 };
 
 RadioButton.on("afterDraw", RadioButton.func.afterDraw);

@@ -20,14 +20,14 @@ Splitter.prototype.componentBuilder = function(opts){
 	if (!window[this.type + "Skin"][this.skin()]){
 		throw new Error("No skin for:" + this.type);
 	}
-	this.buildComponent(window[this.type + "Skin"][this.skin()][opts.target._values.horizontal?"vertical":"horizontal"]);
+	this.buildComponent(window[this.type + "Skin"][this.skin()][opts.target._v.horizontal?"vertical":"horizontal"]);
 };
 
 Splitter.prototype._updatePercentage = function() {
 	var parent = this.parent();
 	if (parent){
 		var element = parent.children().get(0);
-		element.sizeRatio(this._values.percent)
+		element.sizeRatio(this._v.percent)
 	}
 };
 Splitter.prototype._afterDraw = function(){

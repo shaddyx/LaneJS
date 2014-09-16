@@ -17,7 +17,7 @@ TimeGraphRuler.prototype.refresh = function(){
 	if (!this._element) {
 		throw new Error("TimeGraphRuler is not initialized!");
 	}
-	var topPos = this._values.top + this.timeGraph.lineHeight / 2;
+	var topPos = this._v.top + this.timeGraph.lineHeight / 2;
 	this._element.style.top =  topPos+ "px";
 	this._element.style.left = "0px";	
 	this._element.style.width = this.timeGraph.maxWidth + "px";

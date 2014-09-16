@@ -8,20 +8,20 @@ DataElement.addProperty("dataSource",undefined,{type:"DataSource"});
 DataElement.setDefault("value",undefined);
 
 DataElement.func.dataSourceBeforeChanged = function(){
-	this._values.dataSource && this._values.dataSource.removeListener("valueChanged",DataElement.prototype.updateValue,this);
+	this._v.dataSource && this._v.dataSource.removeListener("valueChanged",DataElement.prototype.updateValue,this);
 };
 DataElement.func.dataSourceChanged = function(){
-	this._values.dataSource && this._values.dataSource.on("valueChanged",DataElement.prototype.updateValue,this);
+	this._v.dataSource && this._v.dataSource.on("valueChanged",DataElement.prototype.updateValue,this);
 	this.updateValue();
 };
 
 DataElement.prototype.updateValue = function(){
-	this._values.dataSource && this.value(this._values.dataSource._values.value);
+	this._v.dataSource && this.value(this._v.dataSource._v.value);
 };
 
 DataElement.prototype.valueChanged = function(){
-	if (this._values.dataSource){
-		this._values.dataSource.value(this._values.value);
+	if (this._v.dataSource){
+		this._v.dataSource.value(this._v.value);
 	}
 }
 

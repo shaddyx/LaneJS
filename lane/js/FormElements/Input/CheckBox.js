@@ -6,7 +6,7 @@ CheckBox.type = "CheckBox";
 CheckBox.setDefault("value",false);
 CheckBox.func = {};
 CheckBox.func.afterDraw = function() {
-	this._values.outer.on("click",function(){
+	this._v.outer.on("click",function(){
 		if (this.enabled()){
 			this.trigger("click");
 			this.value(!this.value());
@@ -15,7 +15,7 @@ CheckBox.func.afterDraw = function() {
 	this.updateValue();
 };
 CheckBox.prototype.updateValue = function() {
-	this._elements.img.backgroundImage(this._values.value?"img/CheckBox/yes.png":"img/CheckBox/no.png");
+	this._elements.img.backgroundImage(this._v.value?"img/CheckBox/yes.png":"img/CheckBox/no.png");
 };
 
 

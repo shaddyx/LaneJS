@@ -15,7 +15,7 @@ ChartField.types.curve = function(dataSet, params, options){
 	var lines = [];
 	
 	for (var x = 0; x < count; x ++){
-		var realX = x * my._values.xStep + options.yLineOffset;
+		var realX = x * my._v.xStep + options.yLineOffset;
 		var realY = options.yFieldHeight - (dataSet.data[x] * ratio) + options.xLineOffset;
 		lines.push([realX, realY]);
 	}
@@ -39,7 +39,7 @@ ChartField.types.lines = function(dataSet, params, options){
 	var realY1 = realY - options.yFieldHeight;
 	for (var x = 0; x < dataSet.data.length; x ++){
 		if (dataSet.data[x]){
-			var realX = x * this._values.xStep + options.yLineOffset;
+			var realX = x * this._v.xStep + options.yLineOffset;
 			this.drawLine(realX, realY, realX, realY1);
 		}	
 	}

@@ -11,8 +11,8 @@ Tab.addProperty("tabBar", false,{type:"TabBar"});
 Tab.addProperty("tabVisible", true,{type:"boolean"});
 
 Tab.funcs.selectedChanged = function(){
-	this.visible(this._values.selected);
-	if (this._values.selected) {
+	this.visible(this._v.selected);
+	if (this._v.selected) {
 		this.tabBar().selectedTab(this);
 	}
 };

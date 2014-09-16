@@ -15,7 +15,7 @@ ChartLegend.func.afterDraw = function(){
 };
 
 ChartLegend.func.chartFieldBeforeChanged = function(newValue){
-	var oldValue = this._values.chartField;
+	var oldValue = this._v.chartField;
 	oldValue && oldValue.removeListener("dataChanged", ChartLegend.prototype.refresh, this);
 	newValue && newValue.on("dataChanged", ChartLegend.prototype.refresh, this);
 };
@@ -25,7 +25,7 @@ ChartLegend.prototype.refresh = function(){
 	if (!this.chartField()) {
 		return;
 	}
-	var data = chartField._values.data;
+	var data = chartField._v.data;
 	if (data){
 		
 		var chartCache = [];
@@ -51,7 +51,7 @@ ChartLegend.prototype.rebuild = function(){
 		return;
 	}
 	this._elements.inner.clear();
-	var data = chartField._values.data;
+	var data = chartField._v.data;
 	if (data){
 		for (var k in data.datasets){
 			var dataSet = data.datasets[k];

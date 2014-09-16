@@ -15,10 +15,10 @@ FloatingContainer.addProperty("left",0,{type:"int"});
 FloatingContainer.addProperty("top",0,{type:"int"});
 FloatingContainer.addProperty("relativity",false,{type:"object"});
 FloatingContainer.funcs.onAfterDraw = function(){
-	this._values.outer.floating(true);
+	this._v.outer.floating(true);
 };
 FloatingContainer.funcs.beforeDraw = function(){
-	if (this._values.zIndex === 0) {
+	if (this._v.zIndex === 0) {
 		this.zIndex(FloatingContainer.getNextZIndex());
 	}
 };

@@ -48,7 +48,7 @@ ChartField.prototype.refresh = function(){
 		}
 	}
 	var periodCount = data.labels.length;
-	this._values.options.callBack = function(){
+	this._v.options.callBack = function(){
 		my.trigger("frameEnd");
 		var context = my.getContext();
 		var yAxisX = 30;

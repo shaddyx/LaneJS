@@ -1,6 +1,6 @@
 var RadioButtonGroup = function() {
 	Container.call(this);
-	this._values.children.on("added",this._added);
+	this._v.children.on("added",this._added);
 };
 Util.extend(RadioButtonGroup, Container);
 RadioButtonGroup.type = "RadioButtonGroup";

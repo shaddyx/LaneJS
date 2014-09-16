@@ -17,7 +17,7 @@ DirectDropDown.func.afterDraw = function(){
 	el.build(DirectDropDownSkin._dropContainer.def);
 	el.drawRec({target:rootElement});
 	el.relativity({
-		target:this._values.outer,
+		target:this._v.outer,
 		anchor:"leftInner,bottom",
 		spyVisible:false
 	});
@@ -54,11 +54,11 @@ DirectDropDown.prototype.createElement = function(element){
 		});
 	}
 	var el = this.childElements[this.elementCounter];
-	var inner = this._values.inner;
+	var inner = this._v.inner;
 	el.w = this._baseClass.textUtils.getStringWidth(element.text,{
-		fontFamily: inner._values.fontFamily
-		,fontSize: inner._values.fontSize
-		,fontWeight: inner._values.fontWeight
+		fontFamily: inner._v.fontFamily
+		,fontSize: inner._v.fontSize
+		,fontWeight: inner._v.fontWeight
 	});
 	el.innerHTML = element.text;
 	el.style.color = element.color || "#000000";
@@ -77,7 +77,7 @@ DirectDropDown.prototype.values = function(elements) {
 		this._baseClass.textUtils = new TextUtils();
 		this._baseClass.textUtils._init();
 	}
-	var inner = this._values.inner;
+	var inner = this._v.inner;
 	var maxWidth = 0;
 	for (var k in elements) {
 		var el = this.createElement(elements[k]);
@@ -86,7 +86,7 @@ DirectDropDown.prototype.values = function(elements) {
 	}
 	var count = this.elementCounter;
 	var max = [0,0]
-	for (var y = this._values.maxRows - 1; y >= this._values.minRows; y --){
+	for (var y = this._v.maxRows - 1; y >= this._v.minRows; y --){
 		var res = count % y;
 		if (res === 0) {
 			res = 100000;
@@ -96,7 +96,7 @@ DirectDropDown.prototype.values = function(elements) {
 		}
 	}
 	if (max[1] === 0) {
-		max[0, this._values.maxRows];
+		max[0, this._v.maxRows];
 	}
 	/*console.log("max:",max);
 	console.log("maxWidth:",maxWidth);*/
@@ -124,8 +124,8 @@ DirectDropDown.prototype.values = function(elements) {
 	if (max[0] == 100000 || max[0] == 0) {
 		maxX --;
 	}
-	this.floatingElement.height(lineHeight * maxY + this.floatingElement._values._dx);
-	this.floatingElement.width((maxWidth + 2) * maxX + this.floatingElement._values._dy);
+	this.floatingElement.height(lineHeight * maxY + this.floatingElement._v._dx);
+	this.floatingElement.width((maxWidth + 2) * maxX + this.floatingElement._v._dy);
 };
 DirectDropDown.on("afterDraw", DirectDropDown.func.afterDraw);
 DirectDropDown.on("valueChanged", DirectDropDown.func.updateValue);

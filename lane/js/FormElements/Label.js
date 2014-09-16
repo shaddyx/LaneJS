@@ -7,7 +7,7 @@ Label.funcs = {};
 Label.addProperty("value", "");
 
 Label.func.updateValue = function() {
-	this._values.isDrawn && this._elements.label.caption(this._values.value);
+	this._v.isDrawn && this._elements.label.caption(this._v.value);
 };
 
 Label.on("afterDraw", Label.func.updateValue);

@@ -35,6 +35,7 @@
     	
     	<script type="text/javascript" src="/lane/js/skins/Span.js"></script>
     	<script type="text/javascript" src="/lane/js/skins/Window.js"></script>
+    	<script type="text/javascript" src="/lane/js/skins/Panel.js"></script>
     	<script type="text/javascript" src="/lane/js/skins/Container.js"></script>
     	<script type="text/javascript" src="/lane/js/skins/Label.js"></script>
     	<script type="text/javascript" src="/lane/js/skins/Button.js"></script>
@@ -83,8 +84,22 @@
 		    					type:"Label",
 		    					width:400,
 		    					value:"look at the page source to see how it is done :)"
-		    				},
+		    				}
                         ]
+	    			},
+	    			{
+	    				type:"Panel",
+	    				hs:true,
+	    				borderColor:"#000",
+	    				borderWidth:[1,1,1,1],
+	    				overflow:BoxElement.OVERFLOW_MODE.overflowX,
+	    				c:[
+							{
+								type:"Button",
+								width:600,
+								caption:"test for overflowed button"
+							}
+	    				]
 	    			}
 	    		]
 	    	}, rootElement);

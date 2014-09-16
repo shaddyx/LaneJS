@@ -26,7 +26,7 @@ BoxElement.prototype.propagateEvent = function(name, event) {
 	}
 	var result;
 	if ((result = this.trigger(name, event)) !== false) {
-		if (this.formElement && this.formElement._values.enabled) {
+		if (this.formElement && this.formElement._v.enabled) {
 			result = this.formElement.trigger(name, event);
 			if (result === false) {
 				return false;

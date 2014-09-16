@@ -16,7 +16,7 @@ HourPicker.func.afterDraw = function() {
 		if (this._win){
 			return;
 		}
-		var skin = Util.cloneObject(HourPicker.windowStructure[this._values.skin || "def"]);
+		var skin = Util.cloneObject(HourPicker.windowStructure[this._v.skin || "def"]);
 		skin.relativity = {
 			target:this._elements.input,
 			anchor:"bottom,leftInner"
@@ -31,9 +31,9 @@ HourPicker.func.afterDraw = function() {
 		var rows = 6;
 		var cols = 4;
 		for (var y = 0; y< cols; y++){
-			var row = BoxElement.build(HourPicker.rowStructure[this._values.skin || "def"], this._win._values.inner);
+			var row = BoxElement.build(HourPicker.rowStructure[this._v.skin || "def"], this._win._v.inner);
 			for (var x = 1; x<= rows; x++){
-				var element = BoxElement.build(HourPicker.elementStructure[this._values.skin || "def"], row);
+				var element = BoxElement.build(HourPicker.elementStructure[this._v.skin || "def"], row);
 				element.on("click", function(){
 					my.value(this.__hour);
 					my._win.close();
@@ -41,7 +41,7 @@ HourPicker.func.afterDraw = function() {
 				var captionElement = element._elements.caption || element;
 				element.__hour = y * rows + x - 1;
 				captionElement.caption(Util.padLeft(element.__hour));
-				if (element.__hour == this._values.value) {
+				if (element.__hour == this._v.value) {
 					element.styleClass("selected");
 				} else {
 					element.styleClass("notSelected");
@@ -53,8 +53,8 @@ HourPicker.func.afterDraw = function() {
 };
 
 HourPicker.prototype.updateValues = function() {
-	if (this._values.isDrawn){
-		this._elements.input.htmlElement.value = parseInt(this._values.value) + ":00";
+	if (this._v.isDrawn){
+		this._elements.input.htmlElement.value = parseInt(this._v.value) + ":00";
 	}
 };
 

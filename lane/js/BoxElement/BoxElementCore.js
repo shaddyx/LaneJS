@@ -38,7 +38,7 @@ BoxElement.prototype.build = function(struct, _topEl) {
 		if (k == "c") {
 			for ( var x in prop) {
 				var newEl;
-				if (this._values._isDrawn) {
+				if (this._v._isDrawn) {
 					newEl = new BoxElement(prop[x].params);
 					newEl.build(prop[x], _topEl);
 					newEl.drawRec({
@@ -58,8 +58,8 @@ BoxElement.prototype.build = function(struct, _topEl) {
 			}
 		}
 	}
-	if (this._values.name) {
-		_topEl._elements[this._values.name] = this;
+	if (this._v.name) {
+		_topEl._elements[this._v.name] = this;
 	}
 	return _topEl._elements;
 };
@@ -95,12 +95,12 @@ BoxElement.prototype.appendChild = function(el) {
  * @param params
  */
 BoxElement.prototype.drawRec = function(params, innerCall) {
-	if (!this._values._isDrawn) {
+	if (!this._v._isDrawn) {
 		if (!(params.target instanceof BoxElement)) {
 			throw new Error("element [" + this.toString() + "] drawRec must have parameter target (instanceof BoxElement)!!!");
 		}
 
-		if (this._values._virtualized) {
+		if (this._v._virtualized) {
 			throw new Error("Cant draw virtualized element [" + this.toString() + "]");
 		}
 
@@ -117,7 +117,7 @@ BoxElement.prototype.drawRec = function(params, innerCall) {
 			this.htmlElement.style.overflow = 'hidden';
 		} 
 		
-		this.htmlElement.style.display = this._values._visible ? "block" : "none";
+		this.htmlElement.style.display = this._v._visible ? "block" : "none";
 		this.parent.htmlInnerElement.appendChild(this.htmlElement);
 	}
 
@@ -127,7 +127,7 @@ BoxElement.prototype.drawRec = function(params, innerCall) {
 		}, true);
 	}
 	this.addToRenderQueue();
-	this._values.relativity && this.recalcRelativity();
+	this._v.relativity && this.recalcRelativity();
 };
 /**
  * virtualizes htmlElement caution, virtualize draws an element
@@ -138,7 +138,7 @@ BoxElement.prototype.virtualize = function(params) {
 	if (!params.target) {
 		throw new Error("Target must set");
 	}
-	if (this._values._isDrawn) {
+	if (this._v._isDrawn) {
 		throw new Error("element [" + this.toString() + "] is already drawn, cant virtualize");
 	}
 
@@ -152,7 +152,7 @@ BoxElement.prototype.virtualize = function(params) {
  * returns true if parents is visible
  */
 BoxElement.prototype.isParentsVisible = function() {
-	if (!this._values.visible) {
+	if (!this._v.visible) {
 		return false;
 	}
 	if (this.parent) {
@@ -164,14 +164,14 @@ BoxElement.prototype.isParentsVisible = function() {
  * function recalculates distance between width/innerWidth, etc...
  */
 BoxElement.prototype.__recalcDxDy = function() {
-	var bCache = this._values.borderWidth;
-	var pCache = this._values.padding;
+	var bCache = this._v.borderWidth;
+	var pCache = this._v.padding;
 	this._dx(bCache[1] + bCache[3] + pCache[1] + pCache[3]);
 	this._dy(bCache[0] + bCache[2] + pCache[0] + pCache[2]);
 };
 
 BoxElement.prototype.__updateHorizontal = function() {
-	if (this._values.horizontal) {
+	if (this._v.horizontal) {
 		this._rProps = {
 			value : "width",
 			vMinValue : "vMinWidth",
@@ -291,14 +291,14 @@ BoxElement.build = function(struct, target){
 };
 
 BoxElement.on("mouseover",function(){
-	if (this._values.hovered && !this._hovered){
+	if (this._v.hovered && !this._hovered){
 		if (!this._backup){
 			this._backup = {};
 		}
 		if (!this._backup.hover) {
 			this._backup.hover = {};
 		}
-		this.setPropertiesWithBackup(this._values.hovered, this._backup.hover);
+		this.setPropertiesWithBackup(this._v.hovered, this._backup.hover);
 		this._hovered = true;
 	}
 });
@@ -317,14 +317,14 @@ BoxElement.on("mousedown",function(){
 	if (this._pressed) {
 		return;
 	}
-	if (this._values.pressed) {
+	if (this._v.pressed) {
 		if (!this._backup){
 			this._backup = {};
 		}
 		if (!this._backup.pressed){
 			this._backup.pressed = {};
 		}
-		this.setPropertiesWithBackup(this._values.pressed, this._backup.pressed);
+		this.setPropertiesWithBackup(this._v.pressed, this._backup.pressed);
 		this._pressed = true;
 	}
 });

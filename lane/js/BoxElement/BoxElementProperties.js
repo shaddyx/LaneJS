@@ -10,18 +10,18 @@ BoxElement.on("captionChanged",function(value){
 	}
 	//debugger;
 	this._captionWidth = this._baseClass.textUtils.getStringWidth(value,{
-		fontFamily: this._values.fontFamily
-		,fontSize: this._values.fontSize
-		,fontWeight: this._values.fontWeight
+		fontFamily: this._v.fontFamily
+		,fontSize: this._v.fontSize
+		,fontWeight: this._v.fontWeight
 	});
 	if (this._captionWidth){
-		this._captionHeight = this._values.lineHeight;
+		this._captionHeight = this._v.lineHeight;
 	} else {
 		this._captionHeight = 0;
 	}
 	
-	this._horzOverflow || this.vMinWidth(this._captionWidth + this._values._dx);
-	this._vertOverflow || this.vMinHeight(this._captionHeight + this._values._dy);
+	this._horzOverflow || this.vMinWidth(this._captionWidth + this._v._dx);
+	this._vertOverflow || this.vMinHeight(this._captionHeight + this._v._dy);
 	/*BoxElement.__listeners._dxChanged.call(this);
 	BoxElement.__listeners._dyChanged.call(this);*/
 });
@@ -35,10 +35,10 @@ BoxElement.on("overflowChanged",function(value){
 });
 
 BoxElement.__listeners.recalcInnerWidth = function(){
-	this._horzOverflow||this.innerWidth(this._values.width - this._values._dx);
+	this._horzOverflow||this.innerWidth(this._v.width - this._v._dx);
 };
 BoxElement.__listeners.recalcInnerHeight= function(){
-	this._vertOverflow||this.innerHeight(this._values.height - this._values._dy);
+	this._vertOverflow||this.innerHeight(this._v.height - this._v._dy);
 };
 
 BoxElement.on("heightChanged",BoxElement.__listeners.recalcInnerHeight);
@@ -47,44 +47,44 @@ BoxElement.on("heightChanged",BoxElement.__listeners.recalcInnerHeight);
  */
 
 /*BoxElement.__listeners._dxChanged = function(value){
-	this.minWidth(Math.max(this._values._dx + this._captionWidth,this._values.minWidth));
+	this.minWidth(Math.max(this._v._dx + this._captionWidth,this._v.minWidth));
 	this._baseClass.__listeners.recalcInnerWidth.call(this);
 };
 
 BoxElement.__listeners._dyChanged = function(value){
-	this.minHeight(Math.max(value + this._captionheight,this._values.minHeight));
+	this.minHeight(Math.max(value + this._captionheight,this._v.minHeight));
 	this._baseClass.__listeners.recalcInnerHeight.call(this);
 };*/
 
 BoxElement.__listeners.minWidthChanged = function(value){
-	this.width(Math.max(this._values.width));
+	this.width(Math.max(this._v.width));
 };
 
 BoxElement.__listeners.minHeightChanged = function(value){
-	this.height(Math.max(this._values.height));
+	this.height(Math.max(this._v.height));
 };
 
 
 BoxElement.__listeners.vMinWidthChanged =function(value){
-	this.width(Math.max(this._values.width,value));
+	this.width(Math.max(this._v.width,value));
 }; 
 
 BoxElement.__listeners.vMinHeightChanged = function(value){
-	this.height(Math.max(this._values.height,value));
+	this.height(Math.max(this._v.height,value));
 };
 
 /*
  * before changed functions
  */
 BoxElement.__listeners.widthBeforeChanged = function(value){
-	var newVal = Math.max(value,this._values.vMinWidth,this._values.minWidth);
+	var newVal = Math.max(value,this._v.vMinWidth,this._v.minWidth);
 	if (newVal !== value){
 		this.width(newVal);
 		return false;
 	}
 };
 BoxElement.__listeners.heightBeforeChanged = function(value){
-	var newVal = Math.max(value,this._values.vMinHeight,this._values.minHeight);
+	var newVal = Math.max(value,this._v.vMinHeight,this._v.minHeight);
 	if (newVal !== value){
 		this.height(newVal);
 		return false;
@@ -100,7 +100,7 @@ BoxElement.__listeners.relativityBeforeChanged = function(value){
 	}
 	
 	for (var k in BoxElement.eventsToSpy) {
-		this._values.relativity && this._values.relativity.target.removePropertyChangedFunc(BoxElement.eventsToSpy[k], this.recalcRelativity, this);
+		this._v.relativity && this._v.relativity.target.removePropertyChangedFunc(BoxElement.eventsToSpy[k], this.recalcRelativity, this);
 	}
 	
 	if (value) {
@@ -128,7 +128,7 @@ BoxElement.relativityAnchors = {
 		return {left:abs.left,top:abs.top};
 	},
 	bottom:function(target, abs){
-		return {left:abs.left,top:abs.top + target._values.height};
+		return {left:abs.left,top:abs.top + target._v.height};
 	},
 	rightInner:function(target, abs){
 		return {left:abs.left + target.width() - this.width(),top:abs.top};
@@ -147,7 +147,7 @@ BoxElement.prototype.recalcRelativity = function(){
 //	
 //	TODO:realize this function
 //
-	var relativity = this._values.relativity;
+	var relativity = this._v.relativity;
 	var target = relativity.target;
 	if (relativity.anchor) {
 		var chunks = relativity.anchor.split(",");
@@ -177,14 +177,14 @@ BoxElement.__listeners.marginChanged = function(margin){
 };
 
 BoxElement.on("_vMarginChanged",function(){
-	var margin=this._values._vMargin;
+	var margin=this._v._vMargin;
 	this._marginDx = margin[1]+margin[3];
 	this._marginDy = margin[0]+margin[2];
 });
 
 BoxElement.__listeners.styleClassChanged = function(){
-	var styleClass = this._values.styleClass;
-	var style = this._values.style;
+	var styleClass = this._v.styleClass;
+	var style = this._v.style;
 	if (style && style[styleClass]){
 		var styleObject = style[styleClass];
 		for (var k in styleObject){
@@ -215,8 +215,8 @@ BoxElement.prototype._draggableChanged = function(value){
 			mouseDown:function(){
 				if (this.trigger('dragStarted') !== false)	{
 					this._dragStartPoint = {
-						x:browser.mouseX() - this._values.left,
-						y:browser.mouseY() - this._values.top
+						x:browser.mouseX() - this._v.left,
+						y:browser.mouseY() - this._v.top
 					};
 				}
 			},

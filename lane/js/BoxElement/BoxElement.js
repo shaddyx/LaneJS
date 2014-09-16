@@ -207,10 +207,10 @@ BoxElement.addProperty = function(name,defValue,props){
 	 */
 	var o = this.prototype[name]; 
 	this.prototype[name] = function(value){
-		var changed = value != this._values[name];
+		var changed = value != this._v[name];
 		if (!changed && props.type == BoxElement.PROPERTY_TYPE.array){
 			for (var i = 0; i < value.length; i++){
-				if (value[i] != this._values[name][i]){
+				if (value[i] != this._v[name][i]){
 					changed = true;
 					break;
 				}
@@ -278,12 +278,12 @@ BoxElement.addProperty = function(name,defValue,props){
 };
 BoxElement.prototype.getDebugInfo = function(){
 	var obj = {
-		w:this._values.width
-		,h:this._values.height
-		,hs:this._values.hs
-		,vs:this._values.vs
-		,vMinWidth:this._values.vMinWidth
-		,vMinHeight:this._values.vMinHeight
+		w:this._v.width
+		,h:this._v.height
+		,hs:this._v.hs
+		,vs:this._v.vs
+		,vMinWidth:this._v.vMinWidth
+		,vMinHeight:this._v.vMinHeight
 		,c:[]
 	};
 	for(var k in this.c){
@@ -323,6 +323,8 @@ BoxElement.addProperty("floating",false,{rm:BoxElement.REDRAW_MODE.full});
 BoxElement.addProperty("visible",true,{html:true, rm:BoxElement.REDRAW_MODE.redrawParent, defaultApply:true});
 BoxElement.addProperty("left",0,{html:true, rm:BoxElement.REDRAW_MODE.applyOnly, htmlEnding:'px',defaultApply:true});
 BoxElement.addProperty("top",0,{html:true, rm:BoxElement.REDRAW_MODE.applyOnly, htmlEnding:'px',defaultApply:true});
+BoxElement.addProperty("scrollLeft",0,{html:true, rm:BoxElement.REDRAW_MODE.applyOnly, htmlEnding:'px',defaultApply:true});
+BoxElement.addProperty("scrollTop",0,{html:true, rm:BoxElement.REDRAW_MODE.applyOnly, htmlEnding:'px',defaultApply:true});
 BoxElement.addProperty("hs",false,{rm:BoxElement.REDRAW_MODE.full});
 BoxElement.addProperty("vs",false,{rm:BoxElement.REDRAW_MODE.full});
 BoxElement.addProperty("hCompress",false,{rm:BoxElement.REDRAW_MODE.full});

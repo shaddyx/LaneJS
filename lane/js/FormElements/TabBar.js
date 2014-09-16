@@ -29,8 +29,8 @@ TabBar.prototype._beforeadd = function(tab){
 	}
 };
 TabBar.prototype._refreshTabs = function(activeTab){
-	for (var k in this._values.children._data){
-		var child = this._values.children._data[k];
+	for (var k in this._v.children._data){
+		var child = this._v.children._data[k];
 		if (child != activeTab) {
 			child.selected(false);
 		}
@@ -39,7 +39,7 @@ TabBar.prototype._refreshTabs = function(activeTab){
 TabBar.prototype._added = function(tab){
 	var my = this;
 	var el = new BoxElement();
-	el.build(TabButtonSkin[this._values.skin]);
+	el.build(TabButtonSkin[this._v.skin]);
 	el.drawRec({target:this._elements.buttonContainer});
 	el._elements.caption.caption(tab.caption());
 	tab.button = el
