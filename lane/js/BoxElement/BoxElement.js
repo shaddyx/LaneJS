@@ -101,8 +101,9 @@ BoxElement.REDRAW_MODE = {
 	,applyBefore:2
 	,full:10
 	,redrawParent:11
-	,fullAndRenderMe:12,
-	check:function(value){
+	,fullAndRenderMe:12
+	,render:13
+	,check:function(value){
 		if (value == 0 ||
 			value == 1 ||
 			value == 2 ||
@@ -254,6 +255,9 @@ BoxElement.addProperty = function(name,defValue,props){
 						this._applyAfter[name] = 1;
 						this._baseClass.initGlobalRedraw();
 						break;
+					case rmCache.render:
+						this.addToRenderQueue(true);
+						break;
 					case rmCache.fullAndRenderMe:
 						this._baseClass._applyAfter[this.id] = this;
 						if (html) {
@@ -323,8 +327,8 @@ BoxElement.addProperty("floating",false,{rm:BoxElement.REDRAW_MODE.full});
 BoxElement.addProperty("visible",true,{html:true, rm:BoxElement.REDRAW_MODE.redrawParent, defaultApply:true});
 BoxElement.addProperty("left",0,{html:true, rm:BoxElement.REDRAW_MODE.applyOnly, htmlEnding:'px',defaultApply:true});
 BoxElement.addProperty("top",0,{html:true, rm:BoxElement.REDRAW_MODE.applyOnly, htmlEnding:'px',defaultApply:true});
-BoxElement.addProperty("scrollLeft",0,{html:true, rm:BoxElement.REDRAW_MODE.applyOnly, htmlEnding:'px',defaultApply:true});
-BoxElement.addProperty("scrollTop",0,{html:true, rm:BoxElement.REDRAW_MODE.applyOnly, htmlEnding:'px',defaultApply:true});
+BoxElement.addProperty("scrollLeft",0,{html:true, rm:BoxElement.REDRAW_MODE.render, htmlEnding:'px',defaultApply:true});
+BoxElement.addProperty("scrollTop",0,{html:true, rm:BoxElement.REDRAW_MODE.render, htmlEnding:'px',defaultApply:true});
 BoxElement.addProperty("hs",false,{rm:BoxElement.REDRAW_MODE.full});
 BoxElement.addProperty("vs",false,{rm:BoxElement.REDRAW_MODE.full});
 BoxElement.addProperty("hCompress",false,{rm:BoxElement.REDRAW_MODE.full});

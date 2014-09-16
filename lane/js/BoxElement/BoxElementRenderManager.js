@@ -1,4 +1,5 @@
 BoxElement.runGlobalRender = function(){
+	console.log("Running global render");
 	var my = BoxElement;
 	if (my._renderTimer){
 		clearTimeout(my._renderTimer);
@@ -23,8 +24,8 @@ BoxElement.runGlobalRender = function(){
  * function renders coordinates of our childs
  */
 BoxElement.prototype.render = function(){
-	var left=this._v.padding[3];
-	var top=this._v.padding[0];
+	var left=this._v.padding[3] + this._v.scrollLeft;
+	var top=this._v.padding[0] + this._v.scrollTop;
 	if (this._v.horizontal){
 		left += this._v._alignDelta;
 	} else {

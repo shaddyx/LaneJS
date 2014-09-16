@@ -305,10 +305,6 @@ BoxElement.prototype.reDraw = function(innerCall) {
 				skipCount = 0,
 				foundSmaller,
 				ratio;
-		
-		
-		
-		
 //		
 //		TODO: optimize this!!!
 //		
