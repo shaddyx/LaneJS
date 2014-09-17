@@ -137,8 +137,8 @@ BoxElement.prototype.isCanOverflowInMainDirection = function(){
 	if (
 			this._v.overflow == BoxElement.OVERFLOW_MODE.hidden ||
 			this._v.overflow == BoxElement.OVERFLOW_MODE.auto  ||
-			(this._v.overflow == BoxElement.OVERFLOW_MODE.overflowX && this._v.horizontal) ||
-			(this._v.overflow == BoxElement.OVERFLOW_MODE.overflowY && !this._v.horizontal)
+			((this._v.overflow == BoxElement.OVERFLOW_MODE.overflowX || this._v.overflow == BoxElement.OVERFLOW_MODE.hiddenX) && this._v.horizontal) ||
+			((this._v.overflow == BoxElement.OVERFLOW_MODE.overflowY || this._v.overflow == BoxElement.OVERFLOW_MODE.hiddenY) && !this._v.horizontal)
 			
     ) {
 		return true;
@@ -154,8 +154,8 @@ BoxElement.prototype.isCanOverflowIn2Direction = function(){
 	if (
 			this._v.overflow == BoxElement.OVERFLOW_MODE.hidden ||
 			this._v.overflow == BoxElement.OVERFLOW_MODE.auto  ||
-			(this._v.overflow == BoxElement.OVERFLOW_MODE.overflowX && !this._v.horizontal) ||
-			(this._v.overflow == BoxElement.OVERFLOW_MODE.overflowY && this._v.horizontal)
+			((this._v.overflow == BoxElement.OVERFLOW_MODE.overflowX || this._v.overflow == BoxElement.OVERFLOW_MODE.hiddenX) && !this._v.horizontal) ||
+			((this._v.overflow == BoxElement.OVERFLOW_MODE.overflowY || this._v.overflow == BoxElement.OVERFLOW_MODE.hiddenY) && this._v.horizontal)
 			
     ) {
 		return true;

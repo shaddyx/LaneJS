@@ -344,7 +344,7 @@ BoxElement.addProperty("lineHeight",15,{html:true, rm:BoxElement.REDRAW_MODE.ful
 BoxElement.addProperty("horizontal",false,{rm:BoxElement.REDRAW_MODE.full});
 BoxElement.addProperty("fontColor","none",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
 BoxElement.addProperty("textDecoration","none",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
-BoxElement.addProperty("backgroundColor","none",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
+BoxElement.addProperty("backgroundColor","transparent",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
 BoxElement.addProperty("backgroundImage","none",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});		
 BoxElement.addProperty("backgroundPosition","",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
 BoxElement.addProperty("backgroundRepeat","",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});

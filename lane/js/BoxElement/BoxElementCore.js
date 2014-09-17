@@ -7,7 +7,7 @@ BoxElement.prototype.buildTo = function(struct) {
 	var el = new BoxElement();
 	el.build(struct);
 	el.drawRec({target:this});
-	return target;
+	return el;
 };
 
 /**
@@ -291,6 +291,9 @@ BoxElement.build = function(struct, target){
 };
 
 BoxElement.on("mouseover",function(){
+	if (this.id == 37) {
+		console.log("hover");
+	}
 	if (this._v.hovered && !this._hovered){
 		if (!this._backup){
 			this._backup = {};
@@ -304,6 +307,9 @@ BoxElement.on("mouseover",function(){
 });
 
 BoxElement.on("mouseout",function(){
+	if (this.id == 37) {
+		console.log("out");
+	}
 	if (this._hovered) {
 		this._hovered = false;
 		this.restoreProperties(this._backup.hover);

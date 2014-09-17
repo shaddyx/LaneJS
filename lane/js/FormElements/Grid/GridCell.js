@@ -1,4 +1,4 @@
-var GridCellCell = function(params) {
+var GridCell = function(params) {
 	BaseObject.call(this);
 	this._mustRedraw = true;
 	this._params = params; 
@@ -15,16 +15,6 @@ GridCell.addProperty("left", 0);
 GridCell.addProperty("top", 0);
 GridCell.addProperty("caption", "");
 
-
-GridCell.prototype.init = function(){
+/*GridCell.on("captionChanged", function(value) {
 	
-};
-
-
-GridCell.pritotype.apply = function(){
-
-};
-
-GridCell.on("captionChanged", function(value) {
-	
-});
+});*/	

@@ -47,5 +47,8 @@ browser.on("ready",function(){
 	win.elements.grid.add("asdfasdfadsf", {id:1, test:"234523452354", test1:"34563563456", test2:"12234523542354"});
 	win.elements.grid.add(3, {id:1, test:"234523452354", test1:"34563563456", test2:"12234523542354"});
 	win.elements.grid.add(4, {id:1, test:"234523452354", test1:"34563563456", test2:"12234523542354"});
+	for (var k=0; k<10000; k++){
+		win.elements.grid.add(k + 6, {id:k + 6, test:"234523452354" + k, test1:"34563563456" + k, test2:"12234523542354" + k});
+	}
 	win.elements.grid.update("asdfasdfadsf", {id:1, test:"updated", test1:"34563563456", test2:"sfgsdfgsdfg"});
 });
