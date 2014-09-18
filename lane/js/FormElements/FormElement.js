@@ -112,11 +112,14 @@ FormElement.getSkinForType = function (type, skin){
 FormElement.prototype.buildComponent = function(struct){
 	if (struct.defaults){
 		for (var k in struct.defaults){
-			this[k](struct.defaults[k]);
+			if (typeof this[k] === "function"){
+				this[k](struct.defaults[k]);
+			} else {
+				throw new Error("Error, cant build component [" + this.type + "], property:" + k + " is undefined");
+			}
+			
 		}
-		//delete struct.defaults;
 	}
-	
 	this._elements = this._v.outer.build(struct);
 };
 

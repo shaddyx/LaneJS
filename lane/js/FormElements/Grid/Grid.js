@@ -3,7 +3,6 @@ var Grid = function() {
 	this._rows = [];
 	this._rowsHeight = 0;
 	this._rowHeight = 0;
-	this._columns = [];
 };
 Util.extend(Grid, FormElement);
 Grid.type = "Grid";
@@ -11,10 +10,10 @@ Grid.addProperty("data", false);
 
 Grid.prototype._afterDraw = function() {
 	this._elements.content.on(["heightChanged","widthChanged"], this.reDraw, this);
-	var rowSkin = this._v.skin;
-	this._rowSkin = GridRowSkin[rowSkin];
-	if (!GridRowSkin[rowSkin]){
-		throw new Error("No skin " + rowSkin + " for GridRow!");
+	this._rowSkin = this._v.skin;
+	
+	if (!GridRowSkin[this._rowSkin]){
+		throw new Error("No skin " + this._rowSkin + " for GridRow!");
 	}
 	this._rowHeight = this._rowSkin.height;
 	console.log("Row height:" + this._rowsHeight);
@@ -46,14 +45,20 @@ Grid.prototype._drawRows = function(){
  * adds row to tail of he list
  */
 Grid.prototype._addRow = function(){
-	var row = this._elements.content.buildTo(this._rowSkin);
-	this._rowsHeight += this._rowSkin.height;
+	var row = new GridRow();
+	row.skin(this._rowSkin);
+	row.draw(this._elements.content);
+	if (row.height() == 0) {
+		throw new Error("OOOOps");
+	}
+	this._rowsHeight += row.height();
 	this._rows.push(row);
 };
 /**
  * removes last row from list
  */
 Grid.prototype._removeLastRow = function(){
+	
 	if (this._rows.length > 0){
 		var last = this._rows[this._rows.length - 1];
 		last.remove();

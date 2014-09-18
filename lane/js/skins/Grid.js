@@ -4,7 +4,8 @@ GridSkin.def = {
 	c:[
 	    {
 	    	name:"header",
-	    	height:Constants.lineHeight
+	    	height:Constants.lineHeight,
+	    	caption:"header"
 	    },
 	   	{
 	   		name:"content",
@@ -12,22 +13,23 @@ GridSkin.def = {
 	   		vs:true,
 	   		borderWidth:[1,1,1,1],
 	   		borderColor:"#000",
-	   		overflow:BoxElement.OVERFLOW_MODE.hiddenY,
+	   		overflow:BoxElement.OVERFLOW_MODE.hidden
 	   	},
 	   	{
 	   		name:"footer",
 	   		hs:true,
-	   		height:Constants.lineHeight
+	   		height:Constants.lineHeight,
+	   		caption:"footer"
 	   	}
 	]
 };
 
 GridRowSkin = {};
 GridRowSkin.def = {
-    height:Constants.lineHeight,
+	height:Constants.lineHeight,
+	hs:true,	
     borderWidth:[0,0,1,0],
 	borderColor:"#ccc",
-	hs:true,
 	hovered:{
 		backgroundColor:"#ccc"
 	}
@@ -49,3 +51,7 @@ GridColumnSkin.def = {
 	]
 };
 
+GridCellSkin = {};
+GridCellSkin.def = {
+	name:"caption"	
+};

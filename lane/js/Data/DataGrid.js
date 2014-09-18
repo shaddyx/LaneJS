@@ -1,11 +1,13 @@
 var DataGrid = function(){
-	BaseObject.call(this);
+	DataSource.call(this);
 	this._data = [];
 	this._currentRow = undefined;
 };
+
 Util.extend(DataGrid, DataSource);
 DataGrid.type = "DataGrid";
 DataGrid.addProperty("visible",0);
+DataGrid.addProperty("columns",[]);
 
 /**
  * function adds row 

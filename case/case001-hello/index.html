@@ -24,6 +24,7 @@
     	<script type="text/javascript" src="/lane/js/BoxElement/BoxElementEvents.js"></script>
     	<script type="text/javascript" src="/lane/js/Data/DataSource.js"></script>
     	<script type="text/javascript" src="/lane/js/Data/DataGrid.js"></script>
+    	<script type="text/javascript" src="/lane/js/Data/DataColumn.js"></script>
     	<script type="text/javascript" src="/lane/js/FormElements/FormElement.js"></script>
     	<script type="text/javascript" src="/lane/js/FormElements/Container.js"></script>
     	<script type="text/javascript" src="/lane/js/FormElements/Panel.js"></script>
@@ -61,6 +62,16 @@
     	var rootElement = BoxElement.virtualizeBody();
     	var win;
     	var dataGrid = new DataGrid();
+    	var columns = DataColumn.build([{
+			   name:"a",
+			   caption:"blablabla"
+		   },
+		   {
+			   name:"b",
+			   caption:"blablablb"
+		   }
+		]);
+    	dataGrid.columns(columns);
     	for (var i = 0; i<10000; i++){
     		dataGrid.add({a:"test" + i, b:"testb" + i});
     	}
@@ -71,8 +82,8 @@
 	    	win = FormElement.build({
 	    		type:"Window",
 	    		caption:"lane.js window",
-	    		width:800,
-	    		height:600,
+	    		width:1900,
+	    		height:1000,
 	    		c:[
 	    			{
 	    				type:"Container",
