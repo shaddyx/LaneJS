@@ -6,7 +6,7 @@ Tab.type = "Tab";
 Tab.funcs = {};
 
 Tab.setDefault("visible", false);
-Tab.addProperty("selected", false,{type:"Tab"});
+Tab.addProperty("selected", false,{type:"boolean"});
 Tab.addProperty("tabBar", false,{type:"TabBar"});
 Tab.addProperty("tabVisible", true,{type:"boolean"});
 
