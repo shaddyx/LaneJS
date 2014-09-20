@@ -27,6 +27,7 @@
     	<script type="text/javascript" src="/lane/js/Data/DataColumn.js"></script>
     	<script type="text/javascript" src="/lane/js/FormElements/FormElement.js"></script>
     	<script type="text/javascript" src="/lane/js/FormElements/Container.js"></script>
+    	<script type="text/javascript" src="/lane/js/FormElements/FieldSet.js"></script>
     	<script type="text/javascript" src="/lane/js/FormElements/Panel.js"></script>
     	<script type="text/javascript" src="/lane/js/FormElements/FloatingContainer.js"></script>
     	<script type="text/javascript" src="/lane/js/FormElements/Span.js"></script>
@@ -36,6 +37,7 @@
 
     	<script type="text/javascript" src="/lane/js/FormElements/Grid/Grid.js"></script>
     	<script type="text/javascript" src="/lane/js/FormElements/Grid/GridCell.js"></script>
+    	<script type="text/javascript" src="/lane/js/FormElements/Grid/GridTextCell.js"></script>
     	<script type="text/javascript" src="/lane/js/FormElements/Grid/GridColumn.js"></script>
     	<script type="text/javascript" src="/lane/js/FormElements/Grid/GridRow.js"></script>
     	
@@ -48,6 +50,7 @@
     	<script type="text/javascript" src="/lane/js/skins/Label.js"></script>
     	<script type="text/javascript" src="/lane/js/skins/Button.js"></script>
     	<script type="text/javascript" src="/lane/js/skins/Grid.js"></script>
+    	<script type="text/javascript" src="/lane/js/skins/FieldSet.js"></script>
     	<!-- <script type="text/javascript" src="/lane/js/skins/GridRow.js"></script>
     	<script type="text/javascript" src="/lane/js/skins/GridColumn.js"></script>  -->
     	
@@ -80,10 +83,12 @@
     	browser.imageBase("../../lane/");
     	browser.on("ready",function(){
 	    	win = FormElement.build({
-	    		type:"Window",
+	    		type:"FieldSet",
 	    		caption:"lane.js window",
-	    		width:1900,
-	    		height:1000,
+	    		/*width:1900,
+	    		height:1000,*/
+	    		hs:true,
+	    		vs:true,
 	    		c:[
 	    			{
 	    				type:"Container",

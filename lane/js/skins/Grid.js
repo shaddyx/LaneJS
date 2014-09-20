@@ -37,8 +37,8 @@ GridRowSkin.def = {
 
 
 
-GridColumnSkin = {};
-GridColumnSkin.def = {
+GridHeaderSkin = {};
+GridHeaderSkin.def = {
 	c:[
 	   {
 		   borderWidth:[1,1,1,1],
@@ -51,7 +51,43 @@ GridColumnSkin.def = {
 	]
 };
 
+GridFooterSkin = {};
+GridFooterSkin.def = {
+	c:[
+	   {
+		   borderWidth:[1,1,1,1],
+	   	   borderColor:"#000"
+	   },
+	   {
+		   name:"caption"
+	   }
+	]
+};
+
 GridCellSkin = {};
 GridCellSkin.def = {
-	name:"caption"	
+	text:{
+		name:"caption",
+		width:1000,
+		overflow:BoxElement.OVERFLOW_MODE
+	},
+	img:{
+		name:"img",
+		width:16,
+		height:16
+	},
+	tree:{
+		c:[
+		   {
+			   name:"img",
+			   width:16,
+			   height:16
+		   },
+		   {
+			   name:"caption",
+			   width:1000,
+			   overflow:BoxElement.OVERFLOW_MODE
+		   }
+		]
+	}
 };

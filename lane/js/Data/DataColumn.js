@@ -5,6 +5,7 @@ var DataColumn = function(){
 Util.extend(DataColumn, DataSource);
 DataColumn.type = "DataColumn";
 DataColumn.addProperty("name","");
+DataColumn.addProperty("columnType","text");
 DataColumn.addProperty("caption","");
 
 DataColumn.build = function(columns){

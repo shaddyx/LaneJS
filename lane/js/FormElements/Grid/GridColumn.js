@@ -1,11 +1,11 @@
-var GridColumn = function(params) {
+var GridColumn = function(grid) {
 	BaseObject.call(this);
-	this._params = params;
+	this._grid= grid;
+	this._cells = [];
 };
 Util.extend(GridColumn, BaseObject);
 GridColumn.type = "GridColumn";
+GridColumn.addProperty("columnType","text");
+GridColumn.addProperty("dataColumn",null);
 
-GridColumn.prototype.init = function(){
-	var skin = FormElement.getSkinForType("GridGridColumn","def");
-	this.element = this._params.target.buildTo(skin);
-};
+
