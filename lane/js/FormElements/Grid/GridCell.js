@@ -1,13 +1,43 @@
-var GridCell = function(params) {
+var GridCell = function(column, row) {
 	BaseObject.call(this);
-	this._element = new BoxElement();
+	this._row = row;
+	this._grid = row._grid;
+	this._column = column;
+	
 };
 Util.extend(GridCell, BaseObject);
-BoxElement.type = "GridCell";
+GridCell.type = "GridCell";
 
 
+GridCell.buildCell = function(column, row){
+	var obj;
+	switch(column._v.columnType){
+		case "text":
+			obj = new GridTextCell(column, row);
+			break;
+		default:
+			throw new Error("Error, no such column type:" + column._v.columnType);
+	}
+	return obj;
+};
 
+GridCell.prototype.build = function(){
+	var skin = GridCellSkin[this._column._v.skin];
+	if (!skin){
+		throw new Error("No such skin:" + this._column._v.skin);
+	}
+	var struct = skin[this._column._v.columnType];
+	if (!struct){
+		throw new Error("No such column type:" + this._column._v.columnType);
+	}
+	this._element = new BoxElement();
+	this._element.build(struct);
+	this._element.drawRec({target:this._row._element});
+};
 
-/*GridCell.on("captionChanged", function(value) {
-	
-});*/	
+GridCell.prototype.remove= function(){
+	if (!this._element){
+		throw new Error("Cell is not drawn");
+	}
+	this._element.remove();
+};

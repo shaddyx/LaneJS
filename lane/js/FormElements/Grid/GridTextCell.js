@@ -1,8 +1,8 @@
-var GridTextCell = function(params) {
-	GridCell.call(this);
+var GridTextCell = function(column, row) {
+	GridCell.call(this, column, row);
 };
 Util.extend(GridTextCell, GridCell);
-BoxElement.type = "GridTextCell";
+GridTextCell.type = "GridTextCell";
 
 
 

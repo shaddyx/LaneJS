@@ -18,21 +18,34 @@ Grid.prototype._afterDraw = function() {
 	}
 	this._rowHeight = this._rowSkin.height;
 	//console.log("Row height:" + this._rowsHeight);
+	this.reBuild();
 	this.reDraw();
 };
 
+Grid.prototype.reBuild= function(){
+	if (!this._v.isDrawn){
+		return;
+	}
+	console.log("Grid reBuild called");
+	for (var i = 0; i<this._rows.length; i++ ){
+		this._rows[i].reBuildCells();
+	}
+};
+/**
+ * function called after sizes changed
+ */
 Grid.prototype.reDraw = function(){
 	if (!this._v.isDrawn){
 		return;
 	}
-	console.log("Grid reDraw called");
-	this._drawRows();
-	this._drawCells();
+	console.log("Grid reBuild called");
+	this.drawMissingRows();
+	this.buildCells();
 };
 /**
  * function draws rows to content element in grid
  */
-Grid.prototype._drawRows = function(){
+Grid.prototype.drawMissingRows = function(){
 	//console.log("h:" + this._elements.content.height());
 	var h = this._elements.content.height();
 	if (h > this._rowsHeight){
@@ -75,9 +88,11 @@ Grid.prototype._removeLastRow = function(){
 /**
  * Draws cells to rows 
  */
-Grid.prototype._drawCells = function(){
-	for(var k in this._rows){
-		this._rows[k].buildCells();
+Grid.prototype.buildCells = function(){
+	for (var i = 0; i<this._rows.length; i++ ){
+		if (!this._rows[i].cellsBuilt){
+			this._rows[i].buildCells();
+		}
 	}
 }
 
@@ -88,7 +103,7 @@ Grid.prototype._dataChanged = function(){
 		col.dataColumn(dataCol);
 		this._columns.push(col);
 	}
-	this.reDraw();
+	this.reBuild();
 };
 
 Grid.on("afterDraw", Grid.prototype._afterDraw);

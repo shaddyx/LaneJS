@@ -27,9 +27,11 @@ GridSkin.def = {
 GridRowSkin = {};
 GridRowSkin.def = {
 	height:Constants.lineHeight,
-	hs:true,	
+	hs:true,
+	horizontal:true,
     borderWidth:[0,0,1,0],
 	borderColor:"#ccc",
+	overflow:BoxElement.OVERFLOW_MODE.hidden,
 	hovered:{
 		backgroundColor:"#ccc"
 	}
@@ -69,7 +71,8 @@ GridCellSkin.def = {
 	text:{
 		name:"caption",
 		width:1000,
-		overflow:BoxElement.OVERFLOW_MODE
+		height:Constants.lineHeight,
+		overflow:BoxElement.OVERFLOW_MODE.hidden
 	},
 	img:{
 		name:"img",
