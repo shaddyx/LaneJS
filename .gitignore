@@ -3,3 +3,4 @@
 .settings
 bin/*.log
 bin/*.pid
+*.pyc

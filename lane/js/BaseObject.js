@@ -1,7 +1,4 @@
 "use strict";
-/*
- * @@@dependsOn: BoxElement
- */
 /**
  * basic object, implements an event model 
  */

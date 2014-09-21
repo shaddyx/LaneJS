@@ -1,3 +1,7 @@
+/*
+ * Box element properties
+ * @@@dependsOn: BoxElement
+ */
 BoxElement.prototype.getAbsolutePosition = function(){
 	return this.htmlElement.getBoundingClientRect();
 };

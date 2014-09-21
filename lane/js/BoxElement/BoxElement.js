@@ -1,6 +1,5 @@
 /*
  * Box element
- * @@@dependsOn: BaseObject
  */
 var elements = {};
 var BoxElement = function(params){

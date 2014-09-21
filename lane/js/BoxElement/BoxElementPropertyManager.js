@@ -1,3 +1,6 @@
+/*
+ * @@@dependsOn: BoxElement
+ */
 BoxElement._applyTimer = false;
 BoxElement.prototype.applyProperties = function(before){
 	if (!this.visible){

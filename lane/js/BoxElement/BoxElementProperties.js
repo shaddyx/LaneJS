@@ -2,7 +2,6 @@
  * Box element properties
  * @@@dependsOn: BoxElement
  */
-
 BoxElement.on("captionChanged",function(value){
 	if (!this._baseClass.textUtils){
 		this._baseClass.textUtils = new TextUtils();

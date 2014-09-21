@@ -1,3 +1,6 @@
+/*
+ * @@@dependsOn: BoxElement
+ */
 /**
  * @returns first available parent node, with type BoxElement
  */

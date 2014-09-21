@@ -1,3 +1,6 @@
+/*
+ * @@@dependsOn: BoxElement
+ */
 BoxElement.runGlobalRedraw = function(innerCall) {
 	if (this.die){
 		return;

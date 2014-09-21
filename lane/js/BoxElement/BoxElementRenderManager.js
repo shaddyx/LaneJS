@@ -1,3 +1,6 @@
+/*
+ * @@@dependsOn: BoxElement
+ */
 BoxElement.runGlobalRender = function(){
 	console.log("Running global render");
 	var my = BoxElement;
