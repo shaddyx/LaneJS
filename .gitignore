@@ -4,3 +4,4 @@
 bin/*.log
 bin/*.pid
 *.pyc
+nohup.out
