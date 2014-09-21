@@ -58,9 +58,13 @@ class GraphBuilder:
                 self.findChildren(node)
             list = []
             for node in heads:
+                
                 list.append(node)
                 list += node.buildChildList()
-            print list
+            
+            for node in list:
+                print node.name
+            
             
             
             
