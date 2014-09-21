@@ -10,6 +10,7 @@ class GraphBuilder:
         #self.fileList = []
         self.excludeList = ["/i18n/"]
         self.includeList = []
+        self.nodeMap = {}
     
     def getList(self, path, filter = "*", excludeList = []):
         result = []
@@ -33,11 +34,34 @@ class GraphBuilder:
     def makeNode(self, fileName):
         return Node(".".join(fileName.split("/")[-1].split(".")[0:-1]), fileName)
     
+    def findChildren(self, node):
+        for k in self.nodeMap:
+            childNode = self.nodeMap[k]
+            if node.name in childNode.depends:
+                node.appendChild(childNode)
+                print "adding child " + node.name + " --> " + childNode.name 
+                self.findChildren(childNode)
+                 
     def build(self, path):
             jsList = self.getList(path, "*.js", self.excludeList)
-            nodeMap = {}
+            self.nodeMap = {}
             for f in jsList:
                 node = self.makeNode(f)
-                nodeMap[node.name] = node
+                self.nodeMap[node.name] = node
                 node.loadDeps()
-            #print nodeMap
+            heads = []
+            for k in self.nodeMap:
+                if self.nodeMap[k].isIndependent():
+                    heads.append(self.nodeMap[k])
+            
+            for node in heads:
+                self.findChildren(node)
+            list = []
+            for node in heads:
+                list.append(node)
+                list += node.buildChildList()
+            print list
+            
+            
+            
+            

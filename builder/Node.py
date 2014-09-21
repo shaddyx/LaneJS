@@ -19,6 +19,14 @@ class Node:
     def appendChild(self, child):
         self.children.append(child)
     
+    def isIndependent(self):
+        return len(self.depends) == 0
+    
+    def buildChildList(self):
+        result = self.children
+        for child in self.children:
+            result += child.buildChildList()
+        return result
     def __str__(self):
         return self.name + ":" + self.file + " depends:" + ",".join(self.depends)
     
