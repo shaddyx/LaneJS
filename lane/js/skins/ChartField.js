@@ -1,3 +1,9 @@
+/*
+ * Box element properties
+ * @@@dependsOn: BoxElement
+ * @@@dependsOn: FormElement
+ * @@@name:ChartFieldSkin
+ */
 var ChartFieldSkin = {};
 ChartFieldSkin.def = {
 	c:[

@@ -1,3 +1,9 @@
+/*
+ * Box element properties
+ * @@@dependsOn: BoxElement
+ * @@@dependsOn: FormElement
+ * @@@name:ChartLegendSkin
+ */
 var ChartLegendSkin = {};
 ChartLegendSkin.def = {
 	c:[

@@ -1,3 +1,9 @@
+/*
+ * Box element properties
+ * @@@dependsOn: BoxElement
+ * @@@dependsOn: FormElement
+ * @@@name:FieldSetSkin
+ */
 var FieldSetSkin = {};
 FieldSetSkin.def = {
 	borderWidth:[1,1,1,1],

@@ -1,3 +1,9 @@
+/*
+ * Box element properties
+ * @@@dependsOn: BoxElement
+ * @@@dependsOn: FormElement
+ * @@@nameSuffix:Skin
+ */
 var HourPickerSkin = {};
 HourPickerSkin.def = {
 	horizontal:true,

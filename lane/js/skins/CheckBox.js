@@ -1,3 +1,9 @@
+/*
+ * Box element properties
+ * @@@dependsOn: BoxElement
+ * @@@dependsOn: FormElement
+ * @@@name:CheckBoxSkin
+ */
 var CheckBoxSkin = {};
 CheckBoxSkin.def = {
 	horizontal:true,

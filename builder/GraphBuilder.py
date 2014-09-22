@@ -4,6 +4,7 @@ from os.path import isfile, join, isdir
 import re
 import glob
 import fnmatch
+from Tools import *
 
 class GraphBuilder:
     def __init__(self):
@@ -11,28 +12,9 @@ class GraphBuilder:
         self.excludeList = ["/i18n/"]
         self.includeList = []
         self.nodeMap = {}
-    
-    def getList(self, path, filter = "*", excludeList = []):
-        result = []
-        files = listdir(path)
-        for f in files:
-            fileName = path + f
-            match = False
-            for excludeString in excludeList:
-                if re.search(excludeString, fileName):
-                    print "Ignoring " + fileName
-                    match = True
-                    break
-            if match:
-                continue
-            if isdir(fileName):
-                result += self.getList(fileName + "/", filter, excludeList)
-            else:
-                result.append(fileName)
-        return fnmatch.filter(result, filter)
-        
-    def makeNode(self, fileName):
-        return Node(".".join(fileName.split("/")[-1].split(".")[0:-1]), fileName)
+        self.nodeList = []
+        self.sortedNodeList = []
+       
     
     def findChildren(self, node):
         for k in self.nodeMap:
@@ -41,31 +23,47 @@ class GraphBuilder:
                 node.appendChild(childNode)
                 print "adding child " + node.name + " --> " + childNode.name 
                 self.findChildren(childNode)
-                 
+    
+    def _buildSorted(self):
+        movedNodes = []
+        for i, node in enumerate(self.nodeList):
+            foundDeps = 0
+            for dep in node.depends:
+                for sortedNode in self.sortedNodeList:
+                    if dep == sortedNode.name:
+                        foundDeps += 1
+            if len(node.depends) == foundDeps:
+                movedNodes.append(node)
+        for node in movedNodes:
+            self.nodeList.remove(node)
+            self.sortedNodeList.append(node)
+        return len(movedNodes)
+    
     def build(self, path):
-            jsList = self.getList(path, "*.js", self.excludeList)
+            jsList = getList(path, "*.js", self.excludeList)
             self.nodeMap = {}
+            self.nodeList = []
             for f in jsList:
-                node = self.makeNode(f)
+                node = Node(f)
                 self.nodeMap[node.name] = node
-                node.loadDeps()
+                self.nodeList.append(node)
+                
             heads = []
+            
             for k in self.nodeMap:
                 if self.nodeMap[k].isIndependent():
                     heads.append(self.nodeMap[k])
             
-            for node in heads:
-                self.findChildren(node)
-            list = []
-            for node in heads:
-                
-                list.append(node)
-                list += node.buildChildList()
+            self.sortedNodeList = []
+            print "Calling first"
+            while (self._buildSorted() > 0):
+                pass
+
+            if len(self.nodeList) > 0:
+                print "Error, cyclic dependency in:" + str(self.nodeList)
+            return self.sortedNodeList
             
-            for node in list:
-                print node.name
-            
-            
+           
             
             
             

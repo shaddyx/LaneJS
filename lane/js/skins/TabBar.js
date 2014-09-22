@@ -1,3 +1,9 @@
+/*
+ * Box element properties
+ * @@@dependsOn: BoxElement
+ * @@@dependsOn: FormElement
+ * @@@nameSuffix:Skin
+ */
 var TabBarSkin = {};
 TabBarSkin.def = {
 	borderWidth:[0,0,0,0],

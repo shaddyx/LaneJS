@@ -1,3 +1,9 @@
+/*
+ * Box element properties
+ * @@@dependsOn: BoxElement
+ * @@@dependsOn: FormElement
+ * @@@name:ContainerSkin
+ */
 var ContainerSkin = {def:{name:"inner"}};
 
 ContainerSkin.stb = {

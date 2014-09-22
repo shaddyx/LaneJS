@@ -1,3 +1,9 @@
+/*
+ * Box element properties
+ * @@@dependsOn: BoxElement
+ * @@@dependsOn: FormElement
+ * @@@name:DirectDropDownSkin
+ */
 var DirectDropDownSkin = {};
 DirectDropDownSkin.def = {
 	backgroundColor:"#fff",

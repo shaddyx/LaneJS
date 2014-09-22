@@ -1,3 +1,9 @@
+/*
+ * Box element properties
+ * @@@dependsOn: BoxElement
+ * @@@dependsOn: FormElement
+ * @@@name:CanvasSkin
+ */
 var CanvasSkin = {};
 CanvasSkin.def = {
 	c:[

@@ -1,3 +1,6 @@
+/*
+ * @@@dependsOn:BaseObject
+ */
 Dialogs = {
 	answers:{
 		cancel:0,

@@ -1,4 +1,8 @@
 "use strict";
+/*
+ * @@@dependsOn: CoreException
+ * @@@dependsOn: Constants
+ */
 /**
  * basic object, implements an event model 
  */
