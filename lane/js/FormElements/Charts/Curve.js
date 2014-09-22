@@ -1,3 +1,6 @@
+/*
+ * @@@dependsOn: ChartField
+ */
 ChartField.types.curve = function(dataSet, params, options){
 	var ratio, my = this;
 	

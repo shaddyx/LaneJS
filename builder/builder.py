@@ -7,13 +7,15 @@ def buildGraph(path):
     builder = GraphBuilder()
     return builder.build(path)
 
-def buildJs(path, nodes):
+def buildJs(path, nodes, startFrom, prefix):
     jsBuilder = JsBuilder()
-    jsBuilder.build(path,nodes)
+    jsBuilder.build(path, nodes, startFrom, prefix)
 
-if len(sys.argv) < 3:
-    print "Not enough arguments"
+if len(sys.argv) < 5:
+    print """Not enough arguments
+    Usage: python builder.py [pathToScanForJS] [pathToScanForJspOrHtmlOrPy] [stringToStartJsPathFrom] [prefix]
+    """
     sys.exit()
 
 nodes = buildGraph(sys.argv[1] + '/');
-buildJs(sys.argv[2] + '/',nodes)
+buildJs(sys.argv[2] + '/', nodes, sys.argv[3], sys.argv[4])
