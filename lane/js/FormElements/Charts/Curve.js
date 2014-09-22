@@ -1,7 +1,7 @@
 /*
  * @@@dependsOn: ChartField
  */
-ChartField.types.curve = function(dataSet, params, options){
+/*ChartField.types.curve = function(dataSet, params, options){
 	var ratio, my = this;
 	
 	if (options.max != 0) {
@@ -47,4 +47,4 @@ ChartField.types.lines = function(dataSet, params, options){
 		}	
 	}
 	this.stroke();
-};
+};*/

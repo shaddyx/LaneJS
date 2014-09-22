@@ -1,5 +1,8 @@
 "use strict";
 /*
+ * @@@dependsOn: Browser
+ */
+/*
  * TODO: optimize text utils
  */
 var TextUtils = function(){

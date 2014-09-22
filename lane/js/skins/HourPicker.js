@@ -2,6 +2,7 @@
  * Box element properties
  * @@@dependsOn: BoxElement
  * @@@dependsOn: FormElement
+ * @@@dependsOn: HourPicker 
  * @@@nameSuffix:Skin
  */
 var HourPickerSkin = {};
