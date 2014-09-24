@@ -3,10 +3,6 @@ var GridTextCell = function(column, row) {
 };
 Util.extend(GridTextCell, GridCell);
 GridTextCell.type = "GridTextCell";
-
-
-
-
-/*GridTextCell.on("captionChanged", function(value) {
-	
-});*/	
+GridTextCell.prototype.caption = function(value){
+	this._element._elements.caption.caption(value);
+};

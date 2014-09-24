@@ -1,13 +1,21 @@
 var DataGrid = function(){
 	DataSource.call(this);
 	this._data = [];
-	this._currentRow = undefined;
+	this._columnsCache = {};
+	this._visible = 0;
+	this._currentRow = 0;
 };
 
 Util.extend(DataGrid, DataSource);
 DataGrid.type = "DataGrid";
-DataGrid.addProperty("visible",0);
 DataGrid.addProperty("columns",[]);
+
+DataGrid.prototype._columnsChanged = function(value){
+	this._columnsCache = {};
+	for (var k in value){
+		this._columnsCache[value[k]._v.name] = value[k];
+	}
+};
 
 /**
  * function adds row 
@@ -17,8 +25,30 @@ DataGrid.prototype.add = function(row){
 	if (typeof row !== "object") {
 		throw new Error("Row must be an object");
 	}
-	this._data.push({data:row});
-	this.visible(this._v.visible + 1);
+	var currentIndex = this._data.length - 1;
+	var currentLast = this._data[currentIndex];
+	for (var k in row) {
+		if (this._columnsCache[k] == undefined){
+			throw new Error("Error, column " + k + " is not exists in DataGrid");
+		}
+	}
+	
+	for (k in this._columnsCache == undefined) {
+		if (!row[k]){
+			throw new Error("Error, column " + k + " is not exists in row");
+		}
+	}
+	
+	var dataUnit = {
+		data:row, 
+		previous:currentIndex, 
+		next:undefined
+	};
+	if (currentLast){
+		currentLast.next = currentIndex + 1;
+	}
+	this._data.push(dataUnit);
+	this._visible ++;
 };
 
 /**
@@ -26,7 +56,7 @@ DataGrid.prototype.add = function(row){
  * @param count
  */
 DataGrid.prototype.move = function(count){
-	this._currentRow = count;
+	this.moveTo(this._currentRow + count);
 };
 
 /**
@@ -34,6 +64,12 @@ DataGrid.prototype.move = function(count){
  * @param index
  */
 DataGrid.prototype.moveTo = function(index){
+	if (index < 0 ){
+		throw new Error("Cant move to negative index");
+	}
+	if (index > this._data.length - 1 ){
+		throw new Error("Move index out of range");
+	}
 	this._currentRow = index;
 };
 
@@ -53,9 +89,7 @@ DataGrid.prototype.currentRow = function(){
  * @returns
  */
 DataGrid.prototype.visibleDown = function(){
-	if (this._curentRow != undefined){
-		return this._data.length - this._curentRow;
-	}
+	return this._data.length - this._curentRow;
 };
 
 
@@ -63,8 +97,30 @@ DataGrid.prototype.visibleDown = function(){
  * function returns number of visible rows from current focused row to beginning of list
  * @returns
  */
-DataGrid.prototype.visibleDown = function(){
-	if (this._curentRow != undefined){
-		return this._curentRow - 1;
+DataGrid.prototype.visibleUp = function(){
+	return this._curentRow;
+};
+
+DataGrid.prototype.visible = function(){
+	return this._visible;
+};
+
+DataGrid.prototype.size = function(){
+	return this._visible;
+};
+
+DataGrid.prototype.getRows = function(count, callBack){
+	if (this._currentRow + count > this._data.length - 1) {
+		throw new Error ("Data index is out of range [" + (start + count) + "]");
+	}
+	
+	if (this._currentRow < 0){
+		throw new Error ("Data index is out of range [" + start + "]");
+	}
+	
+	for (var i = 0; i < count; i++){
+		callBack(this._data[this._currentRow + i]);
 	}
 };
+
+DataGrid.on("columnsChanged", DataGrid.prototype._columnsChanged);

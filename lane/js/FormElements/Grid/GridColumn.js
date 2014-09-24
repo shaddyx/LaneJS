@@ -7,5 +7,11 @@ GridColumn.type = "GridColumn";
 GridColumn.addProperty("columnType","text");
 GridColumn.addProperty("dataColumn",null);
 GridColumn.addProperty("skin","def");
-
+GridColumn.addProperty("width", 10);
+GridColumn.addProperty("minWidth", 10);
+GridColumn.on("widthBeforeChanged", function(val){
+	if (val < this._v.minWidth){
+		return this._v.minWidth;
+	}
+});
 

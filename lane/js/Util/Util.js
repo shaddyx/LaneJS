@@ -317,3 +317,4 @@ Util.cloneType = function(name, parentType, checkFunction){
 	newType.check = checkFunction;
 	return newType;
 };
+

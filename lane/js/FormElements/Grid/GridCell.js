@@ -21,8 +21,11 @@ GridCell.buildCell = function(column, row){
 	return obj;
 };
 
+GridCell.prototype.getSkin = function(){
+	return GridCellSkin[this._column._v.skin];
+};
 GridCell.prototype.build = function(){
-	var skin = GridCellSkin[this._column._v.skin];
+	var skin = this.getSkin();
 	if (!skin){
 		throw new Error("No such skin:" + this._column._v.skin);
 	}
@@ -35,9 +38,17 @@ GridCell.prototype.build = function(){
 	this._element.drawRec({target:this._row._element});
 };
 
-GridCell.prototype.remove= function(){
+GridCell.prototype.remove = function(){
 	if (!this._element){
 		throw new Error("Cell is not drawn");
 	}
 	this._element.remove();
 };
+
+
+GridCell.prototype.width = function(value){
+	if (!this._element){
+		throw new Error("Cell is not drawn");
+	}
+	this._element.width(value);
+}

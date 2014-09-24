@@ -34,7 +34,6 @@ JqGrid.prototype.afterDraw = function(){
 	});
 };
 
-
 JqGrid.prototype.add = function(index, data){
 	this.grid.jqGrid('addRowData', index, data);
 };
@@ -53,7 +52,7 @@ JqGrid.on(["widthChanged","heightChanged"], function(){
 	var my = this;
 	if (!this.timeout && this.grid){
 		this.timeout = setTimeout(function(){
-			this.timeout = false;
+			my.timeout = false;
 			my.grid&&my.grid.setGridWidth(my._v.width);
 			my.grid&&my.grid.setGridHeight(my._v.height - 72);
 		},0);

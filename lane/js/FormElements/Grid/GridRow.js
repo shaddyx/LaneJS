@@ -3,15 +3,29 @@ var GridRow = function(grid) {
 	this._grid = grid;
 	this._cells = [];
 	this.cellsBuilt = false;
+	this._objectToBuildCell = GridCell;
 };
 Util.extend(GridRow, BaseObject);
 GridRow.type = "GridRow";
 GridRow.addProperty("skin",false);
 GridRow.addProperty("height",false);
-GridRow.prototype.draw = function(){
-	this._element = this._grid._elements.content.buildTo(GridRowSkin[this._v.skin]);
+
+
+GridRow.prototype.width = function(value) {
+	this._element.width(value);
+};
+
+GridRow.prototype.draw = function(target){
+	this._element = target.buildTo(this._getSkin());
 	this.height(this._element._v.height);
 };
+/**
+ * returns row skin
+ */
+GridRow.prototype._getSkin = function(){
+	return GridRowSkin[this._v.skin];
+}
+
 /**
  * 
  */
@@ -38,17 +52,28 @@ GridRow.prototype.buildCells = function(){
 	}
 	
 	for (var k in this._grid._columns){
-		var cell = GridCell.buildCell(this._grid._columns[k], this);
+		var cell = this._objectToBuildCell.buildCell(this._grid._columns[k], this);
 		cell.build();
+		this._cells.push(cell);
 	}
-	this._cells.push(cell);
 	this.cellsBuilt = true;
 };
 
 GridRow.prototype.removeCells = function(){
-	for (var i=0; i < this._cells; i++){
+	for (var i = 0; i < this._cells.length; i++){
 		this._cells[i].remove();
 	}
 	this._cells = [];
 	this.cellsBuilt = false;
 };
+
+GridRow.prototype.render = function(dataRow){
+	for (var i = 0; i < this._grid._columns.length; i++){
+		var name = this._grid._columns[i]._v.dataColumn._v.name;
+		if (dataRow.data[name] == undefined){
+			throw new Error ("Column with name " + name + " exists, but no data!");
+		}
+		this._cells[i].caption(dataRow.data[name]);
+	}
+};
+
