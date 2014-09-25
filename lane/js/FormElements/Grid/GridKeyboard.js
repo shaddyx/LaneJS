@@ -7,7 +7,6 @@ Grid.prototype.keyPressed = function(evt){
 	switch (key) {
 		// up
 		case 38:
-			debugger;
 			//if (this._v.data.visibleDown)
 			this._v.data.move(-1);
 			this.render();
@@ -15,8 +14,16 @@ Grid.prototype.keyPressed = function(evt){
 			break;
 		// down
 		case 40:
-			debugger;
 			this._v.data.move(1);
+			this.render();
+			break;
+			
+		case 33:
+			this._v.data.move(- (this._rows.length - 1));
+			this.render();
+			break;
+		case 34:
+			this._v.data.move(this._rows.length - 1);
 			this.render();
 			break;
 			
