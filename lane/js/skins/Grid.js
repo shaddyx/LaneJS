@@ -103,3 +103,17 @@ GridCellSkin.def = {
 		]
 	}
 };
+
+GridHelperSkin = {
+	width:3,
+	cursor:"col-resize",
+	c:[
+	   {
+		   margin:[0,0,0,1],
+		   width:1,
+		   hs:true,
+		   borderWidth:[0,0,0,1],
+		   borderColor:"#000000"
+	   }
+	]
+};

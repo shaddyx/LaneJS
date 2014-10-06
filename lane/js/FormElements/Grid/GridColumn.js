@@ -16,3 +16,7 @@ GridColumn.on("widthBeforeChanged", function(val){
 	}
 });
 
+
+GridColumn.prototype.buildHelper = function(){
+	this._helper = new BoxElement();
+};

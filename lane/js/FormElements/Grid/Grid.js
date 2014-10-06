@@ -40,7 +40,6 @@ Grid.prototype.reBuild = function(){
 	this._headerRow.reBuildCells();
 	this._footerRow.reBuildCells();
 	
-	
 	this.reDraw();
 };
 /**
