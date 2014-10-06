@@ -13,6 +13,7 @@ Util.extend(Grid, FormElement);
 Grid.type = "Grid";
 Grid.addProperty("data", false);
 Grid.addProperty("rowWidth", 0);
+Grid.addProperty("showHeader", 0);
 
 Grid.prototype._afterDraw = function() {
 	this._elements.content.on(["heightChanged","widthChanged"], this.reDraw, this);
@@ -23,20 +24,23 @@ Grid.prototype._afterDraw = function() {
 	}
 	this._rowHeight = this._rowSkin.height;
 	this.reBuild();
-	this._buildHeaderAndFooter();
 	//this.initKeyboard();
 };
 
-Grid.prototype.reBuild= function(){
+Grid.prototype.reBuild = function(){
 	if (!this._v.isDrawn || !this._columns.length || !this._elements.content._v.width || !this._elements.content._v.height){
-		return;
+		this.scheduleReBuild();
 	}
 	console.log("Grid reBuild called");
 	for (var i = 0; i<this._rows.length; i++ ){
 		this._rows[i].reBuildCells();
 	}
+	this._buildHeaderAndFooter();
+	
 	this._headerRow.reBuildCells();
 	this._footerRow.reBuildCells();
+	
+	
 	this.reDraw();
 };
 /**
@@ -53,12 +57,17 @@ Grid.prototype.reDraw = function(){
 };
 
 Grid.prototype._buildHeaderAndFooter = function(){
-	this._headerRow = new GridHeaderRow(this);
-	this._headerRow.skin(this._rowSkin);
-	this._headerRow.draw(this._elements.header);
-	this._footerRow = new GridFooterRow(this);
-	this._footerRow.skin(this._rowSkin);
-	this._footerRow.draw(this._elements.footer);
+	if (!this._headerRow){
+		this._headerRow = new GridHeaderRow(this);
+		this._headerRow.skin(this._rowSkin);
+		this._headerRow.draw(this._elements.header);
+	}
+	if (!this._footerRow){
+		this._footerRow = new GridFooterRow(this);
+		this._footerRow.skin(this._rowSkin);
+		this._footerRow.draw(this._elements.footer);
+	}
+	
 };
 
 
@@ -116,8 +125,12 @@ Grid.prototype.buildCells = function(){
 			this._rows[i].buildCells();
 		}
 	}
-	this._headerRow.cellsBuilt || this._headerRow.buildCells();
-	this._footerRow.cellsBuilt || this._footerRow.buildCells();
+	if (this._headerRow){
+		this._headerRow.cellsBuilt || this._headerRow.buildCells();
+	}
+	if (this._footerRow){
+		this._footerRow.cellsBuilt || this._footerRow.buildCells();
+	}
 }
 /**
  * calls when data changed, this function rebuilds local grid columns
@@ -161,8 +174,8 @@ Grid.prototype.reDrawColumns = function(){
 	//
 	//		assigning columns sizes to cells
 	//
-	this._headerRow.width(this._rowWidth);
-	this._footerRow.width(this._rowWidth);
+	this._headerRow && this._headerRow.width(this._rowWidth);
+	this._footerRow && this._footerRow.width(this._rowWidth);
 	for (var ri = 0; ri < this._rows.length; ri++ ){
 		var row = this._rows[ri];
 		row.width(this._rowWidth);
@@ -175,15 +188,27 @@ Grid.prototype.reDrawColumns = function(){
 	//			Applying header and footer cell sizes
 	//
 	for (i = 0; i < this._columns.length; i++) {
-		this._headerRow._cells[i].width(this._columns[i]._v.width);
-		this._footerRow._cells[i].width(this._columns[i]._v.width);
+		this._headerRow && this._headerRow._cells[i].width(this._columns[i]._v.width);
+		this._footerRow && this._footerRow._cells[i].width(this._columns[i]._v.width);
 	}
 	
 	this.scheduleRender();
 };
 
+Grid.prototype.scheduleReBuild = function(){
+	if (!this.reBuild){
+		var my = this;
+		console.log("ReBuild scheduled");
+		this.reBuild = setTimeout(function(){
+			my.renderTimer = false;
+			my.reBuild();
+		},0);
+	}
+};
+
 Grid.prototype.scheduleRender = function(){
 	if (!this.renderTimer){
+		console.log("Render scheduled");
 		var my = this;
 		this.renderTimer = setTimeout(function(){
 			my.renderTimer = false;
@@ -196,8 +221,8 @@ Grid.prototype.render = function(){
 	var my = this;
 	var data = this._v.data;
 	var rowIndex = 0;
-	this._headerRow.render();
-	this._footerRow.render();
+	this._headerRow && this._headerRow.render();
+	this._footerRow && this._footerRow.render();
 	data.getRows(this._rows.length,function(dataRow){
 		my._rows[rowIndex].render(dataRow);
 		rowIndex ++;
@@ -206,5 +231,6 @@ Grid.prototype.render = function(){
 
 
 
+Grid.on("showHeader", Grid.prototype.scheduleReBuild);
 Grid.on("afterDraw", Grid.prototype._afterDraw);
 Grid.on("dataChanged", Grid.prototype._dataChanged);

@@ -7,6 +7,7 @@ DataColumn.type = "DataColumn";
 DataColumn.addProperty("name","");
 DataColumn.addProperty("columnType","text");
 DataColumn.addProperty("caption","");
+DataColumn.addProperty("footerText","");
 
 DataColumn.build = function(columns){
 	var result = [];

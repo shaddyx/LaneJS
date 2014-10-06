@@ -44,7 +44,7 @@ GridHeaderSkin = {};
 GridHeaderSkin.def = {
 	height:Constants.lineHeight,
 	horizontal:true,
-    borderWidth:[0,0,1,0],
+    borderWidth:[0,0,0,0],
 	borderColor:"#000",
 	overflow:BoxElement.OVERFLOW_MODE.hidden
 };
