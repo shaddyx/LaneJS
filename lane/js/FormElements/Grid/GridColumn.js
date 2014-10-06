@@ -9,6 +9,7 @@ GridColumn.addProperty("dataColumn",null);
 GridColumn.addProperty("skin","def");
 GridColumn.addProperty("width", 10);
 GridColumn.addProperty("minWidth", 10);
+GridColumn.addProperty("caption", "");
 GridColumn.on("widthBeforeChanged", function(val){
 	if (val < this._v.minWidth){
 		return this._v.minWidth;

@@ -8,25 +8,58 @@ Grid.prototype.keyPressed = function(evt){
 		// up
 		case 38:
 			//if (this._v.data.visibleDown)
-			this._v.data.move(-1);
+			try{
+				this._v.data.move(-1);
+			} catch (e){
+				if (e instanceof DataOutOfRangeError){
+					console.log("Data is out of range");
+				} else {
+					throw e;
+				}
+			}
 			this.render();
 			break;
 			break;
 		// down
 		case 40:
-			this._v.data.move(1);
+			try{
+				this._v.data.move(1);
+			} catch (e){
+				if (e instanceof DataOutOfRangeError){
+					console.log("Data is out of range");
+				} else {
+					throw e;
+				}
+			}
 			this.render();
 			break;
 			
 		case 33:
-			this._v.data.move(- (this._rows.length - 1));
+			try {
+				this._v.data.move(- (this._rows.length - 1));
+			} catch (e){
+				if (e instanceof DataOutOfRangeError){
+					console.log("Data is out of range");
+				} else {
+					throw e;
+				}
+			}
+			
 			this.render();
 			break;
 		case 34:
-			this._v.data.move(this._rows.length - 1);
+			try{
+				
+				this._v.data.move(this._rows.length - 1);
+			} catch (e){
+				if (e instanceof DataOutOfRangeError){
+					console.log("Data is out of range");
+				} else {
+					throw e;
+				}
+			}
 			this.render();
 			break;
-			
 	}
 };
 

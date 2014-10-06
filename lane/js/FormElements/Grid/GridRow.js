@@ -73,6 +73,7 @@ GridRow.prototype.render = function(dataRow){
 		if (dataRow.data[name] == undefined){
 			throw new Error ("Column with name " + name + " exists, but no data!");
 		}
+		debugger;
 		this._cells[i].caption(dataRow.data[name]);
 	}
 };

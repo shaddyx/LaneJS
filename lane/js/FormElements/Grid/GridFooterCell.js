@@ -1,7 +1,7 @@
 var GridFooterCell = function(column, row) {
-	GridCell.call(this, column, row);
+	GridTextCell.call(this, column, row);
 };
-Util.extend(GridFooterCell, GridCell);
+Util.extend(GridFooterCell, GridTextCell);
 GridFooterCell.type = "GridFooterCell";
 
 GridFooterCell.buildCell = function(column, row){

@@ -1,3 +1,6 @@
+//
+//@@/@dependsOn: DataOutOfRangeError
+//
 var DataGrid = function(){
 	DataSource.call(this);
 	this._data = [];
@@ -65,10 +68,10 @@ DataGrid.prototype.move = function(count){
  */
 DataGrid.prototype.moveTo = function(index){
 	if (index < 0 ){
-		throw new Error("Cant move to negative index");
+		throw new DataOutOfRangeError("Cant move to negative index");
 	}
 	if (index > this._data.length - 1 ){
-		throw new Error("Move index out of range");
+		throw new DataOutOfRangeError("Move index out of range");
 	}
 	this._currentRow = index;
 };

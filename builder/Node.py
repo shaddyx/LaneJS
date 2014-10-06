@@ -19,8 +19,12 @@ class Node:
                 # result = re.search("Util.extend[ ]{0,1}\\(([ A-Za-z0-9]+),([ A-Za-z0-9]+)\\)", data)
                 #------------------ self.depends.append(result.group(2).strip())
         self.depends += self.findTagValues("\@\@\@dependsOn:([ A-Za-z0-9]+)", data, True)
+        ignoreDeps = self.findTagValues("\@\@\@ignoreDep:([ A-Za-z0-9]+)", data, True)
         if "Util.extend" in data:
             self.depends += self.findTagValues("Util.extend[ ]{0,1}\\([ A-Za-z0-9]+,([ A-Za-z0-9]+)\\)", data, True)
+        for k in ignoreDeps:
+            print "Removing dependency:" + k + " from: " + str(self.depends)
+            self.depends.remove(k)
         self.name = self.findOneTag("\@\@\@name:([ A-Za-z0-9]+)", data, self.name)
         self.name = self.findOneTag("\@\@\@namePreffix:([ A-Za-z0-9]+)", data, "") + self.name
         self.name += self.findOneTag("\@\@\@nameSuffix:([ A-Za-z0-9]+)", data, "")

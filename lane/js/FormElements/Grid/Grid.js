@@ -127,6 +127,7 @@ Grid.prototype._dataChanged = function(){
 		var dataCol = this._v.data._v.columns[k];
 		var col = new GridColumn();
 		col.dataColumn(dataCol);
+		col.caption(dataCol.caption());
 		this._columns.push(col);
 	}
 	this.reBuild();
@@ -195,6 +196,8 @@ Grid.prototype.render = function(){
 	var my = this;
 	var data = this._v.data;
 	var rowIndex = 0;
+	this._headerRow.render();
+	this._footerRow.render();
 	data.getRows(this._rows.length,function(dataRow){
 		my._rows[rowIndex].render(dataRow);
 		rowIndex ++;

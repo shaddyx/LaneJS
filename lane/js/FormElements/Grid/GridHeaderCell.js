@@ -1,7 +1,7 @@
 var GridHeaderCell = function(column, row) {
-	GridCell.call(this, column, row);
+	GridTextCell.call(this, column, row);
 };
-Util.extend(GridHeaderCell, GridCell);
+Util.extend(GridHeaderCell, GridTextCell);
 GridHeaderCell.type = "GridHeaderCell";
 GridHeaderCell.buildCell = function(column, row){
 	return new GridHeaderCell(column, row);

@@ -7,3 +7,7 @@ GridFooterRow.type = "GridFooterRow";
 GridFooterRow.prototype._getSkin = function(){
 	return GridFooterSkin[this._v.skin];
 };
+
+GridFooterRow.prototype.render = function(dataRow){
+	
+};
