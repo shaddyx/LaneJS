@@ -134,13 +134,21 @@ Grid.prototype.buildCells = function(){
  * calls when data changed, this function rebuilds local grid columns
  */
 Grid.prototype._dataChanged = function(){
-	for (k = 0; k < this._v.data._v.columns.length; k++) {
+	while (this._columns.length) {
+		this._columns[0].remove();
+		this._columns.splice(0, 1);
+	}
+	
+	for (var k = 0; k < this._v.data._v.columns.length; k++) {
 		var dataCol = this._v.data._v.columns[k];
-		var col = new GridColumn();
+		var col = new GridColumn(this);
+		col.index(k);
 		col.dataColumn(dataCol);
 		col.caption(dataCol.caption());
+		col.buildHelper();
 		this._columns.push(col);
 	}
+	
 	this.reBuild();
 };
 /**
@@ -168,7 +176,15 @@ Grid.prototype.reDrawColumns = function(){
 		}
 		this._columns[i].width(lastSpace);
 	}
-	
+	//
+	//	reCalc column right bound position
+	//
+	var right = 0;
+	for (i = 0; i < this._columns.length - 1; i++) {
+		right += this._columns[i]._v.width;
+		this._columns[i].rightBoundPos(right);
+		this._columns[i].helperHeight(this._v.height);
+	}
 	//
 	//		assigning columns sizes to cells
 	//

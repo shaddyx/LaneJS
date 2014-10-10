@@ -108,13 +108,17 @@ GridCellSkin.def = {
 };
 
 GridHelperSkin = {
-	width:3,
+	zIndex:3,
+	width:5,
+	height:100,
+	floating:true,
 	cursor:"col-resize",
+	margin:[0,0,0,-1],
 	c:[
 	   {
-		   margin:[0,0,0,1],
 		   width:1,
 		   hs:true,
+		   vs:true,
 		   borderWidth:[0,0,0,1],
 		   borderColor:"#000000"
 	   }

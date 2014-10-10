@@ -45,6 +45,22 @@ BoxElement.addPropertyApplyer("opacity",function(value){
 	}
 });
 
+BoxElement.addPropertyApplyer("top",function(value){
+	if (this._v.floating){
+		this.htmlInnerElement.style.top = (value + this._v.margin[0]) + "px";
+	} else {
+		this.htmlInnerElement.style.top = value + "px";
+	}
+});
+
+BoxElement.addPropertyApplyer("left",function(value){
+	if (this._v.floating){
+		this.htmlInnerElement.style.left = (value + this._v.margin[3]) + "px";
+	} else {
+		this.htmlInnerElement.style.left = value + "px";
+	}
+});
+
 BoxElement.addPropertyApplyer("caption",function(value){
 	this.htmlInnerElement.innerHTML = value;
 });
