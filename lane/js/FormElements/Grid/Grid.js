@@ -66,7 +66,6 @@ Grid.prototype._buildHeaderAndFooter = function(){
 		this._footerRow.skin(this._rowSkin);
 		this._footerRow.draw(this._elements.footer);
 	}
-	
 };
 
 

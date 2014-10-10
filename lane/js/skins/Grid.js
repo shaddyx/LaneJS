@@ -10,7 +10,9 @@ GridSkin.def = {
 	c:[
 	    {
 	    	name:"header",
-	    	height:Constants.lineHeight
+	    	height:Constants.lineHeight,
+	    	hs:true,
+	    	overflow:BoxElement.OVERFLOW_MODE.hidden
 	    },
 	   	{
 	   		name:"content",
@@ -23,7 +25,8 @@ GridSkin.def = {
 	   	{
 	   		name:"footer",
 	   		hs:true,
-	   		height:Constants.lineHeight
+	   		height:Constants.lineHeight,
+	   		overflow:BoxElement.OVERFLOW_MODE.hidden
 	   	}
 	]
 };
