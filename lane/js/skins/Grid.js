@@ -14,14 +14,57 @@ GridSkin.def = {
 	    	hs:true,
 	    	overflow:BoxElement.OVERFLOW_MODE.hidden
 	    },
-	   	{
-	   		name:"content",
-	   		hs:true,
-	   		vs:true,
-	   		borderWidth:[1,1,1,1],
-	   		borderColor:"#000",
-	   		overflow:BoxElement.OVERFLOW_MODE.hidden
-	   	},
+	    {
+	    	hs:true,
+	    	vs:true,
+	    	horizontal:true,
+	    	c:[
+	    	    {
+			   		name:"content",
+			   		hs:true,
+			   		vs:true,
+			   		borderWidth:[1,1,1,1],
+			   		borderColor:"#000",
+			   		overflow:BoxElement.OVERFLOW_MODE.hidden
+		   		},
+		   		{
+		   			width:15,
+		   			vs:true,
+		   			c:[
+		   			   {
+		   				   backgroundColor:"#cccccc",
+		   				   width:15,
+		   				   height:15,
+		   				   name:"scrollUp"
+		   				   
+		   			   },
+		   			   {
+		   				  hs:true,
+		   				  vs:true,
+		   				  c:[
+			   				   {
+				   				   backgroundColor:"#cccccc",
+				   				   width:10,
+				   				   height:30,
+				   				   left:2,
+				   				   draggable:{
+				   					   axis:"y"
+				   				   }
+			   				   }
+		   				  ]
+		   			   },
+		   			   {
+		   				   backgroundColor:"#cccccc",
+		   				   width:15,
+		   				   height:15,
+		   				   name:"scrollDn"
+		   				   
+		   			   }
+		   			   
+		   			]
+		   		}
+	    	]
+	    },
 	   	{
 	   		name:"footer",
 	   		hs:true,

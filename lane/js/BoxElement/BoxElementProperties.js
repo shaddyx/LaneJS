@@ -209,6 +209,12 @@ BoxElement.prototype._draggableChanged = function(value){
 		if (typeof value != "object") {
 			value = {};
 		}
+		if (!value.axis){
+			value.axis = "xy";
+		}
+		var dragByX = value.axis.indexOf("x") != -1;
+		var dragByY = value.axis.indexOf("y") != -1;
+		
 		this.floating(true);
 		this._dragListeners = {
 			mouseDown:function(){
@@ -235,8 +241,15 @@ BoxElement.prototype._draggableChanged = function(value){
 					newY = newY > 0 ? newY : 0;
 					newX = newX < maxX ? newX : maxX;
 					newY = newY < maxY ? newY : maxY;
-					this.left(newX);
-					this.top(newY);
+					
+					if (dragByX){
+						this.left(newX);
+					}
+					if (dragByY){
+						this.top(newY);
+					}
+						
+					
 				}
 			},
 			stopDragging:function(){
