@@ -238,8 +238,8 @@ BoxElement.prototype.recalcMinSizes = function() {
 			this[vmSizeValue](max + marginMax);
 		}
 	} else {
-		this._v.hs || this.vMinWidth(this._v._dx + this._captionWidth);
-		this._v.vs || this.vMinHeight(this._v._dy + this._captionHeight);
+		this._v.hs || this._horzOverflow || this.vMinWidth(this._v._dx + this._captionWidth);
+		this._v.vs || this._vertOverflow || this.vMinHeight(this._v._dy + this._captionHeight);
 	}
 };
 

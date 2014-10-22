@@ -3,6 +3,11 @@
  * @@@dependsOn: BoxElement
  */
 BoxElement.on("captionChanged",function(value){
+	if (value){
+		if (this.c.length){
+			throw new Error("Cant add caption to element with childs");
+		}
+	}
 	if (!this._baseClass.textUtils){
 		this._baseClass.textUtils = new TextUtils();
 		this._baseClass.textUtils._init();
@@ -18,19 +23,33 @@ BoxElement.on("captionChanged",function(value){
 	} else {
 		this._captionHeight = 0;
 	}
-	
-	this._horzOverflow || this.vMinWidth(this._captionWidth + this._v._dx);
-	this._vertOverflow || this.vMinHeight(this._captionHeight + this._v._dy);
-	/*BoxElement.__listeners._dxChanged.call(this);
-	BoxElement.__listeners._dyChanged.call(this);*/
+
+	this.recalcMinSizes();
 });
+
 BoxElement.on("overflowChanged",function(value){
 	/*
 	 * TODO: implement this function
 	 */
 	//var oType = this._baseClass.OVERFLOW_MODE;
+	
 	this._horzOverflow = false;
 	this._vertOverflow = false;
+	switch (this._v.overflow){
+		case this._baseClass.OVERFLOW_MODE.auto:
+		case this._baseClass.OVERFLOW_MODE.hidden:
+			this._horzOverflow = true;
+			this._vertOverflow = true;
+			break;
+		case this._baseClass.OVERFLOW_MODE.hiddenX:
+		case this._baseClass.OVERFLOW_MODE.overflowX:
+			this._horzOverflow = true;
+			break;
+		case this._baseClass.OVERFLOW_MODE.hiddenY:
+		case this._baseClass.OVERFLOW_MODE.overflowY:
+			this._vertOverflow = true;
+			break;
+	}
 });
 
 BoxElement.__listeners.recalcInnerWidth = function(){

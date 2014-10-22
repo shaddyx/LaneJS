@@ -111,7 +111,8 @@ GridHeaderCellSkin.def = {
 	name:"caption",
 	fontWeight:"bold",
 	borderWidth:[0,1,0,0],
-	borderColor:"0xffffff"
+	borderColor:"0xffffff",
+	overflow:BoxElement.OVERFLOW_MODE.hidden
 };
 
 GridFooterCellSkin = {};
@@ -119,8 +120,8 @@ GridFooterCellSkin.def = {
 	height:Constants.lineHeight,
 	name:"caption",
 	borderWidth:[0,1,0,0],
-	borderColor:"0xffffff"
-	
+	borderColor:"0xffffff",
+	overflow:BoxElement.OVERFLOW_MODE.hidden
 };
 
 GridCellSkin = {};

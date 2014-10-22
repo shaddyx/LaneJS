@@ -82,6 +82,9 @@ BoxElement.prototype.appendChild = function(el) {
 	if (el.parent) {
 		throw new Error("Cant append already appended element!");
 	}
+	if (this._v.caption){
+		throw new Error("Can't add childs to element with caption!");
+	}
 	el.parent = this;
 	this.c.push(el);
 	el.neibourIndex = this.c.length - 1;
