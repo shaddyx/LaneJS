@@ -291,8 +291,9 @@ Grid.prototype._vScrollerMoved = function(){
 	var contH = this._elements.vertScroll.parent._v.height;
 	var h = this._elements.vertScroll._v.height;
 	var dataPos = (currTop == 0) ? 0 :
-			(data.visible() - this._visibleRows * ((contH - h) / currTop));
+			((data.visible() - this._visibleRows) * (currTop / (contH - h)));
 	dataPos = Math.floor(dataPos);
+	console.log("moving to:" + dataPos);
 	this._v.data.moveTo(dataPos);
 	this.render();
 };
