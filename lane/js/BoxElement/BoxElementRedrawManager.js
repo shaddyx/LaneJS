@@ -99,7 +99,7 @@ BoxElement.initGlobalRedraw = function() {
 		 */
 		var my = this;
 		this._redrawTimer = setTimeout(function() {
-			console.log("initGlobalRedraw called...");
+			//console.log("initGlobalRedraw called...");
 			my._redrawTimer = false;
 			if (!browser.initialized){
 				BoxElement.initGlobalRedraw();

@@ -218,7 +218,7 @@ BoxElement.prototype._draggableChanged = function(value){
 		this.floating(true);
 		this._dragListeners = {
 			mouseDown:function(){
-				if (this.trigger('dragStarted') !== false)	{
+				if (!this._dragStartPoint && this.trigger('dragStarted') !== false)	{
 					this._dragStartPoint = {
 						x:browser.mouseX() - this._v.left,
 						y:browser.mouseY() - this._v.top
@@ -248,12 +248,10 @@ BoxElement.prototype._draggableChanged = function(value){
 					if (dragByY){
 						this.top(newY);
 					}
-						
-					
 				}
 			},
 			stopDragging:function(){
-				if (this._dragListeners && this.trigger('dragEnded') !== false){
+				if (this._dragStartPoint && this._dragListeners && this.trigger('dragEnded') !== false){
 					this._dragStartPoint = false;
 				}
 			},

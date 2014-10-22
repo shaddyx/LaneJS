@@ -3,7 +3,6 @@ var GridCell = function(column, row) {
 	this._row = row;
 	this._grid = row._grid;
 	this._column = column;
-	
 };
 Util.extend(GridCell, BaseObject);
 GridCell.type = "GridCell";

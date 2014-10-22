@@ -2,7 +2,7 @@
  * @@@dependsOn: BoxElement
  */
 BoxElement.runGlobalRender = function(){
-	console.log("Running global render");
+	//console.log("Running global render");
 	var my = BoxElement;
 	if (my._renderTimer){
 		clearTimeout(my._renderTimer);

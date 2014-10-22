@@ -2,6 +2,7 @@
 /*
  * @@@dependsOn: CoreException
  * @@@dependsOn: Constants
+ * @@@dependsOn: Debug
  */
 /**
  * basic object, implements an event model 

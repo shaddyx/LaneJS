@@ -47,6 +47,7 @@ GridSkin.def = {
 				   				   width:10,
 				   				   height:30,
 				   				   left:2,
+				   				   cursor:"pointer",
 				   				   draggable:{
 				   					   axis:"y"
 				   				   }
@@ -156,6 +157,9 @@ GridHelperSkin = {
 	height:100,
 	floating:true,
 	cursor:"col-resize",
+	draggable:{
+		axis:"x"
+	},
 	margin:[0,0,0,-1],
 	c:[
 	   {

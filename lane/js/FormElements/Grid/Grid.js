@@ -49,7 +49,7 @@ Grid.prototype.reDraw = function(){
 	if (!this._v.isDrawn || !this._elements.content._v.width || !this._elements.content._v.height){
 		return;
 	}
-	console.log("Grid reBuild called");
+	console.log("Grid reDraw called");
 	this.drawMissingRows();
 	this.buildCells();
 	this.reDrawColumns();
@@ -155,6 +155,7 @@ Grid.prototype._dataChanged = function(){
  * reCalculates columns width's if columns sum size is lower than free space size 
  */
 Grid.prototype.reDrawColumns = function(){
+	//Debug.getUniq("grid").onCall(2, true);
 	if (!this._elements.content._v.width){
 		return;
 	}
@@ -210,11 +211,11 @@ Grid.prototype.reDrawColumns = function(){
 };
 
 Grid.prototype.scheduleReBuild = function(){
-	if (!this.reBuild){
+	if (!this.reBuildTimer){
 		var my = this;
 		console.log("ReBuild scheduled");
-		this.reBuild = setTimeout(function(){
-			my.renderTimer = false;
+		this.reBuildTimer = setTimeout(function(){
+			my.reBuildTimer = false;
 			my.reBuild();
 		},0);
 	}
@@ -227,6 +228,16 @@ Grid.prototype.scheduleRender = function(){
 		this.renderTimer = setTimeout(function(){
 			my.renderTimer = false;
 			my.render();
+		},0);
+	}
+};
+Grid.prototype.scheduleReDraw= function(){
+	if (!this.reDrawTimer){
+		console.log("Redraw scheduled");
+		var my = this;
+		this.reDrawTimer = setTimeout(function(){
+			my.reDrawTimer = false;
+			my.reDraw();
 		},0);
 	}
 };

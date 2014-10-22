@@ -15,7 +15,8 @@ GridColumn.addProperty("rightBoundPos", 0);
 
 GridColumn.on("widthBeforeChanged", function(val){
 	if (val < this._v.minWidth){
-		return this._v.minWidth;
+		this.width(this._v.minWidth);
+		return false;
 	}
 });
 
@@ -25,6 +26,8 @@ GridColumn.on("rightBoundPosChanged", function(left){
 
 GridColumn.prototype.buildHelper = function(){
 	this._helper = this._grid._v.outer.buildTo(GridHelperSkin);
+	this._helper.on("dragStarted", this._dragStarted, this);
+	this._helper.on("dragEnded", this._dragEnded, this);
 };
 
 GridColumn.prototype.remove = function(){
@@ -33,4 +36,18 @@ GridColumn.prototype.remove = function(){
 
 GridColumn.prototype.helperHeight = function(height){
 	this._helper.height(height);
-}
+};
+
+GridColumn.prototype._dragStarted = function(){
+	this._oldL = this._helper.left();
+};
+
+//
+//		recalculating column width
+//
+GridColumn.prototype._dragEnded = function(){
+	var newL = this._helper._v.left;
+	var newW = this._v.width + (newL - this._oldL);
+	var w = this.width(newW);
+	//this.rightBoundPos(newL + (w - newW));
+};

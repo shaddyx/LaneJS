@@ -203,8 +203,8 @@ BoxElement.prototype.remove = function() {
 	this.parent.htmlElement.removeChild(this.htmlElement);
 	var index = this.neibourIndex;
 	this.parent.c.splice(index,1);
-	for (var k in parent.c){
-		parent.c[k].neibourindex = k;
+	for (var k in this.parent.c){
+		this.parent.c[k].neibourIndex = k;
 	}
 	var toRemove = [];
 	for ( var k in this.c) {
