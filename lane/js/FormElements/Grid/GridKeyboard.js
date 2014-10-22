@@ -7,57 +7,33 @@ Grid.prototype.keyPressed = function(evt){
 	switch (key) {
 		// up
 		case 38:
-			//if (this._v.data.visibleDown)
-			try{
+			if (this._v.data.visibleUp()){
 				this._v.data.move(-1);
-			} catch (e){
-				if (e instanceof DataOutOfRangeError){
-					console.log("Data is out of range");
-				} else {
-					throw e;
-				}
+				this.render();
 			}
-			this.render();
-			break;
 			break;
 		// down
 		case 40:
-			try{
+			if (this._v.data.visibleDown() > this._visibleRows){
 				this._v.data.move(1);
-			} catch (e){
-				if (e instanceof DataOutOfRangeError){
-					console.log("Data is out of range");
-				} else {
-					throw e;
-				}
+				this.render();
 			}
-			this.render();
+
 			break;
-			
+		//
+		//	pageUp
+		//
 		case 33:
-			try {
-				this._v.data.move(- (this._rows.length - 1));
-			} catch (e){
-				if (e instanceof DataOutOfRangeError){
-					console.log("Data is out of range");
-				} else {
-					throw e;
-				}
-			}
-			
+			var count = Math.min(this._visibleRows, this._v.data.visibleUp());
+			this._v.data.move( -count);
 			this.render();
 			break;
+		//
+		//	pageDown
+		//
 		case 34:
-			try{
-				
-				this._v.data.move(this._rows.length - 1);
-			} catch (e){
-				if (e instanceof DataOutOfRangeError){
-					console.log("Data is out of range");
-				} else {
-					throw e;
-				}
-			}
+			var count = Math.min(this._visibleRows, this._v.data.visibleDown() - this._visibleRows);
+			this._v.data.move(count);
 			this.render();
 			break;
 	}

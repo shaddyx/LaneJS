@@ -79,6 +79,16 @@ BoxElement.copyEvent = function(e){
 	return res;
 };
 
+BoxElement.mouseWheelFunction = function(evt){
+	if (!evt) evt = event;
+	var direction = (evt.detail<0 || evt.wheelDelta>0) ? 1 : -1;
+	var e = BoxElement.copyEvent(evt);
+	e.oldDirection = direction;
+	e.direction = direction;
+	e.type = "mousewheel";
+	BoxElement.targetEventFunction(e);
+};
+
 
 Util.addListener(document.body, 'mousedown',BoxElement.targetEventFunction);
 Util.addListener(document.body, 'mouseup',BoxElement.targetEventFunction);
@@ -86,7 +96,8 @@ Util.addListener(document.body, 'click',BoxElement.targetEventFunction);
 Util.addListener(document.body, 'mouseout',BoxElement.targetEventFunction);
 Util.addListener(document.body, 'mouseover',BoxElement.targetEventFunction);
 Util.addListener(document.body, 'mousemove',BoxElement.targetEventFunction);
-
+Util.addListener(document.body, 'mousewheel',BoxElement.mouseWheelFunction);
+Util.addListener(document.body, 'DOMMouseScroll',BoxElement.mouseWheelFunction);
 if (document.addEventListener) {
     document.addEventListener('contextmenu', function(e) {
     	var ev = BoxElement.copyEvent(e);

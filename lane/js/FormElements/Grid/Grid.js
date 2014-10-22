@@ -8,6 +8,7 @@ var Grid = function() {
 	this._rowsHeight = 0;
 	this._rowHeight = 0;
 	this._rowWidth = 0;
+	this._visibleRows = 0;
 };
 Util.extend(Grid, FormElement);
 Grid.type = "Grid";
@@ -51,8 +52,22 @@ Grid.prototype.reDraw = function(){
 	}
 	console.log("Grid reDraw called");
 	this.drawMissingRows();
+	this.calcVisibleRows();
 	this.buildCells();
 	this.reDrawColumns();
+};
+
+Grid.prototype.calcVisibleRows = function(){
+	this._visibleRows = 0;
+	var h = this._elements.content.height();
+	var rowH = 0;
+	for (var ri = 0; ri < this._rows.length; ri++ ){
+		var row = this._rows[ri];
+		rowH += row._v.height
+		if (rowH <= h){
+			this._visibleRows ++;
+		}
+	}
 };
 
 Grid.prototype._buildHeaderAndFooter = function(){
@@ -155,7 +170,6 @@ Grid.prototype._dataChanged = function(){
  * reCalculates columns width's if columns sum size is lower than free space size 
  */
 Grid.prototype.reDrawColumns = function(){
-	//Debug.getUniq("grid").onCall(2, true);
 	if (!this._elements.content._v.width){
 		return;
 	}
@@ -180,9 +194,11 @@ Grid.prototype.reDrawColumns = function(){
 	//
 	//	reCalc column right bound position
 	//
+	
 	var right = 0;
-	for (i = 0; i < this._columns.length - 1; i++) {
+	for (i = 0; i < this._columns.length; i++) {
 		right += this._columns[i]._v.width;
+		console.log("right [" + i + "]",right);
 		this._columns[i].rightBoundPos(right);
 		this._columns[i].helperHeight(this._v.height);
 	}
@@ -248,11 +264,19 @@ Grid.prototype.render = function(){
 	var rowIndex = 0;
 	this._headerRow && this._headerRow.render();
 	this._footerRow && this._footerRow.render();
-	data.getRows(this._rows.length,function(dataRow){
+	data.getRows(this._visibleRows,function(dataRow){
 		my._rows[rowIndex].render(dataRow);
 		rowIndex ++;
 	});
+	//
+	//	update the scroll position
+	//
+	var contH = this._elements.vertScroll.parent._v.height;
+	var h = this._elements.vertScroll._v.height;
+	var scrollTop = (data.visibleUp() / data.visible()) * (contH - h);
+	this._elements.vertScroll.top(scrollTop);
 };
+
 
 
 

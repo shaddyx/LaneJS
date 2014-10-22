@@ -92,7 +92,7 @@ DataGrid.prototype.currentRow = function(){
  * @returns
  */
 DataGrid.prototype.visibleDown = function(){
-	return this._data.length - this._curentRow;
+	return this._data.length - this._currentRow;
 };
 
 
@@ -101,7 +101,7 @@ DataGrid.prototype.visibleDown = function(){
  * @returns
  */
 DataGrid.prototype.visibleUp = function(){
-	return this._curentRow;
+	return this._currentRow;
 };
 
 DataGrid.prototype.visible = function(){
@@ -113,12 +113,12 @@ DataGrid.prototype.size = function(){
 };
 
 DataGrid.prototype.getRows = function(count, callBack){
-	if (this._currentRow + count > this._data.length - 1) {
-		throw new Error ("Data index is out of range [" + (start + count) + "]");
+	if (this._currentRow + count - 1> this._data.length) {
+		throw new Error ("Data index is out of range [" + (this._currentRow + count) + "]");
 	}
 	
 	if (this._currentRow < 0){
-		throw new Error ("Data index is out of range [" + start + "]");
+		throw new Error ("Data index is out of range [" + this._currentRow + "]");
 	}
 	
 	for (var i = 0; i < count; i++){

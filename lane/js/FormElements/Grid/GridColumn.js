@@ -11,7 +11,8 @@ GridColumn.addProperty("width", 10);
 GridColumn.addProperty("index", 0);
 GridColumn.addProperty("minWidth", 10);
 GridColumn.addProperty("caption", "");
-GridColumn.addProperty("rightBoundPos", 0);
+//GridColumn.addProperty("rightBoundPos", 0);
+
 
 GridColumn.on("widthBeforeChanged", function(val){
 	if (val < this._v.minWidth){
@@ -20,9 +21,9 @@ GridColumn.on("widthBeforeChanged", function(val){
 	}
 });
 
-GridColumn.on("rightBoundPosChanged", function(left){
-	this._helper.left(left)
-});
+GridColumn.prototype.rightBoundPos = function(left){
+	return this._helper.left(left)
+};
 
 GridColumn.prototype.buildHelper = function(){
 	this._helper = this._grid._v.outer.buildTo(GridHelperSkin);

@@ -36,7 +36,6 @@ GridSkin.def = {
 		   				   width:15,
 		   				   height:15,
 		   				   name:"scrollUp"
-		   				   
 		   			   },
 		   			   {
 		   				  hs:true,
@@ -48,6 +47,7 @@ GridSkin.def = {
 				   				   height:30,
 				   				   left:2,
 				   				   cursor:"pointer",
+				   				   name:"vertScroll",
 				   				   draggable:{
 				   					   axis:"y"
 				   				   }
