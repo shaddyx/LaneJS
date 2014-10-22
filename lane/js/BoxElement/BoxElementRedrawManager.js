@@ -130,39 +130,13 @@ BoxElement.prototype._parentInQueue = function() {
 	}
 	return false;
 };
+
 BoxElement.prototype.isCanOverflowInMainDirection = function(){
-	//
-	//		todo optimize this function
-	//
-	if (this._v.overflow == BoxElement.OVERFLOW_MODE.none){
-		return false;
-	}
-	if (
-			this._v.overflow == BoxElement.OVERFLOW_MODE.hidden ||
-			this._v.overflow == BoxElement.OVERFLOW_MODE.auto  ||
-			((this._v.overflow == BoxElement.OVERFLOW_MODE.overflowX || this._v.overflow == BoxElement.OVERFLOW_MODE.hiddenX) && this._v.horizontal) ||
-			((this._v.overflow == BoxElement.OVERFLOW_MODE.overflowY || this._v.overflow == BoxElement.OVERFLOW_MODE.hiddenY) && !this._v.horizontal)
-			
-    ) {
-		return true;
-	}
+	return (this._v.horizontal && this._horzOverflow) || !this._v.horizontal && this._vertOverflow;
 };
+
 BoxElement.prototype.isCanOverflowIn2Direction = function(){
-	//
-	//		todo optimize this function
-	//
-	if (this._v.overflow == BoxElement.OVERFLOW_MODE.none){
-		return false;
-	}
-	if (
-			this._v.overflow == BoxElement.OVERFLOW_MODE.hidden ||
-			this._v.overflow == BoxElement.OVERFLOW_MODE.auto  ||
-			((this._v.overflow == BoxElement.OVERFLOW_MODE.overflowX || this._v.overflow == BoxElement.OVERFLOW_MODE.hiddenX) && !this._v.horizontal) ||
-			((this._v.overflow == BoxElement.OVERFLOW_MODE.overflowY || this._v.overflow == BoxElement.OVERFLOW_MODE.hiddenY) && this._v.horizontal)
-			
-    ) {
-		return true;
-	}
+	return (this._v.horizontal && this._vertOverflow) || (!this._v.horizontal && this._horzOverflow);
 };
 
 BoxElement.prototype.recalcMinSizes = function() {
