@@ -271,6 +271,12 @@ Grid.prototype.render = function(){
 		rowIndex ++;
 	});
 	//
+	//	cleaning last rows
+	//
+	for (var i = rowIndex; i < this._rows.length; i++) {
+		my._rows[rowIndex].render(undefined);
+	}
+	//
 	//	update the scroll position
 	//
 	var contH = this._elements.vertScroll.parent._v.height;

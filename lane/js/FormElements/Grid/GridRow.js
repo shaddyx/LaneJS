@@ -70,10 +70,17 @@ GridRow.prototype.removeCells = function(){
 GridRow.prototype.render = function(dataRow){
 	for (var i = 0; i < this._grid._columns.length; i++){
 		var name = this._grid._columns[i]._v.dataColumn._v.name;
-		if (dataRow.data[name] == undefined){
-			throw new Error ("Column with name " + name + " exists, but no data!");
+		//
+		//	todo: move this to cells clean/render method
+		//
+		if (dataRow != undefined){
+			if (dataRow.data[name] == undefined){
+				throw new Error ("Column with name " + name + " exists, but no data!");
+			}
+			this._cells[i].caption(dataRow.data[name]);
+		} else {
+			this._cells[i].caption("");
 		}
-		this._cells[i].caption(dataRow.data[name]);
 	}
 };
 
