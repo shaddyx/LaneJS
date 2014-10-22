@@ -24,6 +24,8 @@ Grid.prototype._afterDraw = function() {
 		throw new Error("No skin " + this._rowSkin + " for GridRow!");
 	}
 	this._rowHeight = this._rowSkin.height;
+	
+	this._elements.vertScroll.on("dragEnded", this._vScrollerMoved, this);	
 	this.reBuild();
 	//this.initKeyboard();
 };
@@ -264,7 +266,7 @@ Grid.prototype.render = function(){
 	var rowIndex = 0;
 	this._headerRow && this._headerRow.render();
 	this._footerRow && this._footerRow.render();
-	data.getRows(this._visibleRows,function(dataRow){
+	data.getRows(Math.min(this._visibleRows, this._v.data.visibleDown()),function(dataRow){
 		my._rows[rowIndex].render(dataRow);
 		rowIndex ++;
 	});
@@ -273,10 +275,21 @@ Grid.prototype.render = function(){
 	//
 	var contH = this._elements.vertScroll.parent._v.height;
 	var h = this._elements.vertScroll._v.height;
-	var scrollTop = (data.visibleUp() / data.visible()) * (contH - h);
+	var scrollTop = Math.floor((data.visibleUp() / (data.visible() - this._visibleRows)) * (contH - h));
 	this._elements.vertScroll.top(scrollTop);
 };
 
+Grid.prototype._vScrollerMoved = function(){
+	var data = this._v.data;
+	var currTop = this._elements.vertScroll._v.top;
+	var contH = this._elements.vertScroll.parent._v.height;
+	var h = this._elements.vertScroll._v.height;
+	var dataPos = (currTop == 0) ? 0 :
+			(data.visible() - this._visibleRows * ((contH - h) / currTop));
+	dataPos = Math.floor(dataPos);
+	this._v.data.moveTo(dataPos);
+	this.render();
+};
 
 
 
