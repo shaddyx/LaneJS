@@ -237,7 +237,24 @@
 	    				c:[
 	    				   {
 	    					   type:"Button",
-	    					   caption:"Test"
+	    					   caption:"Test",
+	    					   on:{
+	    						   click:function(){
+	    							   var container = grid.getCellContainer(1,"b");
+	    							   FormElement.build({
+	    								   type:"InputBox",
+	    								   hs:true,
+	    								   on:{
+	    									   focusChanged:function(value){
+	    										   if (!value){
+	    											   grid.releaseCell();
+	    										   }
+	    									   }
+	    								   }
+	    							   }, container);
+	    							   
+	    						   }
+	    					   }
 	    				   }
 	    				]
 	    			}

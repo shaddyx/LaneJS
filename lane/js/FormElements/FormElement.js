@@ -301,14 +301,14 @@ FormElement.build = function(struct, target, map){
 		}
 		
 	}
-	if (struct.events){
-		for (var k in struct.events){
-			el.on(k, struct.events[k]);
+	if (struct.on){
+		for (var k in struct.on){
+			el.on(k, struct.on[k]);
 		}
 	}
 	
 	for (var k in struct){
-		if (k === "type" || k === "c" || k === "importFrom" || k === "events" || k === "defaults"){
+		if (k === "type" || k === "c" || k === "importFrom" || k === "on" || k === "defaults"){
 			continue;
 		} 
 		if (k === "name"){

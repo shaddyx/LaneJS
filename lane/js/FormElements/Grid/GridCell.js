@@ -61,11 +61,13 @@ GridCell.prototype.remove = function(){
 };
 
 
-GridCell.prototype.clearContainer = function(){
+GridCell.prototype.returnContainer = function(){
 	this._element.clear();
+	return this._element;
 };
 
 GridCell.prototype.restoreContainer = function(){
+	this._element.clear();
 	this.build();
 };
 

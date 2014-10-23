@@ -16,6 +16,8 @@ Grid.addProperty("data", false);
 Grid.addProperty("locked", false);
 Grid.addProperty("rowWidth", 0);
 Grid.addProperty("showHeader", 0);
+Grid.addProperty("rowHeight", undefined);
+
 
 Grid.prototype._afterDraw = function() {
 	this._elements.content.on(["heightChanged","widthChanged"], this.reDraw, this);
@@ -24,7 +26,7 @@ Grid.prototype._afterDraw = function() {
 	if (!GridRowSkin[this._rowSkin]){
 		throw new Error("No skin " + this._rowSkin + " for GridRow!");
 	}
-	this._rowHeight = this._rowSkin.height;
+	this._v.rowHeight || this.rowHeight(this._rowSkin.height);
 	
 	this._elements.vertScroll.on("dragEnded", this._vScrollerMoved, this);	
 	this.reBuild();
@@ -295,7 +297,7 @@ Grid.prototype.render = function(){
  * @param rowNumber
  * @param colName
  */
-Grid.prototype.getCell = function(rowNumber, colName){
+Grid.prototype.getCellContainer = function(rowNumber, colName){
 	var my = this;
 	var data = this._v.data;
 	var diff = rowNumber - data.visibleUp();
@@ -315,8 +317,7 @@ Grid.prototype.getCell = function(rowNumber, colName){
 	});
 	if (found){
 		var cell = this.locked(found.getCellByName(colName));
-		cell.clearContainer();
-		return this._v.locked;
+		return cell.returnContainer();
 	} else {
 		this.locked(false);
 	}

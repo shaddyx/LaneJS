@@ -53,10 +53,10 @@ BoxElement.on("overflowChanged",function(value){
 });
 
 BoxElement.__listeners.recalcInnerWidth = function(){
-	this._horzOverflow||this.innerWidth(this._v.width - this._v._dx);
+	this.innerWidth(this._v.width - this._v._dx);
 };
 BoxElement.__listeners.recalcInnerHeight= function(){
-	this._vertOverflow||this.innerHeight(this._v.height - this._v._dy);
+	this.innerHeight(this._v.height - this._v._dy);
 };
 
 BoxElement.on("heightChanged",BoxElement.__listeners.recalcInnerHeight);

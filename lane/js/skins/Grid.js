@@ -77,7 +77,7 @@ GridSkin.def = {
 
 GridRowSkin = {};
 GridRowSkin.def = {
-	height:Constants.lineHeight,
+	height:Constants.rowHeight,
 	horizontal:true,
     borderWidth:[0,0,1,0],
 	borderColor:"#ccc",
@@ -126,7 +126,7 @@ GridFooterCellSkin.def = {
 
 GridCellContainer = {
 	overflow:BoxElement.OVERFLOW_MODE.hidden,
-	height:Constants.lineHeight
+	height:Constants.rowHeight
 };
 
 GridCellSkin = {};
@@ -135,7 +135,7 @@ GridCellSkin.def = {
 		c:[
 		   {
 			   name:"caption",
-			   height:Constants.lineHeight,
+			   height:Constants.rowHeight ,
 			   overflow:BoxElement.OVERFLOW_MODE.hidden
 		   }
 		]
