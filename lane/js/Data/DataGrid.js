@@ -122,7 +122,7 @@ DataGrid.prototype.getRows = function(count, callBack){
 	}
 	
 	for (var i = 0; i < count; i++){
-		callBack(this._data[this._currentRow + i]);
+		callBack(this._data[this._currentRow + i], this._currentRow + i);
 	}
 };
 

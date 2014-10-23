@@ -23,7 +23,7 @@ BoxElement.on("captionChanged",function(value){
 	} else {
 		this._captionHeight = 0;
 	}
-
+	
 	this.recalcMinSizes();
 });
 

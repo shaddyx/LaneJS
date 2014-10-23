@@ -13,6 +13,7 @@ var Grid = function() {
 Util.extend(Grid, FormElement);
 Grid.type = "Grid";
 Grid.addProperty("data", false);
+Grid.addProperty("locked", false);
 Grid.addProperty("rowWidth", 0);
 Grid.addProperty("showHeader", 0);
 
@@ -259,8 +260,13 @@ Grid.prototype.scheduleReDraw= function(){
 		},0);
 	}
 };
-
+/**
+ * renders grid data to grid
+ */
 Grid.prototype.render = function(){
+	if (this._v.locked){
+		return;
+	}
 	var my = this;
 	var data = this._v.data;
 	var rowIndex = 0;
@@ -283,6 +289,44 @@ Grid.prototype.render = function(){
 	var h = this._elements.vertScroll._v.height;
 	var scrollTop = Math.floor((data.visibleUp() / (data.visible() - this._visibleRows)) * (contH - h));
 	this._elements.vertScroll.top(scrollTop);
+};
+/**
+ * returns physical cell by row number (in dataSource) and column name
+ * @param rowNumber
+ * @param colName
+ */
+Grid.prototype.getCell = function(rowNumber, colName){
+	var my = this;
+	var data = this._v.data;
+	var diff = rowNumber - data.visibleUp();
+	if (diff < 0) {
+		data.moveTo(rowNumber);
+	} else if (diff > this._visibleRows){
+		data.move(diff - this._visibleRows + 1);
+	}
+	this.render();
+	var rowIndex = 0;
+	var found = undefined;
+	data.getRows(Math.min(this._visibleRows, this._v.data.visibleDown()),function(dataRow, currentRow){
+		if (currentRow == rowNumber){
+			found = my._rows[rowIndex];
+		}
+		rowIndex ++;
+	});
+	if (found){
+		var cell = this.locked(found.getCellByName(colName));
+		cell.clearContainer();
+		return this._v.locked;
+	} else {
+		this.locked(false);
+	}
+};
+
+Grid.prototype.releaseCell = function(){
+	var cell = this._v.locked;
+	cell.restoreContainer();
+	this.locked(false);
+	this.render();
 };
 
 Grid.prototype._vScrollerMoved = function(){

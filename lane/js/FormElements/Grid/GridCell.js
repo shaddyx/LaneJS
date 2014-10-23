@@ -19,10 +19,16 @@ GridCell.buildCell = function(column, row){
 	}
 	return obj;
 };
-
+/**
+ * returns cell skin structure
+ * @returns
+ */
 GridCell.prototype.getSkin = function(){
 	return GridCellSkin[this._column._v.skin];
 };
+/**
+ * builds the cell structure
+ */
 GridCell.prototype.build = function(){
 	var skin = this.getSkin();
 	if (!skin){
@@ -32,8 +38,18 @@ GridCell.prototype.build = function(){
 	if (!struct){
 		throw new Error("No such column type:" + this._column._v.columnType);
 	}
-	this._element = new BoxElement();
-	this._element.build(struct);
+	var st = {};
+	for (var k in GridCellContainer){
+		st[k] = GridCellContainer[k];
+	}
+	
+	for (var k in struct){
+		st[k] = struct[k];
+	}
+	if (!this._element){
+		this._element = new BoxElement();
+	}
+	this._element.build(st);
 	this._element.drawRec({target:this._row._element});
 };
 
@@ -44,6 +60,14 @@ GridCell.prototype.remove = function(){
 	this._element.remove();
 };
 
+
+GridCell.prototype.clearContainer = function(){
+	this._element.clear();
+};
+
+GridCell.prototype.restoreContainer = function(){
+	this.build();
+};
 
 GridCell.prototype.width = function(value){
 	if (!this._element){

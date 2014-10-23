@@ -2,6 +2,9 @@
  * @@@dependsOn: Grid
  */
 Grid.prototype.keyPressed = function(evt){
+	if (this._v.locked){
+		return;
+	}
 	var key = evt.keyCode || evt.which;
 	console.log("Key pressed:", key);
 	switch (key) {

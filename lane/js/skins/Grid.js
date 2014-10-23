@@ -124,12 +124,21 @@ GridFooterCellSkin.def = {
 	overflow:BoxElement.OVERFLOW_MODE.hidden
 };
 
+GridCellContainer = {
+	overflow:BoxElement.OVERFLOW_MODE.hidden,
+	height:Constants.lineHeight
+};
+
 GridCellSkin = {};
 GridCellSkin.def = {
 	text:{
-		name:"caption",
-		height:Constants.lineHeight,
-		overflow:BoxElement.OVERFLOW_MODE.hidden
+		c:[
+		   {
+			   name:"caption",
+			   height:Constants.lineHeight,
+			   overflow:BoxElement.OVERFLOW_MODE.hidden
+		   }
+		]
 	},
 	img:{
 		name:"img",

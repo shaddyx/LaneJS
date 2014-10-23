@@ -66,6 +66,19 @@ GridRow.prototype.removeCells = function(){
 	this._cells = [];
 	this.cellsBuilt = false;
 };
+/**
+ * returns physical cell by name
+ * @param name
+ * @returns
+ */
+GridRow.prototype.getCellByName = function(name){
+	for (var i = 0; i < this._grid._columns.length; i++){
+		var colName = this._grid._columns[i]._v.dataColumn._v.name;
+		if (colName == name) {
+			return this._cells[i];
+		}
+	}
+};
 
 GridRow.prototype.render = function(dataRow){
 	for (var i = 0; i < this._grid._columns.length; i++){
