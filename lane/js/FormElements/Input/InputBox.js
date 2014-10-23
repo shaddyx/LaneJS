@@ -3,7 +3,6 @@ var InputBox = function() {
 };
 Util.extend(InputBox, InputElement);
 InputBox.type = "InputBox";
-//InputBox.addProperty("value","",{type:"text"});
 InputBox.setDefault("value", "");
 InputBox.addProperty("password",false,{type:"boolean"});
 InputBox.func = {};

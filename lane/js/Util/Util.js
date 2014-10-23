@@ -70,6 +70,7 @@ Util.extend = function(child, parent) {
 	}
 	child.addProperty = parent.addProperty;
 	child.setDefault = parent.setDefault;
+	child.setParams = parent.setParams;
 	child.on = parent.on;
 	/*child.addProperty = parent.addProperty;
 	child.addProperty = parent.addProperty;*/

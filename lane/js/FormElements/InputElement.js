@@ -4,4 +4,4 @@ var InputElement = function(){
 Util.extend(InputElement,FormElement);
 InputElement.type = "InputElement";
 InputElement.funcs = {};
-InputElement.addProperty("value", false, {type:"boolean"});
+InputElement.addProperty("value", false);
