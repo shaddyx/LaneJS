@@ -57,11 +57,11 @@ BaseObject.addProperty = function(name,defValue,params){
 		def:defValue,
 		params:params
 	};
-	
-		
+	var my = this;	
 	if (!params.changedAlways){
 		this.prototype[name] = function(val){
 			if (val != undefined){
+				var params = my._properties[name].params;
 				if (params.type) {
 					val = params.type.check(val, strict, this._v[name]);
 				}
@@ -78,6 +78,7 @@ BaseObject.addProperty = function(name,defValue,params){
 	} else {
 		this.prototype[name] = function(val){
 			if (val != undefined){
+				var params = my._properties[name].params;
 				if (params.type) {
 					val = params.type.check(val, strict);
 				}

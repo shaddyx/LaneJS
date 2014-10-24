@@ -176,7 +176,16 @@ Grid.prototype._dataChanged = function(){
 	}
 	
 	this.reBuild();
+	this._v.data.on("dataUpdate", function(){
+		this.scheduleRender();
+	},this);
 };
+
+Grid.prototype._dataBeforeChanged = function(data){
+	if (this._v.data){
+		this._v.data.removeListener("dataUpdate");
+	}
+}
 /**
  * reCalculates columns width's if columns sum size is lower than free space size 
  */
@@ -281,6 +290,7 @@ Grid.prototype.render = function(){
 	this._headerRow && this._headerRow.render();
 	this._footerRow && this._footerRow.render();
 	data.getRows(Math.min(this._visibleRows, this._v.data.visibleDown()),function(dataRow){
+		my._rows[rowIndex].restoreProperties();
 		my._rows[rowIndex].render(dataRow);
 		rowIndex ++;
 	});
@@ -349,8 +359,15 @@ Grid.prototype._vScrollerMoved = function(){
 	this.render();
 };
 
-
+Grid.on("rowRender", function(row, dataRow){
+	if (dataRow.selected){
+		for (var k in GridSelectedRowSkin){
+			row.setProperty(k, GridSelectedRowSkin[k]);
+		}
+	}
+});
 
 Grid.on(["showHeaderChanged", "showFooterChanged"], Grid.prototype.scheduleReDraw);
 Grid.on("afterDraw", Grid.prototype._afterDraw);
 Grid.on("dataChanged", Grid.prototype._dataChanged);
+Grid.on("dataBeforeChanged", Grid.prototype._dataBeforeChanged);

@@ -9,8 +9,6 @@ Util.extend(GridRow, BaseObject);
 GridRow.type = "GridRow";
 GridRow.addProperty("skin",false);
 GridRow.addProperty("height",false);
-GridRow.addProperty("visible",true);
-
 
 GridRow.prototype.width = function(value) {
 	this._element.width(value);
@@ -51,11 +49,12 @@ GridRow.prototype.buildCells = function(){
 	if (this.cellsBuilt){
 		throw new Error("Cells already built, remove they first!");
 	}
-	
+	this._cellsByName = {};
 	for (var k in this._grid._columns){
 		var cell = this._objectToBuildCell.buildCell(this._grid._columns[k], this);
 		cell.build();
 		this._cells.push(cell);
+		this._cellsByName[cell._column._v.dataColumn._v.name] = cell;
 	}
 	this.cellsBuilt = true;
 };
@@ -95,5 +94,32 @@ GridRow.prototype.render = function(dataRow){
 		} else {
 			this._cells[i].caption("");
 		}
+	}
+	
+	if (dataRow != undefined){
+		this._grid.trigger("rowRender", this, dataRow);
+	}
+};
+
+GridRow.prototype.getCellByName = function(name){
+	return this._cellsByName[name];
+};
+
+GridRow.prototype.setProperty = function(name, value){
+	if (this._element._v[name]!= value){
+		this._changed = this._changed || {};
+		this._changed[name] = this._element._v[name];
+		this._element[name](value);
+	}
+};
+
+GridRow.prototype.restoreProperties = function(){
+	if (this._changed){
+		for (var name in this._changed)
+		this._element[name](this._changed[name]);
+	}
+	this._changed = false;
+	for (var i=0; i<this._cells.length; i++){
+		this._cells[i].restoreProperties();
 	}
 };

@@ -12,6 +12,7 @@ var DataGrid = function(){
 Util.extend(DataGrid, DataSource);
 DataGrid.type = "DataGrid";
 DataGrid.addProperty("columns",[]);
+DataGrid.addProperty("selectedRow", 0);
 
 DataGrid.prototype._columnsChanged = function(value){
 	this._columnsCache = {};
@@ -44,11 +45,16 @@ DataGrid.prototype.add = function(row){
 	
 	var dataUnit = {
 		data:row, 
-		previous:currentIndex, 
-		next:undefined
+		previous:currentIndex,
+		current:this._data.length,
+		next:undefined,
+		selected:false
 	};
 	if (currentLast){
 		currentLast.next = currentIndex + 1;
+	}
+	if (this._v.selectedRow == this._data.length){
+		dataUnit.selected = true;
 	}
 	this._data.push(dataUnit);
 	this._visible ++;
@@ -125,5 +131,18 @@ DataGrid.prototype.getRows = function(count, callBack){
 		callBack(this._data[this._currentRow + i], this._currentRow + i);
 	}
 };
+//
+//		selectin management
+//
+DataGrid.on("selectedRowBeforeChanged", function(newValue){
+	this._data[this._v.selectedRow].selected = false;
+});
+//
+//		selectin management
+//
+DataGrid.on("selectedRowChanged", function(newValue){
+	this._data[newValue].selected = true;
+	this.trigger("dataUpdate");
+});
 
 DataGrid.on("columnsChanged", DataGrid.prototype._columnsChanged);

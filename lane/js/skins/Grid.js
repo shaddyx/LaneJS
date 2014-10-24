@@ -181,3 +181,9 @@ GridHelperSkin = {
 	   }
 	]
 };
+
+GridSelectedRowSkin = {
+	borderWidth:[1,1,1,1],
+	backgroundColor:"#ccc",
+	borderColor:"#f00"
+};

@@ -3,10 +3,13 @@ var GridCell = function(column, row) {
 	this._row = row;
 	this._grid = row._grid;
 	this._column = column;
+	this._changed = false
 };
 Util.extend(GridCell, BaseObject);
 GridCell.type = "GridCell";
-
+GridCell._props = {
+	backgroundColor:"inherit"
+};
 
 GridCell.buildCell = function(column, row){
 	var obj;
@@ -76,4 +79,20 @@ GridCell.prototype.width = function(value){
 		throw new Error("Cell is not drawn");
 	}
 	this._element.width(value);
-}
+};
+
+GridCell.prototype.setProperty = function(name, value){
+	if (name != this._baseClass._props[name]){
+		this._changed = true;
+		this._element[name](value);
+	}
+};
+
+GridCell.prototype.restoreProperties = function(){
+	if (this._changed){
+		for (var name in this._baseClass._props){
+			this._element[name](this._baseClass._props[name]);
+		}
+	}
+	this._changed = false;
+};
