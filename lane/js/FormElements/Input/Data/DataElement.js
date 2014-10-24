@@ -23,7 +23,7 @@ DataElement.prototype.valueChanged = function(){
 	if (this._v.dataSource){
 		this._v.dataSource.value(this._v.value);
 	}
-}
+};
 
 DataElement.on("dataSourceBeforeChanged", DataElement.func.dataSourceBeforeChanged);
 DataElement.on("dataSourceChanged", DataElement.func.dataSourceChanged);

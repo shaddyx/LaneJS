@@ -9,6 +9,7 @@ Util.extend(GridRow, BaseObject);
 GridRow.type = "GridRow";
 GridRow.addProperty("skin",false);
 GridRow.addProperty("height",false);
+GridRow.addProperty("visible",true);
 
 
 GridRow.prototype.width = function(value) {
@@ -96,4 +97,3 @@ GridRow.prototype.render = function(dataRow){
 		}
 	}
 };
-

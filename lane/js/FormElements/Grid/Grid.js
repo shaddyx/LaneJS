@@ -15,7 +15,8 @@ Grid.type = "Grid";
 Grid.addProperty("data", false);
 Grid.addProperty("locked", false);
 Grid.addProperty("rowWidth", 0);
-Grid.addProperty("showHeader", 0);
+Grid.addProperty("showHeader", true);
+Grid.addProperty("showFooter", false);
 Grid.addProperty("rowHeight", undefined);
 
 
@@ -60,8 +61,12 @@ Grid.prototype.reDraw = function(){
 	this.calcVisibleRows();
 	this.buildCells();
 	this.reDrawColumns();
+	this.updateHeaderFooterVisibility();
 };
-
+Grid.prototype.updateHeaderFooterVisibility = function(){
+	this._elements.header.visible(this._v.showHeader);
+	this._elements.footer.visible(this._v.showFooter);
+}
 Grid.prototype.calcVisibleRows = function(){
 	this._visibleRows = 0;
 	var h = this._elements.content.height();
@@ -86,6 +91,7 @@ Grid.prototype._buildHeaderAndFooter = function(){
 		this._footerRow.skin(this._rowSkin);
 		this._footerRow.draw(this._elements.footer);
 	}
+	this.updateHeaderFooterVisibility();
 };
 
 
@@ -345,6 +351,6 @@ Grid.prototype._vScrollerMoved = function(){
 
 
 
-Grid.on("showHeader", Grid.prototype.scheduleReBuild);
+Grid.on(["showHeaderChanged", "showFooterChanged"], Grid.prototype.scheduleReDraw);
 Grid.on("afterDraw", Grid.prototype._afterDraw);
 Grid.on("dataChanged", Grid.prototype._dataChanged);
