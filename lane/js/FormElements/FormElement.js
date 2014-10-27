@@ -274,6 +274,9 @@ FormElement.on("afterDraw",FormElement.funcs.afterDraw);
 
 FormElement._apply = function(el, struct){
 	for (var k in struct){
+		if (typeof el[k] != "function"){
+			throw new Error("Error, there are no property " + k + " in " + el);
+		}
 		el[k](struct[k]);
 	}
 };

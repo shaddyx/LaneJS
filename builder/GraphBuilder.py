@@ -26,15 +26,16 @@ class GraphBuilder:
     
     def _buildSorted(self):
         movedNodes = []
-        for i, node in enumerate(self.nodeList):
+        for node in self.nodeList:
             foundDeps = 0
             for dep in node.depends:
                 for sortedNode in self.sortedNodeList:
                     if dep == sortedNode.name:
                         foundDeps += 1
-            if len(node.depends) == foundDeps:
+            if len(node.depends) <= foundDeps:
                 movedNodes.append(node)
         for node in movedNodes:
+            #print "removing: " + str(node) + " found: " + str(foundDeps) 
             self.nodeList.remove(node)
             self.sortedNodeList.append(node)
         return len(movedNodes)
@@ -49,7 +50,6 @@ class GraphBuilder:
                 self.nodeList.append(node)
                 
             heads = []
-            
             for k in self.nodeMap:
                 if self.nodeMap[k].isIndependent():
                     heads.append(self.nodeMap[k])
@@ -60,7 +60,7 @@ class GraphBuilder:
                 pass
 
             if len(self.nodeList) > 0:
-                print "Error, cyclic dependency in:" + str(self.nodeList)
+                print "Error, can't resolve, or cyclic dependency in:" + str(self.nodeList)
             return self.sortedNodeList
             
            

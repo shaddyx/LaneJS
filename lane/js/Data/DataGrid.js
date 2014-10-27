@@ -1,5 +1,6 @@
 //
 //@@/@dependsOn: DataOutOfRangeError
+//@@@dependsOn: DataColumn
 //
 var DataGrid = function(){
 	DataSource.call(this);
@@ -58,6 +59,7 @@ DataGrid.prototype.add = function(row){
 	}
 	this._data.push(dataUnit);
 	this._visible ++;
+	this.trigger("dataUpdate");
 };
 
 /**
@@ -118,6 +120,14 @@ DataGrid.prototype.size = function(){
 	return this._visible;
 };
 
+DataGrid.prototype.each = function(callBack){
+	for (var k in this._data){
+		if (callBack(this._data[k]) === true){
+			return;
+		}
+	}
+};
+
 DataGrid.prototype.getRows = function(count, callBack){
 	if (this._currentRow + count - 1> this._data.length) {
 		throw new Error ("Data index is out of range [" + (this._currentRow + count) + "]");
@@ -146,3 +156,15 @@ DataGrid.on("selectedRowChanged", function(newValue){
 });
 
 DataGrid.on("columnsChanged", DataGrid.prototype._columnsChanged);
+
+/**
+ * builds dataGrid 
+ */
+DataGrid.build = function(struct){
+	var dataGrid = new DataGrid();
+	var columns = DataColumn.build(struct.columns);
+	dataGrid.columns(columns);
+	return dataGrid;
+};
+
+

@@ -303,6 +303,12 @@ Util.o = function(params){
 };
 Util.fillObject = function(object, data){
 	for (var k in data) {
+		if (k == "class"){
+			continue;
+		}
+		if (typeof object[k] != "function"){
+			throw new Error("Object " + object + " has no property " + k);
+		}
 		object[k](data[k]);
 	}
 };

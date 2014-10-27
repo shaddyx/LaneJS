@@ -13,11 +13,16 @@ class JsBuilder:
         lines = []
         for node in nodeList:
             files.append(node.file)
-            lines.append("""<script type="text/javascript" src="%s"></script>""" % (prefix + node.file[node.file.find(startFrom):]))
+            if (node.file.find(startFrom) != -1):
+                lines.append("""<script type="text/javascript" src="%s"></script>""" % (prefix + node.file[node.file.find(startFrom):]))
+            else:
+                pass
+                #print "file is not in path:" + str(node)
             
         
         list = []
         list += getList(path, "*.jsp", self.excludeList)
+        list += getList(path, "*.gsp", self.excludeList)
         list += getList(path, "*.java", self.excludeList)
         list += getList(path, "*.html", self.excludeList)
         list += getList(path, "*.htm", self.excludeList)

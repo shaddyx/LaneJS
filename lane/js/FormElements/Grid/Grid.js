@@ -37,6 +37,7 @@ Grid.prototype._afterDraw = function() {
 Grid.prototype.reBuild = function(){
 	if (!this._v.isDrawn || !this._columns.length || !this._elements.content._v.width || !this._elements.content._v.height){
 		this.scheduleReBuild();
+		return;
 	}
 	console.log("Grid reBuild called");
 	for (var i = 0; i<this._rows.length; i++ ){
@@ -81,6 +82,9 @@ Grid.prototype.calcVisibleRows = function(){
 };
 
 Grid.prototype._buildHeaderAndFooter = function(){
+	if (!this._v.isDrawn) {
+		return;
+	}
 	if (!this._headerRow){
 		this._headerRow = new GridHeaderRow(this);
 		this._headerRow.skin(this._rowSkin);
@@ -176,14 +180,12 @@ Grid.prototype._dataChanged = function(){
 	}
 	
 	this.reBuild();
-	this._v.data.on("dataUpdate", function(){
-		this.scheduleRender();
-	},this);
+	this._v.data.on("dataUpdate", this.scheduleRender,this);
 };
 
 Grid.prototype._dataBeforeChanged = function(data){
 	if (this._v.data){
-		this._v.data.removeListener("dataUpdate");
+		this._v.data.removeListener("dataUpdate", this.scheduleRender);
 	}
 }
 /**
