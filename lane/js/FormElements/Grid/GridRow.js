@@ -9,20 +9,24 @@ Util.extend(GridRow, BaseObject);
 GridRow.type = "GridRow";
 GridRow.addProperty("skin",false);
 GridRow.addProperty("height",false);
+GridRow.addProperty("rowIndex", 0);
 
 GridRow.prototype.width = function(value) {
 	this._element.width(value);
 };
 
 GridRow.prototype.draw = function(target){
-	this._element = target.buildTo(this._getSkin());
+	this._element = target.buildTo(this.getSkin());
 	this.height(this._element._v.height);
 };
 /**
  * returns row skin
  */
-GridRow.prototype._getSkin = function(){
-	return GridRowSkin[this._v.skin];
+GridRow.prototype.getSkin = function(selected){
+	if (selected){
+		return GridRowSkin[this._v.skin].selected || GridRowSkin[this._v.skin];
+	}
+	return GridRowSkin[this._v.skin].normal || GridRowSkin[this._v.skin];
 }
 
 /**
@@ -55,6 +59,7 @@ GridRow.prototype.buildCells = function(){
 		cell.build();
 		this._cells.push(cell);
 		this._cellsByName[cell._column._v.dataColumn._v.name] = cell;
+		cell.columnName(cell._column._v.dataColumn._v.name);
 	}
 	this.cellsBuilt = true;
 };

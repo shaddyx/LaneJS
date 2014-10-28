@@ -4,7 +4,7 @@ var GridHeaderRow = function(grid) {
 };
 Util.extend(GridHeaderRow, GridRow);
 GridHeaderRow.type = "GridHeaderRow";
-GridHeaderRow.prototype._getSkin = function(){
+GridHeaderRow.prototype.getSkin = function(){
 	return GridHeaderSkin[this._v.skin];
 };
 

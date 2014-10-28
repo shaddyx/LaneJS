@@ -4,7 +4,7 @@ var GridFooterRow = function(grid) {
 };
 Util.extend(GridFooterRow, GridRow);
 GridFooterRow.type = "GridFooterRow";
-GridFooterRow.prototype._getSkin = function(){
+GridFooterRow.prototype.getSkin = function(){
 	return GridFooterSkin[this._v.skin];
 };
 

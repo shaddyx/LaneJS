@@ -14,12 +14,17 @@ Util.extend(DataGrid, DataSource);
 DataGrid.type = "DataGrid";
 DataGrid.addProperty("columns",[]);
 DataGrid.addProperty("selectedRow", 0);
+DataGrid.addProperty("selectedColumn", "");
 
 DataGrid.prototype._columnsChanged = function(value){
 	this._columnsCache = {};
 	for (var k in value){
 		this._columnsCache[value[k]._v.name] = value[k];
 	}
+};
+
+DataGrid.prototype.getByIndex = function(index){
+	return this._data[index];
 };
 
 /**
@@ -44,18 +49,16 @@ DataGrid.prototype.add = function(row){
 		}
 	}
 	
-	var dataUnit = {
+	var dataUnit = new DataRow({
 		data:row, 
 		previous:currentIndex,
 		current:this._data.length,
 		next:undefined,
-		selected:false
-	};
+		dataGrid:this
+	});
+	
 	if (currentLast){
 		currentLast.next = currentIndex + 1;
-	}
-	if (this._v.selectedRow == this._data.length){
-		dataUnit.selected = true;
 	}
 	this._data.push(dataUnit);
 	this._visible ++;
@@ -123,7 +126,7 @@ DataGrid.prototype.size = function(){
 DataGrid.prototype.each = function(callBack){
 	for (var k in this._data){
 		if (callBack(this._data[k]) === true){
-			return;
+			return true;
 		}
 	}
 };
@@ -142,16 +145,9 @@ DataGrid.prototype.getRows = function(count, callBack){
 	}
 };
 //
-//		selectin management
-//
-DataGrid.on("selectedRowBeforeChanged", function(newValue){
-	this._data[this._v.selectedRow].selected = false;
-});
-//
-//		selectin management
+//		selection management
 //
 DataGrid.on("selectedRowChanged", function(newValue){
-	this._data[newValue].selected = true;
 	this.trigger("dataUpdate");
 });
 

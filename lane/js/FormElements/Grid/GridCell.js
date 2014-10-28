@@ -10,6 +10,7 @@ GridCell.type = "GridCell";
 GridCell._props = {
 	backgroundColor:"inherit"
 };
+GridCell.addProperty("columnName", "");
 
 GridCell.buildCell = function(column, row){
 	var obj;
@@ -54,6 +55,8 @@ GridCell.prototype.build = function(){
 	}
 	this._element.build(st);
 	this._element.drawRec({target:this._row._element});
+	this._element.removeListener("click", this._cellClicked, this);
+	this._element.on("click", this._cellClicked, this);
 };
 
 GridCell.prototype.remove = function(){
@@ -72,6 +75,11 @@ GridCell.prototype.returnContainer = function(){
 GridCell.prototype.restoreContainer = function(){
 	this._element.clear();
 	this.build();
+};
+
+GridCell.prototype._cellClicked = function(){
+	var colSelected = this._v.columnName;
+	this._grid._v.data.getByIndex(this._row._v.rowIndex).select();
 };
 
 GridCell.prototype.width = function(value){

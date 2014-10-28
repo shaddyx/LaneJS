@@ -77,13 +77,19 @@ GridSkin.def = {
 
 GridRowSkin = {};
 GridRowSkin.def = {
-	height:Constants.rowHeight,
-	horizontal:true,
-    borderWidth:[0,0,1,0],
-	borderColor:"#ccc",
-	overflow:BoxElement.OVERFLOW_MODE.hidden,
-	hovered:{
-		backgroundColor:"#ccc"
+	normal:{
+		height:Constants.rowHeight,
+		horizontal:true,
+	    borderWidth:[0,0,1,0],
+	    padding:[1,0,0,1],
+		borderColor:"#ccc",
+		overflow:BoxElement.OVERFLOW_MODE.hidden,
+	},
+	selected:{
+		borderWidth:[1,1,1,1],
+		padding:[0,0,0,0],
+		backgroundColor:"#ccc",
+		borderColor:"#f00"
 	}
 };
 
@@ -92,6 +98,7 @@ GridHeaderSkin.def = {
 	height:Constants.lineHeight,
 	horizontal:true,
     borderWidth:[0,0,0,0],
+    padding:[1,0,0,1],
 	borderColor:"#000",
 	overflow:BoxElement.OVERFLOW_MODE.hidden
 };
@@ -101,6 +108,7 @@ GridFooterSkin.def = {
 	height:Constants.lineHeight,
 	horizontal:true,
     borderWidth:[0,0,1,0],
+    padding:[1,0,0,1],
 	borderColor:"#000",
 	overflow:BoxElement.OVERFLOW_MODE.hidden
 };
@@ -180,10 +188,4 @@ GridHelperSkin = {
 		   borderColor:"#000000"
 	   }
 	]
-};
-
-GridSelectedRowSkin = {
-	borderWidth:[1,1,1,1],
-	backgroundColor:"#ccc",
-	borderColor:"#f00"
 };

@@ -294,6 +294,7 @@ Grid.prototype.render = function(){
 	data.getRows(Math.min(this._visibleRows, this._v.data.visibleDown()),function(dataRow){
 		my._rows[rowIndex].restoreProperties();
 		my._rows[rowIndex].render(dataRow);
+		my._rows[rowIndex].rowIndex(dataRow.current);
 		rowIndex ++;
 	});
 	//
@@ -362,9 +363,10 @@ Grid.prototype._vScrollerMoved = function(){
 };
 
 Grid.on("rowRender", function(row, dataRow){
-	if (dataRow.selected){
-		for (var k in GridSelectedRowSkin){
-			row.setProperty(k, GridSelectedRowSkin[k]);
+	if (dataRow.current == dataGrid._v.selectedRow){
+		var skin = row.getSkin(true);
+		for (var k in skin){
+			row.setProperty(k, skin[k]);
 		}
 	}
 });
