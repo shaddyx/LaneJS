@@ -12,14 +12,14 @@ Grid.prototype.keyPressed = function(evt){
 		case 38:
 			if (this._v.data.visibleUp()){
 				this._v.data.move(-1);
-				this.render();
+				//this.render();
 			}
 			break;
 		// down
 		case 40:
 			if (this._v.data.visibleDown() > this._visibleRows){
 				this._v.data.move(1);
-				this.render();
+				//this.render();
 			}
 
 			break;
@@ -29,7 +29,7 @@ Grid.prototype.keyPressed = function(evt){
 		case 33:
 			var count = Math.min(this._visibleRows, this._v.data.visibleUp());
 			this._v.data.move( -count);
-			this.render();
+			//this.render();
 			break;
 		//
 		//	pageDown
@@ -37,7 +37,7 @@ Grid.prototype.keyPressed = function(evt){
 		case 34:
 			var count = Math.min(this._visibleRows, this._v.data.visibleDown() - this._visibleRows);
 			this._v.data.move(count);
-			this.render();
+			//this.render();
 			break;
 	}
 };

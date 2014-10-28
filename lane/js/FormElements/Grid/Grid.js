@@ -291,6 +291,27 @@ Grid.prototype.render = function(){
 	var rowIndex = 0;
 	this._headerRow && this._headerRow.render();
 	this._footerRow && this._footerRow.render();
+	//
+	//		first we must check the cursor is visible 
+	//
+	var lastIndex = data.getCurrentRow().current;
+	if (data._v.selectedRow < lastIndex){
+		data.selectedRow(lastIndex);
+	} else {
+		data.getRows(Math.min(this._visibleRows, this._v.data.visibleDown()),function(dataRow){
+			if (data._v.selectedRow == dataRow.current){
+				//		we found the selection
+				lastIndex = undefined;
+				return false;
+			}
+			lastIndex = dataRow.current;
+		});
+		if (lastIndex != undefined){
+			data.selectedRow(lastIndex);
+		}
+	}
+	
+	
 	data.getRows(Math.min(this._visibleRows, this._v.data.visibleDown()),function(dataRow){
 		my._rows[rowIndex].restoreProperties();
 		my._rows[rowIndex].render(dataRow);

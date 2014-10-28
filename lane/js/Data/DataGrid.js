@@ -52,8 +52,12 @@ DataGrid.prototype.add = function(row){
 	var dataUnit = new DataRow({
 		data:row, 
 		previous:currentIndex,
+		previousVisible:currentIndex,
 		current:this._data.length,
 		next:undefined,
+		nextVisible:undefined,
+		visible:true,
+		node:false,
 		dataGrid:this
 	});
 	
@@ -73,6 +77,8 @@ DataGrid.prototype.move = function(count){
 	this.moveTo(this._currentRow + count);
 };
 
+
+
 /**
  * function moves current focused row
  * @param index
@@ -85,13 +91,14 @@ DataGrid.prototype.moveTo = function(index){
 		throw new DataOutOfRangeError("Move index out of range");
 	}
 	this._currentRow = index;
+	this.trigger("dataUpdate");
 };
 
 /**
  * Function returns current focused row
  * @returns current row
  */
-DataGrid.prototype.currentRow = function(){
+DataGrid.prototype.getCurrentRow = function(){
 	if (this._currentRow == undefined && this._data.length){
 		this._currentRow = 0;
 	}
@@ -141,7 +148,9 @@ DataGrid.prototype.getRows = function(count, callBack){
 	}
 	
 	for (var i = 0; i < count; i++){
-		callBack(this._data[this._currentRow + i], this._currentRow + i);
+		if (callBack(this._data[this._currentRow + i], this._currentRow + i) === false){
+			return;
+		}
 	}
 };
 //
