@@ -30,6 +30,8 @@ GridSkin.def = {
 		   		{
 		   			width:15,
 		   			vs:true,
+		   			name:"vertScrollContainer",
+		   			visible:false,
 		   			c:[
 		   			   {
 		   				   backgroundColor:"#cccccc",
@@ -149,9 +151,13 @@ GridCellSkin.def = {
 		]
 	},
 	img:{
-		name:"img",
-		width:16,
-		height:16
+		c:[
+		   {
+				name:"img",
+				width:16,
+				height:16
+		   }
+		]
 	},
 	tree:{
 		c:[

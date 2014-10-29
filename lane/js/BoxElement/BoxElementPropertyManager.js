@@ -121,8 +121,13 @@ BoxElement.addPropertyApplyer("padding",function(value){
 BoxElement.addPropertyApplyer("backgroundImage",function(value){
 	if (value){
 		if (value != 'none'){
-			value = value.split(' ').join('');
-			this.htmlElement.style.backgroundImage = "url(" + browser._v.imageBase + value + ")";
+			if (value.indexOf("http://") == -1 && value.indexOf("https://") == -1){
+				value = value.split(' ').join('');
+				this.htmlElement.style.backgroundImage = "url(" + browser._v.imageBase + value + ")";
+			} else {
+				this.htmlElement.style.backgroundImage = "url(" + value + ")";
+			}
+			
 		}
 		else{
 			this.htmlElement.style.backgroundImage = "none";

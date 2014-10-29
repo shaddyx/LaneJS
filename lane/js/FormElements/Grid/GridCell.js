@@ -18,6 +18,9 @@ GridCell.buildCell = function(column, row){
 		case "text":
 			obj = new GridTextCell(column, row);
 			break;
+		case "img":
+			obj = new GridImgCell(column, row);
+			break;
 		default:
 			throw new Error("Error, no such column type:" + column._v.columnType);
 	}

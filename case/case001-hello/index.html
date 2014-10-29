@@ -87,6 +87,7 @@
 <script type="text/javascript" src="/lane/js/FormElements/Grid/GridFooterRow.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/Grid/JqGridImageColumn.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/Grid/GridTextCell.js"></script>    
+<script type="text/javascript" src="/lane/js/FormElements/Grid/GridImgCell.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/Grid/GridHeaderRow.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/Container.js"></script>    
 <script type="text/javascript" src="/lane/js/Util/TextUtils.js"></script>    
@@ -137,12 +138,12 @@
     	var dataGrid = new DataGrid();
     	var columns = DataColumn.build([{
 			   name:"a",
-			   caption:"blablabla"
+			   caption:"blablabla",
+			   columnType:"img"
 		   },
 		   {
 			   name:"b",
-			   caption:"blablablb",
-			   columnType:"image"
+			   caption:"blablablb"
 		   },
 		   {
 			   name:"c",
@@ -166,8 +167,8 @@
 		   }
 		]);
     	dataGrid.columns(columns);
-    	for (var i = 0; i<10; i++){
-    		dataGrid.add({a:"test" + i, b:"testb" + i, c:i, d:i, e:i, f:i, g:i});
+    	for (var i = 0; i<1000; i++){
+    		dataGrid.add({a:"https://cdn2.iconfinder.com/data/icons/crystalproject/Open-Office-Icons/stock_3d-apply-16.png", b:"testb" + i, c:i, d:i, e:i, f:i, g:i});
     	}
     	
     	

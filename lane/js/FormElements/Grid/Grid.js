@@ -19,6 +19,7 @@ Grid.addProperty("showHeader", true);
 Grid.addProperty("showFooter", false);
 Grid.addProperty("rowHeight", undefined);
 Grid.addProperty("topLine", false);
+Grid.addProperty("_scrollerShown", false);
 
 
 Grid.prototype._afterDraw = function() {
@@ -175,6 +176,7 @@ Grid.prototype._dataChanged = function(){
 		var col = new GridColumn(this);
 		col.index(k);
 		col.dataColumn(dataCol);
+		col.columnType(dataCol.columnType());
 		col.caption(dataCol.caption());
 		col.buildHelper();
 		this._columns.push(col);
@@ -322,10 +324,13 @@ Grid.prototype.render = function(){
 	//
 	//	update the scroll position
 	//
+	
+	this._updateScrollerVisibility();
 	var contH = this._elements.vertScroll.parent._v.height;
 	var h = this._elements.vertScroll._v.height;
 	var scrollTop = Math.floor((data.visibleUp() / (data.visible() - this._visibleRows)) * (contH - h));
 	this._elements.vertScroll.top(scrollTop);
+	
 };
 /**
  * returns physical cell by row number (in dataSource) and column name
@@ -378,6 +383,11 @@ Grid.prototype._vScrollerMoved = function(){
 	this.render();
 };
 
+Grid.prototype._updateScrollerVisibility = function(){
+	this._elements.vertScrollContainer && this._elements.vertScrollContainer.visible(this._v.data && this._v.data.visible() > this._visibleRows);
+};
+
+
 Grid.on("rowRender", function(row, dataRow){
 	if (dataRow.current == dataGrid.getCurrentRow().current){
 		var skin = row.getSkin(true);
@@ -387,6 +397,9 @@ Grid.on("rowRender", function(row, dataRow){
 	}
 });
 
+
+
+Grid.on("_scrollerShownChanged", Grid.prototype._updateScrollerVisibility);
 Grid.on(["showHeaderChanged", "showFooterChanged"], Grid.prototype.scheduleReDraw);
 Grid.on("afterDraw", Grid.prototype._afterDraw);
 Grid.on("dataChanged", Grid.prototype._dataChanged);
