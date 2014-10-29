@@ -151,6 +151,7 @@ GridCellSkin.def = {
 		]
 	},
 	img:{
+		hAlign:BoxElement.ALIGN.middle,
 		c:[
 		   {
 				name:"img",
