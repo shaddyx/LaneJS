@@ -21,7 +21,9 @@ TabBarSkin.def = {
 	   {
 		   name:"inner",
 		   hs:true,
-		   vs:true
+		   vs:true,
+		   borderWidth:[0,1,1,1],
+		   borderColor:"#CCC4A6",
 	   }
 	]
 };

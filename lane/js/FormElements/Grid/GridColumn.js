@@ -11,6 +11,7 @@ GridColumn.addProperty("width", 10);
 GridColumn.addProperty("index", 0);
 GridColumn.addProperty("minWidth", 10);
 GridColumn.addProperty("caption", "");
+GridColumn.addProperty("hs", "");
 //GridColumn.addProperty("rightBoundPos", 0);
 
 

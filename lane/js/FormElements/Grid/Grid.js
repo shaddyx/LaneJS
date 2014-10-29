@@ -20,6 +20,7 @@ Grid.addProperty("showFooter", false);
 Grid.addProperty("rowHeight", undefined);
 Grid.addProperty("topLine", false);
 Grid.addProperty("_scrollerShown", false);
+Grid.addProperty("_horzScrollerShown", false);
 
 
 Grid.prototype._afterDraw = function() {
@@ -38,7 +39,7 @@ Grid.prototype._afterDraw = function() {
 
 Grid.prototype.reBuild = function(){
 	if (!this._v.isDrawn || !this._columns.length || !this._elements.content._v.width || !this._elements.content._v.height){
-		this.scheduleReBuild();
+		this.scheduleReBuild(100);
 		return;
 	}
 	console.log("Grid reBuild called");
@@ -225,7 +226,7 @@ Grid.prototype.reDrawColumns = function(){
 		right += this._columns[i]._v.width;
 		console.log("right [" + i + "]",right);
 		this._columns[i].rightBoundPos(right);
-		this._columns[i].helperHeight(this._v.height);
+		this._columns[i].helperHeight(this._elements.gridContentContainer._v.height);
 	}
 	//
 	//		assigning columns sizes to cells
@@ -251,14 +252,15 @@ Grid.prototype.reDrawColumns = function(){
 	this.scheduleRender();
 };
 
-Grid.prototype.scheduleReBuild = function(){
+Grid.prototype.scheduleReBuild = function(time){
+	time = time || 0;
 	if (!this.reBuildTimer){
 		var my = this;
 		console.log("ReBuild scheduled");
 		this.reBuildTimer = setTimeout(function(){
 			my.reBuildTimer = false;
 			my.reBuild();
-		},0);
+		},time);
 	}
 };
 
@@ -388,6 +390,10 @@ Grid.prototype._vScrollerMoved = function(){
 
 Grid.prototype._updateScrollerVisibility = function(){
 	this._elements.vertScrollContainer && this._elements.vertScrollContainer.visible(this._v.data && this._v.data.visible() > this._visibleRows);
+};
+
+Grid.prototype._updateHorzScrollerVisibility = function(){
+	//this._elements.vertScrollContainer && this._elements.vertScrollContainer.visible(this._v.data && this._v.data.visible() > this._visibleRows);
 };
 
 

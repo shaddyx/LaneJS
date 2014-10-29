@@ -60,27 +60,17 @@ BoxElement.__listeners.recalcInnerHeight= function(){
 };
 
 BoxElement.on("heightChanged",BoxElement.__listeners.recalcInnerHeight);
-/*
- * minWidth can't be less than dx
- */
 
-/*BoxElement.__listeners._dxChanged = function(value){
-	this.minWidth(Math.max(this._v._dx + this._captionWidth,this._v.minWidth));
-	this._baseClass.__listeners.recalcInnerWidth.call(this);
-};
-
-BoxElement.__listeners._dyChanged = function(value){
-	this.minHeight(Math.max(value + this._captionheight,this._v.minHeight));
-	this._baseClass.__listeners.recalcInnerHeight.call(this);
-};*/
-
-BoxElement.__listeners.minWidthChanged = function(value){
-	this.width(Math.max(this._v.width));
+//
+//		wtf is this?!?!
+//
+/*BoxElement.__listeners.minWidthChanged = function(value){
+	this.width(Math.max(this._v.width, this._v._dx));
 };
 
 BoxElement.__listeners.minHeightChanged = function(value){
-	this.height(Math.max(this._v.height));
-};
+	this.height(Math.max(this._v.height, this._v._dy));
+};*/
 
 
 BoxElement.__listeners.vMinWidthChanged =function(value){
@@ -308,13 +298,14 @@ BoxElement.on("relativityBeforeChanged",BoxElement.__listeners.relativityBeforeC
 BoxElement.on("heightBeforeChanged",BoxElement.__listeners.heightBeforeChanged);
 BoxElement.on("vMinHeightChanged",BoxElement.__listeners.vMinHeightChanged);
 BoxElement.on("vMinWidthChanged",BoxElement.__listeners.vMinWidthChanged);
-BoxElement.on("minHeightChanged",BoxElement.__listeners.minHeightChanged);
+//BoxElement.on("minHeightChanged",BoxElement.__listeners.minHeightChanged);
+//BoxElement.on("minWidthChanged",BoxElement.__listeners.minWidthChanged);
 BoxElement.on("horizontalChanged",BoxElement.prototype.__updateHorizontal);
 BoxElement.on("widthChanged",BoxElement.__listeners.recalcInnerWidth);
 BoxElement.on(["borderWidthChanged","paddingChanged","marginChanged"],BoxElement.prototype.__recalcDxDy);
 /*BoxElement.on("_dxChanged",BoxElement.__listeners._dxChanged);
 BoxElement.on("_dyChanged",BoxElement.__listeners._dyChanged);*/
-BoxElement.on("minWidthChanged",BoxElement.__listeners.minWidthChanged);
+//
 
 
 
