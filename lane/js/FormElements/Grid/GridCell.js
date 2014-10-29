@@ -80,6 +80,7 @@ GridCell.prototype.restoreContainer = function(){
 GridCell.prototype._cellClicked = function(){
 	var colSelected = this._v.columnName;
 	this._grid._v.data.getByIndex(this._row._v.rowIndex).select();
+	this._grid.scheduleRender();
 };
 
 GridCell.prototype.width = function(value){

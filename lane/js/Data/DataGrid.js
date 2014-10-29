@@ -13,8 +13,6 @@ var DataGrid = function(){
 Util.extend(DataGrid, DataSource);
 DataGrid.type = "DataGrid";
 DataGrid.addProperty("columns",[]);
-DataGrid.addProperty("selectedRow", 0);
-DataGrid.addProperty("selectedColumn", "");
 
 DataGrid.prototype._columnsChanged = function(value){
 	this._columnsCache = {};
@@ -91,7 +89,7 @@ DataGrid.prototype.moveTo = function(index){
 		throw new DataOutOfRangeError("Move index out of range");
 	}
 	this._currentRow = index;
-	this.trigger("dataUpdate");
+	//this.trigger("dataUpdate");
 };
 
 /**
@@ -138,27 +136,62 @@ DataGrid.prototype.each = function(callBack){
 	}
 };
 
-DataGrid.prototype.getRows = function(count, callBack){
-	if (this._currentRow + count - 1> this._data.length) {
+DataGrid.prototype.getRows = function(from, count, callBack){
+	if (typeof from == "object"){
+		from = from.current;
+	}
+	if (from + count - 1> this._data.length) {
 		throw new Error ("Data index is out of range [" + (this._currentRow + count) + "]");
 	}
 	
-	if (this._currentRow < 0){
+	if (from < 0){
 		throw new Error ("Data index is out of range [" + this._currentRow + "]");
 	}
-	
-	for (var i = 0; i < count; i++){
-		if (callBack(this._data[this._currentRow + i], this._currentRow + i) === false){
-			return;
+	if (count > 0){
+		for (var i = from; i < from + count; i ++){
+			if (callBack(this._data[i], i) === false){
+				return;
+			}
+		}
+	} else {
+		for (var i = from; i > from + count; i --){
+			if (callBack(this._data[i], i) === false){
+				return;
+			}
 		}
 	}
+	
 };
-//
-//		selection management
-//
-DataGrid.on("selectedRowChanged", function(newValue){
-	this.trigger("dataUpdate");
-});
+
+/**
+ * returns count of visible items
+ * @param row
+ * @returns
+ */
+
+DataGrid.prototype._getVisibleUpForRow = function(row){
+	//
+	//	warning, this method is only for dataGrid 
+	//
+	if (typeof row === "object"){
+		row = row.current;
+	}
+	return row + 1;
+};
+
+DataGrid.prototype._getVisibleDownForRow = function(row){
+	//
+	//	warning, this method is only for dataGrid 
+	//
+	if (typeof row === "object"){
+		row = row.current;
+	}
+	return this._visible - row;
+};
+
+DataGrid.prototype._getRelative = function(row, offset){
+	return this._data[row.current + offset];
+};
 
 DataGrid.on("columnsChanged", DataGrid.prototype._columnsChanged);
 
@@ -171,5 +204,7 @@ DataGrid.build = function(struct){
 	dataGrid.columns(columns);
 	return dataGrid;
 };
+
+
 
 

@@ -18,6 +18,7 @@ Grid.addProperty("rowWidth", 0);
 Grid.addProperty("showHeader", true);
 Grid.addProperty("showFooter", false);
 Grid.addProperty("rowHeight", undefined);
+Grid.addProperty("topLine", false);
 
 
 Grid.prototype._afterDraw = function() {
@@ -294,25 +295,19 @@ Grid.prototype.render = function(){
 	//
 	//		first we must check the cursor is visible 
 	//
-	var lastIndex = data.getCurrentRow().current;
-	if (data._v.selectedRow < lastIndex){
-		data.selectedRow(lastIndex);
-	} else {
-		data.getRows(Math.min(this._visibleRows, this._v.data.visibleDown()),function(dataRow){
-			if (data._v.selectedRow == dataRow.current){
-				//		we found the selection
-				lastIndex = undefined;
-				return false;
-			}
-			lastIndex = dataRow.current;
-		});
-		if (lastIndex != undefined){
-			data.selectedRow(lastIndex);
-		}
+	var current = data.getCurrentRow();
+	if (!this._v.topLine){
+		this.topLine(current);
 	}
 	
+	if (current.visibleUp() < this._v.topLine.visibleUp()){
+		this.topLine(current);
+	} else if (current.visibleUp() > this._v.topLine.visibleUp() + this._visibleRows - 1){
+		my.topLine(current.getRelative( - this._visibleRows + 1));
+	};
 	
-	data.getRows(Math.min(this._visibleRows, this._v.data.visibleDown()),function(dataRow){
+	
+	data.getRows(this._v.topLine, Math.min(this._visibleRows, this._v.topLine.visibleDown()),function(dataRow){
 		my._rows[rowIndex].restoreProperties();
 		my._rows[rowIndex].render(dataRow);
 		my._rows[rowIndex].rowIndex(dataRow.current);
@@ -322,7 +317,7 @@ Grid.prototype.render = function(){
 	//	cleaning last rows
 	//
 	for (var i = rowIndex; i < this._rows.length; i++) {
-		my._rows[rowIndex].render(undefined);
+		my._rows[i].render(undefined);
 	}
 	//
 	//	update the scroll position
@@ -349,7 +344,7 @@ Grid.prototype.getCellContainer = function(rowNumber, colName){
 	this.render();
 	var rowIndex = 0;
 	var found = undefined;
-	data.getRows(Math.min(this._visibleRows, this._v.data.visibleDown()),function(dataRow, currentRow){
+	data.getRows(data.getCurrentRow(), Math.min(this._visibleRows, this._v.data.visibleDown()),function(dataRow, currentRow){
 		if (currentRow == rowNumber){
 			found = my._rows[rowIndex];
 		}
@@ -384,7 +379,7 @@ Grid.prototype._vScrollerMoved = function(){
 };
 
 Grid.on("rowRender", function(row, dataRow){
-	if (dataRow.current == dataGrid._v.selectedRow){
+	if (dataRow.current == dataGrid.getCurrentRow().current){
 		var skin = row.getSkin(true);
 		for (var k in skin){
 			row.setProperty(k, skin[k]);
