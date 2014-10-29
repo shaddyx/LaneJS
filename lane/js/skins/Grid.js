@@ -24,7 +24,7 @@ GridSkin.def = {
 			   		hs:true,
 			   		vs:true,
 			   		borderWidth:[1,1,1,1],
-			   		borderColor:"#000",
+			   		borderColor:"#79B7E7",
 			   		overflow:BoxElement.OVERFLOW_MODE.hidden
 		   		},
 		   		{
@@ -84,7 +84,7 @@ GridRowSkin.def = {
 		horizontal:true,
 	    borderWidth:[0,0,1,0],
 	    padding:[1,0,0,1],
-		borderColor:"#ccc",
+		borderColor:"#79B7E7",
 		overflow:BoxElement.OVERFLOW_MODE.hidden,
 	},
 	selected:{
@@ -101,7 +101,7 @@ GridHeaderSkin.def = {
 	horizontal:true,
     borderWidth:[0,0,0,0],
     padding:[1,0,0,1],
-	borderColor:"#000",
+	borderColor:"#79B7E7",
 	overflow:BoxElement.OVERFLOW_MODE.hidden
 };
 
@@ -111,7 +111,7 @@ GridFooterSkin.def = {
 	horizontal:true,
     borderWidth:[0,0,1,0],
     padding:[1,0,0,1],
-	borderColor:"#000",
+	borderColor:"#79B7E7",
 	overflow:BoxElement.OVERFLOW_MODE.hidden
 };
 
@@ -184,14 +184,14 @@ GridHelperSkin = {
 	draggable:{
 		axis:"x"
 	},
-	margin:[0,0,0,-1],
+	margin:[0,0,0,0],
 	c:[
 	   {
 		   width:1,
 		   hs:true,
 		   vs:true,
 		   borderWidth:[0,0,0,1],
-		   borderColor:"#000000"
+		   borderColor:"#79B7E7"
 	   }
 	]
 };

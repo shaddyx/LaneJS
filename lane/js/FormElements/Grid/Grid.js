@@ -298,6 +298,9 @@ Grid.prototype.render = function(){
 	//		first we must check the cursor is visible 
 	//
 	var current = data.getCurrentRow();
+	if (!current){
+		return false;
+	}
 	if (!this._v.topLine){
 		this.topLine(current);
 	}
@@ -389,7 +392,7 @@ Grid.prototype._updateScrollerVisibility = function(){
 
 
 Grid.on("rowRender", function(row, dataRow){
-	if (dataRow.current == dataGrid.getCurrentRow().current){
+	if (dataRow.current == dataRow.dataGrid.getCurrentRow().current){
 		var skin = row.getSkin(true);
 		for (var k in skin){
 			row.setProperty(k, skin[k]);
