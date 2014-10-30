@@ -29,8 +29,8 @@ BoxElement.prototype.build = function(struct, _topEl) {
 	}
 	this._topEl = _topEl;
 	if (struct.on) {
-		for ( var k in struct.events) {
-			this.on(k, struct.events[k], this);
+		for ( var k in struct.on) {
+			this.on(k, struct.on[k], this);
 		}
 	}
 
