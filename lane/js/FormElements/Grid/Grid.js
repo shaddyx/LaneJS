@@ -224,7 +224,6 @@ Grid.prototype.reDrawColumns = function(){
 	var right = 0;
 	for (i = 0; i < this._columns.length; i++) {
 		right += this._columns[i]._v.width;
-		console.log("right [" + i + "]",right);
 		this._columns[i].rightBoundPos(right);
 		this._columns[i].helperHeight(this._elements.gridContentContainer._v.height);
 	}

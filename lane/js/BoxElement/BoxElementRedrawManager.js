@@ -151,6 +151,7 @@ BoxElement.prototype.recalcMinSizes = function() {
 		 * values to use for orientational side
 		 */
 		var sizeValue = this._v.horizontal ? 'width' : 'height';
+		var innerSizeValue = this._v.horizontal ? 'innerWidth' : 'innerHeight';
 		var vmSizeValue = this._v.horizontal ? 'vMinWidth' : 'vMinHeight';
 		var msizeValue = this._v.horizontal ? 'minWidth' : 'minHeight';
 		var stretchValue = this._v.horizontal ? 'hs' : 'vs';
@@ -158,57 +159,65 @@ BoxElement.prototype.recalcMinSizes = function() {
 		 * calculating summ's
 		 */
 		
-		if (!this.isCanOverflowInMainDirection()) {
-			
-			var summ = 0;
-			var marginSumm = 0;
-			for ( var k = 0; k < this.c.length; k++) {
-				var child = this.c[k];
-				if(child._v.visible && !child._v.floating){
-					if (child._v[stretchValue]) {
-						summ += child._v[vmSizeValue];
-					} else {
-						summ += child._v[sizeValue];
-					}
-					marginSumm += child[this._v.horizontal?"_marginDx":"_marginDy"];
-				}
-			}
-			summ += this._v.horizontal ? this._v._dx : this._v._dy;
 		
-			var newValue = Math.max(summ, this._v[msizeValue]);
-			if (isNaN(newValue)) {
-				debugger;
+		var summ = 0;
+		var marginSumm = 0;
+		for ( var k = 0; k < this.c.length; k++) {
+			var child = this.c[k];
+			if(child._v.visible && !child._v.floating){
+				if (child._v[stretchValue]) {
+					summ += child._v[vmSizeValue];
+				} else {
+					summ += child._v[sizeValue];
+				}
+				marginSumm += child[this._v.horizontal?"_marginDx":"_marginDy"];
 			}
-			/*
-			 * setting result
-			 */
+		}
+		summ += this._v.horizontal ? this._v._dx : this._v._dy;
+	
+		var newValue = Math.max(summ, this._v[msizeValue]);
+		if (isNaN(newValue)) {
+			debugger;
+		}
+		/*
+		 * setting result
+		 */
+		
+		if (this.isCanOverflowInMainDirection()) {
+			this[innerSizeValue](newValue + marginSumm);
+		} else {
 			this[vmSizeValue](newValue + marginSumm);
 		}
-		if (!this.isCanOverflowIn2Direction()) {
-			/*
-			 * value to use on anti-orientational side
-			 */
-			vmSizeValue = this._v.horizontal ? 'vMinHeight' : 'vMinWidth';
-			sizeValue = this._v.horizontal ? 'height' : 'width';
-			stretchValue = this._v.horizontal ? 'vs' : 'hs';
-			var marginD = this._v.horizontal?"_marginDy":"_marginDx";
-			var max = 0;
-			var marginMax = 0;
-			for ( var k = 0; k < this.c.length; k++) {
-				var child = this.c[k];
-				if(child._v.visible && !child._v.floating){
-					if (child._v[stretchValue]) {
-						max = Math.max(child._v[vmSizeValue] + child[marginD], max);
-					} else {
-						max = Math.max(child._v[sizeValue] + child[marginD], max);
-					}
-					//marginMax = Math.max(marginMax, this[this._v.horizontal?"_marginDy":"_marginDx"]);
+		
+		
+		/*
+		 * value to use on anti-orientational side
+		 */
+		vmSizeValue = this._v.horizontal ? 'vMinHeight' : 'vMinWidth';
+		innerSizeValue = this._v.horizontal ? 'innerHeight' : 'innerWidth';
+		sizeValue = this._v.horizontal ? 'height' : 'width';
+		stretchValue = this._v.horizontal ? 'vs' : 'hs';
+		var marginD = this._v.horizontal?"_marginDy":"_marginDx";
+		var max = 0;
+		var marginMax = 0;
+		for ( var k = 0; k < this.c.length; k++) {
+			var child = this.c[k];
+			if(child._v.visible && !child._v.floating){
+				if (child._v[stretchValue]) {
+					max = Math.max(child._v[vmSizeValue] + child[marginD], max);
+				} else {
+					max = Math.max(child._v[sizeValue] + child[marginD], max);
 				}
+				//marginMax = Math.max(marginMax, this[this._v.horizontal?"_marginDy":"_marginDx"]);
 			}
-			max += this._v.horizontal ? this._v._dy : this._v._dx;
-			/*
-			 * setting result
-			 */
+		}
+		max += this._v.horizontal ? this._v._dy : this._v._dx;
+		/*
+		 * setting result
+		 */
+		if (this.isCanOverflowIn2Direction()) {
+			this[innerSizeValue](max + marginMax);
+		} else {
 			this[vmSizeValue](max + marginMax);
 		}
 	} else {
@@ -304,7 +313,7 @@ BoxElement.prototype.reDraw = function(innerCall) {
 			}
 		} while (foundSmaller);
 //		
-//		setting new sizes
+//		setting new sizes for child nodes
 //		
 		var lastValue = lastInner - skipInner;
 		var newSize = Math.floor(lastValue / (toStretch.length - skipCount));

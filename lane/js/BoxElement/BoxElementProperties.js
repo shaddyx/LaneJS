@@ -53,24 +53,18 @@ BoxElement.on("overflowChanged",function(value){
 });
 
 BoxElement.__listeners.recalcInnerWidth = function(){
-	this.innerWidth(this._v.width - this._v._dx);
+	if (!this._horzOverflow) {
+		this.innerWidth(this._v.width - this._v._dx);
+	} 
 };
 BoxElement.__listeners.recalcInnerHeight= function(){
-	this.innerHeight(this._v.height - this._v._dy);
+	if (!this._vertOverflow){
+		this.innerHeight(this._v.height - this._v._dy);
+	}
 };
 
 BoxElement.on("heightChanged",BoxElement.__listeners.recalcInnerHeight);
 
-//
-//		wtf is this?!?!
-//
-/*BoxElement.__listeners.minWidthChanged = function(value){
-	this.width(Math.max(this._v.width, this._v._dx));
-};
-
-BoxElement.__listeners.minHeightChanged = function(value){
-	this.height(Math.max(this._v.height, this._v._dy));
-};*/
 
 
 BoxElement.__listeners.vMinWidthChanged =function(value){

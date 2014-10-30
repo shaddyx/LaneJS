@@ -337,8 +337,8 @@ BoxElement.addProperty("hAlign",BoxElement.ALIGN.begin,{html:true, rm:BoxElement
 BoxElement.addProperty("width",0,{html:true, rm:BoxElement.REDRAW_MODE.redrawParent,htmlEnding:'px'});
 BoxElement.addProperty("sizeRatio",100,{rm:BoxElement.REDRAW_MODE.full});
 BoxElement.addProperty("height",0,{html:true, rm:BoxElement.REDRAW_MODE.redrawParent,htmlEnding:'px'});
-BoxElement.addProperty("innerWidth",false,{rm:BoxElement.REDRAW_MODE.full});
-BoxElement.addProperty("innerHeight",false,{rm:BoxElement.REDRAW_MODE.full});
+BoxElement.addProperty("innerWidth",0,{rm:BoxElement.REDRAW_MODE.full});
+BoxElement.addProperty("innerHeight",0,{rm:BoxElement.REDRAW_MODE.full});
 BoxElement.addProperty("lineHeight",15,{html:true, rm:BoxElement.REDRAW_MODE.full,defaultApply:true, htmlEnding:'px'});
 BoxElement.addProperty("horizontal",false,{rm:BoxElement.REDRAW_MODE.full});
 BoxElement.addProperty("fontColor","none",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
