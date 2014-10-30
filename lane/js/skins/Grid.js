@@ -96,6 +96,12 @@ GridSkin.def = {
 		   {
 			  hs:true,
 			  vs:true,
+			  name:"horzScrollerSliderContainer",
+			  on:{
+					horzScrollerMoved:function(percentage){
+						debugger;
+					}
+			  },
 			  c:[
 			   {
    				   backgroundColor:"#cccccc",
@@ -116,7 +122,6 @@ GridSkin.def = {
 			   height:15,
 			   name:"scrollRight"
 		   }
-		   
 		]
    	}]
 	
@@ -187,6 +192,7 @@ GridCellContainer = {
 GridCellSkin = {};
 GridCellSkin.def = {
 	text:{
+		cursor:"pointer",
 		c:[
 		   {
 			   name:"caption",
@@ -197,6 +203,7 @@ GridCellSkin.def = {
 	},
 	img:{
 		hAlign:BoxElement.ALIGN.middle,
+		cursor:"pointer",
 		c:[
 		   {
 				name:"img",
@@ -206,6 +213,7 @@ GridCellSkin.def = {
 		]
 	},
 	tree:{
+		cursor:"pointer",
 		c:[
 		   {
 			   name:"img",

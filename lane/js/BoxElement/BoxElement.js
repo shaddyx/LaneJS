@@ -62,6 +62,12 @@ var BoxElement = function(params){
 	this.__updateHorizontal();
 	this._marginDx = 0;
 	this._marginDy = 0;
+	if (this.id == 84){
+		this.on("innerWidthChanged", function(v){
+			if (v == 683.1142578125) debugger;
+			console.log("v", v);
+		});
+	}
 };
 
 Util.extend(BoxElement,BaseObject);

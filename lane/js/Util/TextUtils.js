@@ -68,10 +68,10 @@ TextUtils.prototype.getStringWidth = function(text,key){
 		if (!w){
 			debugger;
 		}
-		width+=w;
+		width += w;
 	}
 	if (width != 0){
-		return width + 1;
+		return Math.ceil(width + 1);
 	}
 	return 0;
 	

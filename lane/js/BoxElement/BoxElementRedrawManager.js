@@ -31,7 +31,6 @@ BoxElement.runGlobalRedraw = function(innerCall) {
 	/*
 	 * gathering elements to redraw array
 	 */
-	// throw new Exception("123412341234");
 	var tmp = [];
 	for ( var k in this._reDrawMap) {
 		if (!this._reDrawMap[k]._parentInQueue()) {
@@ -155,6 +154,7 @@ BoxElement.prototype.recalcMinSizes = function() {
 		var vmSizeValue = this._v.horizontal ? 'vMinWidth' : 'vMinHeight';
 		var msizeValue = this._v.horizontal ? 'minWidth' : 'minHeight';
 		var stretchValue = this._v.horizontal ? 'hs' : 'vs';
+		var dValue = this._v.hrizontal ? '_dx' : '_dy';
 		/*
 		 * calculating summ's
 		 */
@@ -173,7 +173,7 @@ BoxElement.prototype.recalcMinSizes = function() {
 				marginSumm += child[this._v.horizontal?"_marginDx":"_marginDy"];
 			}
 		}
-		summ += this._v.horizontal ? this._v._dx : this._v._dy;
+		summ += this._v[dValue];
 	
 		var newValue = Math.max(summ, this._v[msizeValue]);
 		if (isNaN(newValue)) {
@@ -184,7 +184,7 @@ BoxElement.prototype.recalcMinSizes = function() {
 		 */
 		
 		if (this.isCanOverflowInMainDirection()) {
-			this[innerSizeValue](newValue + marginSumm);
+			this[innerSizeValue](Math.max(this._v[sizeValue] - this._v[dValue], newValue));
 		} else {
 			this[vmSizeValue](newValue + marginSumm);
 		}
@@ -197,7 +197,8 @@ BoxElement.prototype.recalcMinSizes = function() {
 		innerSizeValue = this._v.horizontal ? 'innerHeight' : 'innerWidth';
 		sizeValue = this._v.horizontal ? 'height' : 'width';
 		stretchValue = this._v.horizontal ? 'vs' : 'hs';
-		var marginD = this._v.horizontal?"_marginDy":"_marginDx";
+		var marginD = this._v.horizontal?"_marginDy" : "_marginDx";
+		var dValue = this._v.horizontal?"_dy" : "_dx";
 		var max = 0;
 		var marginMax = 0;
 		for ( var k = 0; k < this.c.length; k++) {
@@ -211,12 +212,12 @@ BoxElement.prototype.recalcMinSizes = function() {
 				//marginMax = Math.max(marginMax, this[this._v.horizontal?"_marginDy":"_marginDx"]);
 			}
 		}
-		max += this._v.horizontal ? this._v._dy : this._v._dx;
+		max += this._v[dValue];
 		/*
 		 * setting result
 		 */
 		if (this.isCanOverflowIn2Direction()) {
-			this[innerSizeValue](max + marginMax);
+			this[innerSizeValue](Math.max(this._v[sizeValue] - this._v[dValue], max));
 		} else {
 			this[vmSizeValue](max + marginMax);
 		}
@@ -285,7 +286,10 @@ BoxElement.prototype.reDraw = function(innerCall) {
 		//		
 
 		var		inner = this._v.horizontal ? this._v.innerWidth : this._v.innerHeight, 
-				lastFreeSpace = this._v[stretchValue] - this._v[stretchvMin], 	
+				//
+				//	TODO:investigate this!!!!
+				//
+				lastFreeSpace = this._v[stretchValue] - this._v[this._v.horizontal ? '_dx' : '_dy'] - this._v[stretchvMin], 	
 				lastInner = inner - nonStretchable,
 				skipInner = 0,
 				skipCount = 0,

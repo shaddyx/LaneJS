@@ -28,14 +28,14 @@ BoxElement.prototype.build = function(struct, _topEl) {
 		_topEl = this;
 	}
 	this._topEl = _topEl;
-	if (struct.events) {
+	if (struct.on) {
 		for ( var k in struct.events) {
 			this.on(k, struct.events[k], this);
 		}
 	}
 
 	for ( var k in struct) {
-		if (k == "events" || k == "params" || k == "defaults") {
+		if (k == "on" || k == "params" || k == "defaults") {
 			continue;
 		}
 		var prop = struct[k];

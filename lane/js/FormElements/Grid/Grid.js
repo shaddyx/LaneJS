@@ -32,7 +32,8 @@ Grid.prototype._afterDraw = function() {
 	}
 	this._v.rowHeight || this.rowHeight(this._rowSkin.height);
 	
-	this._elements.vertScroll.on("dragEnded", this._vScrollerMoved, this);	
+	this._elements.vertScroll.on("dragEnded", this._vScrollerMoved, this);
+	this._elements.horzScroll.on("dragEnded", this._hScrollerMoved, this);	
 	this.reBuild();
 	//this.initKeyboard();
 };
@@ -298,6 +299,7 @@ Grid.prototype.render = function(){
 	//
 	//		first we must check the cursor is visible 
 	//
+	this._updateHorzScrollerVisibility();
 	var current = data.getCurrentRow();
 	if (!current){
 		return false;
@@ -387,12 +389,28 @@ Grid.prototype._vScrollerMoved = function(){
 	this.render();
 };
 
+Grid.prototype._hScrollerMoved = function(){
+	var scrollW = this._elements.horzScroll._v.width;
+	var scrollLeft = this._elements.horzScroll._v.left;
+	var fullW = this._elements.horzScroll.parent._v.innerWidth - scrollW;
+	var percent = (scrollLeft / fullW) * 100;
+	for (var k in this._elements){
+		this._elements[k].trigger("horzScrollerMoved", percent);
+	}
+	
+	
+};
+
 Grid.prototype._updateScrollerVisibility = function(){
 	this._elements.vertScrollContainer && this._elements.vertScrollContainer.visible(this._v.data && this._v.data.visible() > this._visibleRows);
 };
 
 Grid.prototype._updateHorzScrollerVisibility = function(){
 	//this._elements.vertScrollContainer && this._elements.vertScrollContainer.visible(this._v.data && this._v.data.visible() > this._visibleRows);
+	var firstRow = this._rows[0];
+	if (firstRow){
+		this._elements.horzScrollContainer && this._elements.horzScrollContainer.visible(firstRow.isOverflowed());
+	}
 };
 
 
