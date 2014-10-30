@@ -251,6 +251,7 @@ BoxElement.prototype._draggableChanged = function(value){
 					if (dragByY){
 						this.top(newY);
 					}
+					this.trigger('drag');
 				}
 			},
 			stopDragging:function(){

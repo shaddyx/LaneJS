@@ -33,7 +33,7 @@ Grid.prototype._afterDraw = function() {
 	this._v.rowHeight || this.rowHeight(this._rowSkin.height);
 	
 	this._elements.vertScroll.on("dragEnded", this._vScrollerMoved, this);
-	this._elements.horzScroll.on("dragEnded", this._hScrollerMoved, this);	
+	this._elements.horzScroll.on("drag", this._hScrollerMoved, this);	
 	this.reBuild();
 	//this.initKeyboard();
 };
@@ -211,7 +211,7 @@ Grid.prototype.reDrawColumns = function(){
 	
 	if (columnsFullWidth < this._rowWidth){
 		var ratio = this._rowWidth / columnsFullWidth;
-		var lastSpace = this._rowWidth;
+		var lastSpace = this._rowWidth - 1;
 		var i;
 		for (i = 0; i < this._columns.length - 1; i++) {
 			lastSpace -= this._columns[i].width(Math.floor(this._columns[i]._v.width * ratio));
@@ -395,7 +395,7 @@ Grid.prototype._hScrollerMoved = function(){
 	var fullW = this._elements.horzScroll.parent._v.innerWidth - scrollW;
 	var percent = (scrollLeft / fullW) * 100;
 	for (var k in this._elements){
-		this._elements[k].trigger("horzScrollerMoved", percent);
+		this._elements[k].trigger("horzScrollerMoved", percent, this);
 	}
 	
 	
@@ -406,11 +406,7 @@ Grid.prototype._updateScrollerVisibility = function(){
 };
 
 Grid.prototype._updateHorzScrollerVisibility = function(){
-	//this._elements.vertScrollContainer && this._elements.vertScrollContainer.visible(this._v.data && this._v.data.visible() > this._visibleRows);
-	var firstRow = this._rows[0];
-	if (firstRow){
-		this._elements.horzScrollContainer && this._elements.horzScrollContainer.visible(firstRow.isOverflowed());
-	}
+	this._elements.horzScrollContainer && this._elements.horzScrollContainer.visible(this._elements.header.isOverflowedX());
 };
 
 

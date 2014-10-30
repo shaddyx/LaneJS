@@ -128,11 +128,3 @@ GridRow.prototype.restoreProperties = function(){
 		this._cells[i].restoreProperties();
 	}
 };
-
-
-GridRow.prototype.isOverflowed = function(){
-	//
-	//		TODO: investigate why +2;
-	//
-	return this._element && this._element._v.innerWidth > this._element._v.width + 2;
-};

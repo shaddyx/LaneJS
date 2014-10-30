@@ -286,7 +286,15 @@ BoxElement.prototype.enumChilds = function(callBack){
 		callBack(this.c[k]);
 		this.c[k].enumChilds(callBack);
 	}
-}
+};
+
+BoxElement.prototype.isOverflowedX = function(){
+	return this._v.width - this._v._dx < this._v.innerWidth;
+};
+
+BoxElement.prototype.isOverflowedY = function(){
+	return this._v.height - this._v._dy < this._v.innerheight;
+};
 
 BoxElement.build = function(struct, target){
 	var el = new BoxElement();
