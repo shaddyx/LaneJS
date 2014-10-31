@@ -47,7 +47,7 @@ BoxElement.addPropertyApplyer("opacity",function(value){
 
 BoxElement.addPropertyApplyer("top",function(value){
 	if (this._v.floating){
-		this.htmlInnerElement.style.top = (value + this._v.margin[0]) + "px";
+		this.htmlInnerElement.style.top = (value + this._v.margin[0] + this.parent._v.scrollTop ) + "px";
 	} else {
 		this.htmlInnerElement.style.top = value + "px";
 	}
@@ -55,11 +55,33 @@ BoxElement.addPropertyApplyer("top",function(value){
 
 BoxElement.addPropertyApplyer("left",function(value){
 	if (this._v.floating){
-		this.htmlInnerElement.style.left = (value + this._v.margin[3]) + "px";
+		this.htmlInnerElement.style.left = (value + this._v.margin[3] + this.parent._v.scrollLeft) + "px";
 	} else {
 		this.htmlInnerElement.style.left = value + "px";
 	}
 });
+//
+//	TODO: remove this hack
+//
+BoxElement.on("scrollLeftChanged", function(){
+	for (var k in this.c){
+		var oldVal = this.c[k]._v.left; 
+		this.c[k].left(-Infinity);
+		this.c[k].left(oldVal);
+	}
+});
+
+BoxElement.on("scrollTopChanged", function(){
+	for (var k in this.c){
+		var oldVal = this.c[k]._v.top; 
+		this.c[k].top(-Infinity);
+		this.c[k].top(oldVal);
+	}
+});
+
+//
+// ENDTODO: remove this hack
+//
 
 BoxElement.addPropertyApplyer("caption",function(value){
 	this.htmlInnerElement.innerHTML = value;
@@ -78,7 +100,6 @@ BoxElement.addPropertyApplyer("visible",function(value){
 	setTimeout(function(){
 		my.htmlElement.style.display = value?"block":"none";
 	},100);
-	
 });
 
 BoxElement.addPropertyApplyer("borderRadius",function(value){

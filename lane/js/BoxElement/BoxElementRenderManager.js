@@ -26,9 +26,6 @@ BoxElement.runGlobalRender = function(){
  * function renders coordinates of our childs
  */
 BoxElement.prototype.render = function(){
-	if (this.id == 141){
-		debugger;
-	}
 	var left = this._v.padding[3] + this._v.scrollLeft;
 	var top = this._v.padding[0] + this._v.scrollTop;
 	if (this._v.horizontal){

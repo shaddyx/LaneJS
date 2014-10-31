@@ -24,7 +24,7 @@ Grid.addProperty("_horzScrollerShown", false);
 
 
 Grid.prototype._afterDraw = function() {
-	this._elements.content.on(["heightChanged","widthChanged"], this.reDraw, this);
+	this._elements.gridContentContainer.on(["heightChanged","widthChanged"], this.scheduleReDraw, this);
 	this._rowSkin = this._v.skin;
 	
 	if (!GridRowSkin[this._rowSkin]){
@@ -271,7 +271,7 @@ Grid.prototype.scheduleRender = function(){
 		this.renderTimer = setTimeout(function(){
 			my.renderTimer = false;
 			my.render();
-		},0);
+		},10);
 	}
 };
 Grid.prototype.scheduleReDraw= function(){
@@ -281,7 +281,7 @@ Grid.prototype.scheduleReDraw= function(){
 		this.reDrawTimer = setTimeout(function(){
 			my.reDrawTimer = false;
 			my.reDraw();
-		},0);
+		},10);
 	}
 };
 /**
@@ -406,7 +406,7 @@ Grid.prototype._updateScrollerVisibility = function(){
 };
 
 Grid.prototype._updateHorzScrollerVisibility = function(){
-	this._elements.horzScrollContainer && this._elements.horzScrollContainer.visible(this._elements.header.isOverflowedX());
+	this._elements.horzScrollContainer && this._elements.horzScrollContainer.visible(this._elements.gridContentContainer.isOverflowedX());
 };
 
 

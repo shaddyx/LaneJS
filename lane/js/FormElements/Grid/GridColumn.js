@@ -23,13 +23,18 @@ GridColumn.on("widthBeforeChanged", function(val){
 });
 
 GridColumn.prototype.rightBoundPos = function(left){
+	if (!this._helper){
+		this.buildHelper();
+	}
 	return this._helper.left(left)
 };
 
 GridColumn.prototype.buildHelper = function(){
-	this._helper = this._grid._v.outer.buildTo(GridHelperSkin);
-	this._helper.on("dragStarted", this._dragStarted, this);
-	this._helper.on("dragEnded", this._dragEnded, this);
+	if (this._grid._v.isDrawn){
+		this._helper = this._grid._elements.gridContentContainer.buildTo(GridHelperSkin);
+		this._helper.on("dragStarted", this._dragStarted, this);
+		this._helper.on("dragEnded", this._dragEnded, this);
+	}
 };
 
 GridColumn.prototype.remove = function(){

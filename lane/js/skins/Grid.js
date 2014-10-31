@@ -11,12 +11,12 @@ GridSkin.def = {
 		hs:true,
 		vs:true,
 		name:"gridContentContainer",
+		overflow:BoxElement.OVERFLOW_MODE.hidden,
 		c:[
 		    {
 		    	name:"header",
 		    	height:Constants.lineHeight,
-		    	hs:true,
-		    	overflow:BoxElement.OVERFLOW_MODE.hidden
+		    	hs:true
 		    },
 		    {
 		    	hs:true,
@@ -99,10 +99,10 @@ GridSkin.def = {
 			  name:"horzScrollerSliderContainer",
 			  on:{
 					horzScrollerMoved:function(percentage, grid){
-						var diff = grid._elements.header._v.innerWidth - grid._elements.header._v.width;
-						grid._elements.header.scrollLeft(- diff *percentage / 100);
-						grid._elements.content.scrollLeft(- diff *percentage / 100);
-						grid._elements.footer.scrollLeft(- diff *percentage / 100);
+						var diff = grid._elements.gridContentContainer._v.innerWidth - grid._elements.gridContentContainer._v.width;
+						grid._elements.gridContentContainer.scrollLeft(- diff *percentage / 100);
+						//grid._elements.content.scrollLeft(- diff *percentage / 100);
+						//grid._elements.footer.scrollLeft(- diff *percentage / 100);
 					}
 			  },
 			  c:[
