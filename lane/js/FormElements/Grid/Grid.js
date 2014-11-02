@@ -80,10 +80,10 @@ Grid.prototype.calcVisibleRows = function(){
 	for (var ri = 0; ri < this._rows.length; ri++ ){
 		var row = this._rows[ri];
 		rowH += row._v.height
-		this._visibleRows ++;
-		if (rowH >= h){
+		if (rowH > h){
 			break;
 		}
+		this._visibleRows ++;
 	}
 };
 
