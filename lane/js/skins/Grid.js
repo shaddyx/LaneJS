@@ -5,7 +5,62 @@
  * @@@nameSuffix:Skin
  */
 var GridSkin = {};
-
+GridSkin._parts = {
+	scroller:{
+    	hs:true,
+    	vs:true,
+    	horizontal:true,
+    	c:[
+    	    {
+		   		name:"content",
+		   		hs:true,
+		   		vs:true,
+		   		borderWidth:[1,1,1,1],
+		   		borderColor:"#79B7E7",
+		   		overflow:BoxElement.OVERFLOW_MODE.hidden
+	   		},
+	   		{
+	   			width:15,
+	   			vs:true,
+	   			name:"vertScrollContainer",
+	   			visible:false,
+	   			c:[
+	   			   {
+	   				   backgroundColor:"#cccccc",
+	   				   width:15,
+	   				   height:15,
+	   				   name:"scrollUp"
+	   			   },
+	   			   {
+	   				  hs:true,
+	   				  vs:true,
+	   				  c:[
+		   				   {
+			   				   backgroundColor:"#cccccc",
+			   				   width:10,
+			   				   height:30,
+			   				   left:2,
+			   				   cursor:"pointer",
+			   				   name:"vertScroll",
+			   				   draggable:{
+			   					   axis:"y"
+			   				   }
+		   				   }
+	   				  ]
+	   			   },
+	   			   {
+	   				   backgroundColor:"#cccccc",
+	   				   width:15,
+	   				   height:15,
+	   				   name:"scrollDn"
+	   				   
+	   			   }
+	   			   
+	   			]
+	   		}
+    	]
+    }
+}
 GridSkin.def = {
 	c:[{
 		hs:true,
@@ -18,60 +73,7 @@ GridSkin.def = {
 		    	height:Constants.lineHeight,
 		    	hs:true
 		    },
-		    {
-		    	hs:true,
-		    	vs:true,
-		    	horizontal:true,
-		    	c:[
-		    	    {
-				   		name:"content",
-				   		hs:true,
-				   		vs:true,
-				   		borderWidth:[1,1,1,1],
-				   		borderColor:"#79B7E7",
-				   		overflow:BoxElement.OVERFLOW_MODE.hidden
-			   		},
-			   		{
-			   			width:15,
-			   			vs:true,
-			   			name:"vertScrollContainer",
-			   			visible:false,
-			   			c:[
-			   			   {
-			   				   backgroundColor:"#cccccc",
-			   				   width:15,
-			   				   height:15,
-			   				   name:"scrollUp"
-			   			   },
-			   			   {
-			   				  hs:true,
-			   				  vs:true,
-			   				  c:[
-				   				   {
-					   				   backgroundColor:"#cccccc",
-					   				   width:10,
-					   				   height:30,
-					   				   left:2,
-					   				   cursor:"pointer",
-					   				   name:"vertScroll",
-					   				   draggable:{
-					   					   axis:"y"
-					   				   }
-				   				   }
-			   				  ]
-			   			   },
-			   			   {
-			   				   backgroundColor:"#cccccc",
-			   				   width:15,
-			   				   height:15,
-			   				   name:"scrollDn"
-			   				   
-			   			   }
-			   			   
-			   			]
-			   		}
-		    	]
-		    },
+		    GridSkin._parts.scroller,
 		   	{
 		   		name:"footer",
 		   		hs:true,
