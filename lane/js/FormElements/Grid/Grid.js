@@ -75,12 +75,16 @@ Grid.prototype.updateHeaderFooterVisibility = function(){
 Grid.prototype.calcVisibleRows = function(){
 	this._visibleRows = 0;
 	var h = this._elements.content.height();
+	console.log("content:", this._elements.content.htmlElement)
 	var rowH = 0;
+	
 	for (var ri = 0; ri < this._rows.length; ri++ ){
 		var row = this._rows[ri];
 		rowH += row._v.height
-		if (rowH <= h){
-			this._visibleRows ++;
+		this._visibleRows ++;
+		if (rowH >= h){
+			console.log("diff",h,rowH, this._visibleRows, row._v.height);
+			break;
 		}
 	}
 };

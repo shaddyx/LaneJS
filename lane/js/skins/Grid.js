@@ -138,7 +138,7 @@ GridRowSkin.def = {
 	    borderWidth:[0,0,1,0],
 	    padding:[1,0,0,1],
 		borderColor:"#79B7E7",
-		//overflow:BoxElement.OVERFLOW_MODE.hidden
+		overflow:BoxElement.OVERFLOW_MODE.hidden
 	},
 	selected:{
 		borderWidth:[1,1,1,1],
