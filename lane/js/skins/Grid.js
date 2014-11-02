@@ -59,30 +59,8 @@ GridSkin._parts = {
 	   			]
 	   		}
     	]
-    }
-}
-GridSkin.def = {
-	c:[{
-		hs:true,
-		vs:true,
-		name:"gridContentContainer",
-		overflow:BoxElement.OVERFLOW_MODE.hidden,
-		c:[
-		    {
-		    	name:"header",
-		    	height:Constants.lineHeight,
-		    	hs:true
-		    },
-		    GridSkin._parts.scroller,
-		   	{
-		   		name:"footer",
-		   		hs:true,
-		   		height:Constants.lineHeight,
-		   		overflow:BoxElement.OVERFLOW_MODE.hidden
-		   	}
-		]
-	},
-	{
+    },
+    horzScroller:{
    		hs:true,
    		horizontal:true,
    		visible:false,
@@ -128,7 +106,31 @@ GridSkin.def = {
 			   name:"scrollRight"
 		   }
 		]
-   	}]
+   	}
+}
+GridSkin.def = {
+	c:[{
+		hs:true,
+		vs:true,
+		name:"gridContentContainer",
+		overflow:BoxElement.OVERFLOW_MODE.hidden,
+		c:[
+		    {
+		    	name:"header",
+		    	height:Constants.lineHeight,
+		    	hs:true
+		    },
+		    GridSkin._parts.scroller,
+		   	{
+		   		name:"footer",
+		   		hs:true,
+		   		height:Constants.lineHeight,
+		   		overflow:BoxElement.OVERFLOW_MODE.hidden
+		   	}
+		]
+	},
+	GridSkin._parts.horzScroller
+	]
 	
 };
 
