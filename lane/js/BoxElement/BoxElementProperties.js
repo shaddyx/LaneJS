@@ -12,7 +12,6 @@ BoxElement.on("captionChanged",function(value){
 		this._baseClass.textUtils = new TextUtils();
 		this._baseClass.textUtils._init();
 	}
-	//debugger;
 	this._captionWidth = this._baseClass.textUtils.getStringWidth(value,{
 		fontFamily: this._v.fontFamily
 		,fontSize: this._v.fontSize
@@ -185,9 +184,16 @@ BoxElement.on("_vMarginChanged",function(){
 });
 
 BoxElement.__listeners.styleClassChanged = function(){
+	if (this.id == 15){
+		debugger;
+	}
 	var styleClass = this._v.styleClass;
 	var style = this._v.style;
-	if (style && style[styleClass]){
+	if (style && styleClass){
+		if (!style[styleClass]){
+			return;
+			//throw new Error("there are no styleClass with name:" + styleClass);
+		}
 		var styleObject = style[styleClass];
 		for (var k in styleObject){
 			this[k](styleObject[k]);

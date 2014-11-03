@@ -140,15 +140,14 @@ GridRowSkin.def = {
 		height:Constants.rowHeight,
 		horizontal:true,
 	    borderWidth:[0,0,1,0],
-	    padding:[1,0,0,1],
 		borderColor:"#79B7E7",
 		overflow:BoxElement.OVERFLOW_MODE.hidden
 	},
 	selected:{
-		borderWidth:[1,1,1,1],
-		padding:[0,0,0,0],
-		backgroundColor:"#ccc",
-		borderColor:"#f00"
+		backgroundColor:"#ccc"
+	},
+	clean:{
+		visible:false
 	}
 };
 
@@ -157,7 +156,7 @@ GridHeaderSkin.def = {
 	height:Constants.lineHeight,
 	horizontal:true,
     borderWidth:[0,0,0,0],
-    padding:[1,0,0,1],
+    padding:[1,0,0,2],
 	borderColor:"#79B7E7",
 	//overflow:BoxElement.OVERFLOW_MODE.hidden
 };
@@ -179,6 +178,7 @@ GridHeaderCellSkin.def = {
 	fontWeight:"bold",
 	borderWidth:[0,1,0,0],
 	borderColor:"0xffffff",
+	hAlign:BoxElement.ALIGN.middle,
 	overflow:BoxElement.OVERFLOW_MODE.hidden
 };
 
@@ -193,7 +193,9 @@ GridFooterCellSkin.def = {
 
 GridCellContainer = {
 	overflow:BoxElement.OVERFLOW_MODE.hidden,
-	height:Constants.rowHeight
+	height:Constants.rowHeight,
+	borderWidth:[0,0,0,1],
+	borderColor:"#79B7E7"
 };
 
 GridCellSkin = {};
@@ -251,8 +253,8 @@ GridHelperSkin = {
 		   width:1,
 		   hs:true,
 		   vs:true,
-		   borderWidth:[0,0,0,1],
-		   borderColor:"#79B7E7"
+		   //borderWidth:[0,0,0,1],
+		   //borderColor:"#79B7E7"
 	   }
 	]
 };

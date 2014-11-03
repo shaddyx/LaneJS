@@ -23,9 +23,11 @@ GridRow.prototype.draw = function(target){
  * returns row skin
  */
 GridRow.prototype.getSkin = function(selected){
-	if (selected){
+	if (selected === true){
 		return GridRowSkin[this._v.skin].selected || GridRowSkin[this._v.skin];
-	}
+	} else if (selected === false){
+		return GridRowSkin[this._v.skin].clean || GridRowSkin[this._v.skin];
+	} 
 	return GridRowSkin[this._v.skin].normal || GridRowSkin[this._v.skin];
 }
 
@@ -96,14 +98,12 @@ GridRow.prototype.render = function(dataRow){
 				throw new Error ("Column with name " + name + " exists, but no data!");
 			}
 			this._cells[i].caption(dataRow.data[name]);
-		} else {
+		} /*else {
 			this._cells[i].caption("");
-		}
+		}*/
 	}
 	
-	if (dataRow != undefined){
-		this._grid.trigger("rowRender", this, dataRow);
-	}
+	this._grid.trigger("rowRender", this, dataRow);
 };
 
 GridRow.prototype.getCellByName = function(name){

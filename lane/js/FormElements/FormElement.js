@@ -206,7 +206,7 @@ FormElement.funcs.afterDraw = function(){
 	this._v.outer.htmlElement.setAttribute("formElementId",this.id);
 	this._captionWidthChanged();
 	this.refreshEnabled();
-	this.applyStyleClass();
+	//this.applyStyleClass();
 	this.applyImg();
 };
 
@@ -228,26 +228,25 @@ FormElement.prototype.triggerRec = function(name, event){
 
 FormElement.prototype.refreshEnabled = function(){
 	if (this._v.isDrawn){
-		var outer = this._v.outer;
-		this._setStyleClass(outer, this._v.enabled?"enabled":"disabled");
+		this._v.outer.setStyleClassRec(this._v.enabled?"enabled":"disabled");
 		this._v.outer.opacity(this._v.enabled ? 1: 0.5);
 	}
 };
 
-FormElement.prototype._setStyleClass = function(element, styleName){
+/*FormElement.prototype._setStyleClass = function(element, styleName){
 	element.styleClass(styleName);
 	if (element != this._v.outer && element.formElement) {
 		return;
 	}
-	for (var k in element.c) {
-		this._setStyleClass (element.c[k], styleName);
-	}
-};
-FormElement.prototype.applyStyleClass = function(){
+	element.setStyleClassRec(styleName);
+};*/
+
+/*FormElement.prototype.applyStyleClass = function(){
 	if (this._v.isDrawn){
 		this._setStyleClass(this._v.outer, this._v.styleClass);
 	}
-};
+};*/
+
 FormElement.prototype.applyFocus = function(){
 	if (this._v.focus){
 		FormElement.currentFocus = this;
@@ -266,7 +265,7 @@ FormElement.prototype.applyHint = function(){
 FormElement.on("hintChanged", FormElement.prototype.applyHint);
 FormElement.on("focusChanged", FormElement.prototype.applyFocus);
 FormElement.on("imgChanged", FormElement.prototype.applyImg);
-FormElement.on("styleClassChanged",FormElement.prototype.applyStyleClass);
+//FormElement.on("styleClassChanged",FormElement.prototype.applyStyleClass);
 FormElement.on("enabledChanged",FormElement.prototype.refreshEnabled);
 FormElement.on("captionWidthChanged",FormElement.prototype._captionWidthChanged);
 FormElement.on("captionChanged",FormElement.funcs.captionChanged);

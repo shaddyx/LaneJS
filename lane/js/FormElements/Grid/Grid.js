@@ -413,12 +413,20 @@ Grid.prototype._updateHorzScrollerVisibility = function(){
 
 
 Grid.on("rowRender", function(row, dataRow){
-	if (dataRow.current == dataRow.dataGrid.getCurrentRow().current){
-		var skin = row.getSkin(true);
+	if (dataRow == undefined) {
+		var skin = row.getSkin(false);
 		for (var k in skin){
 			row.setProperty(k, skin[k]);
 		}
+	} else {
+		if (dataRow.current == dataRow.dataGrid.getCurrentRow().current){
+			var skin = row.getSkin(true);
+			for (var k in skin){
+				row.setProperty(k, skin[k]);
+			}
+		}
 	}
+	
 });
 
 

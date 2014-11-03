@@ -44,9 +44,9 @@ ButtonSkin.def = {
 		   padding:[6,4,0,4],
 		   color:"#1c94c4",
 		   hs:true
-		   
 	   }
-	  ]
+	  ],
+	  styleClass:"enabled"
 };
 
 ButtonSkin.img = {
