@@ -81,8 +81,6 @@ GridSkin._parts = {
 					horzScrollerMoved:function(percentage, grid){
 						var diff = grid._elements.gridContentContainer._v.innerWidth - grid._elements.gridContentContainer._v.width;
 						grid._elements.gridContentContainer.scrollLeft(- diff *percentage / 100);
-						//grid._elements.content.scrollLeft(- diff *percentage / 100);
-						//grid._elements.footer.scrollLeft(- diff *percentage / 100);
 					}
 			  },
 			  c:[
@@ -177,7 +175,7 @@ GridHeaderCellSkin.def = {
 	name:"caption",
 	fontWeight:"bold",
 	borderWidth:[0,1,0,0],
-	borderColor:"0xffffff",
+	borderColor:"#79B7E7",
 	hAlign:BoxElement.ALIGN.middle,
 	overflow:BoxElement.OVERFLOW_MODE.hidden
 };
@@ -187,7 +185,7 @@ GridFooterCellSkin.def = {
 	height:Constants.lineHeight,
 	name:"caption",
 	borderWidth:[0,1,0,0],
-	borderColor:"0xffffff",
+	borderColor:"#79B7E7",
 	overflow:BoxElement.OVERFLOW_MODE.hidden
 };
 
