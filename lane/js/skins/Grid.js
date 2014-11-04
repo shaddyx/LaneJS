@@ -134,18 +134,24 @@ GridSkin.def = {
 
 GridRowSkin = {};
 GridRowSkin.def = {
-	normal:{
-		height:Constants.rowHeight,
-		horizontal:true,
-	    borderWidth:[0,0,1,0],
-		borderColor:"#79B7E7",
-		overflow:BoxElement.OVERFLOW_MODE.hidden
-	},
-	selected:{
-		backgroundColor:"#ccc"
-	},
-	clean:{
-		visible:false
+	height:Constants.rowHeight,
+	horizontal:true,
+    borderWidth:[0,0,1,0],
+	borderColor:"#79B7E7",
+	styleClass:"clean",
+	overflow:BoxElement.OVERFLOW_MODE.hidden,
+	style:{
+		normal:{
+			backgroundColor:"inherit",
+			visible:true
+		},
+		selected:{
+			backgroundColor:"#ccc",
+			visible:true
+		},
+		clean:{
+			visible:false
+		}
 	}
 };
 
@@ -154,7 +160,7 @@ GridHeaderSkin.def = {
 	height:Constants.lineHeight,
 	horizontal:true,
     borderWidth:[0,0,0,0],
-    padding:[1,0,0,2],
+    padding:[0,0,0,2],
 	borderColor:"#79B7E7",
 	//overflow:BoxElement.OVERFLOW_MODE.hidden
 };

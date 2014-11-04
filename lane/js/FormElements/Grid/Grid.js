@@ -345,7 +345,6 @@ Grid.prototype.render = function(){
 	
 	
 	data.getRows(this._v.topLine, Math.min(this._visibleRows, this._v.topLine.visibleDown()),function(dataRow){
-		my._rows[rowIndex].restoreProperties();
 		my._rows[rowIndex].render(dataRow);
 		my._rows[rowIndex].rowIndex(dataRow.current);
 		rowIndex ++;
@@ -439,19 +438,12 @@ Grid.prototype._updateHorzScrollerVisibility = function(){
 
 Grid.on("rowRender", function(row, dataRow){
 	if (dataRow == undefined) {
-		var skin = row.getSkin(false);
-		for (var k in skin){
-			row.setProperty(k, skin[k]);
-		}
+		row.setStyleClass("clean");
+	} else if (dataRow.current == dataRow.dataGrid.getCurrentRow().current){
+		row.setStyleClass("selected");
 	} else {
-		if (dataRow.current == dataRow.dataGrid.getCurrentRow().current){
-			var skin = row.getSkin(true);
-			for (var k in skin){
-				row.setProperty(k, skin[k]);
-			}
-		}
+		row.setStyleClass("normal");
 	}
-	
 });
 
 

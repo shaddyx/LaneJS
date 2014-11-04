@@ -226,6 +226,12 @@ FormElement.prototype.triggerRec = function(name, event){
 	this.trigger(name,event);
 };
 
+FormElement.prototype.eachParent = function(callBack){
+	if (this._v.parent && callBack.call(this._v.parent, this._v.parent) !==false){
+		this._v.parent.eachParent(callBack);
+	}
+};
+
 FormElement.prototype.refreshEnabled = function(){
 	if (this._v.isDrawn){
 		this._v.outer.setStyleClassRec(this._v.enabled?"enabled":"disabled");

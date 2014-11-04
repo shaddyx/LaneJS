@@ -19,18 +19,14 @@ GridRow.prototype.draw = function(target){
 	this._element = target.buildTo(this.getSkin());
 	this.height(this._element._v.height);
 };
-/**
- * returns row skin
- */
-GridRow.prototype.getSkin = function(selected){
-	if (selected === true){
-		return GridRowSkin[this._v.skin].selected || GridRowSkin[this._v.skin];
-	} else if (selected === false){
-		return GridRowSkin[this._v.skin].clean || GridRowSkin[this._v.skin];
-	} 
-	return GridRowSkin[this._v.skin].normal || GridRowSkin[this._v.skin];
-}
 
+GridRow.prototype.setStyleClass = function(styleClass){
+	this._element.setStyleClassRec(styleClass);
+};
+
+GridRow.prototype.getSkin = function(){
+	return GridRowSkin[this._v.skin];
+};
 /**
  * 
  */
@@ -110,7 +106,7 @@ GridRow.prototype.getCellByName = function(name){
 	return this._cellsByName[name];
 };
 
-GridRow.prototype.setProperty = function(name, value){
+/*GridRow.prototype.setProperty = function(name, value){
 	if (this._element._v[name]!= value){
 		this._changed = this._changed || {};
 		this._changed[name] = this._element._v[name];
@@ -127,4 +123,4 @@ GridRow.prototype.restoreProperties = function(){
 	for (var i=0; i<this._cells.length; i++){
 		this._cells[i].restoreProperties();
 	}
-};
+};*/
