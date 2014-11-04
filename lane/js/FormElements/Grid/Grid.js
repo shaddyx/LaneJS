@@ -426,8 +426,6 @@ Grid.prototype._hScrollerMoved = function(){
 	for (var k in this._elements){
 		this._elements[k].trigger("horzScrollerMoved", percent, this);
 	}
-	
-	
 };
 
 Grid.prototype._updateScrollerVisibility = function(){

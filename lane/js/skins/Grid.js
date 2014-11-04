@@ -7,50 +7,44 @@
 var GridSkin = {};
 GridSkin._parts = {
 	scroller:{
-    	hs:true,
-    	vs:true,
-    	c:[
-	   		{
-	   			width:15,
-	   			vs:true,
-	   			name:"vertScrollContainer",
-	   			visible:false,
-	   			c:[
-	   			   {
-	   				   backgroundColor:"#cccccc",
-	   				   width:15,
-	   				   height:15,
-	   				   name:"scrollUp"
-	   			   },
-	   			   {
-	   				  hs:true,
-	   				  vs:true,
-	   				  c:[
-		   				   {
-			   				   backgroundColor:"#cccccc",
-			   				   width:10,
-			   				   height:30,
-			   				   left:2,
-			   				   cursor:"pointer",
-			   				   name:"vertScroll",
-			   				   draggable:{
-			   					   axis:"y"
-			   				   }
+			width:15,
+   			vs:true,
+   			name:"vertScrollContainer",
+   			visible:false,
+   			c:[
+   			   {
+   				   backgroundColor:"#cccccc",
+   				   width:15,
+   				   height:15,
+   				   name:"scrollUp"
+   			   },
+   			   {
+   				  hs:true,
+   				  vs:true,
+   				  c:[
+	   				   {
+		   				   backgroundColor:"#cccccc",
+		   				   width:10,
+		   				   height:30,
+		   				   left:2,
+		   				   cursor:"pointer",
+		   				   name:"vertScroll",
+		   				   draggable:{
+		   					   axis:"y"
 		   				   }
-	   				  ]
-	   			   },
-	   			   {
-	   				   backgroundColor:"#cccccc",
-	   				   width:15,
-	   				   height:15,
-	   				   name:"scrollDn"
-	   				   
-	   			   }
-	   			   
-	   			]
-	   		}
-    	]
-    },
+	   				   }
+   				  ]
+   			   },
+   			   {
+   				   backgroundColor:"#cccccc",
+   				   width:15,
+   				   height:15,
+   				   name:"scrollDn"
+   				   
+   			   }
+   			   
+   			]
+   	},
     horzScroller:{
    		hs:true,
    		horizontal:true,
@@ -98,37 +92,44 @@ GridSkin._parts = {
    	}
 }
 GridSkin.def = {
-	c:[{
-		hs:true,
-		vs:true,
-		name:"gridContentContainer",
-		overflow:BoxElement.OVERFLOW_MODE.hidden,
-		c:[
-		    {
-		    	name:"header",
-		    	height:Constants.lineHeight,
-		    	hs:true
-		    },
-		    {
-		   		name:"content",
-		   		hs:true,
-		   		vs:true,
-		   		borderWidth:[1,1,1,1],
-		   		borderColor:"#79B7E7",
-		   		overflow:BoxElement.OVERFLOW_MODE.hidden
-	   		},
-		    GridSkin._parts.scroller,
-		   	{
-		   		name:"footer",
-		   		hs:true,
-		   		height:Constants.lineHeight,
-		   		overflow:BoxElement.OVERFLOW_MODE.hidden
-		   	}
-		]
-	},
-	GridSkin._parts.horzScroller
+	c:[
+	   	{
+			horizontal:true,
+			hs:true,
+			vs:true,
+			c:[
+				{
+					hs:true,
+					vs:true,
+					name:"gridContentContainer",
+					overflow:BoxElement.OVERFLOW_MODE.hidden,
+					c:[
+					    {
+					    	name:"header",
+					    	height:Constants.lineHeight,
+					    	hs:true
+					    },
+					    {
+					   		name:"content",
+					   		hs:true,
+					   		vs:true,
+					   		borderWidth:[1,1,1,1],
+					   		borderColor:"#79B7E7",
+					   		overflow:BoxElement.OVERFLOW_MODE.hidden
+				   		},
+					   	{
+					   		name:"footer",
+					   		hs:true,
+					   		height:Constants.lineHeight,
+					   		overflow:BoxElement.OVERFLOW_MODE.hidden
+					   	}
+					]
+				},
+				GridSkin._parts.scroller
+			]
+		},
+		GridSkin._parts.horzScroller
 	]
-	
 };
 
 GridRowSkin = {};
