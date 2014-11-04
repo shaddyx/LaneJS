@@ -48,7 +48,8 @@ TabBar.prototype._added = function(tab){
 	});
 	
 	tab._selectedBeforeChanged = function(value){
-		this._setStyleClass(tab.button, value ? "selected" : "notSelected");
+		tab.button.setStyleClassRec(value ? "selected" : "notSelected");
+		//this._setStyleClass(tab.button, value ? "selected" : "notSelected");
 	};
 	tab.on("selectedBeforeChanged", tab._selectedBeforeChanged);
 	tab.on("tabVisibleChanged", function(val){

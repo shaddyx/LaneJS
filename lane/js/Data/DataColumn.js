@@ -9,6 +9,7 @@ DataColumn.addProperty("columnType","text");
 DataColumn.addProperty("caption","");
 DataColumn.addProperty("footerText","");
 DataColumn.addProperty("width", 0);
+DataColumn.addProperty("hs", false);
 DataColumn.addProperty("visible", true);
 DataColumn.addProperty("sortable", false, {type:"boolean"});
 

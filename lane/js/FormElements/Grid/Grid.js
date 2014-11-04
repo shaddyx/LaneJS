@@ -174,7 +174,7 @@ Grid.prototype._dataChanged = function(){
 		this._columns[0].remove();
 		this._columns.splice(0, 1);
 	}
-	
+	var hsFound = false;
 	for (var k = 0; k < this._v.data._v.columns.length; k++) {
 		var dataCol = this._v.data._v.columns[k];
 		var col = new GridColumn(this);
@@ -182,6 +182,14 @@ Grid.prototype._dataChanged = function(){
 		col.dataColumn(dataCol);
 		col.columnType(dataCol.columnType());
 		col.caption(dataCol.caption());
+		if (dataCol.hs()) {
+			hsFound = true;
+		}
+		if (!hsFound && this._v.data._v.columns.length - 1 == k){
+			col.hs(true);
+		} else {
+			col.hs(dataCol.hs());
+		}
 		col.buildHelper();
 		this._columns.push(col);
 	}
@@ -206,10 +214,23 @@ Grid.prototype.reDrawColumns = function(){
 		this._rowWidth = this._elements.content._v.width;
 	}
 	
-	var columnsFullWidth = 0;
+	//
+	//	calculating initial values
+	//
+	var columnsNonStretchWidth = 0,
+		columnsStretchableWidth = 0;
 	for (i = 0; i < this._columns.length; i++) {
-		columnsFullWidth += this._columns[i]._v.width; 
+		var col = this._columns[i];
+		if (col._v.hs){
+			columnsStretchableWidth += col._v.width
+		} else {
+			columnsNonStretchWidth += col._v.width;
+		}
 	}
+	
+	//
+	//	reDrawing widths
+	//
 	
 	if (columnsFullWidth < this._rowWidth){
 		var ratio = this._rowWidth / columnsFullWidth;
@@ -220,16 +241,17 @@ Grid.prototype.reDrawColumns = function(){
 		}
 		this._columns[i].width(lastSpace);
 	}
+	
 	//
 	//	reCalc column right bound position
 	//
-	
 	var right = 0;
 	for (i = 0; i < this._columns.length; i++) {
 		right += this._columns[i]._v.width;
 		this._columns[i].rightBoundPos(right);
 		this._columns[i].helperHeight(this._elements.gridContentContainer._v.height);
 	}
+	
 	//
 	//		assigning columns sizes to cells
 	//
