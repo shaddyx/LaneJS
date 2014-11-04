@@ -253,8 +253,16 @@ GridHelperSkin = {
 		   width:1,
 		   hs:true,
 		   vs:true,
-		   //borderWidth:[0,0,0,1],
-		   //borderColor:"#79B7E7"
+		   borderColor:"#79B7E7",
+		   style:{
+				dragStarted:{
+					borderWidth:[0,0,0,1]
+					
+				},
+				dragEnded:{
+					borderWidth:[0,0,0,0]
+				}
+			}
 	   }
 	]
 };

@@ -184,9 +184,6 @@ BoxElement.on("_vMarginChanged",function(){
 });
 
 BoxElement.__listeners.styleClassChanged = function(){
-	if (this.id == 15){
-		debugger;
-	}
 	var styleClass = this._v.styleClass;
 	var style = this._v.style;
 	if (style && styleClass){
@@ -228,6 +225,7 @@ BoxElement.prototype._draggableChanged = function(value){
 		this._dragListeners = {
 			mouseDown:function(){
 				if (!this._dragStartPoint && this.trigger('dragStarted') !== false)	{
+					this.setStyleClassRec("dragStarted");
 					this._dragStartPoint = {
 						x:browser.mouseX() - this._v.left,
 						y:browser.mouseY() - this._v.top
@@ -262,6 +260,7 @@ BoxElement.prototype._draggableChanged = function(value){
 			},
 			stopDragging:function(){
 				if (this._dragStartPoint && this._dragListeners && this.trigger('dragEnded') !== false){
+					this.setStyleClassRec("dragEnded");
 					this._dragStartPoint = false;
 				}
 			},
