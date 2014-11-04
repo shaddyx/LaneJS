@@ -109,6 +109,14 @@ GridSkin.def = {
 		    	height:Constants.lineHeight,
 		    	hs:true
 		    },
+		    {
+		   		name:"content",
+		   		hs:true,
+		   		vs:true,
+		   		borderWidth:[1,1,1,1],
+		   		borderColor:"#79B7E7",
+		   		overflow:BoxElement.OVERFLOW_MODE.hidden
+	   		},
 		    GridSkin._parts.scroller,
 		   	{
 		   		name:"footer",

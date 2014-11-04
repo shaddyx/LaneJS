@@ -182,6 +182,8 @@ Grid.prototype._dataChanged = function(){
 		col.dataColumn(dataCol);
 		col.columnType(dataCol.columnType());
 		col.caption(dataCol.caption());
+		console.log("colW:", dataCol.width());
+		col.width(dataCol.width());
 		if (dataCol.hs()) {
 			hsFound = true;
 		}
@@ -218,11 +220,13 @@ Grid.prototype.reDrawColumns = function(){
 	//	calculating initial values
 	//
 	var columnsNonStretchWidth = 0,
-		columnsStretchableWidth = 0;
+		columnsStretchableWidth = 0,
+		toStretch = [];
 	for (i = 0; i < this._columns.length; i++) {
 		var col = this._columns[i];
 		if (col._v.hs){
 			columnsStretchableWidth += col._v.width
+			toStretch.push(col);
 		} else {
 			columnsNonStretchWidth += col._v.width;
 		}
@@ -231,15 +235,16 @@ Grid.prototype.reDrawColumns = function(){
 	//
 	//	reDrawing widths
 	//
-	
-	if (columnsFullWidth < this._rowWidth){
-		var ratio = this._rowWidth / columnsFullWidth;
-		var lastSpace = this._rowWidth - 1;
+	var spaceToStretch = this._rowWidth - columnsNonStretchWidth;
+	if (spaceToStretch > columnsStretchableWidth){
+		var ratio = spaceToStretch / columnsStretchableWidth;
+		var lastSpace = spaceToStretch;
 		var i;
-		for (i = 0; i < this._columns.length - 1; i++) {
-			lastSpace -= this._columns[i].width(Math.floor(this._columns[i]._v.width * ratio));
+		for (i = 0; i < toStretch.length - 1; i++) {
+			var col = toStretch[i];
+			lastSpace -= col.width(Math.floor(col._v.width * ratio));
 		}
-		this._columns[i].width(lastSpace);
+		toStretch[i].width(lastSpace);
 	}
 	
 	//
