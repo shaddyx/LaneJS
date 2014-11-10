@@ -94,48 +94,72 @@ BoxElement.__listeners.heightBeforeChanged = function(value){
 /**
  * the proprty list to spy onchange from relative element
  */
-BoxElement.eventsToSpy = [/*'leftChanged','topChanged','widthChanged','heightChanged', "isDrawnChanged", "parentVisibleChanged"*/, "redrawed"];
+BoxElement.eventsToSpy = [/*'leftChanged','topChanged','widthChanged','heightChanged', "isDrawnChanged", "parentVisibleChanged"*/, "redrawed", "firstApplyed"];
+BoxElement.prototype.__adjustRelativityTarget = function(target){
+	if (typeof target === "function") {
+		target = target.call(this);
+	} else if (typeof target === "string") {
+		target = this._topEl._elements[target];
+	}
+	return target;
+};
 BoxElement.__listeners.relativityBeforeChanged = function(value){
-	if (value !== false && typeof value != "object") {
+	if (value !== false && typeof value !== "object") {
 		throw new Error ("Relativity must be an object");
 	}
 	
 	for (var k in BoxElement.eventsToSpy) {
-		this._v.relativity && this._v.relativity.target.removePropertyChangedFunc(BoxElement.eventsToSpy[k], this.recalcRelativity, this);
+		this._v.relativity && this.__adjustRelativityTarget(this._v.relativity.target).removePropertyChangedFunc(BoxElement.eventsToSpy[k], this.recalcRelativity, this);
 	}
 	
 	if (value) {
 		this.floating(true);
 		for (var k in BoxElement.eventsToSpy) {
-			value.target.on(BoxElement.eventsToSpy[k], this.recalcRelativity, this);
+			this.__adjustRelativityTarget(value.target).on(BoxElement.eventsToSpy[k], this.recalcRelativity, this);
 		}
 	}
 };
 
 BoxElement.relativityAnchors = {
 	leftTopInner:function(target, abs){
-		return {left:abs.left,top:target.top()};
+		abs.top = target.top;
+		return abs;
 	},
 	rightTopInner:function(target, abs){
-		return {left:abs.left + target.width()-this.width(),top:abs.top};
+		abs.left = abs.left + target.width()-this.width();
+		return abs;
 	},
 	rightBottomInner:function(target, abs){
-		return {left:abs.left + target.width()-this.width(),top:abs.top + target.height()-this.height()};
+		abs.left = abs.left + target.width()-this.width();
+		abs.top = abs.top + target.height()-this.height();
+		return abs;
 	},
 	middle:function(target, abs){
-		return {left:abs.left + (target.width() - this.width()) / 2,top:abs.top + (target.height()-this.height()) / 2};
+		abs.left = abs.left + (target.width() - this.width());
+		abs.top = abs.top + (target.height()-this.height()) / 2;
+		return abs;
 	},
 	leftInner:function(target, abs){
-		return {left:abs.left,top:abs.top};
+		return abs;
 	},
 	bottom:function(target, abs){
-		return {left:abs.left,top:abs.top + target._v.height};
+		abs.top = abs.top + target._v.height;
+		return abs;
 	},
 	rightInner:function(target, abs){
-		return {left:abs.left + target.width() - this.width(),top:abs.top};
+		abs.left = abs.left  + target.width() - this.width();
+		return abs;
 	},
 	topInner:function(target, abs){
-		return {left:abs.left, top:abs.top};
+		return abs;
+	},
+	width:function(target, abs){
+		abs.width = target._v.width;
+		return abs;
+	},
+	height:function(target, abs){
+		abs.height = target._v.height;
+		return abs;
 	}
 };
 
@@ -149,10 +173,14 @@ BoxElement.prototype.recalcRelativity = function(){
 //	TODO:realize this function
 //
 	var relativity = this._v.relativity;
-	var target = relativity.target;
+	var target = this.__adjustRelativityTarget(relativity.target);
 	if (relativity.anchor) {
 		var chunks = relativity.anchor.split(",");
 		var relativityResult = target.getAbsolutePosition();
+		t = target;
+		//console.log("result is:", relativityResult);
+		delete relativityResult.right;
+		delete relativityResult.bottom;
 		for (var k in chunks) {
 			if (!BoxElement.relativityAnchors[chunks[k]]){
 				throw new Error("No relativity anchor: " + chunks[k]);

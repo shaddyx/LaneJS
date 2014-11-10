@@ -30,6 +30,10 @@ BoxElement.prototype.applyProperties = function(before){
 		this._applyAfter = {};
 		delete this._baseClass._applyAfter[this.id];
 	}
+	if (!this._firstApplyed){
+		this._firstApplyed = true;
+		this.trigger("firstApplyed");
+	}
 };
 
 BoxElement.addPropertyApplyer("opacity",function(value){

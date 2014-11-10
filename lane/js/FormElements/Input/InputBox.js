@@ -5,6 +5,7 @@ Util.extend(InputBox, InputElement);
 InputBox.type = "InputBox";
 InputBox.setDefault("value", "");
 InputBox.addProperty("password",false,{type:"boolean"});
+InputBox.addProperty("values",[1],{type:"array"});
 InputBox.func = {};
 InputBox.func.afterDraw = function() {
 	var my = this;
@@ -13,6 +14,7 @@ InputBox.func.afterDraw = function() {
 	//this._input.htmlElement.setAttribute("type",this._v.password?"password":"text");
 	this._updateListeners();
 	this.updatePassword();
+	this.updateValueList();
 };
 
 InputBox.prototype.updateValues = function() {
@@ -39,6 +41,35 @@ InputBox.prototype._updateListeners = function(){
 	Util.addListener(this._elements.input.htmlElement, "keyup", function(){
 		my.value(this.value);
 	});
+};
+InputBox.prototype.updateValueList = function(){
+	if (this._v.values.length){
+		if (!this._grid){
+			this._grid = FormElement.build(InputBoxSkin.__grid,this._elements.gridContainer); 
+		}
+		var dataGrid = new DataGrid();
+		dataGrid.columns(DataColumn.build([{
+			   name:"field",
+			   caption:"blablabla",
+			   columnType:"text"
+		}]));
+		for (var i = 0; i < this._v.values.length; i++){
+			dataGrid.add({field:this._v.values[i]});
+    	}
+		
+		this._grid.data(dataGrid);
+		var h = Constants.rowHeight * this._v.values.length;
+		if (h > Constants.maxInputDropDownHeightinRows * Constants.rowHeight){
+			h = Constants.maxInputDropDownHeightinRows * Constants.rowHeight;
+		}
+		console.log("h:",h);
+		this._elements.gridContainer.height(h + 4);
+	} else {
+		this._grid && this._grid.remove();
+	}
+};
+InputBox.prototype._updateValueListVisibility = function(){
+	this._elements.gridContainer.visible(this._v.focus && this._v.values.length);
 };
 InputBox.prototype.updatePassword = function(){
 	if (this._v.isDrawn) {
@@ -68,7 +99,7 @@ InputBox.prototype.updatePassword = function(){
 		}
 	}
 };
-
+InputBox.on("focusChanged", InputBox.prototype._updateValueListVisibility);
 InputBox.on("afterDraw", InputBox.func.afterDraw);
 InputBox.on("valueChanged", InputBox.prototype.updateValues);
 InputBox.on("passwordChanged", InputBox.prototype.updatePassword);

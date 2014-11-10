@@ -3,13 +3,40 @@
  * @@@dependsOn: BoxElement
  */
 BoxElement.prototype.getAbsolutePosition = function(){
-	return this.htmlElement.getBoundingClientRect();
+	var left = 0;
+	var top = 0;
+	this.enumParents(function(parent){
+		var padding;
+		var scrollLeft = 0;
+		var scrollTop = 0;
+		var border;
+		if (parent.parent){
+			padding = parent.parent._v.padding;
+			border = parent.parent._v.borderWidth;
+			scrollLeft = parent.parent._v.scrollLeft;
+			scrollTop = parent.parent._v.scrollTop;
+		} else {
+			padding = [0,0,0,0];
+			border = [0,0,0,0];
+		}
+		
+		left += parent._v.left + parent._v.margin[3] + padding[3] + border[3] + scrollLeft;
+		top += parent._v.top + parent._v.margin[0] + padding[0] + border[0] + scrollTop;
+		if (parent._v.horizontal){
+			left += parent._v._alignDelta;
+		} else {
+			top += parent._v._alignDelta;
+		}
+	});
+	return {left:left, top:top};
+	//return this.htmlElement.getBoundingClientRect();
+	
 };
 
 
-BoxElement.prototype.buildTo = function(struct) {
+BoxElement.prototype.buildTo = function(struct, topEl) {
 	var el = new BoxElement();
-	el.build(struct);
+	el.build(struct, topEl);
 	el.drawRec({target:this});
 	return el;
 };
@@ -41,13 +68,12 @@ BoxElement.prototype.build = function(struct, _topEl) {
 			this.on(k, struct.on[k], this);
 		}
 	}
-
 	for ( var k in struct) {
-		if (k == "on" || k == "params" || k == "defaults") {
+		if (k === "on" || k === "params" || k === "defaults" || k === "rootBuild") {
 			continue;
 		}
 		var prop = struct[k];
-		if (k == "c") {
+		if (k === "c") {
 			for ( var x in prop) {
 				var newEl;
 				if (this._v._isDrawn) {
@@ -62,7 +88,7 @@ BoxElement.prototype.build = function(struct, _topEl) {
 				}
 			}
 		} else {
-			if (typeof (this[k]) == 'function') {
+			if (typeof (this[k]) === 'function') {
 				this[k](prop);
 			} else {
 				debugger;
@@ -72,6 +98,13 @@ BoxElement.prototype.build = function(struct, _topEl) {
 	}
 	if (this._v.name) {
 		_topEl._elements[this._v.name] = this;
+	}
+	
+	if (struct.rootBuild){
+		this._rootElements = [];
+		for (var k in struct.rootBuild){
+			this._rootElements.push(rootElement.buildTo(struct.rootBuild[k], _topEl));
+		}
 	}
 	return _topEl._elements;
 };
@@ -209,6 +242,11 @@ BoxElement.prototype.remove = function() {
 		console.log("Trying to remove already removed node");
 		return;
 	}
+	if (this._rootElements){
+		for (var k in this._rootElements){
+			this._rootElements[k].remove();
+		}
+	}
 	this._removed = true;
 	delete elements[this.id];
 	this.parent.htmlElement.removeChild(this.htmlElement);
@@ -294,6 +332,12 @@ BoxElement.prototype.enumChilds = function(callBack){
 		callBack(this.c[k]);
 		this.c[k].enumChilds(callBack);
 	}
+};
+BoxElement.prototype.enumParents = function(callBack){
+	if (callBack(this) === false){
+		return
+	}
+	this.parent && this.parent.enumParents(callBack);
 };
 
 BoxElement.prototype.isOverflowedX = function(){

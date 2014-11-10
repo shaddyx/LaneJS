@@ -182,7 +182,6 @@ Grid.prototype._dataChanged = function(){
 		col.dataColumn(dataCol);
 		col.columnType(dataCol.columnType());
 		col.caption(dataCol.caption());
-		console.log("colW:", dataCol.width());
 		col.width(dataCol.width());
 		if (dataCol.hs()) {
 			hsFound = true;

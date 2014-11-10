@@ -56,7 +56,10 @@ DataGrid.prototype.add = function(row){
 		nextVisible:undefined,
 		visible:true,
 		node:false,
-		dataGrid:this
+		dataGrid:this,
+		opened:true,
+		level:0,
+		parent:false
 	});
 	
 	if (currentLast){

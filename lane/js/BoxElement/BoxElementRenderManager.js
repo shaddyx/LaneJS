@@ -51,6 +51,10 @@ BoxElement.prototype.render = function(){
 			}
 		}
 	}
+	if (!this._firstRendered){
+		this._firstRendered = true;
+		this.trigger("firstRendered");
+	}
 };
 /**
  * adds us to render queue, but only if our parent exists

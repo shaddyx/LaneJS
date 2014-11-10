@@ -5,6 +5,14 @@
  * @@@nameSuffix:Skin
  */
 var InputBoxSkin = {};
+InputBoxSkin.__grid = {
+	type:"Grid",
+	showHeader:false,
+	showFooter:false,
+	hs:true,
+	vs:true
+	
+};
 InputBoxSkin.def = {
 	horizontal:true,
 	cursor:"pointer",
@@ -20,6 +28,7 @@ InputBoxSkin.def = {
 		   borderColor:"#ccc",
 		   borderWidth:[1,1,1,1],
 		   borderRadius:[3,3,3,3],
+		   name:"inputContainer",
 		   c:[
 		       {
 				   margin:[0,0,0,3],
@@ -33,8 +42,25 @@ InputBoxSkin.def = {
 				   minWidth:30,
 				   name:"input"
 			   }
+		  ],
+		  rootBuild:[
+		        {
+					floating : true,
+					visible:false,
+					height:30,
+					width:300,
+					minWidth:100,
+					borderColor : "#ccc",
+					borderWidth : [1,1,1,1],
+					borderRadius : [3,3,3,3],
+					backgroundColor:"#ffffff",
+					name:"gridContainer",
+					relativity:{
+						target:"inputContainer",
+						anchor:"bottom,width"
+					}
+				}
 		  ]
 	   }
-	   
 	  ]
 };
