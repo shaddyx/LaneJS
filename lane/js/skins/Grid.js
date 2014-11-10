@@ -23,7 +23,7 @@ GridSkin._parts = {
    				  vs:true,
    				  c:[
 	   				   {
-		   				   backgroundColor:"#cccccc",
+		   				   backgroundColor:"#79B7E7",
 		   				   width:10,
 		   				   height:30,
 		   				   left:2,

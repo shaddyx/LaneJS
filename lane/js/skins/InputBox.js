@@ -50,7 +50,7 @@ InputBoxSkin.def = {
 					height:30,
 					width:300,
 					minWidth:100,
-					borderColor : "#ccc",
+					borderColor : "#79B7E7",
 					borderWidth : [1,1,1,1],
 					borderRadius : [3,3,3,3],
 					backgroundColor:"#ffffff",

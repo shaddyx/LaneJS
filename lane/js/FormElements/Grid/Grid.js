@@ -361,9 +361,12 @@ Grid.prototype.render = function(){
 	this._updateScrollerVisibility();
 	var contH = this._elements.vertScroll.parent._v.height;
 	var h = this._elements.vertScroll._v.height;
-	var scrollTop = Math.floor((data.visibleUp() / (data.visible() - this._visibleRows)) * (contH - h));
+	//var scrollTop = Math.floor((data.visibleUp() / (data.visible() - this._visibleRows)) * (contH - h));
+	var scrollTop = Math.floor((data.visibleUp() / (data.visible() - 1)) * (contH - h));
 	this._elements.vertScroll.top(scrollTop);
-	
+	window.grids = window.grids || {};
+	window.grids[this.id] = this;
+	console.log(contH);
 };
 /**
  * returns physical cell by row number (in dataSource) and column name
@@ -409,9 +412,8 @@ Grid.prototype._vScrollerMoved = function(){
 	var contH = this._elements.vertScroll.parent._v.height;
 	var h = this._elements.vertScroll._v.height;
 	var dataPos = (currTop == 0) ? 0 :
-			((data.visible() - this._visibleRows) * (currTop / (contH - h)));
+			(data.visible() * (currTop / (contH - h)));
 	dataPos = Math.floor(dataPos);
-	console.log("moving to:" + dataPos);
 	this._v.data.moveTo(dataPos);
 	this.render();
 };
