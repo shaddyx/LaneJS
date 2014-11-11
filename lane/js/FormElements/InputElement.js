@@ -1,3 +1,7 @@
+/**
+ * @constructor
+ * @extends FormElement
+ */
 var InputElement = function(){
 	FormElement.call(this);
 };

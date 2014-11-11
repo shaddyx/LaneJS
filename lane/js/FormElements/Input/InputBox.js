@@ -1,3 +1,8 @@
+/**
+ * @constructor
+ * @arguments FormElement
+ * @extends FormElement
+ */
 var InputBox = function() {
 	InputElement.call(this);
 };
@@ -5,13 +10,12 @@ Util.extend(InputBox, InputElement);
 InputBox.type = "InputBox";
 InputBox.setDefault("value", "");
 InputBox.addProperty("password",false,{type:"boolean"});
-InputBox.addProperty("values",[1],{type:"array"});
+InputBox.addProperty("values",[],{type:"array"});
 InputBox.func = {};
 InputBox.func.afterDraw = function() {
 	var my = this;
 	this.updateValues();
 	this._input = this._elements.input;
-	//this._input.htmlElement.setAttribute("type",this._v.password?"password":"text");
 	this._updateListeners();
 	this.updatePassword();
 	this.updateValueList();
@@ -37,20 +41,29 @@ InputBox.prototype._updateListeners = function(){
 		});
 	}
 	
-	
 	Util.addListener(this._elements.input.htmlElement, "keyup", function(){
 		my.value(this.value);
 	});
 };
+/**
+ * function calls when item in dropdown selected (private function)
+ * @param col - column
+ * @param row - row
+ */
+InputBox.prototype._itemSelected = function(col, row){
+	this.value(row.data.field);
+};
+
 InputBox.prototype.updateValueList = function(){
 	if (this._v.values.length){
 		if (!this._grid){
-			this._grid = FormElement.build(InputBoxSkin.__grid,this._elements.gridContainer); 
+			/** @type Grid */
+			this._grid = FormElement.build(InputBoxSkin.__grid,this._elements.gridContainer);
+			this._grid.on("cellClicked", this._itemSelected, this);
 		}
 		var dataGrid = new DataGrid();
 		dataGrid.columns(DataColumn.build([{
 			   name:"field",
-			   caption:"blablabla",
 			   columnType:"text"
 		}]));
 		for (var i = 0; i < this._v.values.length; i++){
@@ -62,7 +75,6 @@ InputBox.prototype.updateValueList = function(){
 		if (h > Constants.maxInputDropDownHeightinRows * Constants.rowHeight){
 			h = Constants.maxInputDropDownHeightinRows * Constants.rowHeight;
 		}
-		console.log("h:",h);
 		this._elements.gridContainer.height(h + 4);
 	} else {
 		this._grid && this._grid.remove();

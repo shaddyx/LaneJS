@@ -1,6 +1,10 @@
 /**
  * @@@dependsOn: DataGrid
  */
+/**
+ * @memberOf Global
+ * @class Grid
+ */
 var Grid = function() {
 	FormElement.call(this);
 	this._rows = [];
@@ -11,6 +15,13 @@ var Grid = function() {
 	this._visibleRows = 0;
 };
 Util.extend(Grid, FormElement);
+Grid.triggeringEvents={
+	cellClicked:1,
+	cellDblClicked:1,
+	horzScrollerMoved:1,
+	rowRender:1
+	
+};
 Grid.type = "Grid";
 Grid.addProperty("data", false);
 Grid.addProperty("locked", false);
@@ -18,6 +29,7 @@ Grid.addProperty("rowWidth", 0);
 Grid.addProperty("showHeader", true);
 Grid.addProperty("showFooter", false);
 Grid.addProperty("rowHeight", undefined);
+Grid.addProperty("selectedColumn", undefined);
 Grid.addProperty("topLine", false);
 Grid.addProperty("_scrollerShown", false);
 Grid.addProperty("_horzScrollerShown", false);

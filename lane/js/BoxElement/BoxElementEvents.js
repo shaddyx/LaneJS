@@ -93,11 +93,13 @@ BoxElement.mouseWheelFunction = function(evt){
 Util.addListener(document.body, 'mousedown',BoxElement.targetEventFunction);
 Util.addListener(document.body, 'mouseup',BoxElement.targetEventFunction);
 Util.addListener(document.body, 'click',BoxElement.targetEventFunction);
+Util.addListener(document.body, 'dblclick',BoxElement.targetEventFunction);
 Util.addListener(document.body, 'mouseout',BoxElement.targetEventFunction);
 Util.addListener(document.body, 'mouseover',BoxElement.targetEventFunction);
 Util.addListener(document.body, 'mousemove',BoxElement.targetEventFunction);
 Util.addListener(document.body, 'mousewheel',BoxElement.mouseWheelFunction);
 Util.addListener(document.body, 'DOMMouseScroll',BoxElement.mouseWheelFunction);
+
 if (document.addEventListener) {
     document.addEventListener('contextmenu', function(e) {
     	var ev = BoxElement.copyEvent(e);

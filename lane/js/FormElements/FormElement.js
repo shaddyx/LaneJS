@@ -1,3 +1,11 @@
+/**
+ * @constructor
+ * @arguments BaseObject
+ * @property {number} opacity
+ * @property {string} name
+ * @property {BoxElement} inner
+ * @property {boolean} isDrawn
+ */
 var FormElement = function(){
 	BaseObject.call(this);
 	this.id = FormElement.idCounter++;

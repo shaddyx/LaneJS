@@ -4,8 +4,13 @@
  * @@@dependsOn: Constants
  * @@@dependsOn: Debug
  */
-/**
+/*
  * basic object, implements an event model 
+ */
+
+/**
+ * @class BaseObject
+ * @constructor
  */
 var BaseObject = function(){
 	/*
