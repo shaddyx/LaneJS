@@ -10,25 +10,27 @@ InputElement.type = "InputElement";
 InputElement.funcs = {};
 InputElement.addProperty("value", false);
 InputElement.addProperty("model", false);
-InputElement.addProperty("path", false);
 
 InputElement.prototype._modelStateChanged = function(){
-	var name = this.path === false ? this._v.name: this._v.path;
-	if (this._v.model && name){
-		this.value(this._v.model[name]());
+	this.value(this._v.model[this._v.name]());
+	for (var k in this._v.model.____modelInputElements){
+		this._v.model.____modelInputElements.trigger("modelStateChanged", this, this._v._name);
 	}
 };
 
-InputElement.on(["pathBeforeChanged", "nameBeforeChanged","modelBeforeChanged"], function(value){
-	var name = this.path === false ? this._v.name: this._v.path;
-	if (this._v.model && name){
-		this._v.model.removeListener(name + "Changed", this._modelStateChanged, this);
+InputElement.on(["pathBeforeChanged", "modelBeforeChanged"], function(value){
+	if (this._v.model && this._v.name){
+		this._v.model.removeListener(this._v.name + "Changed", this._modelStateChanged, this);
+		this._v.model.trigger("removedInputElement");
+		delete this._v.model.____modelInputElements[this._v.name];
 	}
 });
 
-InputElement.on(["pathChanged", "nameChanged","modelChanged"], function(){
-	var name = this.path === false ? this._v.name: this._v.path;
-	if (this._v.model && name){
-		this._v.model.on(name + "Changed", this._modelStateChanged, this);
+InputElement.on(["pathChanged", "modelChanged"], function(){
+	if (this._v.model && this._v.name){
+		this._v.model.on(this._v.name + "Changed", this._modelStateChanged, this);
+		this._v.model.____modelInputElements = this._v.model.____modelInputElements || {};
+		this._v.model.____modelInputElements[this._v.name] = this;
+		this._v.model.trigger("addedInputElement");
 	}
 });
