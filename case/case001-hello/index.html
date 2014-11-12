@@ -26,6 +26,7 @@
 <script type="text/javascript" src="/lane/js/3rdParty/jquery-ui.js"></script>    
 <script type="text/javascript" src="/lane/js/BoxElement/BoxElement.js"></script>    
 <script type="text/javascript" src="/lane/js/Collections/BasicCollection.js"></script>    
+<script type="text/javascript" src="/lane/js/Collections/Enum.js"></script>    
 <script type="text/javascript" src="/lane/js/Collections/BasicMap.js"></script>    
 <script type="text/javascript" src="/lane/js/Collections/BasicList.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/FormElement.js"></script>    
@@ -86,6 +87,7 @@
 <script type="text/javascript" src="/lane/js/FormElements/Button.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/Grid/GridFooterRow.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/Grid/JqGridImageColumn.js"></script>    
+<script type="text/javascript" src="/lane/js/FormElements/Grid/GridCheckBoxCell.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/Grid/GridTextCell.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/Grid/GridImgCell.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/Grid/GridHeaderRow.js"></script>    
@@ -117,6 +119,7 @@
 <script type="text/javascript" src="/lane/js/FormElements/Canvas.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/Grid/Grid.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/Grid/JqGrid.js"></script>    
+<script type="text/javascript" src="/lane/js/Data/DataTreeGrid.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/ChartField.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/ChartFieldBackup.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/ChartField1.js"></script>    
@@ -142,8 +145,9 @@
 			   columnType:"img"
 		   },
 		   {
-			   name:"b",
-			   caption:"blablablb"
+			   name:"cb",
+			   caption:"Checkbox",
+			   columnType:"checkbox"
 		   },
 		   {
 			   name:"c",
@@ -170,7 +174,7 @@
 		]);
     	dataGrid.columns(columns);
     	for (var i = 0; i<10; i++){
-    		dataGrid.add({a:"https://cdn2.iconfinder.com/data/icons/crystalproject/Open-Office-Icons/stock_3d-apply-16.png", b:"testb" + i, c:i, d:i, e:i, f:i, g:i});
+    		dataGrid.add({a:"https://cdn2.iconfinder.com/data/icons/crystalproject/Open-Office-Icons/stock_3d-apply-16.png", cb:Math.random() * 2 > 1, c:i, d:i, e:i, f:i, g:i});
     	}
 		var ib = new InputBox();
     	browser.imageBase("../../lane/");

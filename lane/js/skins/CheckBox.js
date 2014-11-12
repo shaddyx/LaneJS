@@ -13,9 +13,7 @@ CheckBoxSkin.def = {
 		   name:"caption"
 	   },
 	   {
-		 width:3  
-	   },
-	   {
+		   margin:[0,0,0,3],
 		   name:"img",
 		   backgroundImage:"img/CheckBox/no.png",
 		   width:16,

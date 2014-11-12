@@ -225,6 +225,37 @@ GridCellSkin.def = {
 		   }
 		]
 	},
+	img:{
+		hAlign:BoxElement.ALIGN.middle,
+		cursor:"pointer",
+		c:[
+		   {
+				name:"img",
+				width:16,
+				height:16
+		   }
+		]
+	},
+	checkbox:{
+		hAlign:BoxElement.ALIGN.middle,
+		cursor:"pointer",
+		c:[
+		   {
+				name:"img",
+				width:16,
+				height:16,
+				styleClass:"no",
+				style:{
+					yes:{
+						backgroundImage:"img/CheckBox/yes.png"
+					},
+					no:{
+						backgroundImage:"img/CheckBox/no.png"
+					}
+				}
+		   }
+		]
+	},
 	tree:{
 		cursor:"pointer",
 		c:[

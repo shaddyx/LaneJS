@@ -123,3 +123,7 @@ GridCell.prototype.restoreProperties = function(){
 	}
 	this._changed = false;
 };
+
+GridCell.prototype.notifyDataUpdate = function(){
+	this._grid._v.data.trigger("dataUpdate");
+};
