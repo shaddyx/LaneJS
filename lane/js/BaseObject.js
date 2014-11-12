@@ -1,5 +1,6 @@
 "use strict";
 /*
+ * @@@dependsOn: Types
  * @@@dependsOn: CoreException
  * @@@dependsOn: Constants
  * @@@dependsOn: Debug
