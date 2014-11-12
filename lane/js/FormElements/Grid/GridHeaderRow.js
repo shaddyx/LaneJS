@@ -11,6 +11,6 @@ GridHeaderRow.prototype.getSkin = function(){
 GridHeaderRow.prototype.render = function(){
 	for (var i = 0; i < this._grid._columns.length; i++){
 		var caption = this._grid._columns[i]._v.dataColumn._v.caption;
-		this._cells[i].caption(caption);
+		this._cells[i].value(caption);
 	}
 };
