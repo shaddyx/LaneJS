@@ -2,17 +2,16 @@
 //@@/@dependsOn: DataOutOfRangeError
 //@@@dependsOn: DataColumn
 //
+/**
+ * @constructor
+ * @extends DataGrid
+ */
 var DataTreeGrid = function(){
 	DataGrid.call(this);
-	
 };
 
 Util.extend(DataTreeGrid, DataGrid);
 DataTreeGrid.type = "DataTreeGrid";
-
-DataTreeGrid.prototype.insertElementToindex = function(element, index){
-	
-};
 
 /**
  * function adds row 
@@ -23,7 +22,6 @@ DataTreeGrid.prototype.add = function(rowParams, row){
 	if (typeof row !== "object") {
 		throw new Error("Row must be an object");
 	}
-	
 	var dataUnit = new DataRow({
 		data:row, 
 		previous:-1,
@@ -41,8 +39,7 @@ DataTreeGrid.prototype.add = function(rowParams, row){
 	});
 	
 	if (rowParams.parent){
-		var parentObject = this.getByIndex(rowParams.parent);
-		dataUnit.parent = parent.current;
+		dataUnit.parent = rowParams.parent;
 		dataUnit.current = parent.lastVisible + 1
 	} else {
 		dataUnit.previous = this._data.length - 1;

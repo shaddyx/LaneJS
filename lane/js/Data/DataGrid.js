@@ -2,6 +2,10 @@
 //@@/@dependsOn: DataOutOfRangeError
 //@@@dependsOn: DataColumn
 //
+/**
+ * @constructor
+ * @extends DataSource
+ */
 var DataGrid = function(){
 	DataSource.call(this);
 	this._data = [];
@@ -205,6 +209,11 @@ DataGrid.build = function(struct){
 	var dataGrid = new DataGrid();
 	var columns = DataColumn.build(struct.columns);
 	dataGrid.columns(columns);
+	if (struct.data){
+		for (var k in struct.data){
+			dataGrid.add(struct.data[k]);
+		}
+	}
 	return dataGrid;
 };
 

@@ -3,6 +3,6 @@ var GridImgCell = function(column, row) {
 };
 Util.extend(GridImgCell, GridCell);
 GridImgCell.type = "GridImgCell";
-GridImgCell.prototype.caption = function(value){
+GridImgCell.prototype.value = function(value){
 	this._element._elements.img.backgroundImage(value);
 };

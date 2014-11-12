@@ -1,3 +1,7 @@
+/**
+ * @constructor
+ * @extends BaseObject
+ */
 var DataSource = function(){
 	BaseObject.call(this);
 };

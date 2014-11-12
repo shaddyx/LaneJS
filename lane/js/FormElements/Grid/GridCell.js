@@ -21,6 +21,9 @@ GridCell.buildCell = function(column, row){
 		case "img":
 			obj = new GridImgCell(column, row);
 			break;
+		case "checkbox":
+			obj = new GridCheckBoxCell(column, row);
+			break;
 		default:
 			throw new Error("Error, no such column type:" + column._v.columnType);
 	}
@@ -84,6 +87,7 @@ GridCell.prototype.restoreContainer = function(){
 
 GridCell.prototype._cellDblClicked = function(){
 	var row = this._grid._v.data.getByIndex(this._row._v.rowIndex);
+	this.trigger("dblClick",this, row);
 	this._grid.trigger("cellDblClicked", this, row);
 };
 
@@ -93,6 +97,7 @@ GridCell.prototype._cellClicked = function(){
 		row.select();
 		this._grid.scheduleRender();
 	}
+	this.trigger("click",this, row);
 	this._grid.trigger("cellClicked",this, row);
 };
 

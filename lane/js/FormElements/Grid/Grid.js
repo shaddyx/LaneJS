@@ -255,7 +255,7 @@ Grid.prototype.reDrawColumns = function(){
 			var col = toStretch[i];
 			lastSpace -= col.width(Math.floor(col._v.width * ratio));
 		}
-		toStretch[i].width(lastSpace);
+		toStretch[i] && toStretch[i].width(lastSpace);
 	}
 	
 	//
@@ -328,7 +328,7 @@ Grid.prototype.scheduleReDraw= function(){
  * renders grid data to grid
  */
 Grid.prototype.render = function(){
-	if (this._v.locked){
+	if (this._v.locked || !this._v.data){
 		return;
 	}
 	var my = this;
