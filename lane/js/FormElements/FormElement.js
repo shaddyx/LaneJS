@@ -247,20 +247,6 @@ FormElement.prototype.refreshEnabled = function(){
 	}
 };
 
-/*FormElement.prototype._setStyleClass = function(element, styleName){
-	element.styleClass(styleName);
-	if (element != this._v.outer && element.formElement) {
-		return;
-	}
-	element.setStyleClassRec(styleName);
-};*/
-
-/*FormElement.prototype.applyStyleClass = function(){
-	if (this._v.isDrawn){
-		this._setStyleClass(this._v.outer, this._v.styleClass);
-	}
-};*/
-
 FormElement.prototype.applyFocus = function(){
 	if (this._v.focus){
 		FormElement.currentFocus = this;
@@ -337,19 +323,6 @@ FormElement.build = function(struct, target, map){
 			}
 			throw new Error("Object " + objString + " has no property " + k);
 		}
-		/*
-		if (el._v[k] instanceof BasicMap) {
-			for (var x in struct[k]){
-				el._v[k].add(x, struct[k][x]);
-			}
-		}
-		
-		if (el._v[k] instanceof BasicList) {
-			for (var x in struct[k]){
-				el._v[k].add(struct[k][x]);
-			}
-		}
-		*/
 		el[k](struct[k]);
 	}
 	el.draw({ target: target });

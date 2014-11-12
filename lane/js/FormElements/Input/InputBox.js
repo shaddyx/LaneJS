@@ -1,7 +1,6 @@
 /**
  * @constructor
- * @arguments FormElement
- * @extends FormElement
+ * @extends InputElement
  */
 var InputBox = function() {
 	InputElement.call(this);

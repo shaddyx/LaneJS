@@ -296,7 +296,7 @@ Grid.prototype.scheduleReBuild = function(time){
 	time = time || 0;
 	if (!this.reBuildTimer){
 		var my = this;
-		console.log("ReBuild scheduled");
+		//console.log("ReBuild scheduled");
 		this.reBuildTimer = setTimeout(function(){
 			my.reBuildTimer = false;
 			my.reBuild();

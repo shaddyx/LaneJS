@@ -3,11 +3,11 @@
 //@@@dependsOn: DataColumn
 //
 var DataTreeGrid = function(){
-	DataGridSource.call(this);
+	DataGrid.call(this);
 	
 };
 
-Util.extend(DataTreeGrid, DataGridSource);
+Util.extend(DataTreeGrid, DataGrid);
 DataTreeGrid.type = "DataTreeGrid";
 
 DataTreeGrid.prototype.insertElementToindex = function(element, index){
