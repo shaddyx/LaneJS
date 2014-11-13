@@ -1,3 +1,11 @@
+/*
+ * @@@dependsOn: Util
+ * @@@dependsOn: Constants
+ * @@@dependsOn: Debug
+ */
+/*
+ * basic object, implements an event model 
+ */
 var Types = {};
 (function() {
 
@@ -9,9 +17,9 @@ var Types = {};
 		fromString:function (str){
 			throw new Error("Error, can't convert [" + this.name + "] from string");
 		},
-		enumerable: false;
+		enumerable: false
 	};
-
+	
 	Types.int = Util.cloneType("int", Types.object, {
 		check : function(value, strict) {
 			if (typeof value == "number") {
@@ -50,15 +58,15 @@ var Types = {};
 			return value.toString();
 		}
 	});
-
+	
 	Types.boolean = Util.cloneType("boolean", Types.object, {
 		check:function(value, strict) {
 			return !!value;
 		},
-		enumerable:{
-			"true":true,
-			"false":false
-		}
+		enumerable:[
+			true,
+			false
+		]
 	});
 
 	Types.array = Util.cloneType("array", Types.object,{

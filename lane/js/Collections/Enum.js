@@ -5,14 +5,13 @@ var Enum = function(){
 Util.extend(Enum,BaseObject);
 Enum.type = "Enum";
 Enum.addProperty("values", []);
+Enum.prototype.add = function(obj){
+	
+};
 Enum.prototype.each = function(callBack){
 	for (var i = 0; i < this._v.values.length; i++){
 		callBack(this._v.values[i]);
 	}
-};
-
-Enum.prototype.fromSrting = function(){
-	
 };
 
 Enum.build = function(values){
