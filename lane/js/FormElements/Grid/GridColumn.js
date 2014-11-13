@@ -38,7 +38,9 @@ GridColumn.prototype.buildHelper = function(){
 };
 
 GridColumn.prototype.remove = function(){
-	this._helper.remove();
+	if (this._helper){
+		this._helper.remove();
+	}
 };
 
 GridColumn.prototype.helperHeight = function(height){

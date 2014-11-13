@@ -11,7 +11,6 @@ BoxElement.prototype.getAbsolutePosition = function(){
 		var scrollTop = 0;
 		var border;
 		if (parent.parent){
-			padding = parent.parent._v.padding;
 			border = parent.parent._v.borderWidth;
 			scrollLeft = parent.parent._v.scrollLeft;
 			scrollTop = parent.parent._v.scrollTop;
@@ -20,8 +19,8 @@ BoxElement.prototype.getAbsolutePosition = function(){
 			border = [0,0,0,0];
 		}
 		
-		left += parent._v.left + parent._v.margin[3] + padding[3] + border[3] + scrollLeft;
-		top += parent._v.top + parent._v.margin[0] + padding[0] + border[0] + scrollTop;
+		left += parent._v.left + parent._v._vMargin[3] + border[3] + scrollLeft;
+		top += parent._v.top + parent._v._vMargin[0] + border[0] + scrollTop;
 		if (parent._v.horizontal){
 			left += parent._v._alignDelta;
 		} else {
@@ -29,7 +28,6 @@ BoxElement.prototype.getAbsolutePosition = function(){
 		}
 	});
 	return {left:left, top:top};
-	//return this.htmlElement.getBoundingClientRect();
 	
 };
 

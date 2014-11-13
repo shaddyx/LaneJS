@@ -46,6 +46,7 @@ InputBoxSkin.def = {
 		  rootBuild:[
 		        {
 					floating : true,
+					zIndex:topZIndex,
 					visible:false,
 					height:30,
 					width:300,

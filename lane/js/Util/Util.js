@@ -317,11 +317,12 @@ Util.fillObject = function(object, data){
  * function clones Type object
  */
 Util.cloneType = function(name, parentType, checkFunction){
-	
 	var newType = this.cloneObject(parentType);
 	newType.name = name;
 	newType.parentType = parentType;
-	newType.check = checkFunction;
+	for (var k in checkFunction){
+		newType[k] = checkFunction[k];
+	}
 	return newType;
 };
 

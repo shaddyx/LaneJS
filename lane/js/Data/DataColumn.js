@@ -17,12 +17,16 @@ DataColumn.build = function(columns){
 	var result = [];
 	for (var k in columns){
 		var columnData = columns[k];
-		var obj = new DataColumn();
-		obj.name(k);
-		for (var x in columnData){
-			obj[x](columnData[x]);
+		if (columnData instanceof DataColumn){
+			result.push(columnData);
+		} else {
+			var obj = new DataColumn();
+			obj.name(k);
+			for (var x in columnData){
+				obj[x](columnData[x]);
+			}
+			result.push(obj);
 		}
-		result.push(obj);
 	}
 	return result;
 }
