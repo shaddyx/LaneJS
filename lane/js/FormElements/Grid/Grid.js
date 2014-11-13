@@ -378,7 +378,6 @@ Grid.prototype.render = function(){
 	this._elements.vertScroll.top(scrollTop);
 	window.grids = window.grids || {};
 	window.grids[this.id] = this;
-	console.log(contH);
 };
 /**
  * returns physical cell by row number (in dataSource) and column name
