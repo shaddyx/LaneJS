@@ -96,7 +96,7 @@ DataGrid.prototype.moveTo = function(index){
 		throw new DataOutOfRangeError("Move index out of range");
 	}
 	this._currentRow = index;
-	//this.trigger("dataUpdate");
+	this.trigger("dataCursorMoved", this._currentRow);
 };
 
 /**

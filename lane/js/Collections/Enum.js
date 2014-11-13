@@ -12,7 +12,7 @@ Enum.prototype.each = function(callBack){
 };
 
 Enum.build = function(values){
-	var	enum = new Enum();
-	enum.values(values);
-	return enum;
+	var	en = new Enum();
+	en.values(values);
+	return en;
 };
