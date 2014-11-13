@@ -125,11 +125,19 @@ InputBox.prototype._updateEditable = function(){
 	}
 };
 
-InputBox.prototype._dataTypeChanged = function(){
-	
+InputBox.prototype._dataTypeBeforeChanged = function(value){
+	if (typeof (value) === "string"){
+		this.dataType(Types[value]);
+		return;
+	}
+	if (this._v.dataType && this._v.enumerable){
+		this.values([]);
+	}
 };
-InputBox.prototype._dataTypeBeforeChanged = function(){
-	
+InputBox.prototype._dataTypeChanged = function(){
+	if (this._v.dataType && this._v.enumerable){
+		this.values(this._v.enumerable);
+	}
 };
 
 InputBox.on("focusChanged", InputBox.prototype._updateValueListVisibility);

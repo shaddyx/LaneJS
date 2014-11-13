@@ -11,6 +11,10 @@ Enum.prototype.each = function(callBack){
 	}
 };
 
+Enum.prototype.fromSrting = function(){
+	
+};
+
 Enum.build = function(values){
 	var	en = new Enum();
 	en.values(values);

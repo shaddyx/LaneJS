@@ -8,7 +8,8 @@ var Types = {};
 		},
 		fromString:function (str){
 			throw new Error("Error, can't convert [" + this.name + "] from string");
-		}
+		},
+		enumerable: false;
 	};
 
 	Types.int = Util.cloneType("int", Types.object, {
@@ -53,6 +54,10 @@ var Types = {};
 	Types.boolean = Util.cloneType("boolean", Types.object, {
 		check:function(value, strict) {
 			return !!value;
+		},
+		enumerable:{
+			"true":true,
+			"false":false
 		}
 	});
 
