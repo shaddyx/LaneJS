@@ -7,7 +7,7 @@ Grid.prototype.mouseWheel = function(e){
 	}
 	if ((-e.direction > 0 && this._v.data.visibleDown() > 1)
 		||(-e.direction < 0 && this._v.data.visibleUp())){
-		this._v.data.move( -e.direction );
+		this._v.data.moveCurrentRow( -e.direction );
 		this.render();
 	}
 	

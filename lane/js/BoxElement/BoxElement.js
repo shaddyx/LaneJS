@@ -278,6 +278,7 @@ BoxElement.addProperty = function(name,defValue,props){
 		}
 		return o.call(this,value);
 	};
+	return this.prototype[name];
 };
 BoxElement.prototype.getDebugInfo = function(){
 	var obj = {
@@ -300,7 +301,7 @@ BoxElement.addPropertyApplyer = function(name,func){
 };
 BoxElement.addProperty("_isDrawn",false);
 BoxElement.addProperty("_virtualized",false);
-BoxElement.addProperty("name",false);
+BoxElement.prototype.name = BoxElement.addProperty("name",false);
 /*
  * distance,between width/height and innerWidth/innerHeight
  */
@@ -313,64 +314,64 @@ BoxElement.addProperty("_alignDelta",0,{rm:BoxElement.REDRAW_MODE.full});
 /*
  * reDraw properties
  */
-BoxElement.addProperty("minWidth",0);
-BoxElement.addProperty("minHeight",0);
-BoxElement.addProperty("vMinWidth",0);
-BoxElement.addProperty("vMinHeight",0);
+BoxElement.prototype.minWidth = BoxElement.addProperty("minWidth",0);
+BoxElement.prototype.minHeight = BoxElement.addProperty("minHeight",0);
+BoxElement.prototype.vMinWidth = BoxElement.addProperty("vMinWidth",0);
+BoxElement.prototype.vMinHeight = BoxElement.addProperty("vMinHeight",0);
 
 /*
  *
  */
-BoxElement.addProperty("caption","",{html:true, rm:BoxElement.REDRAW_MODE.applyOnly});
-BoxElement.addProperty("floating",false,{rm:BoxElement.REDRAW_MODE.full});
-BoxElement.addProperty("visible",true,{html:true, rm:BoxElement.REDRAW_MODE.redrawParent, defaultApply:true});
-BoxElement.addProperty("left",0,{html:true, rm:BoxElement.REDRAW_MODE.applyOnly, defaultApply:true});
-BoxElement.addProperty("top",0,{html:true, rm:BoxElement.REDRAW_MODE.applyOnly, defaultApply:true});
-BoxElement.addProperty("scrollLeft",0,{html:true, rm:BoxElement.REDRAW_MODE.render, htmlEnding:'px',defaultApply:true});
-BoxElement.addProperty("scrollTop",0,{html:true, rm:BoxElement.REDRAW_MODE.render, htmlEnding:'px',defaultApply:true});
-BoxElement.addProperty("hs",false,{rm:BoxElement.REDRAW_MODE.full});
-BoxElement.addProperty("vs",false,{rm:BoxElement.REDRAW_MODE.full});
-BoxElement.addProperty("hCompress",false,{rm:BoxElement.REDRAW_MODE.full});
-BoxElement.addProperty("vCompress",false,{rm:BoxElement.REDRAW_MODE.full});
-BoxElement.addProperty("vAlign",BoxElement.ALIGN.begin,{rm:BoxElement.REDRAW_MODE.full});
-BoxElement.addProperty("hAlign",BoxElement.ALIGN.begin,{html:true, rm:BoxElement.REDRAW_MODE.full});
-BoxElement.addProperty("width",0,{html:true, rm:BoxElement.REDRAW_MODE.redrawParent,htmlEnding:'px'});
-BoxElement.addProperty("sizeRatio",100,{rm:BoxElement.REDRAW_MODE.full});
-BoxElement.addProperty("height",0,{html:true, rm:BoxElement.REDRAW_MODE.redrawParent,htmlEnding:'px'});
-BoxElement.addProperty("innerWidth",0,{rm:BoxElement.REDRAW_MODE.full});
-BoxElement.addProperty("innerHeight",0,{rm:BoxElement.REDRAW_MODE.full});
-BoxElement.addProperty("lineHeight",15,{html:true, rm:BoxElement.REDRAW_MODE.full,defaultApply:true, htmlEnding:'px'});
-BoxElement.addProperty("horizontal",false,{rm:BoxElement.REDRAW_MODE.full});
-BoxElement.addProperty("fontColor","none",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
-BoxElement.addProperty("textDecoration","none",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
-BoxElement.addProperty("backgroundColor","transparent",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
-BoxElement.addProperty("backgroundImage","none",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});		
-BoxElement.addProperty("backgroundPosition","",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
-BoxElement.addProperty("backgroundRepeat","",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
-BoxElement.addProperty("cursor",false,{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
-BoxElement.addProperty("fontWeight","normal",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly,defaultApply:true});
-BoxElement.addProperty("fontSize","13px",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly,defaultApply:true});
-BoxElement.addProperty("fontFamily","Arial",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly,defaultApply:true});
-BoxElement.addProperty("color","",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
-BoxElement.addProperty("cursor",false,{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
-BoxElement.addProperty("selectable",false,{html:true,rm:BoxElement.REDRAW_MODE.applyOnly,defaultApply:true});		//,defaultApply:true
-BoxElement.addProperty("borderWidth",[0,0,0,0],{html:true,rm:BoxElement.REDRAW_MODE.full, type:BoxElement.PROPERTY_TYPE.array, defaultApply:true, recalcDxDy:true});
-BoxElement.addProperty("padding",[0,0,0,0],{html:true,rm:BoxElement.REDRAW_MODE.fullAndRenderMe, type:BoxElement.PROPERTY_TYPE.array, recalcDxDy:true});
-BoxElement.addProperty("margin",[0,0,0,0],{rm:BoxElement.REDRAW_MODE.full, type:BoxElement.PROPERTY_TYPE.array});
-BoxElement.addProperty("borderRadius",[0,0,0,0],{html:true,rm:BoxElement.REDRAW_MODE.applyOnly, type:BoxElement.PROPERTY_TYPE.array});
-BoxElement.addProperty("borderColor","#000",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
-BoxElement.addProperty("borderStyle","solid",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly, defaultApply:true});
-BoxElement.addProperty("overflow",BoxElement.OVERFLOW_MODE.none,{html:true, rm:BoxElement.REDRAW_MODE.full});
-BoxElement.addProperty("elementType",false,{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
-BoxElement.addProperty("zIndex",0,{html:true,rm:BoxElement.REDRAW_MODE.applyOnly, defaultApply:true});
-BoxElement.addProperty("opacity",1,{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
-BoxElement.addProperty("spacing", 0, {rm:BoxElement.REDRAW_MODE.full});
-BoxElement.addProperty("hovered",false);
-BoxElement.addProperty("style",false);
-BoxElement.addProperty("styleClass",false);
-BoxElement.addProperty("relativity",false);
-BoxElement.addProperty("pressed",false);
-BoxElement.addProperty("style",false);
-BoxElement.addProperty("draggable",false);
+BoxElement.prototype.caption = BoxElement.addProperty("caption","",{html:true, rm:BoxElement.REDRAW_MODE.applyOnly});
+BoxElement.prototype.floating = BoxElement.addProperty("floating",false,{rm:BoxElement.REDRAW_MODE.full});
+BoxElement.prototype.visible = BoxElement.addProperty("visible",true,{html:true, rm:BoxElement.REDRAW_MODE.redrawParent, defaultApply:true});
+BoxElement.prototype.left = BoxElement.addProperty("left",0,{html:true, rm:BoxElement.REDRAW_MODE.applyOnly, defaultApply:true});
+BoxElement.prototype.top = BoxElement.addProperty("top",0,{html:true, rm:BoxElement.REDRAW_MODE.applyOnly, defaultApply:true});
+BoxElement.prototype.scrollLeft = BoxElement.addProperty("scrollLeft",0,{html:true, rm:BoxElement.REDRAW_MODE.render, htmlEnding:'px',defaultApply:true});
+BoxElement.prototype.scrollTop = BoxElement.addProperty("scrollTop",0,{html:true, rm:BoxElement.REDRAW_MODE.render, htmlEnding:'px',defaultApply:true});
+BoxElement.prototype.hs = BoxElement.addProperty("hs",false,{rm:BoxElement.REDRAW_MODE.full});
+BoxElement.prototype.vs = BoxElement.addProperty("vs",false,{rm:BoxElement.REDRAW_MODE.full});
+BoxElement.prototype.hCompress = BoxElement.addProperty("hCompress",false,{rm:BoxElement.REDRAW_MODE.full});
+BoxElement.prototype.vCompress = BoxElement.addProperty("vCompress",false,{rm:BoxElement.REDRAW_MODE.full});
+BoxElement.prototype.vAlign = BoxElement.addProperty("vAlign",BoxElement.ALIGN.begin,{rm:BoxElement.REDRAW_MODE.full});
+BoxElement.prototype.hAlign = BoxElement.addProperty("hAlign",BoxElement.ALIGN.begin,{html:true, rm:BoxElement.REDRAW_MODE.full});
+BoxElement.prototype.width = BoxElement.addProperty("width",0,{html:true, rm:BoxElement.REDRAW_MODE.redrawParent,htmlEnding:'px'});
+BoxElement.prototype.sizeRatio = BoxElement.addProperty("sizeRatio",100,{rm:BoxElement.REDRAW_MODE.full});
+BoxElement.prototype.height = BoxElement.addProperty("height",0,{html:true, rm:BoxElement.REDRAW_MODE.redrawParent,htmlEnding:'px'});
+BoxElement.prototype.innerWidth = BoxElement.addProperty("innerWidth",0,{rm:BoxElement.REDRAW_MODE.full});
+BoxElement.prototype.innerHeight = BoxElement.addProperty("innerHeight",0,{rm:BoxElement.REDRAW_MODE.full});
+BoxElement.prototype.lineHeight = BoxElement.addProperty("lineHeight",15,{html:true, rm:BoxElement.REDRAW_MODE.full,defaultApply:true, htmlEnding:'px'});
+BoxElement.prototype.horizontal = BoxElement.addProperty("horizontal",false,{rm:BoxElement.REDRAW_MODE.full});
+BoxElement.prototype.fontColor = BoxElement.addProperty("fontColor","none",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
+BoxElement.prototype.textDecoration = BoxElement.addProperty("textDecoration","none",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
+BoxElement.prototype.backgroundColor = BoxElement.addProperty("backgroundColor","transparent",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
+BoxElement.prototype.backgroundImage = BoxElement.addProperty("backgroundImage","none",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});		
+BoxElement.prototype.backgroundPosition = BoxElement.addProperty("backgroundPosition","",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
+BoxElement.prototype.backgroundRepeat = BoxElement.addProperty("backgroundRepeat","",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
+BoxElement.prototype.cursor = BoxElement.addProperty("cursor",false,{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
+BoxElement.prototype.fontWeight = BoxElement.addProperty("fontWeight","normal",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly,defaultApply:true});
+BoxElement.prototype.fontSize = BoxElement.addProperty("fontSize","13px",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly,defaultApply:true});
+BoxElement.prototype.fontFamily = BoxElement.addProperty("fontFamily","Arial",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly,defaultApply:true});
+BoxElement.prototype.color = BoxElement.addProperty("color","",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
+BoxElement.prototype.cursor = BoxElement.addProperty("cursor",false,{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
+BoxElement.prototype.selectable = BoxElement.addProperty("selectable",false,{html:true,rm:BoxElement.REDRAW_MODE.applyOnly,defaultApply:true});		//,defaultApply:true
+BoxElement.prototype.borderWidth = BoxElement.addProperty("borderWidth",[0,0,0,0],{html:true,rm:BoxElement.REDRAW_MODE.full, type:BoxElement.PROPERTY_TYPE.array, defaultApply:true, recalcDxDy:true});
+BoxElement.prototype.padding = BoxElement.addProperty("padding",[0,0,0,0],{html:true,rm:BoxElement.REDRAW_MODE.fullAndRenderMe, type:BoxElement.PROPERTY_TYPE.array, recalcDxDy:true});
+BoxElement.prototype.margin = BoxElement.addProperty("margin",[0,0,0,0],{rm:BoxElement.REDRAW_MODE.full, type:BoxElement.PROPERTY_TYPE.array});
+BoxElement.prototype.borderRadius = BoxElement.addProperty("borderRadius",[0,0,0,0],{html:true,rm:BoxElement.REDRAW_MODE.applyOnly, type:BoxElement.PROPERTY_TYPE.array});
+BoxElement.prototype.borderColor = BoxElement.addProperty("borderColor","#000",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
+BoxElement.prototype.borderStyle = BoxElement.addProperty("borderStyle","solid",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly, defaultApply:true});
+BoxElement.prototype.overflow = BoxElement.addProperty("overflow",BoxElement.OVERFLOW_MODE.none,{html:true, rm:BoxElement.REDRAW_MODE.full});
+BoxElement.prototype.elementType = BoxElement.addProperty("elementType",false,{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
+BoxElement.prototype.zIndex = BoxElement.addProperty("zIndex",0,{html:true,rm:BoxElement.REDRAW_MODE.applyOnly, defaultApply:true});
+BoxElement.prototype.opacity = BoxElement.addProperty("opacity",1,{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
+BoxElement.prototype.spacing = BoxElement.addProperty("spacing", 0, {rm:BoxElement.REDRAW_MODE.full});
+BoxElement.prototype.hovered = BoxElement.addProperty("hovered",false);
+BoxElement.prototype.style = BoxElement.addProperty("style",false);
+BoxElement.prototype.styleClass = BoxElement.addProperty("styleClass",false);
+BoxElement.prototype.relativity = BoxElement.addProperty("relativity",false);
+BoxElement.prototype.pressed = BoxElement.addProperty("pressed",false);
+BoxElement.prototype.style = BoxElement.addProperty("style",false);
+BoxElement.prototype.draggable = BoxElement.addProperty("draggable",false);
 
 

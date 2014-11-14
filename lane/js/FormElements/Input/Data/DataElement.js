@@ -4,7 +4,7 @@ var DataElement = function(){
 Util.extend(DataElement, InputElement);
 DataElement.type = "DataElement";
 DataElement.func = {};
-DataElement.addProperty("dataSource",undefined,{type:"DataSource"});
+DataElement.prototype.dataSource = DataElement.addProperty("dataSource",undefined,{type:"DataSource"});
 DataElement.setDefault("value",undefined);
 
 DataElement.func.dataSourceBeforeChanged = function(){

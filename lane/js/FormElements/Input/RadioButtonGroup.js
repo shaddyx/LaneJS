@@ -4,7 +4,7 @@ var RadioButtonGroup = function() {
 };
 Util.extend(RadioButtonGroup, Container);
 RadioButtonGroup.type = "RadioButtonGroup";
-RadioButtonGroup.addProperty("checked",false,{type:"boolean"});
+RadioButtonGroup.prototype.checked = RadioButtonGroup.addProperty("checked",false,{type:"boolean"});
 RadioButtonGroup.func = {};
 
 RadioButtonGroup.prototype._added = function(element) {

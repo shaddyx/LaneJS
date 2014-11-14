@@ -4,7 +4,7 @@ var Enum = function(){
 
 Util.extend(Enum,BaseObject);
 Enum.type = "Enum";
-Enum.addProperty("values", []);
+Enum.prototype.values = Enum.addProperty("values", []);
 Enum.prototype.add = function(obj){
 	
 };

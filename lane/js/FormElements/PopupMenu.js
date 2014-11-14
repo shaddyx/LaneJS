@@ -3,7 +3,7 @@ var PopupMenu = function() {
 };
 Util.extend(PopupMenu, FloatingContainer);
 PopupMenu.type = "PopupMenu";
-PopupMenu.addProperty("component", false, {type:"FormElement"});
+PopupMenu.prototype.component = PopupMenu.addProperty("component", false, {type:"FormElement"});
 
 PopupMenu.build = function(struct){
 	if (struct.type != "PopupMenu") {

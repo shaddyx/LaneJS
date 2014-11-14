@@ -14,11 +14,11 @@ Window.buttons = {
 		return value;
 	}
 };
-Window.addProperty("dragStarted", false);
-Window.addProperty("openCentered", false);
-Window.addProperty("draggable", true, {type:Types.boolean});
-Window.addProperty("buttons", Window.buttons.CLOSE, {type:Window.buttons});
-Window.addProperty("modal",false);
+Window.prototype.dragStarted = Window.addProperty("dragStarted", false);
+Window.prototype.openCentered = Window.addProperty("openCentered", false);
+Window.prototype.draggable = Window.addProperty("draggable", true, {type:Types.boolean});
+Window.prototype.buttons = Window.addProperty("buttons", Window.buttons.CLOSE, {type:Window.buttons});
+Window.prototype.modal = Window.addProperty("modal",false);
 Window.prototype.checkButtons = function(){
 	if(this._v.isDrawn){
 		this._elements.minimizeButton && this._elements.minimizeButton.visible(this._v.buttons & Window.buttons.MINIMIZE);

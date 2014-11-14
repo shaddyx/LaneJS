@@ -3,7 +3,7 @@ var Image = function() {
 };
 Util.extend(Image, Panel);
 Image.type = "Image";
-//Image.addProperty("img", false, {type:"image"});
+//Image.prototype.img = Image.addProperty("img", false, {type:"image"});
 /*Image.func = {};
 Image.func.afterDraw = function() {
 	if (this._v.isDrawn && this._elements.img){

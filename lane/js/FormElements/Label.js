@@ -4,7 +4,7 @@ var Label = function(){
 Util.extend(Label,FormElement);
 Label.type = "Label";
 Label.funcs = {};
-Label.addProperty("value", "");
+Label.prototype.value = Label.addProperty("value", "");
 
 Label.func.updateValue = function() {
 	this._v.isDrawn && this._elements.label.caption(this._v.value);

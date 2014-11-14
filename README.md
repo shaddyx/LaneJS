@@ -108,7 +108,7 @@ hs – horizontal stretching. It means the element can be stretched horizontally
 vs – vertical stretching. It means the element could be stretched vertically. <br />
 type – stands for the type of an element you're creating. In this example you're creating an element of type “Container”  which has one element of type “Label” and one element of type “Button”. In case you need to edit or add some properties of these type of elements, you need to see the source of “Container.js” and add a property. For example: 
 
-Container.addProperty("horizontal", false, {type:"boolean"});
+Container.prototype.horizontal = Container.addProperty("horizontal", false, {type:"boolean"});
 
 =========================================================================
 

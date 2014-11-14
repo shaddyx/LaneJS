@@ -8,10 +8,11 @@ var InputBox = function() {
 Util.extend(InputBox, InputElement);
 InputBox.type = "InputBox";
 InputBox.setDefault("value", "");
-InputBox.addProperty("password",false,{type:"boolean"});
-InputBox.addProperty("values",[],{type:"array"});
-InputBox.addProperty("dataType","string");
-InputBox.addProperty("editable",true);
+/** @method */
+InputBox.prototype.password = InputBox.addProperty("password",false,{type:"boolean"});
+InputBox.prototype.values = InputBox.addProperty("values",[],{type:"array"});
+InputBox.prototype.dataType = InputBox.addProperty("dataType","string");
+InputBox.prototype.editable = InputBox.addProperty("editable",true);
 InputBox.func = {};
 InputBox.func.afterDraw = function() {
 	var my = this;

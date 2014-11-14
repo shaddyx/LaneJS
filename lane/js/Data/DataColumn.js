@@ -4,14 +4,14 @@ var DataColumn = function(){
 
 Util.extend(DataColumn, DataSource);
 DataColumn.type = "DataColumn";
-DataColumn.addProperty("name","");
-DataColumn.addProperty("columnType","text");
-DataColumn.addProperty("caption","");
-DataColumn.addProperty("footerText","");
-DataColumn.addProperty("width", 0);
-DataColumn.addProperty("hs", true);
-DataColumn.addProperty("visible", true);
-DataColumn.addProperty("sortable", false, {type:"boolean"});
+DataColumn.prototype.name = DataColumn.addProperty("name","");
+DataColumn.prototype.columnType = DataColumn.addProperty("columnType","text");
+DataColumn.prototype.caption = DataColumn.addProperty("caption","");
+DataColumn.prototype.footerText = DataColumn.addProperty("footerText","");
+DataColumn.prototype.width = DataColumn.addProperty("width", 0);
+DataColumn.prototype.hs = DataColumn.addProperty("hs", true);
+DataColumn.prototype.visible = DataColumn.addProperty("visible", true);
+DataColumn.prototype.sortable = DataColumn.addProperty("sortable", false, {type:"boolean"});
 
 DataColumn.build = function(columns){
 	var result = [];

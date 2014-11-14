@@ -4,6 +4,7 @@
 /**
  * @memberOf Global
  * @class Grid
+ * @extends FormElement
  */
 var Grid = function() {
 	FormElement.call(this);
@@ -23,14 +24,14 @@ Grid.triggeringEvents={
 	
 };
 Grid.type = "Grid";
-Grid.addProperty("data", false);
-Grid.addProperty("locked", false);
-Grid.addProperty("rowWidth", 0);
-Grid.addProperty("showHeader", true);
-Grid.addProperty("showFooter", false);
-Grid.addProperty("rowHeight", undefined);
-Grid.addProperty("selectedColumn", undefined);
-Grid.addProperty("topLine", false);
+Grid.prototype.data = Grid.addProperty("data", false);
+Grid.prototype.locked = Grid.addProperty("locked", false);
+Grid.prototype.rowWidth = Grid.addProperty("rowWidth", 0);
+Grid.prototype.showHeader = Grid.addProperty("showHeader", true);
+Grid.prototype.showFooter = Grid.addProperty("showFooter", false);
+Grid.prototype.rowHeight = Grid.addProperty("rowHeight", undefined);
+Grid.prototype.selectedColumn = Grid.addProperty("selectedColumn", undefined);
+Grid.prototype.topLine = Grid.addProperty("topLine", false);
 Grid.addProperty("_scrollerShown", false);
 Grid.addProperty("_horzScrollerShown", false);
 
@@ -391,7 +392,7 @@ Grid.prototype.getCellContainer = function(rowNumber, colName){
 	if (diff < 0) {
 		data.moveTo(rowNumber);
 	} else if (diff > this._visibleRows){
-		data.move(diff - this._visibleRows + 1);
+		data.moveCurrentRow(diff - this._visibleRows + 1);
 	}
 	this.render();
 	var rowIndex = 0;

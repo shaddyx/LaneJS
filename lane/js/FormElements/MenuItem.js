@@ -3,7 +3,7 @@ var MenuItem = function(){
 };
 Util.extend(MenuItem,FormElement);
 MenuItem.type = "MenuItem";
-MenuItem.addProperty("img", false, {type:"image"});
+MenuItem.prototype.img = MenuItem.addProperty("img", false, {type:"image"});
 MenuItem.setDefault("hs",true);
 MenuItem.func = {};
 MenuItem.func.afterDraw = function() {

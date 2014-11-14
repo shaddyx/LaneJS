@@ -7,5 +7,5 @@ var DataSource = function(){
 };
 Util.extend(DataSource, BaseObject);
 DataSource.type = "DataSource";
-DataSource.addProperty("value", undefined);
+DataSource.prototype.value = DataSource.addProperty("value", undefined);
 DataSource.func = {};

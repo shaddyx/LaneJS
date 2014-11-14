@@ -8,9 +8,9 @@ var JqGrid = function() {
 Util.extend(JqGrid, Panel);
 JqGrid.type = "JqGrid";
 JqGrid.func = {};
-JqGrid.addProperty("multiSelect", false, {type:"boolean"});
-JqGrid.addProperty("sortColumn",false);
-JqGrid.addProperty("columns", false, {type:"TypedMap"});
+JqGrid.prototype.multiSelect = JqGrid.addProperty("multiSelect", false, {type:"boolean"});
+JqGrid.prototype.sortColumn = JqGrid.addProperty("sortColumn",false);
+JqGrid.prototype.columns = JqGrid.addProperty("columns", false, {type:"TypedMap"});
 
 JqGrid.prototype.afterDraw = function(){
 	var my = this;

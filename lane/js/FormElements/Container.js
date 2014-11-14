@@ -11,12 +11,12 @@ var Container = function(){
 Util.extend(Container,FormElement);
 Container.type = "Container";
 Container.funcs = {};
-Container.addProperty("children", false, {type:"BasicList", hidden:true});
-Container.addProperty("overflow", BoxElement.OVERFLOW_MODE.none, {type:BoxElement.OVERFLOW_MODE});
-Container.addProperty("horizontal", false, {type:"boolean"});
-Container.addProperty("hAlign", BoxElement.ALIGN.begin, {type:BoxElement.ALIGN});
-Container.addProperty("vAlign", BoxElement.ALIGN.begin, {type:BoxElement.ALIGN});
-Container.addProperty("padding", [0,0,0,0], {type:"intArray", hidden:true});
+Container.prototype.children = Container.addProperty("children", false, {type:"BasicList", hidden:true});
+Container.prototype.overflow = Container.addProperty("overflow", BoxElement.OVERFLOW_MODE.none, {type:BoxElement.OVERFLOW_MODE});
+Container.prototype.horizontal = Container.addProperty("horizontal", false, {type:"boolean"});
+Container.prototype.hAlign = Container.addProperty("hAlign", BoxElement.ALIGN.begin, {type:BoxElement.ALIGN});
+Container.prototype.vAlign = Container.addProperty("vAlign", BoxElement.ALIGN.begin, {type:BoxElement.ALIGN});
+Container.prototype.padding = Container.addProperty("padding", [0,0,0,0], {type:"intArray", hidden:true});
 
 Container.prototype.addChild = function(child){
 	if (this._v.children.add(child)){

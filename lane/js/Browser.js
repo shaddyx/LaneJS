@@ -26,11 +26,11 @@ var BrowserObject = function() {
 
 Util.extend(BrowserObject, BaseObject);
 BrowserObject.type = "BrowserObject";
-BrowserObject.addProperty("imageBase", "");
-BrowserObject.addProperty("width", false);
-BrowserObject.addProperty("height", false);
-BrowserObject.addProperty("mouseX", false);
-BrowserObject.addProperty("mouseY", false);
+BrowserObject.prototype.imageBase = BrowserObject.addProperty("imageBase", "");
+BrowserObject.prototype.width = BrowserObject.addProperty("width", false);
+BrowserObject.prototype.height = BrowserObject.addProperty("height", false);
+BrowserObject.prototype.mouseX = BrowserObject.addProperty("mouseX", false);
+BrowserObject.prototype.mouseY = BrowserObject.addProperty("mouseY", false);
 
 BrowserObject.prototype.init = function() {
 	this.initialized = true;

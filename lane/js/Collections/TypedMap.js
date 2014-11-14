@@ -7,7 +7,7 @@ TypedMap.type = "TypedMap";
 /*
  * returns element count
  */
-TypedMap.addProperty("elementType",false);
+TypedMap.prototype.elementType = TypedMap.addProperty("elementType",false);
 
 TypedMap.prototype.add = function(name, obj){
 	this._baseClass.superClass.prototype.add.apply(this,arguments);

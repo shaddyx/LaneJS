@@ -8,8 +8,8 @@ var InputElement = function(){
 Util.extend(InputElement,FormElement);
 InputElement.type = "InputElement";
 InputElement.funcs = {};
-InputElement.addProperty("value", false);
-InputElement.addProperty("model", false);
+InputElement.prototype.value = InputElement.addProperty("value", false);
+InputElement.prototype.model = InputElement.addProperty("model", false);
 
 InputElement.prototype._modelStateChanged = function(){
 	this.value(this._v.model[this._v.name]());

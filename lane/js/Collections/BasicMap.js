@@ -9,7 +9,7 @@ BasicMap.type = "BasicMap";
 /*
  * returns element count
  */
-BasicMap.addProperty("count",0);
+BasicMap.prototype.count = BasicMap.addProperty("count",0);
 
 BasicMap.prototype.hasKey = function(name){
 	return this._data[name] != undefined;

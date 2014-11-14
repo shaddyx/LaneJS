@@ -10,10 +10,10 @@ FloatingContainer.getNextZIndex = function(){
 Util.extend(FloatingContainer,Container);
 FloatingContainer.type = "FloatingContainer";
 FloatingContainer.funcs = {};
-FloatingContainer.addProperty("zIndex",0,{type:"int"});
-FloatingContainer.addProperty("left",0,{type:"int"});
-FloatingContainer.addProperty("top",0,{type:"int"});
-FloatingContainer.addProperty("relativity",false,{type:"object"});
+FloatingContainer.prototype.zIndex = FloatingContainer.addProperty("zIndex",0,{type:"int"});
+FloatingContainer.prototype.left = FloatingContainer.addProperty("left",0,{type:"int"});
+FloatingContainer.prototype.top = FloatingContainer.addProperty("top",0,{type:"int"});
+FloatingContainer.prototype.relativity = FloatingContainer.addProperty("relativity",false,{type:"object"});
 FloatingContainer.funcs.onAfterDraw = function(){
 	this._v.outer.floating(true);
 };

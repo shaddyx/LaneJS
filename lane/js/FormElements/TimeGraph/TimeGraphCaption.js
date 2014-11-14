@@ -3,9 +3,9 @@ var TimeGraphCaption = function(timeGraph) {
 	this.type = 'TimeGraphCaption';
 };
 Util.extend(TimeGraphCaption, BaseObject);
-TimeGraphCaption.addProperty("top",0);
-TimeGraphCaption.addProperty("timeGraph",false);
-TimeGraphCaption.addProperty("caption","");
+TimeGraphCaption.prototype.top = TimeGraphCaption.addProperty("top",0);
+TimeGraphCaption.prototype.timeGraph = TimeGraphCaption.addProperty("timeGraph",false);
+TimeGraphCaption.prototype.caption = TimeGraphCaption.addProperty("caption","");
 
 TimeGraphCaption.prototype.build = function(timeGraph) {
 	this.timeGraph = timeGraph;

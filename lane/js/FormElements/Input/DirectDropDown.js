@@ -4,10 +4,10 @@ var DirectDropDown = function(){
 };
 Util.extend(DirectDropDown,FormElement);
 DirectDropDown.type = "DirectDropDown";
-DirectDropDown.addProperty("minRows",15);
-DirectDropDown.addProperty("maxRows",30);
+DirectDropDown.prototype.minRows = DirectDropDown.addProperty("minRows",15);
+DirectDropDown.prototype.maxRows = DirectDropDown.addProperty("maxRows",30);
 DirectDropDown.funcs = {};
-DirectDropDown.addProperty("value", "");
+DirectDropDown.prototype.value = DirectDropDown.addProperty("value", "");
 DirectDropDown.func.updateValue = function(val) {
 	this._elements.value.caption(val.text);
 };

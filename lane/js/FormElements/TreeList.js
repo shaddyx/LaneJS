@@ -5,8 +5,8 @@ var TreeList = function() {
 };
 Util.extend(TreeList, Panel);
 TreeList.type = "TreeList";
-TreeList.addProperty("selectedNode", false);
-// FormElement.addProperty("data",{},{type:"object"});
+TreeList.prototype.selectedNode = TreeList.addProperty("selectedNode", false);
+// FormElement.prototype.data = FormElement.addProperty("data",{},{type:"object"});
 TreeList.uniqId = 0;
 TreeList.func.afterDraw = function() {
 	var my = this;

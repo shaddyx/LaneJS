@@ -17,6 +17,6 @@ FieldSet.funcs.updateCollapsable = function(){
 FieldSet.on("collapsedChanged", FieldSet.funcs.updateCollapsed);
 FieldSet.on("collapsableChanged", FieldSet.funcs.updateCollapsable);
 
-FieldSet.addProperty("header", true,{type:"boolean"});
-FieldSet.addProperty("collapsable", true,{type:"boolean"});
-FieldSet.addProperty("collapsed", false,{type:"boolean"});
+FieldSet.prototype.header = FieldSet.addProperty("header", true,{type:"boolean"});
+FieldSet.prototype.collapsable = FieldSet.addProperty("collapsable", true,{type:"boolean"});
+FieldSet.prototype.collapsed = FieldSet.addProperty("collapsed", false,{type:"boolean"});

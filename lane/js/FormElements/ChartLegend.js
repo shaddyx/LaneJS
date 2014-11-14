@@ -5,7 +5,7 @@ var ChartLegend = function() {
 
 Util.extend(ChartLegend, FormElement);
 ChartLegend.type = "ChartLegend";
-ChartLegend.addProperty("chartField",false);
+ChartLegend.prototype.chartField = ChartLegend.addProperty("chartField",false);
 
 ChartLegend.types = {};
 ChartLegend.func = {};

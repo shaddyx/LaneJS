@@ -16,7 +16,7 @@ var DataGrid = function(){
 
 Util.extend(DataGrid, DataSource);
 DataGrid.type = "DataGrid";
-DataGrid.addProperty("columns",[]);
+DataGrid.prototype.columns = DataGrid.addProperty("columns",[]);
 
 DataGrid.prototype._columnsChanged = function(value){
 	this._columnsCache = {};
@@ -78,7 +78,7 @@ DataGrid.prototype.add = function(row){
  * function moves current focused row to current row + count elements
  * @param count
  */
-DataGrid.prototype.move = function(count){
+DataGrid.prototype.moveCurrentRow = function(count){
 	this.moveTo(this._currentRow + count);
 };
 
@@ -90,7 +90,7 @@ DataGrid.prototype.move = function(count){
  */
 DataGrid.prototype.moveTo = function(index){
 	if (index < 0 ){
-		throw new DataOutOfRangeError("Cant move to negative index");
+		throw new DataOutOfRangeError("Cant moveCurrentRow to negative index");
 	}
 	if (index > this._data.length - 1 ){
 		throw new DataOutOfRangeError("Move index out of range");
@@ -198,6 +198,24 @@ DataGrid.prototype._getVisibleDownForRow = function(row){
 
 DataGrid.prototype._getRelative = function(row, offset){
 	return this._data[row.current + offset];
+};
+/**
+ * removes element by index
+ * @param index
+ */
+DataGrid.prototype.remove = function(index){
+	var prev = this._data[index].previous;
+	this._data.splice(index, 1);
+	for (var i = index; i < this._data.length; i++){
+		/** @type DataRow */
+		var elem = this._data[i];
+		elem.previous = prev;
+		elem.previousVisible = prev;
+		elem.next = i + 1;
+		elem.nextVisible = i + 1;
+		elem.current = i;
+		prev = i;
+	}
 };
 
 DataGrid.on("columnsChanged", DataGrid.prototype._columnsChanged);

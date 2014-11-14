@@ -8,7 +8,7 @@ Util.extend(TabBar, Container);
 TabBar.type = "TabBar";
 TabBar.funcs = {};
 
-TabBar.addProperty("selectedTab", false,{type:"Tab"});
+TabBar.prototype.selectedTab = TabBar.addProperty("selectedTab", false,{type:"Tab"});
 
 TabBar.funcs.selectedTabChanged = function(tab){
 	if (tab) {
@@ -68,4 +68,4 @@ TabBar.prototype._removed = function(tab) {
 
 TabBar.on("selectedTabChanged", TabBar.funcs.selectedTabChanged);
 //TabBar.on("collapsableChanged", TabBar.funcs.updateCollapsable);
-//TabBar.addProperty("header", true,{type:"boolean"});
+//TabBar.prototype.header = TabBar.addProperty("header", true,{type:"boolean"});

@@ -7,7 +7,7 @@ var Splitter = function(){
 };
 Util.extend(Splitter,FormElement);
 Splitter.type = "Splitter";
-FormElement.addProperty("percent",100, {type:"float"});
+FormElement.prototype.percent = FormElement.addProperty("percent",100, {type:"float"});
 /**
  * overriding component builder
  * @override

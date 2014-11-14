@@ -4,14 +4,14 @@ var TimeGraphBar = function(timeGraph) {
 };
 Util.extend(TimeGraphBar, BaseObject);
 
-TimeGraphBar.addProperty("backgroundColor","#ff0000");
-TimeGraphBar.addProperty("borderColor","#ff0000");
-TimeGraphBar.addProperty("time","");
-TimeGraphBar.addProperty("length",0);
-TimeGraphBar.addProperty("line","default");
-TimeGraphBar.addProperty("height",20);
-TimeGraphBar.addProperty("top",0);
-TimeGraphBar.addProperty("timeGraph",false);
+TimeGraphBar.prototype.backgroundColor = TimeGraphBar.addProperty("backgroundColor","#ff0000");
+TimeGraphBar.prototype.borderColor = TimeGraphBar.addProperty("borderColor","#ff0000");
+TimeGraphBar.prototype.time = TimeGraphBar.addProperty("time","");
+TimeGraphBar.prototype.length = TimeGraphBar.addProperty("length",0);
+TimeGraphBar.prototype.line = TimeGraphBar.addProperty("line","default");
+TimeGraphBar.prototype.height = TimeGraphBar.addProperty("height",20);
+TimeGraphBar.prototype.top = TimeGraphBar.addProperty("top",0);
+TimeGraphBar.prototype.timeGraph = TimeGraphBar.addProperty("timeGraph",false);
 
 TimeGraphBar.prototype.build = function(timeGraph) {
 	this.timeGraph = timeGraph;

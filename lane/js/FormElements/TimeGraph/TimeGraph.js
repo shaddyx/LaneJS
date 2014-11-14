@@ -4,9 +4,9 @@ var TimeGraph = function() {
 };
 
 Util.extend(TimeGraph, FormElement);
-TimeGraph.addProperty("data",[]);
-TimeGraph.addProperty("xRatio",0.000001);
-TimeGraph.addProperty("yRatio",1);
+TimeGraph.prototype.data = TimeGraph.addProperty("data",[]);
+TimeGraph.prototype.xRatio = TimeGraph.addProperty("xRatio",0.000001);
+TimeGraph.prototype.yRatio = TimeGraph.addProperty("yRatio",1);
 
 TimeGraph.prototype._afterDraw = function(){
 	this.graphCanvas = this._elements.drawBox;

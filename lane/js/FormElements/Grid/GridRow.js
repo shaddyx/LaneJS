@@ -7,9 +7,9 @@ var GridRow = function(grid) {
 };
 Util.extend(GridRow, BaseObject);
 GridRow.type = "GridRow";
-GridRow.addProperty("skin",false);
-GridRow.addProperty("height",false);
-GridRow.addProperty("rowIndex", 0);
+GridRow.prototype.skin = GridRow.addProperty("skin",false);
+GridRow.prototype.height = GridRow.addProperty("height",false);
+GridRow.prototype.rowIndex = GridRow.addProperty("rowIndex", 0);
 
 GridRow.prototype.width = function(value) {
 	this._element.width(value);
@@ -87,7 +87,7 @@ GridRow.prototype.render = function(dataRow){
 	for (var i = 0; i < this._grid._columns.length; i++){
 		var name = this._grid._columns[i]._v.dataColumn._v.name;
 		//
-		//	todo: move this to cells clean/render method
+		//	todo: moveCurrentRow this to cells clean/render method
 		//
 		if (dataRow != undefined){
 			if (dataRow.data[name] == undefined){

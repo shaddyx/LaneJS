@@ -3,8 +3,8 @@ var TimeGraphRuler = function(timeGraph) {
 	this.type = 'TimeGraphRuler';
 };
 Util.extend(TimeGraphRuler, BaseObject);
-TimeGraphRuler.addProperty("top",0);
-TimeGraphRuler.addProperty("timeGraph",false);
+TimeGraphRuler.prototype.top = TimeGraphRuler.addProperty("top",0);
+TimeGraphRuler.prototype.timeGraph = TimeGraphRuler.addProperty("timeGraph",false);
 
 TimeGraphRuler.prototype.build = function(timeGraph) {
 	this.timeGraph = timeGraph;

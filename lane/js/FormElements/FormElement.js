@@ -1,10 +1,6 @@
 /**
  * @constructor
  * @arguments BaseObject
- * @property {number} opacity
- * @property {string} name
- * @property {BoxElement} inner
- * @property {boolean} isDrawn
  */
 var FormElement = function(){
 	BaseObject.call(this);
@@ -19,31 +15,31 @@ Util.extend(FormElement,BaseObject);
 FormElement.type = "FormElement";
 FormElement.funcs = {};
 FormElement.idCounter = 0;
-FormElement.addProperty("opacity",1);
-FormElement.addProperty("name","");
-FormElement.addProperty("parent",false);
-FormElement.addProperty("inner",false);
-FormElement.addProperty("img", false, {type:"image"});
-FormElement.addProperty("hint", false, {type:"string"});
-FormElement.addProperty("outer",false);
-FormElement.addProperty("isDrawn",false);
-FormElement.addProperty("width",0);
-FormElement.addProperty("height",20);
-FormElement.addProperty("minWidth",0);
-FormElement.addProperty("minHeight",0);
-FormElement.addProperty("hs",false);
-FormElement.addProperty("vs",false);
-FormElement.addProperty("visible",true);
-FormElement.addProperty("skin","def");
-FormElement.addProperty("caption","");
-FormElement.addProperty("captionWidth",0);
-FormElement.addProperty("sizeRatio",100);
-FormElement.addProperty("margin",[0,0,0,0]);
-FormElement.addProperty("enabled",true);
-FormElement.addProperty("contextMenu",false);
-FormElement.addProperty("styleClass",false);
-FormElement.addProperty("logicalParent",false);
-FormElement.addProperty("focus",false);
+FormElement.prototype.opacity = FormElement.addProperty("opacity",1);
+FormElement.prototype.name = FormElement.addProperty("name","");
+FormElement.prototype.parent = FormElement.addProperty("parent",false);
+FormElement.prototype.inner = FormElement.addProperty("inner",false);
+FormElement.prototype.img = FormElement.addProperty("img", false, {type:"image"});
+FormElement.prototype.hint = FormElement.addProperty("hint", false, {type:"string"});
+FormElement.prototype.outer = FormElement.addProperty("outer",false);
+FormElement.prototype.isDrawn = FormElement.addProperty("isDrawn",false);
+FormElement.prototype.width = FormElement.addProperty("width",0);
+FormElement.prototype.height = FormElement.addProperty("height",20);
+FormElement.prototype.minWidth = FormElement.addProperty("minWidth",0);
+FormElement.prototype.minHeight = FormElement.addProperty("minHeight",0);
+FormElement.prototype.hs = FormElement.addProperty("hs",false);
+FormElement.prototype.vs = FormElement.addProperty("vs",false);
+FormElement.prototype.visible = FormElement.addProperty("visible",true);
+FormElement.prototype.skin = FormElement.addProperty("skin","def");
+FormElement.prototype.caption = FormElement.addProperty("caption","");
+FormElement.prototype.captionWidth = FormElement.addProperty("captionWidth",0);
+FormElement.prototype.sizeRatio = FormElement.addProperty("sizeRatio",100);
+FormElement.prototype.margin = FormElement.addProperty("margin",[0,0,0,0]);
+FormElement.prototype.enabled = FormElement.addProperty("enabled",true);
+FormElement.prototype.contextMenu = FormElement.addProperty("contextMenu",false);
+FormElement.prototype.styleClass = FormElement.addProperty("styleClass",false);
+FormElement.prototype.logicalParent = FormElement.addProperty("logicalParent",false);
+FormElement.prototype.focus = FormElement.addProperty("focus",false);
 
 
 FormElement.currentFocus = false;

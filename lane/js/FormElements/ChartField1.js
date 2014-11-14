@@ -4,17 +4,17 @@ var ChartField = function() {
 Util.extend(ChartField, Canvas);
 ChartField.type = "ChartField";
 ChartField.func = {};
-ChartField.addProperty("data",undefined);
-ChartField.addProperty("xLineOffset",20);
-ChartField.addProperty("yLineOffset",40);
-ChartField.addProperty("xTextOffset",10);
-ChartField.addProperty("yTextOffset",10);
-ChartField.addProperty("options",{});
-ChartField.addProperty("showYLabels",true);
-ChartField.addProperty("guideLineWidth",20);
-ChartField.addProperty("xStep",50);
-ChartField.addProperty("scaleX",true);
-ChartField.addProperty("showXLabels",false);
+ChartField.prototype.data = ChartField.addProperty("data",undefined);
+ChartField.prototype.xLineOffset = ChartField.addProperty("xLineOffset",20);
+ChartField.prototype.yLineOffset = ChartField.addProperty("yLineOffset",40);
+ChartField.prototype.xTextOffset = ChartField.addProperty("xTextOffset",10);
+ChartField.prototype.yTextOffset = ChartField.addProperty("yTextOffset",10);
+ChartField.prototype.options = ChartField.addProperty("options",{});
+ChartField.prototype.showYLabels = ChartField.addProperty("showYLabels",true);
+ChartField.prototype.guideLineWidth = ChartField.addProperty("guideLineWidth",20);
+ChartField.prototype.xStep = ChartField.addProperty("xStep",50);
+ChartField.prototype.scaleX = ChartField.addProperty("scaleX",true);
+ChartField.prototype.showXLabels = ChartField.addProperty("showXLabels",false);
 
 ChartField.func.afterDraw = function(){
 	this._elements.canvas.on("parentVisibleChanged", this.refresh, this);

@@ -6,9 +6,9 @@ Tab.type = "Tab";
 Tab.funcs = {};
 
 Tab.setDefault("visible", false);
-Tab.addProperty("selected", false,{type:"boolean"});
-Tab.addProperty("tabBar", false,{type:"TabBar"});
-Tab.addProperty("tabVisible", true,{type:"boolean"});
+Tab.prototype.selected = Tab.addProperty("selected", false,{type:"boolean"});
+Tab.prototype.tabBar = Tab.addProperty("tabBar", false,{type:"TabBar"});
+Tab.prototype.tabVisible = Tab.addProperty("tabVisible", true,{type:"boolean"});
 
 Tab.funcs.selectedChanged = function(){
 	this.visible(this._v.selected);

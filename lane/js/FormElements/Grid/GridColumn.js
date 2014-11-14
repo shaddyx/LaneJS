@@ -4,15 +4,15 @@ var GridColumn = function(grid) {
 };
 Util.extend(GridColumn, BaseObject);
 GridColumn.type = "GridColumn";
-GridColumn.addProperty("columnType","text");
-GridColumn.addProperty("dataColumn",null);
-GridColumn.addProperty("skin","def");
-GridColumn.addProperty("width", 10);
-GridColumn.addProperty("index", 0);
-GridColumn.addProperty("minWidth", 10);
-GridColumn.addProperty("caption", "");
-GridColumn.addProperty("hs", "");
-//GridColumn.addProperty("rightBoundPos", 0);
+GridColumn.prototype.columnType = GridColumn.addProperty("columnType","text");
+GridColumn.prototype.dataColumn = GridColumn.addProperty("dataColumn",null);
+GridColumn.prototype.skin = GridColumn.addProperty("skin","def");
+GridColumn.prototype.width = GridColumn.addProperty("width", 10);
+GridColumn.prototype.index = GridColumn.addProperty("index", 0);
+GridColumn.prototype.minWidth = GridColumn.addProperty("minWidth", 10);
+GridColumn.prototype.caption = GridColumn.addProperty("caption", "");
+GridColumn.prototype.hs = GridColumn.addProperty("hs", "");
+//GridColumn.prototype.rightBoundPos = GridColumn.addProperty("rightBoundPos", 0);
 
 
 GridColumn.on("widthBeforeChanged", function(val){

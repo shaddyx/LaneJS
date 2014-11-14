@@ -5,8 +5,8 @@ var Canvas = function() {
 Util.extend(Canvas, Panel);
 Canvas.type = "Canvas";
 Canvas.func = {};
-Canvas.addProperty("drawColor","#000000",{type:"color"});
-Canvas.addProperty("lineWidth",1,{type:"int", changedAlways:true});
+Canvas.prototype.drawColor = Canvas.addProperty("drawColor","#000000",{type:"color"});
+Canvas.prototype.lineWidth = Canvas.addProperty("lineWidth",1,{type:"int", changedAlways:true});
 Canvas.on("afterDraw", function(){
 	if (!this._elements.canvas.htmlElement.getContext){
 		G_vmlCanvasManager.initElement(this._elements.canvas.htmlElement);

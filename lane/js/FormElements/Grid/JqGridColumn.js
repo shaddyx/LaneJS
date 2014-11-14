@@ -6,14 +6,14 @@ JqGridColumn.type = "JqGridColumn";
 JqGridColumn.func = {};
 
 
-JqGridColumn.addProperty("name", "");
-JqGridColumn.addProperty("caption", "");
-JqGridColumn.addProperty("width", 0);
-JqGridColumn.addProperty("index", "");
-JqGridColumn.addProperty("align", "right");
-JqGridColumn.addProperty("sortType", "");
-JqGridColumn.addProperty("sortable", false);
-JqGridColumn.addProperty("formatter", false);
+JqGridColumn.prototype.name = JqGridColumn.addProperty("name", "");
+JqGridColumn.prototype.caption = JqGridColumn.addProperty("caption", "");
+JqGridColumn.prototype.width = JqGridColumn.addProperty("width", 0);
+JqGridColumn.prototype.index = JqGridColumn.addProperty("index", "");
+JqGridColumn.prototype.align = JqGridColumn.addProperty("align", "right");
+JqGridColumn.prototype.sortType = JqGridColumn.addProperty("sortType", "");
+JqGridColumn.prototype.sortable = JqGridColumn.addProperty("sortable", false);
+JqGridColumn.prototype.formatter = JqGridColumn.addProperty("formatter", false);
 
 JqGridColumn.prototype.toJqGridModel = function(){
 	var model = {

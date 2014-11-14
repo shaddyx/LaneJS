@@ -3,7 +3,7 @@ var HourPicker = function() {
 };
 Util.extend(HourPicker, InputElement);
 HourPicker.type = "HourPicker";
-//HourPicker.addProperty("value","",{type:"text"});
+//HourPicker.prototype.value = HourPicker.addProperty("value","",{type:"text"});
 HourPicker.setDefault("value", "", {type:"int"});
 HourPicker.func = {};
 HourPicker.func.afterDraw = function() {

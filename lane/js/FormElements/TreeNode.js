@@ -43,14 +43,14 @@ var TreeNode = function(params){
 
 Util.extend(TreeNode, BaseObject);
 TreeNode.type = "TreeNode";
-TreeNode.addProperty("text", undefined);
-TreeNode.addProperty("img", undefined);
-TreeNode.addProperty("opened", undefined);
-TreeNode.addProperty("last", false);
-TreeNode.addProperty("bgColor", false);
-TreeNode.addProperty("selected", false);
-TreeNode.addProperty("checked", false);
-TreeNode.addProperty("canBeChecked", false);
+TreeNode.prototype.text = TreeNode.addProperty("text", undefined);
+TreeNode.prototype.img = TreeNode.addProperty("img", undefined);
+TreeNode.prototype.opened = TreeNode.addProperty("opened", undefined);
+TreeNode.prototype.last = TreeNode.addProperty("last", false);
+TreeNode.prototype.bgColor = TreeNode.addProperty("bgColor", false);
+TreeNode.prototype.selected = TreeNode.addProperty("selected", false);
+TreeNode.prototype.checked = TreeNode.addProperty("checked", false);
+TreeNode.prototype.canBeChecked = TreeNode.addProperty("canBeChecked", false);
 TreeNode.on("canBeCheckedChanged", function(value) {
 	this.checkboxElement.style.display = value?"block":"none";
 });

@@ -10,7 +10,7 @@ GridCell.type = "GridCell";
 GridCell._props = {
 	backgroundColor:"inherit"
 };
-GridCell.addProperty("columnName", "");
+GridCell.prototype.columnName = GridCell.addProperty("columnName", "");
 
 GridCell.buildCell = function(column, row){
 	var obj;

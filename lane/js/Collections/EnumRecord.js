@@ -4,7 +4,7 @@ var EnumRecord = function(){
 
 Util.extend(EnumRecord,BaseObject);
 EnumRecord.type = "EnumRecord";
-EnumRecord.addProperty("values", []);
+EnumRecord.prototype.values = EnumRecord.addProperty("values", []);
 
 EnumRecord.prototype.add = function(obj){
 	

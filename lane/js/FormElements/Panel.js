@@ -4,7 +4,7 @@ var Panel = function() {
 };
 Util.extend(Panel, Container);
 Panel.type = "Panel";
-Panel.addProperty("borderRadius", [0,0,0,0], {type:"array"});
-Panel.addProperty("backgroundColor", "none", {type:"color"});
-Panel.addProperty("borderColor", "#000", {type:"color"});
-Panel.addProperty("borderWidth", [0,0,0,0], {type:"array"});
+Panel.prototype.borderRadius = Panel.addProperty("borderRadius", [0,0,0,0], {type:"array"});
+Panel.prototype.backgroundColor = Panel.addProperty("backgroundColor", "none", {type:"color"});
+Panel.prototype.borderColor = Panel.addProperty("borderColor", "#000", {type:"color"});
+Panel.prototype.borderWidth = Panel.addProperty("borderWidth", [0,0,0,0], {type:"array"});
