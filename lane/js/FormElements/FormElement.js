@@ -15,7 +15,7 @@ Util.extend(FormElement,BaseObject);
 FormElement.type = "FormElement";
 FormElement.funcs = {};
 FormElement.idCounter = 0;
-FormElement.prototype.opacity = FormElement.addProperty("opacity",1);
+FormElement.prototype.opacity = FormElement.addProperty("opacity", true, {type:"boolean"});
 FormElement.prototype.name = FormElement.addProperty("name","");
 FormElement.prototype.parent = FormElement.addProperty("parent",false);
 FormElement.prototype.inner = FormElement.addProperty("inner",false);

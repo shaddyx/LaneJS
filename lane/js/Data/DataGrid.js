@@ -51,21 +51,12 @@ DataGrid.prototype.add = function(row){
 		}
 	}
 	
-	var dataUnit = new DataRow({
-		data:row, 
-		previous:currentIndex,
-		previousVisible:currentIndex,
-		current:this._data.length,
-		next:undefined,
-		nextVisible:undefined,
-		visible:true,
-		node:false,
-		dataGrid:this,
-		opened:true,
-		level:0,
-		parent:false
-	});
-	
+	var dataUnit = new DataRow();
+	dataUnit.data = row;
+	dataUnit.previous = currentIndex;
+	dataUnit.previousVisible = currentIndex;
+	dataUnit.current = this._data.length;
+	dataUnit.dataGrid = this;
 	if (currentLast){
 		currentLast.next = currentIndex + 1;
 	}
@@ -221,7 +212,8 @@ DataGrid.prototype.remove = function(index){
 DataGrid.on("columnsChanged", DataGrid.prototype._columnsChanged);
 
 /**
- * builds dataGrid 
+ * builds dataGrid
+ * @returns DataGrid
  */
 DataGrid.build = function(struct){
 	var dataGrid = new DataGrid();

@@ -2,7 +2,7 @@
  * @@@dependsOn: Grid
  */
 Grid.prototype.mouseWheel = function(e){
-	if (this._v.locked){
+	if (this._v.locked || !this._v.data){
 		return;
 	}
 	if ((-e.direction > 0 && this._v.data.visibleDown() > 1)

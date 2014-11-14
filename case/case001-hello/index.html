@@ -29,6 +29,7 @@
 <script type="text/javascript" src="/lane/js/Collections/Enum.js"></script>    
 <script type="text/javascript" src="/lane/js/Collections/BasicMap.js"></script>    
 <script type="text/javascript" src="/lane/js/Collections/BasicList.js"></script>    
+<script type="text/javascript" src="/lane/js/Collections/EnumRecord.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/FormElement.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/TimeGraph/TimeGraphRuler.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/TimeGraph/TimeGraphBar.js"></script>    
@@ -50,6 +51,7 @@
 <script type="text/javascript" src="/lane/js/Collections/ElementMap.js"></script>    
 <script type="text/javascript" src="/lane/js/Collections/TypedMap.js"></script>    
 <script type="text/javascript" src="/lane/js/skins/Panel.js"></script>    
+<script type="text/javascript" src="/lane/js/skins/PropertiesEditor.js"></script>    
 <script type="text/javascript" src="/lane/js/skins/TabBar.js"></script>    
 <script type="text/javascript" src="/lane/js/skins/ChartField.js"></script>    
 <script type="text/javascript" src="/lane/js/skins/ChartLegend.js"></script>    
@@ -77,6 +79,7 @@
 <script type="text/javascript" src="/lane/js/skins/InputBox.js"></script>    
 <script type="text/javascript" src="/lane/js/skins/TextArea.js"></script>    
 <script type="text/javascript" src="/lane/js/skins/Container.js"></script>    
+<script type="text/javascript" src="/lane/js/FormElements/PropertiesEditor.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/ChartLegend.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/TimeGraph/TimeGraph.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/Input/DirectDropDown.js"></script>    
@@ -233,16 +236,7 @@
 								type:"InputBox",
 								width:200,
 								caption:"InputBox with values",
-								dataType:"boolean",
-								/*values:[
-									1,
-									2,
-									3,
-									4,
-									5,
-									6,
-									7,8,9,0,1,2,3,4,5,6
-								]*/
+								dataType:"boolean"
 							}
 	    				]
 	    			},
@@ -273,16 +267,22 @@
 	    									   }
 	    								   }
 	    							   }, container);
-	    							   
 	    						   }
 	    					   }
 	    				   }
 	    				]
-	    			}
+	    			},
+					{
+						type:"PropertiesEditor",
+						hs:true,
+						vs:true,
+						name:"propertiesEd"
+					}
 	    		]
 	    	}, rootElement);
 	    	win.elements.grid.data(dataGrid);
 	    	window.grid = win.elements.grid;
+			win.elements.propertiesEd.target(window.grid);
 	    });
 	    
     </script>

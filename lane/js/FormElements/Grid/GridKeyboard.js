@@ -2,7 +2,7 @@
  * @@@dependsOn: Grid
  */
 Grid.prototype.keyPressed = function(evt){
-	if (this._v.locked){
+	if (this._v.locked || !this._v.data){
 		return;
 	}
 	var key = evt.keyCode || evt.which;

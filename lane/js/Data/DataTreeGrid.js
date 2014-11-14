@@ -22,21 +22,9 @@ DataTreeGrid.prototype.add = function(rowParams, row){
 	if (typeof row !== "object") {
 		throw new Error("Row must be an object");
 	}
-	var dataUnit = new DataRow({
-		data:row, 
-		previous:-1,
-		previousVisible:-1,
-		current:0,
-		next:undefined,
-		nextVisible:undefined,
-		visible:true,
-		node:false,
-		DataTreeGrid:this,
-		opened:true,
-		level:0,
-		parent:false,
-		lastVisible:-1
-	});
+	var dataUnit = new DataRow();
+	dataUnit.data = row;
+	dataUnit.dataGrid = this;
 	
 	if (rowParams.parent){
 		dataUnit.parent = rowParams.parent;

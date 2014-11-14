@@ -405,6 +405,9 @@ Grid.prototype.getCellContainer = function(rowNumber, colName){
 	});
 	if (found){
 		var cell = this.locked(found.getCellByName(colName));
+		if (!cell){
+			throw new Error("Error, cell with name [" + colName + "] is not exists!");
+		}
 		return cell.returnContainer();
 	} else {
 		this.locked(false);

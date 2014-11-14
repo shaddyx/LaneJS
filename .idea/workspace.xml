@@ -2,57 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a120b5af-7bd9-4235-ab3e-5a5348a08717" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/BaseObject.js" afterPath="$PROJECT_DIR$/lane/js/BaseObject.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/Collections/BasicMap.js" afterPath="$PROJECT_DIR$/lane/js/Collections/BasicMap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/BoxElement/BoxElement.js" afterPath="$PROJECT_DIR$/lane/js/BoxElement/BoxElement.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/Browser.js" afterPath="$PROJECT_DIR$/lane/js/Browser.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Canvas.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Canvas.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/ChartField.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/ChartField.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/ChartField1.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/ChartField1.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/ChartFieldBackup.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/ChartFieldBackup.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/ChartLegend.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/ChartLegend.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Container.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Container.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/Data/DataColumn.js" afterPath="$PROJECT_DIR$/lane/js/Data/DataColumn.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Input/Data/DataElement.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Input/Data/DataElement.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lane/js/FormElements/PropertiesEditor.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lane/js/skins/PropertiesEditor.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/Data/DataGrid.js" afterPath="$PROJECT_DIR$/lane/js/Data/DataGrid.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/Data/DataSource.js" afterPath="$PROJECT_DIR$/lane/js/Data/DataSource.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Input/DirectDropDown.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Input/DirectDropDown.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/Collections/Enum.js" afterPath="$PROJECT_DIR$/lane/js/Collections/Enum.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/Collections/EnumRecord.js" afterPath="$PROJECT_DIR$/lane/js/Collections/EnumRecord.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/FieldSet.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/FieldSet.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/FloatingContainer.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/FloatingContainer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/Data/DataRow.js" afterPath="$PROJECT_DIR$/lane/js/Data/DataRow.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/Data/DataTreeGrid.js" afterPath="$PROJECT_DIR$/lane/js/Data/DataTreeGrid.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/FormElement.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/FormElement.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Grid/Grid.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Grid/Grid.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Grid/GridCell.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Grid/GridCell.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Grid/GridColumn.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Grid/GridColumn.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Grid/GridKeyboard.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Grid/GridKeyboard.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Grid/GridMouse.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Grid/GridMouse.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Grid/GridRow.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Grid/GridRow.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Input/HourPicker.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Input/HourPicker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Image.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Image.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Input/InputBox.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Input/InputBox.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/InputElement.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/InputElement.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Grid/JqGrid.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Grid/JqGrid.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Grid/JqGridColumn.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Grid/JqGridColumn.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Label.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Label.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/MenuItem.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/MenuItem.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Panel.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Panel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/PopupMenu.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/PopupMenu.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Input/Data/RadioButton.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Input/Data/RadioButton.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Input/RadioButtonGroup.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Input/RadioButtonGroup.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Input/Slider.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Input/Slider.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Splitter.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Splitter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Tab.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Tab.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/TabBar.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/TabBar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/TimeGraph/TimeGraph.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/TimeGraph/TimeGraph.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/TimeGraph/TimeGraphBar.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/TimeGraph/TimeGraphBar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/TimeGraph/TimeGraphCaption.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/TimeGraph/TimeGraphCaption.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/TimeGraph/TimeGraphRuler.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/TimeGraph/TimeGraphRuler.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/TreeList.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/TreeList.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/TreeNode.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/TreeNode.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/Collections/TypedMap.js" afterPath="$PROJECT_DIR$/lane/js/Collections/TypedMap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lane/js/FormElements/Window.js" afterPath="$PROJECT_DIR$/lane/js/FormElements/Window.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/case/case001-hello/index.html" afterPath="$PROJECT_DIR$/case/case001-hello/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/case/case007-grid/index.html" afterPath="$PROJECT_DIR$/case/case007-grid/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/case/case008-builder/index.html" afterPath="$PROJECT_DIR$/case/case008-builder/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="boxElement.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -76,45 +39,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="InputBox.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lane/js/skins/InputBox.js">
+      <file leaf-file-name="PropertiesEditor.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lane/js/FormElements/PropertiesEditor.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="1296">
-              <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InputBox.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lane/js/FormElements/Input/InputBox.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="2808">
-              <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1008">
+              <caret line="32" column="3" selection-start-line="32" selection-start-column="3" selection-end-line="32" selection-end-column="3" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BoxElement.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lane/js/BoxElement/BoxElement.js">
+      <file leaf-file-name="BaseObject.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lane/js/BaseObject.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2430" max-vertical-offset="6894">
-              <caret line="150" column="13" selection-start-line="150" selection-start-column="13" selection-end-line="150" selection-end-column="13" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="4266">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Types.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lane/js/Types.js">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/case/case001-hello/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2772">
-              <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.46534654" vertical-offset="4347" max-vertical-offset="5310">
+              <caret line="265" column="52" selection-start-line="265" selection-start-column="52" selection-end-line="265" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataGrid.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lane/js/Data/DataGrid.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4284">
+              <caret line="18" column="64" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="64" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -125,33 +84,9 @@
       <file leaf-file-name="FormElement.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lane/js/FormElements/FormElement.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="7272">
-              <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="7272">
+              <caret line="17" column="87" selection-start-line="17" selection-start-column="87" selection-end-line="17" selection-end-column="87" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Grid.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lane/js/FormElements/Grid/Grid.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="8514">
-              <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataGrid.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lane/js/Data/DataGrid.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6923077" vertical-offset="900" max-vertical-offset="4428">
-              <caret line="86" column="3" selection-start-line="86" selection-start-column="3" selection-end-line="86" selection-end-column="3" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -164,11 +99,18 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/lane/js/FormElements/Grid/Grid.js" />
         <option value="$PROJECT_DIR$/lane/js/methods.js" />
-        <option value="$PROJECT_DIR$/lane/js/FormElements/FormElement.js" />
+        <option value="$PROJECT_DIR$/lane/js/Data/DataRow.js" />
+        <option value="$PROJECT_DIR$/lane/js/Data/DataTreeGrid.js" />
         <option value="$PROJECT_DIR$/lane/js/FormElements/Input/InputBox.js" />
+        <option value="$PROJECT_DIR$/lane/js/FormElements/Grid/Grid.js" />
+        <option value="$PROJECT_DIR$/lane/js/skins/PropertiesEditor.js" />
+        <option value="$PROJECT_DIR$/lane/js/FormElements/Grid/GridMouse.js" />
+        <option value="$PROJECT_DIR$/lane/js/FormElements/Grid/GridKeyboard.js" />
         <option value="$PROJECT_DIR$/lane/js/Data/DataGrid.js" />
+        <option value="$PROJECT_DIR$/case/case001-hello/index.html" />
+        <option value="$PROJECT_DIR$/lane/js/FormElements/PropertiesEditor.js" />
+        <option value="$PROJECT_DIR$/lane/js/FormElements/FormElement.js" />
       </list>
     </option>
   </component>
@@ -176,10 +118,9 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1" />
     <option name="y" value="25" />
-    <option name="width" value="1922" />
-    <option name="height" value="1056" />
+    <option name="width" value="1920" />
+    <option name="height" value="1055" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -204,6 +145,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -253,10 +195,53 @@
               <option name="myItemId" value="lane" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boxElement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boxElement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lane" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FormElements" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boxElement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boxElement" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lane" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -268,14 +253,10 @@
     <property name="FullScreen" value="false" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
-      <method />
-    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <method />
     </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -283,6 +264,10 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -321,15 +306,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="25" width="1922" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="25" width="1920" height="1055" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18177083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18177083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -337,11 +322,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45067498" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45067498" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -370,7 +355,73 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="1296">
           <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
           <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/FormElements/Input/InputBox.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="2808">
+          <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/BoxElement/BoxElement.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2430" max-vertical-offset="6894">
+          <caret line="150" column="13" selection-start-line="150" selection-start-column="13" selection-end-line="150" selection-end-column="13" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/Types.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="2772">
+          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+          <folding>
             <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/FormElements/FormElement.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="7272">
+          <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/FormElements/Grid/Grid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="8514">
+          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/Data/DataGrid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4428">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/skins/InputBox.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="1296">
+          <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -396,7 +447,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="8514">
           <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -408,42 +459,6 @@
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lane/js/FormElements/Grid/Grid.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8514">
-          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lane/js/skins/InputBox.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1080">
-          <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lane/js/FormElements/FormElement.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7272">
-          <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lane/js/FormElements/Input/InputBox.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="2808">
-          <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -462,18 +477,190 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="2322" max-vertical-offset="6894">
           <caret line="150" column="13" selection-start-line="150" selection-start-column="13" selection-end-line="150" selection-end-column="13" />
           <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/Data/DataRow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="702">
+          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/Data/DataTreeGrid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1692">
+          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/skins/InputBox.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1080">
+          <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/FormElements/Input/InputBox.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="756" max-vertical-offset="2790">
+          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/FormElements/Splitter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="936">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/FormElements/Span.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="936">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/FormElements/Panel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.03846154" vertical-offset="0" max-vertical-offset="936">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/FormElements/PopupMenu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.03846154" vertical-offset="0" max-vertical-offset="936">
+          <caret line="2" column="2" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/FormElements/Grid/GridCell.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.232143" vertical-offset="31" max-vertical-offset="2430">
+          <caret line="18" column="33" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/FormElements/Grid/Grid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8568">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/skins/Grid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40384614" vertical-offset="2214" max-vertical-offset="5544">
+          <caret line="144" column="38" selection-start-line="144" selection-start-column="38" selection-end-line="144" selection-end-column="38" />
+          <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="936">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/skins/Button.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3240">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="3" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/skins/PropertiesEditor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="396">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/FormElements/Grid/GridKeyboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34615386" vertical-offset="0" max-vertical-offset="936">
+          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/FormElements/Grid/GridMouse.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09615385" vertical-offset="0" max-vertical-offset="936">
+          <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lane/js/Data/DataGrid.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6923077" vertical-offset="900" max-vertical-offset="4428">
-          <caret line="86" column="3" selection-start-line="86" selection-start-column="3" selection-end-line="86" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4284">
+          <caret line="18" column="64" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="64" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/BaseObject.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4266">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/FormElements/PropertiesEditor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1008">
+          <caret line="32" column="3" selection-start-line="32" selection-start-column="3" selection-end-line="32" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/js/FormElements/FormElement.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="7272">
+          <caret line="17" column="87" selection-start-line="17" selection-start-column="87" selection-end-line="17" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/case/case001-hello/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46534654" vertical-offset="4347" max-vertical-offset="5310">
+          <caret line="265" column="52" selection-start-line="265" selection-start-column="52" selection-end-line="265" selection-end-column="52" />
+          <folding />
         </state>
       </provider>
     </entry>

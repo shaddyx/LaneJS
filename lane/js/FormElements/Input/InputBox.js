@@ -137,7 +137,6 @@ InputBox.prototype._dataTypeBeforeChanged = function(value){
 };
 InputBox.prototype._dataTypeChanged = function(){
 	if (this._v.dataType && this._v.dataType.enumerable){
-		debugger;
 		this.values(this._v.dataType.enumerable);
 	}
 };
