@@ -73,8 +73,12 @@ DataGrid.prototype.moveCurrentRow = function(count){
 	this.moveTo(this._currentRow + count);
 };
 
-
-
+/**
+ * refreshes the view grids if (they are/it) connected
+ */
+DataGrid.prototype.refreshView = function(){
+	this.trigger("dataUpdate");
+};
 /**
  * function moves current focused row
  * @param index

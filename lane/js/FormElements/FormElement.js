@@ -8,6 +8,8 @@ var FormElement = function(){
 	this.outer(new BoxElement());
 	this.inner(this.outer());
 	this._propertyTranslators = {};
+	/** @type FormElement*/
+	this.topElement = false;
 	this.addPropertyTranslator(['opacity','hs', 'vs', {name:'width', back:true}, {name:'height', back:true}, 'sizeRatio', {name: "margin", back:true}, "visible", "minWidth", "minHeight"]);
 	this.logicalChildren = [];
 };
@@ -276,7 +278,7 @@ FormElement._apply = function(el, struct){
 	}
 };
 
-FormElement.build = function(struct, target, map){
+FormElement.build = function(struct, target, map, topElement){
 	var topLevel = false;
 	if (!map) {
 		topLevel = true;
@@ -289,6 +291,10 @@ FormElement.build = function(struct, target, map){
 		throw new Error ("Error building FormElement[" + struct.type + "] not found");
 	}
 	var el = new window[struct.type]();
+	if (!topElement ){
+		topElement = el;
+	}
+	el.topElement = topElement;
 	if (struct.importFrom){
 		if (struct.importFrom instanceof Array){
 			for (var k in struct.importFrom){
@@ -324,7 +330,7 @@ FormElement.build = function(struct, target, map){
 	el.draw({ target: target });
 	if (struct.c) {
 		for (var k in struct.c){
-			this.build(struct.c[k], el, map);
+			this.build(struct.c[k], el, map, topElement);
 		}
 	}
 	el.elements = map;

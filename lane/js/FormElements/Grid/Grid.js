@@ -24,6 +24,10 @@ Grid.triggeringEvents={
 	
 };
 Grid.type = "Grid";
+/**
+ * @function
+ * @return @DataGrid
+ */
 Grid.prototype.data = Grid.addProperty("data", false);
 Grid.prototype.locked = Grid.addProperty("locked", false);
 Grid.prototype.rowWidth = Grid.addProperty("rowWidth", 0);

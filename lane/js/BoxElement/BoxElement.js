@@ -43,6 +43,9 @@ var BoxElement = function(params){
 	/*
 	 * creates an DOM element
 	 */
+	/**
+	 * @type {HTMLElement}
+	 */
 	this.htmlElement = document.createElement(params.tag || 'div');
 	if (params.css){
 		
