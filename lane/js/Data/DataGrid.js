@@ -130,6 +130,16 @@ DataGrid.prototype.size = function(){
 	return this._visible;
 };
 
+DataGrid.prototype.find = function(findFunction){
+	var found = false;
+	this.each(function(row){
+		if (found = findFunction.call(this, row) != undefined){
+			return true;
+		}
+	});
+	return found;
+};
+
 DataGrid.prototype.each = function(callBack){
 	for (var k in this._data){
 		if (callBack(this._data[k]) === true){
