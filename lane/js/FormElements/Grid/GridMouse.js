@@ -16,3 +16,17 @@ Grid.prototype.mouseWheel = function(e){
 Grid.on("afterDraw", function(){
 	this._v.outer.on("mousewheel", this.mouseWheel, this);
 });
+
+Grid.on("cellClicked", function(cell, row){
+	if (this._v.locked) {
+		return;
+	}
+	this.selectedColumn(cell._column.name());
+});
+Grid.on("cellDblClicked", function(cell, row){
+	if (this._v.locked) {
+		return;
+	}
+	this.selectedColumn(cell._column.name());
+	this.trigger("cellEdit", cell, row);
+});

@@ -72,7 +72,14 @@ Grid.prototype.keyPressed = function(evt){
 			}
 			this.render();
 			break;
+		case 13:
+			if (this._v.locked) {
+				return;
+			}
+			this._v.data.getCurrentRow();
 
+			debugger;
+			//this.trigger("cellEdit", cell, row);
 	}
 };
 
