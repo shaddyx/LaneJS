@@ -13,6 +13,10 @@ var PropertiesEditor = function() {
            {
                caption:"value",
                name:"value"
+           },
+           {
+               caption:"type",
+               name:"type"
            }
        ]
     });
@@ -40,8 +44,31 @@ PropertiesEditor.prototype._targetChanged = function(){
 
 
     for (var k in target._baseClass._properties){
-        var record = {name:k, value:target[k]()};
-        this._data.add(record);
+        var type = target._baseClass._properties[k].params.type;
+        if (!type){
+            type = "string";
+        }
+        var record = {name:k, value:target[k](), type:type.toString()};
+        if (!target._baseClass._properties[k].params.hideFromEditor){
+            this._data.add(record);
+        }
+
+    }
+};
+
+PropertiesEditor.prototype.getEditor = function(type){
+    var type = type.name || type;
+    switch (type){
+        case "string":
+            return new InputBox();
+        case "int":
+            return new InputBox();
+        case "boolean":
+            var obj = new InputBox();
+            obj.valueType("boolean");
+            return obj;
+        default:
+            return new InputBox();
     }
 };
 

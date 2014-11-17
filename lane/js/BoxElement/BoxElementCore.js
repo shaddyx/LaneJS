@@ -85,11 +85,14 @@ BoxElement.prototype.build = function(struct, _topEl) {
 					newEl.build(prop[x], _topEl);
 				}
 			}
+		} else if (k === "import") {
+			for (var x in prop){
+				this[x](prop[x]);
+			}
 		} else {
 			if (typeof (this[k]) === 'function') {
 				this[k](prop);
 			} else {
-				debugger;
 				throw new Error("BoxElement error, no such property:" + k);
 			}
 		}

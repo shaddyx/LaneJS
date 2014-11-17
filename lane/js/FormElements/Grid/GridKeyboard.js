@@ -39,6 +39,40 @@ Grid.prototype.keyPressed = function(evt){
 			this._v.data.moveCurrentRow(count);
 			this.render();
 			break;
+		//
+		//	right
+		//
+		case 39:
+
+			var col = this.getColumnByName(this._v.selectedColumn);
+			if (col){
+				if (this._columns[col._v.index + 1]){
+					this.selectedColumn(this._columns[col._v.index + 1]._v.name);
+				} else {
+					this.selectedColumn(this._columns[0]._v.name);
+				}
+
+			} else {
+				this.selectedColumn(false);
+			}
+			this.render();
+			break;
+		case 37:
+
+			var col = this.getColumnByName(this._v.selectedColumn);
+			if (col){
+				if (col._v.index > 0){
+					this.selectedColumn(this._columns[col._v.index - 1]._v.name);
+				} else {
+					this.selectedColumn(this._columns[this._columns.length - 1]._v.name);
+				}
+
+			} else {
+				this.selectedColumn(false);
+			}
+			this.render();
+			break;
+
 	}
 };
 

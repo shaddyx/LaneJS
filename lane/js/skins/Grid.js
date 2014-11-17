@@ -202,9 +202,22 @@ GridCellContainer = {
 	borderColor:"#79B7E7"
 };
 
-GridCellSkin = {};
+GridCellSkin = {
+	__defaults:{
+		style:{
+			cellSelected:{
+				backgroundColor:"#aacccc"
+			},
+			cellUnselected:{
+				backgroundColor:"inherit"
+			}
+		}
+	}
+};
+
 GridCellSkin.def = {
 	text:{
+		import:GridCellSkin.__defaults,
 		cursor:"pointer",
 		c:[
 		   {
@@ -215,17 +228,7 @@ GridCellSkin.def = {
 		]
 	},
 	img:{
-		hAlign:BoxElement.ALIGN.middle,
-		cursor:"pointer",
-		c:[
-		   {
-				name:"img",
-				width:16,
-				height:16
-		   }
-		]
-	},
-	img:{
+		import:GridCellSkin.__defaults,
 		hAlign:BoxElement.ALIGN.middle,
 		cursor:"pointer",
 		c:[
@@ -237,6 +240,7 @@ GridCellSkin.def = {
 		]
 	},
 	checkbox:{
+		import:GridCellSkin.__defaults,
 		hAlign:BoxElement.ALIGN.middle,
 		cursor:"pointer",
 		c:[
@@ -257,6 +261,7 @@ GridCellSkin.def = {
 		]
 	},
 	tree:{
+		import:GridCellSkin.__defaults,
 		cursor:"pointer",
 		c:[
 		   {

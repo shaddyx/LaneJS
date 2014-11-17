@@ -10,6 +10,7 @@ GridRow.type = "GridRow";
 GridRow.prototype.skin = GridRow.addProperty("skin",false);
 GridRow.prototype.height = GridRow.addProperty("height",false);
 GridRow.prototype.rowIndex = GridRow.addProperty("rowIndex", 0);
+GridRow.prototype.selected = GridRow.addProperty("selected", false);
 
 GridRow.prototype.width = function(value) {
 	this._element.width(value);
@@ -93,10 +94,12 @@ GridRow.prototype.render = function(dataRow){
 			if (dataRow.data[name] == undefined){
 				throw new Error ("Column with name " + name + " exists, but no data!");
 			}
+			this._cells[i].selected(this._v.selected && name === this._grid._v.selectedColumn);
 			this._cells[i].value(dataRow.data[name]);
-		} /*else {
-			this._cells[i].caption("");
-		}*/
+
+		} else {
+			this._cells[i].selected(false);
+		}
 	}
 	
 	this._grid.trigger("rowRender", this, dataRow);
@@ -105,7 +108,6 @@ GridRow.prototype.render = function(dataRow){
 GridRow.prototype.getCellByName = function(name){
 	return this._cellsByName[name];
 };
-
 /*GridRow.prototype.setProperty = function(name, value){
 	if (this._element._v[name]!= value){
 		this._changed = this._changed || {};

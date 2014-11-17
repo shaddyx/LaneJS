@@ -11,7 +11,8 @@ GridColumn.prototype.width = GridColumn.addProperty("width", 10);
 GridColumn.prototype.index = GridColumn.addProperty("index", 0);
 GridColumn.prototype.minWidth = GridColumn.addProperty("minWidth", 10);
 GridColumn.prototype.caption = GridColumn.addProperty("caption", "");
-GridColumn.prototype.hs = GridColumn.addProperty("hs", "");
+GridColumn.prototype.hs = GridColumn.addProperty("hs", false);
+GridColumn.prototype.name = GridColumn.addProperty("name", "");
 //GridColumn.prototype.rightBoundPos = GridColumn.addProperty("rightBoundPos", 0);
 
 

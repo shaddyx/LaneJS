@@ -11,6 +11,7 @@ GridCell._props = {
 	backgroundColor:"inherit"
 };
 GridCell.prototype.columnName = GridCell.addProperty("columnName", "");
+GridCell.prototype.selected = GridCell.addProperty("selected", false);
 
 GridCell.buildCell = function(column, row){
 	var obj;
@@ -65,6 +66,7 @@ GridCell.prototype.build = function(){
 	this._element.on("click", this._cellClicked, this);
 	this._element.removeListener("dblClick", this._cellDblClicked, this);
 	this._element.on("dblClick", this._cellDblClicked, this);
+	this.updateSelected();
 };
 
 GridCell.prototype.remove = function(){
@@ -127,3 +129,9 @@ GridCell.prototype.restoreProperties = function(){
 GridCell.prototype.notifyDataUpdate = function(){
 	this._grid._v.data.trigger("dataUpdate");
 };
+
+GridCell.prototype.updateSelected = function(){
+	this._element && this._element.setStyleClassRec(this._v.selected ? "cellSelected" : "cellUnselected");
+};
+
+GridCell.on("selectedChanged", GridCell.prototype.updateSelected);

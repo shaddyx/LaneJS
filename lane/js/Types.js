@@ -14,8 +14,14 @@ var Types = {};
 		check : function(value, strict) {
 			return value;
 		},
-		fromString:function (str){
+		convertFromString:function (str){
 			throw new Error("Error, can't convert [" + this.name + "] from string");
+		},
+		convertToString:function (str){
+			throw new Error("Error, can't convert [" + this.name + "] to string");
+		},
+		toString:function(){
+			return "[lane type " + this.name + "]";
 		},
 		enumerable: false
 	};

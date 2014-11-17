@@ -33,8 +33,8 @@ Grid.prototype.locked = Grid.addProperty("locked", false);
 Grid.prototype.rowWidth = Grid.addProperty("rowWidth", 0);
 Grid.prototype.showHeader = Grid.addProperty("showHeader", true);
 Grid.prototype.showFooter = Grid.addProperty("showFooter", false);
-Grid.prototype.rowHeight = Grid.addProperty("rowHeight", undefined);
-Grid.prototype.selectedColumn = Grid.addProperty("selectedColumn", undefined);
+Grid.prototype.rowHeight = Grid.addProperty("rowHeight", 0);
+Grid.prototype.selectedColumn = Grid.addProperty("selectedColumn", false);
 Grid.prototype.topLine = Grid.addProperty("topLine", false);
 Grid.addProperty("_scrollerShown", false);
 Grid.addProperty("_horzScrollerShown", false);
@@ -192,14 +192,19 @@ Grid.prototype._dataChanged = function(){
 		this._columns.splice(0, 1);
 	}
 	var hsFound = false;
+	var selectedFound = false;
 	for (var k = 0; k < this._v.data._v.columns.length; k++) {
 		var dataCol = this._v.data._v.columns[k];
 		var col = new GridColumn(this);
-		col.index(k);
+		col.index(parseInt(k));
 		col.dataColumn(dataCol);
 		col.columnType(dataCol.columnType());
 		col.caption(dataCol.caption());
 		col.width(dataCol.width());
+		col.name(dataCol.name());
+		if (col._v.name === this._v.selectedColumn){
+			selectedFound = true;
+		}
 		if (dataCol.hs()) {
 			hsFound = true;
 		}
@@ -211,7 +216,9 @@ Grid.prototype._dataChanged = function(){
 		col.buildHelper();
 		this._columns.push(col);
 	}
-	
+	if (!selectedFound && this._columns){
+		this.selectedColumn(this._columns[0].name());
+	}
 	this.reBuild();
 	this._v.data.on("dataUpdate", this.scheduleRender,this);
 };
@@ -358,9 +365,9 @@ Grid.prototype.render = function(){
 	} else if (current.visibleUp() > this._v.topLine.visibleUp() + this._visibleRows - 1){
 		my.topLine(current.getRelative( - this._visibleRows + 1));
 	};
-	
-	
+
 	data.getRows(this._v.topLine, Math.min(this._visibleRows, this._v.topLine.visibleDown()),function(dataRow){
+		my._rows[rowIndex].selected(dataRow.current == dataRow.dataGrid.getCurrentRow().current);
 		my._rows[rowIndex].render(dataRow);
 		my._rows[rowIndex].rowIndex(dataRow.current);
 		rowIndex ++;
@@ -454,8 +461,20 @@ Grid.prototype._updateScrollerVisibility = function(){
 Grid.prototype._updateHorzScrollerVisibility = function(){
 	this._elements.horzScrollContainer && this._elements.horzScrollContainer.visible(this._elements.gridContentContainer.isOverflowedX());
 };
-
-
+/**
+ * returns column by name
+ * @param name
+ * @returns {GridColumn}
+ */
+Grid.prototype.getColumnByName = function(name){
+	for (var k in this._columns) {
+		var dColumn = this._columns[k]._v.name;
+		if (dColumn === name) {
+			return this._columns[k];
+		}
+	}
+	return false;
+}
 Grid.on("rowRender", function(row, dataRow){
 	if (dataRow == undefined) {
 		row.setStyleClass("clean");
@@ -473,3 +492,4 @@ Grid.on(["showHeaderChanged", "showFooterChanged"], Grid.prototype.scheduleReDra
 Grid.on("afterDraw", Grid.prototype._afterDraw);
 Grid.on("dataChanged", Grid.prototype._dataChanged);
 Grid.on("dataBeforeChanged", Grid.prototype._dataBeforeChanged);
+Grid.on("selectedColumnChanged", Grid.prototype.scheduleRender)
