@@ -96,7 +96,7 @@ DataGrid.prototype.moveTo = function(index){
 
 /**
  * Function returns current focused row
- * @returns current row
+ * @returns {DataRow} current row
  */
 DataGrid.prototype.getCurrentRow = function(){
 	if (this._currentRow == undefined && this._data.length){

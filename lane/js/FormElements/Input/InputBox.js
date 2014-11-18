@@ -16,8 +16,8 @@ InputBox.prototype.editable = InputBox.addProperty("editable",true);
 InputBox.func = {};
 InputBox.func.afterDraw = function() {
 	var my = this;
-	this.updateValues();
 	this._input = this._elements.input;
+	this.updateValues();
 	this._updateListeners();
 	this.updatePassword();
 	this.updateValueList();
@@ -25,26 +25,26 @@ InputBox.func.afterDraw = function() {
 };
 
 InputBox.prototype.updateValues = function() {
-	if (this._v.isDrawn && this._elements.input.htmlElement.value != this._v.value){
-		this._elements.input.htmlElement.value = this._v.value.toString();
+	if (this._v.isDrawn && this._elements.input.htmlInnerElement.value !== this._v.value){
+		this._elements.input.htmlInnerElement.value = this._v.value.toString();
 	}
 };
 InputBox.prototype._updateListeners = function(){
 	var my = this;
 	if (browser.ie && parseInt(browser.version) < 10){
-		Util.addListener(this._elements.input.htmlElement,"keyup", function(e) {
+		Util.addListener(this._elements.input.htmlInnerElement,"keyup", function(e) {
 			var me = this;
 			setTimeout(function(){
 	    		return my.trigger("input", me.value);
 	    	},0);
 		});
 	} else {
-		Util.addListener(this._elements.input.htmlElement, "input", function(e){
+		Util.addListener(this._elements.input.htmlInnerElement, "input", function(e){
 			return my.trigger("input", this.value);
 		});
 	}
 	
-	Util.addListener(this._elements.input.htmlElement, "keyup", function(){
+	Util.addListener(this._elements.input.htmlInnerElement, "keyup", function(){
 		my.value(this.value);
 	});
 };
@@ -55,6 +55,7 @@ InputBox.prototype._updateListeners = function(){
  */
 InputBox.prototype._itemSelected = function(col, row){
 	this.value(row.data.field);
+	this._elements.gridContainer.visible(false);
 };
 
 InputBox.prototype.updateValueList = function(){
@@ -64,6 +65,7 @@ InputBox.prototype.updateValueList = function(){
 			/** @type Grid */
 			this._grid = FormElement.build(InputBoxSkin.__grid,this._elements.gridContainer);
 			this._grid.on("cellClicked", this._itemSelected, this);
+			this._grid.on("cellEdit", this._itemSelected, this);
 		}
 		var dataGrid = new DataGrid();
 		dataGrid.columns(DataColumn.build([{
@@ -90,13 +92,14 @@ InputBox.prototype._updateValueListVisibility = function(){
 };
 InputBox.prototype.updatePassword = function(){
 	if (this._v.isDrawn) {
-		var old = this._input.htmlElement;
+		var old = this._input.htmlInnerElement;
+		var oldType = old.getAttribute("type") || "text";
 		var newValue = this._v.password?"password":"text";
-		if (old.getAttribute("type") != newValue){
+		if (oldType != newValue){
 			var container = old.parentNode;
 			var newInput = document.createElement("input");
 			newInput.setAttribute("type",newValue);
-			this._input.htmlElement = newInput;
+			this._input.htmlInnerElement = newInput;
 			var style;
 			if (old.getComputedStyle){
 				style = old.getComputedStyle();
@@ -119,9 +122,9 @@ InputBox.prototype.updatePassword = function(){
 InputBox.prototype._updateEditable = function(){
 	if (this._v.isDrawn){
 		if (!this._v.editable){
-			this._input.htmlElement.setAttribute("readonly","");
+			this._input.htmlInnerElement.setAttribute("readonly","");
 		} else {
-			this._input.htmlElement.removeAttribute("readonly");
+			this._input.htmlInnerElement.removeAttribute("readonly");
 		}
 	}
 };
@@ -148,3 +151,6 @@ InputBox.on("passwordChanged", InputBox.prototype.updatePassword);
 InputBox.on("editable", InputBox.prototype._updateEditable);
 InputBox.on("dataTypeChanged", InputBox.prototype._dataTypeChanged);
 InputBox.on("dataTypeBeforeChanged", InputBox.prototype._dataTypeBeforeChanged);
+InputBox.on(["keydown", "keyup", "keypress"], function(e){
+	this._grid && this._grid.trigger(e.type, e);
+});

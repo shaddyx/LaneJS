@@ -6,7 +6,7 @@ Grid.prototype.keyPressed = function(evt){
 		return;
 	}
 	var key = evt.keyCode || evt.which;
-	console.log("Key pressed:", key);
+	console.log("Grid key pressed:", key);
 	switch (key) {
 		// up
 		case 38:
@@ -57,6 +57,9 @@ Grid.prototype.keyPressed = function(evt){
 			}
 			this.render();
 			break;
+		//
+		//	left
+		//
 		case 37:
 
 			var col = this.getColumnByName(this._v.selectedColumn);
@@ -72,14 +75,16 @@ Grid.prototype.keyPressed = function(evt){
 			}
 			this.render();
 			break;
+		//
+		//	enter
+		//
 		case 13:
 			if (this._v.locked) {
 				return;
 			}
-			this._v.data.getCurrentRow();
-
-			debugger;
-			//this.trigger("cellEdit", cell, row);
+			var col = this.getColumnByName(this._v.selectedColumn);
+			this.trigger("cellEdit", col.name(), this._v.data.getCurrentRow());
+			break;
 	}
 };
 

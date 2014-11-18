@@ -393,27 +393,22 @@ Grid.prototype.render = function(){
 };
 /**
  * returns physical cell by row number (in dataSource) and column name
- * @param rowNumber
+ * @param dataRowindex
  * @param colName
  */
-Grid.prototype.getCellContainer = function(rowNumber, colName){
+Grid.prototype.getCellContainer = function(dataRowindex, colName){
 	var my = this;
 	var data = this._v.data;
-	var diff = rowNumber - data.visibleUp();
-	if (diff < 0) {
-		data.moveTo(rowNumber);
-	} else if (diff > this._visibleRows){
-		data.moveCurrentRow(diff - this._visibleRows + 1);
-	}
+	data.moveTo(dataRowindex);
 	this.render();
-	var rowIndex = 0;
-	var found = undefined;
-	data.getRows(data.getCurrentRow(), Math.min(this._visibleRows, this._v.data.visibleDown()),function(dataRow, currentRow){
-		if (currentRow == rowNumber){
-			found = my._rows[rowIndex];
+	var found = false;
+	for (var k in this._rows){
+		var row = this._rows[k];
+		if (row._v.currentRow && row._v.currentRow.current == dataRowindex){
+			found = row;
+			break;
 		}
-		rowIndex ++;
-	});
+	}
 	if (found){
 		var cell = this.locked(found.getCellByName(colName));
 		if (!cell){
@@ -424,12 +419,16 @@ Grid.prototype.getCellContainer = function(rowNumber, colName){
 		this.locked(false);
 	}
 };
-
+/**
+ * releases locked mode, and re-builds current cell
+ */
 Grid.prototype.releaseCell = function(){
 	var cell = this._v.locked;
-	cell.restoreContainer();
-	this.locked(false);
-	this.render();
+	if (cell){
+		cell.restoreContainer();
+		this.locked(false);
+		this.render();
+	}
 };
 
 Grid.prototype._vScrollerMoved = function(){

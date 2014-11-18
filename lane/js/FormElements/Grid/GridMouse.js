@@ -28,5 +28,5 @@ Grid.on("cellDblClicked", function(cell, row){
 		return;
 	}
 	this.selectedColumn(cell._column.name());
-	this.trigger("cellEdit", cell, row);
+	this.trigger("cellEdit", cell._column.name(), row);
 });

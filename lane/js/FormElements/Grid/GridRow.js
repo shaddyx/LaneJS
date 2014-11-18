@@ -11,6 +11,7 @@ GridRow.prototype.skin = GridRow.addProperty("skin",false);
 GridRow.prototype.height = GridRow.addProperty("height",false);
 GridRow.prototype.rowIndex = GridRow.addProperty("rowIndex", 0);
 GridRow.prototype.selected = GridRow.addProperty("selected", false);
+GridRow.prototype.currentRow = GridRow.addProperty("currentRow", false);
 
 GridRow.prototype.width = function(value) {
 	this._element.width(value);
@@ -85,6 +86,7 @@ GridRow.prototype.getCellByName = function(name){
 };
 
 GridRow.prototype.render = function(dataRow){
+	this.currentRow(dataRow);
 	for (var i = 0; i < this._grid._columns.length; i++){
 		var name = this._grid._columns[i]._v.dataColumn._v.name;
 		//

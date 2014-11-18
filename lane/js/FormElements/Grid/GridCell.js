@@ -64,8 +64,8 @@ GridCell.prototype.build = function(){
 	this._element.drawRec({target:this._row._element});
 	this._element.removeListener("click", this._cellClicked, this);
 	this._element.on("click", this._cellClicked, this);
-	this._element.removeListener("dblClick", this._cellDblClicked, this);
-	this._element.on("dblClick", this._cellDblClicked, this);
+	this._element.removeListener("dblclick", this._cellDblClicked, this);
+	this._element.on("dblclick", this._cellDblClicked, this);
 	this.updateSelected();
 };
 
@@ -77,11 +77,16 @@ GridCell.prototype.remove = function(){
 };
 
 
+/**
+ * @returns {BoxElement}
+ */
 GridCell.prototype.returnContainer = function(){
 	this._element.clear();
 	return this._element;
 };
-
+/**
+ * restores cell
+ */
 GridCell.prototype.restoreContainer = function(){
 	this._element.clear();
 	this.build();

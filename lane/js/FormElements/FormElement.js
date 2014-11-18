@@ -42,6 +42,7 @@ FormElement.prototype.contextMenu = FormElement.addProperty("contextMenu",false)
 FormElement.prototype.styleClass = FormElement.addProperty("styleClass",false, {type:"string"});
 FormElement.prototype.logicalParent = FormElement.addProperty("logicalParent",false);
 FormElement.prototype.focus = FormElement.addProperty("focus",false);
+FormElement.prototype.focusParent = FormElement.addProperty("focusParent",false);
 
 
 FormElement.currentFocus = false;
@@ -160,8 +161,11 @@ FormElement.prototype.draw = function(opts){
 	this.applyHint();
 	this._v.outer.on("click", function(e){
 		if (!e.usedForFocus){
-			FormElement.currentFocus && FormElement.currentFocus.focus(false);
+			if (FormElement.currentFocus && FormElement.currentFocus !== this){
+				FormElement.currentFocus.focus(false);
+			}
 			this.focus(true);
+			this.applyFocus();
 			e.usedForFocus = true;
 		}
 	},this);
@@ -173,7 +177,11 @@ FormElement.prototype.remove = function(){
 		this._v.outer.remove();
 		this.trigger("removed");
 	}
-	
+	if (this._v.focus && this._v.focusparent){
+		if (!this._v.focusparent._v.focus) {
+			this._v.focusparent.focus(true);
+		}
+	}
 };
 
 FormElement.funcs.captionChanged = function(value){
