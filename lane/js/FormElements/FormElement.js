@@ -17,16 +17,16 @@ Util.extend(FormElement,BaseObject);
 FormElement.type = "FormElement";
 FormElement.funcs = {};
 FormElement.idCounter = 0;
-FormElement.prototype.opacity = FormElement.addProperty("opacity", true, {type:"boolean"});
+FormElement.prototype.opacity = FormElement.addProperty("opacity", true, {type:"int"});
 FormElement.prototype.name = FormElement.addProperty("name","");
-FormElement.prototype.parent = FormElement.addProperty("parent",false);
-FormElement.prototype.inner = FormElement.addProperty("inner",false);
+FormElement.prototype.parent = FormElement.addProperty("parent",false,{hideFromEditor:true});
+FormElement.prototype.inner = FormElement.addProperty("inner",false,{hideFromEditor:true});
 FormElement.prototype.img = FormElement.addProperty("img", false, {type:"image"});
 FormElement.prototype.hint = FormElement.addProperty("hint", false, {type:"string"});
-FormElement.prototype.outer = FormElement.addProperty("outer",false);
+FormElement.prototype.outer = FormElement.addProperty("outer",false,{hideFromEditor:true});
 FormElement.prototype.isDrawn = FormElement.addProperty("isDrawn",false, {type:"string", hideFromEditor:true});
-FormElement.prototype.width = FormElement.addProperty("width",0);
-FormElement.prototype.height = FormElement.addProperty("height",20);
+FormElement.prototype.width = FormElement.addProperty("width",0, {type: "number"});
+FormElement.prototype.height = FormElement.addProperty("height",20, {type: "number"});
 FormElement.prototype.minWidth = FormElement.addProperty("minWidth",0, {type:"number"});
 FormElement.prototype.minHeight = FormElement.addProperty("minHeight",0, {type:"number"});
 FormElement.prototype.hs = FormElement.addProperty("hs",false, {type:"boolean"});
@@ -41,7 +41,7 @@ FormElement.prototype.enabled = FormElement.addProperty("enabled",true,{type:"bo
 FormElement.prototype.contextMenu = FormElement.addProperty("contextMenu",false);
 FormElement.prototype.styleClass = FormElement.addProperty("styleClass",false, {type:"string"});
 FormElement.prototype.logicalParent = FormElement.addProperty("logicalParent",false);
-FormElement.prototype.focus = FormElement.addProperty("focus",false);
+FormElement.prototype.focus = FormElement.addProperty("focus",false, {type: "boolean", hideFromEditor:true});
 FormElement.prototype.focusParent = FormElement.addProperty("focusParent",false);
 
 
