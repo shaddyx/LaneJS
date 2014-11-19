@@ -51,48 +51,8 @@ InputBox.prototype._updateListeners = function(){
 		my.value(this.value);
 	});
 };
-/**
- * function calls when item in dropdown selected (private function)
- * @param col - column
- * @param row - row
- */
-InputBox.prototype._itemSelected = function(col, row){
-	this.value(row.data.field);
-	this._elements.gridContainer.visible(false);
-	this.currentFocus(true);
-	this.trigger("editEnd");
-};
 
-InputBox.prototype.updateValueList = function(){
-	if (this._v.values.length){
-		this.editable(false);
-		if (!this._grid){
-			/** @type Grid */
-			this._grid = FormElement.build(InputBoxSkin.__grid,this._elements.gridContainer);
-			this._grid.on("cellClicked", this._itemSelected, this);
-			this._grid.on("cellEdit", this._itemSelected, this);
-			this._grid.focusParent(this);
-		}
-		var dataGrid = new DataGrid();
-		dataGrid.columns(DataColumn.build([{
-			   name:"field",
-			   columnType:"text"
-		}]));
-		for (var i = 0; i < this._v.values.length; i++){
-			dataGrid.add({field:this._v.values[i]});
-    	}
-		
-		this._grid.data(dataGrid);
-		var h = Constants.rowHeight * this._v.values.length;
-		if (h > Constants.maxInputDropDownHeightinRows * Constants.rowHeight){
-			h = Constants.maxInputDropDownHeightinRows * Constants.rowHeight;
-		}
-		this._elements.gridContainer.height(h + 4);
-	} else {
-		this._grid && this._grid.remove();
-		this.editable(true);
-	}
-};
+
 
 InputBox.prototype.updatePassword = function(){
 	if (this._v.isDrawn) {
@@ -122,15 +82,6 @@ InputBox.prototype.updatePassword = function(){
 		}
 	}
 };
-InputBox.prototype._updateEditable = function(){
-	if (this._v.isDrawn){
-		if (!this._v.editable){
-			this._input.htmlInnerElement.setAttribute("readonly","");
-		} else {
-			this._input.htmlInnerElement.removeAttribute("readonly");
-		}
-	}
-};
 
 InputBox.prototype._dataTypeBeforeChanged = function(value){
 	if (typeof (value) === "string"){
@@ -157,11 +108,20 @@ InputBox.prototype._inputBoxKeyListener = function(evt){
 			break;
 	}
 };
+InputBox.prototype._updateEditable = function(){
+	if (this._v.isDrawn){
+		if (!this._v.editable){
+			this._input.htmlInnerElement.setAttribute("readonly","");
+		} else {
+			this._input.htmlInnerElement.removeAttribute("readonly");
+		}
+	}
+};
 
+InputBox.on("editable", InputBox.prototype._updateEditable);
 InputBox.on("afterDraw", InputBox.func.afterDraw);
 InputBox.on("valueChanged", InputBox.prototype.updateValues);
 InputBox.on("passwordChanged", InputBox.prototype.updatePassword);
-InputBox.on("editable", InputBox.prototype._updateEditable);
 InputBox.on("dataTypeChanged", InputBox.prototype._dataTypeChanged);
 InputBox.on("dataTypeBeforeChanged", InputBox.prototype._dataTypeBeforeChanged);
 InputBox.on("keydown", InputBox.prototype._inputBoxKeyListener);

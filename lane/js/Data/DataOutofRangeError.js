@@ -1,5 +1,6 @@
 //
 //@@@ignoreDep: Error
+//@@@dependsOn: Util
 //
 var DataOutOfRangeError = function(reason, nested){
 	Error.call(this, reason);
