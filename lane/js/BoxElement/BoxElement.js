@@ -67,9 +67,6 @@ var BoxElement = function(params){
 	this.__updateHorizontal();
 	this._marginDx = 0;
 	this._marginDy = 0;
-	if (this.id == 264){
-		debugger;
-	}
 };
 
 Util.extend(BoxElement,BaseObject);

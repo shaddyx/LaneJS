@@ -58,7 +58,6 @@ InputBox.prototype._updateListeners = function(){
  */
 InputBox.prototype._itemSelected = function(col, row){
 	this.value(row.data.field);
-	debugger;
 	this._elements.gridContainer.visible(false);
 	this.currentFocus(true);
 	this.trigger("editEnd");
@@ -157,7 +156,14 @@ InputBox.prototype._dataTypeChanged = function(){
 InputBox.on("editStart", function(){
 	this._elements.gridContainer.visible(this._v.values.length);
 });
-
+InputBox.prototype._inputBoxKeyListener = function(evt){
+	var key = evt.keyCode || evt.which;
+	switch (key){
+		case 13:
+			this.trigger("editEnd");
+			break;
+	}
+};
 InputBox.on("focusBeforeChanged", InputBox.prototype._focusBeforeChanged);
 InputBox.on("afterDraw", InputBox.func.afterDraw);
 InputBox.on("valueChanged", InputBox.prototype.updateValues);
@@ -165,6 +171,8 @@ InputBox.on("passwordChanged", InputBox.prototype.updatePassword);
 InputBox.on("editable", InputBox.prototype._updateEditable);
 InputBox.on("dataTypeChanged", InputBox.prototype._dataTypeChanged);
 InputBox.on("dataTypeBeforeChanged", InputBox.prototype._dataTypeBeforeChanged);
+InputBox.on("keydown", InputBox.prototype._inputBoxKeyListener);
 InputBox.on(["keydown", "keyup", "keypress"], function(e){
+
 	this._grid && this._grid.trigger(e.type, e);
 });

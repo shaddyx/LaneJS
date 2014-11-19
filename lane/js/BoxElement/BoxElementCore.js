@@ -244,13 +244,9 @@ BoxElement.prototype.remove = function() {
 		return;
 	}
 	if (this._rootElements){
-		debugger;
 		for (var k in this._rootElements){
 			this._rootElements[k].remove();
 		}
-	}
-	if (!elements[this.id]){
-		debugger;
 	}
 	delete elements[this.id];
 	this.htmlElement.parentNode.removeChild(this.htmlElement);

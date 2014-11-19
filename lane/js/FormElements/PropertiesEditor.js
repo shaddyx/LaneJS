@@ -66,12 +66,24 @@ PropertiesEditor.prototype._cellEdit = function(name, row){
     editor.draw({target:container});
     editor.currentFocus(true);
     editor.focusParent(this);
-
+    var focusFunc = function(value){
+        if (!value){
+            editor.remove();
+        } else {
+            editor.currentFocus(true);
+        }
+    };
+    this.on("focusChanged", focusFunc);
     editor.on("editEnd", function(value){
+        if (!editor){
+            return;
+        }
         row.data.value = editor.value();
         my._v.target[row.data.name](editor.value());
         my._grid.releaseCell();
         editor.remove();
+        editor = false;
+        my.removeListener("focusChanged",focusFunc);
         my._grid.currentFocus(true);
     });
 };

@@ -464,5 +464,4 @@ FormElement._eventListener = function(e){
 Util.addListener(document, "keydown", FormElement._eventListener);
 Util.addListener(document, "keyup", FormElement._eventListener);
 Util.addListener(document, "keypress", FormElement._eventListener);
-		
-//document.oncontextmenu
+
