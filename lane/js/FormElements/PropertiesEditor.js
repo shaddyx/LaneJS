@@ -20,6 +20,7 @@ var PropertiesEditor = function() {
            }
        ]
     });
+    this._grid.focusParent(this);
     this._grid.data(this._data);
     this._grid.on("cellEdit", this._cellEdit, this);
 };
@@ -63,14 +64,15 @@ PropertiesEditor.prototype._cellEdit = function(name, row){
     editor.hs(true);
     editor.value(row.data.value);
     editor.draw({target:container});
-    editor.focus(true);
-    editor.on("focusChanged", function(value){
-        if (!value){
-            row.data.value = editor.value();
-            my._v.target[row.data.name](editor.value());
-            my._grid.releaseCell();
-            editor.remove();
-        }
+    editor.currentFocus(true);
+    editor.focusParent(this);
+
+    editor.on("editEnd", function(value){
+        row.data.value = editor.value();
+        my._v.target[row.data.name](editor.value());
+        my._grid.releaseCell();
+        editor.remove();
+        my._grid.currentFocus(true);
     });
 };
 /**

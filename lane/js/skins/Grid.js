@@ -97,6 +97,15 @@ GridSkin.def = {
 			horizontal:true,
 			hs:true,
 			vs:true,
+			borderWidth:[1,1,1,1],
+			style:{
+				focused:{
+					borderColor:"#79B7E7",
+				},
+				unFocused:{
+					borderColor:"#cccccc"
+				}
+			},
 			c:[
 				{
 					hs:true,

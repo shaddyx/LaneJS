@@ -6,4 +6,4 @@ bin/*.pid
 *.pyc
 nohup.out
 /bin/
-.idea/
+.idea/*

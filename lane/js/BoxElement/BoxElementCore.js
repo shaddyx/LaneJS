@@ -330,8 +330,12 @@ BoxElement.prototype.restoreProperties = function(backup) {
 };
 BoxElement.prototype.enumChilds = function(callBack){
 	for(var k in this.c){
-		callBack(this.c[k]);
-		this.c[k].enumChilds(callBack);
+		var res = callBack.call(this.c[k], this.c[k]);
+		if (res === undefined){
+			this.c[k].enumChilds(callBack);
+		} else if (res === false) {
+			break;
+		}
 	}
 };
 BoxElement.prototype.enumParents = function(callBack){

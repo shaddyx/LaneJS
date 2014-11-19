@@ -43,6 +43,7 @@ FormElement.prototype.styleClass = FormElement.addProperty("styleClass",false, {
 FormElement.prototype.logicalParent = FormElement.addProperty("logicalParent",false);
 FormElement.prototype.focus = FormElement.addProperty("focus",false, {type: "boolean", hideFromEditor:true});
 FormElement.prototype.focusParent = FormElement.addProperty("focusParent",false);
+FormElement.prototype.currentFocus = FormElement.addProperty("currentFocus",false);
 
 
 FormElement.currentFocus = false;
@@ -61,6 +62,14 @@ FormElement.prototype.enumParents = function(callBack){
 	if (this._v.parent){
 		return this._v.parent.enumParents(callBack);
 	}
+};
+FormElement.prototype.enumFocusParents = function(callBack){
+	if (callBack.call(this, this) === false) {
+		return false;
+	}
+
+	var parent = this._v.focusParent || this._v.parent;
+	parent && parent.enumFocusParents(callBack);
 };
 
 FormElement.prototype.addPropertyTranslator = function(property){
@@ -124,7 +133,6 @@ FormElement.prototype.buildComponent = function(struct){
 			} else {
 				throw new Error("Error, cant build component [" + this.type + "], property:" + k + " is undefined");
 			}
-			
 		}
 	}
 	this._elements = this._v.outer.build(struct);
@@ -145,7 +153,6 @@ FormElement.prototype.draw = function(opts){
 		opts.target.appendChild(this._v.outer);
 	}
 	this.isDrawn(true);
-	
 	this._v.outer.elementType(this.type);
 	this._v.outer.htmlElement.setAttribute("elementSkin", this._v.skin || "def");
 	if (this instanceof Container){
@@ -159,14 +166,10 @@ FormElement.prototype.draw = function(opts){
 	}, this);
 	this.trigger("afterDraw",opts);
 	this.applyHint();
+	this.applyFocusStyle();
 	this._v.outer.on("click", function(e){
-		if (!e.usedForFocus){
-			if (FormElement.currentFocus && FormElement.currentFocus !== this){
-				FormElement.currentFocus.focus(false);
-			}
-			this.focus(true);
-			this.applyFocus();
-			e.usedForFocus = true;
+		if (!this._v.focus){
+			this.currentFocus(true);
 		}
 	},this);
 };
@@ -177,12 +180,9 @@ FormElement.prototype.remove = function(){
 		this._v.outer.remove();
 		this.trigger("removed");
 	}
-	if (this._v.focus && this._v.focusparent){
-		if (!this._v.focusparent._v.focus) {
-			this._v.focusparent.focus(true);
-		}
-	}
+	this.releaseFocus();
 };
+
 
 FormElement.funcs.captionChanged = function(value){
 	if (this._v.isDrawn && this._elements.caption){
@@ -220,7 +220,7 @@ FormElement.funcs.afterDraw = function(){
 	this._v.outer.htmlElement.setAttribute("formElementId",this.id);
 	this._captionWidthChanged();
 	this.refreshEnabled();
-	//this.applyStyleClass();
+	this.applyStyleClass();
 	this.applyImg();
 };
 
@@ -239,10 +239,14 @@ FormElement.prototype.triggerRec = function(name, event){
 	}
 	this.trigger(name,event);
 };
-
-FormElement.prototype.eachParent = function(callBack){
-	if (this._v.parent && callBack.call(this._v.parent, this._v.parent) !==false){
-		this._v.parent.eachParent(callBack);
+FormElement.prototype.enumChilds = function(callBack){
+	for(var k in this.c){
+		var res = callBack(this.c[k]);
+		if (res === undefined){
+			this.c[k].enumChilds(callBack);
+		} else if (res === false) {
+			break;
+		}
 	}
 };
 
@@ -253,11 +257,10 @@ FormElement.prototype.refreshEnabled = function(){
 	}
 };
 
-FormElement.prototype.applyFocus = function(){
-	if (this._v.focus){
-		FormElement.currentFocus = this;
-	}
+FormElement.prototype.applyFocusStyle = function(){
+	this.styleClass(this._v.focus ? "focused" : "unFocused");
 };
+
 FormElement.prototype.applyHint = function(){
 	if (this._v.isDrawn){
 		if (this._v.hint){
@@ -265,13 +268,66 @@ FormElement.prototype.applyHint = function(){
 		} else {
 			this._v.outer.htmlElement.removeAttribute("title");
 		}
-		
 	}
 };
+FormElement.prototype.applyStyleClass = function(){
+	var my = this;
+	this._v.outer.enumChilds(function(){
+		if (my._v.inner === this){
+			return true;
+		}
+		this.styleClass(my._v.styleClass);
+	});
+};
+
+FormElement.prototype.applyCurrentFocus = function(value){
+	if (value){
+		if (FormElement.currentFocus && FormElement.currentFocus !== this && FormElement.currentFocus._v.currentFocus){
+			FormElement.currentFocus.currentFocus(false);
+		}
+		FormElement.currentFocus = this;
+		this.enumFocusParents(function(){
+			this.focus(true);
+		});
+	} else {
+		this.enumFocusParents(function(){
+			this.focus(false);
+		});
+		if (FormElement.currentFocus === this){
+			FormElement.currentFocus = false;
+		}
+	}
+};
+
+FormElement.prototype.releaseFocus = function(){
+	if (this._v.focus){
+		this.enumChilds(function(el){
+			if (el._v.focus){
+				el.focus(false);
+			}
+			if (el._v.currentFocus){
+				el.currentFocus(false);
+			}
+		});
+		var my = this;
+		this.enumFocusParents(function(el){
+			if (el === my){
+				el.currentFocus(true);
+				return false;
+			}
+		});
+	}
+};
+
+FormElement.on("visibleChanged", function(value){
+	if (!value) this.releaseFocus();
+});
+
 FormElement.on("hintChanged", FormElement.prototype.applyHint);
-FormElement.on("focusChanged", FormElement.prototype.applyFocus);
+FormElement.on("currentFocusChanged", FormElement.prototype.applyCurrentFocus);
+FormElement.on("focusChanged", FormElement.prototype.applyFocusStyle);
 FormElement.on("imgChanged", FormElement.prototype.applyImg);
-//FormElement.on("styleClassChanged",FormElement.prototype.applyStyleClass);
+FormElement.on("styleClassChanged",FormElement.prototype.applyStyleClass);
 FormElement.on("enabledChanged",FormElement.prototype.refreshEnabled);
 FormElement.on("captionWidthChanged",FormElement.prototype._captionWidthChanged);
 FormElement.on("captionChanged",FormElement.funcs.captionChanged);
@@ -400,7 +456,7 @@ FormElement.on("contextMenu", FormElement.func.contextMenu);
 
 FormElement._eventListener = function(e){
 	if (FormElement.currentFocus){
-		return FormElement.currentFocus.enumParents(function(parent){
+		return FormElement.currentFocus.enumFocusParents(function(parent){
 			return parent.trigger(e.type, e);
 		});
 	}

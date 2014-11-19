@@ -1,6 +1,7 @@
 /*
  * Box element properties
  * @@@dependsOn: BoxElement
+ * @@@dependsOn: BoxElementCore
  */
 BoxElement.on("captionChanged",function(value){
 	if (value){

@@ -23,12 +23,15 @@ InputBox.func.afterDraw = function() {
 	this.updateValueList();
 	this._updateEditable();
 };
-
 InputBox.prototype.updateValues = function() {
 	if (this._v.isDrawn && this._elements.input.htmlInnerElement.value !== this._v.value){
 		this._elements.input.htmlInnerElement.value = this._v.value.toString();
 	}
 };
+/**
+ * function updates listeners for input html element
+ * @private
+ */
 InputBox.prototype._updateListeners = function(){
 	var my = this;
 	if (browser.ie && parseInt(browser.version) < 10){
@@ -56,6 +59,8 @@ InputBox.prototype._updateListeners = function(){
 InputBox.prototype._itemSelected = function(col, row){
 	this.value(row.data.field);
 	this._elements.gridContainer.visible(false);
+	this.currentFocus(true);
+	this.trigger("editEnd");
 };
 
 InputBox.prototype.updateValueList = function(){
@@ -66,6 +71,7 @@ InputBox.prototype.updateValueList = function(){
 			this._grid = FormElement.build(InputBoxSkin.__grid,this._elements.gridContainer);
 			this._grid.on("cellClicked", this._itemSelected, this);
 			this._grid.on("cellEdit", this._itemSelected, this);
+			this._grid.focusParent(this);
 		}
 		var dataGrid = new DataGrid();
 		dataGrid.columns(DataColumn.build([{
@@ -87,9 +93,13 @@ InputBox.prototype.updateValueList = function(){
 		this.editable(true);
 	}
 };
-InputBox.prototype._updateValueListVisibility = function(){
-	this._elements.gridContainer.visible(this._v.focus && this._v.values.length);
+
+InputBox.prototype._focusBeforeChanged = function(focus){
+	if (focus && !this._v.focus){
+		this.trigger("editStart");
+	}
 };
+
 InputBox.prototype.updatePassword = function(){
 	if (this._v.isDrawn) {
 		var old = this._input.htmlInnerElement;
@@ -143,8 +153,11 @@ InputBox.prototype._dataTypeChanged = function(){
 		this.values(this._v.dataType.enumerable);
 	}
 };
+InputBox.on("editStart", function(){
+	this._elements.gridContainer.visible(this._v.values.length);
+});
 
-InputBox.on("focusChanged", InputBox.prototype._updateValueListVisibility);
+InputBox.on("focusBeforeChanged", InputBox.prototype._focusBeforeChanged);
 InputBox.on("afterDraw", InputBox.func.afterDraw);
 InputBox.on("valueChanged", InputBox.prototype.updateValues);
 InputBox.on("passwordChanged", InputBox.prototype.updatePassword);
