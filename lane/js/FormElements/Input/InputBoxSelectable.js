@@ -17,6 +17,7 @@ InputBox.prototype._itemSelected = function(col, row){
 	this.value(row.data.field);
 	this._elements.gridContainer.visible(false);
 	this.currentFocus(true);
+	debugger;
 	this.trigger("editEnd");
 };
 

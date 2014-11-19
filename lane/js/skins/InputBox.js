@@ -29,6 +29,7 @@ InputBoxSkin.def = {
 		   borderWidth:[1,1,1,1],
 		   borderRadius:[3,3,3,3],
 		   name:"inputContainer",
+		   horizontal:true,
 		   c:[
 		       {
 				   margin:[0,0,0,3],
@@ -41,6 +42,17 @@ InputBoxSkin.def = {
 				   hs:true,
 				   minWidth:30,
 				   name:"input"
+			   },
+			   {
+				   vs:true,
+				   lineHeight:10,
+				   caption:"...",
+				   cursor:"pointer",
+				   name:"selectStartButton",
+				   borderColor:"#ccc",
+				   borderRadius:[2,2,2,2],
+				   borderWidth:[1,1,1,1],
+				   margin:[2,2,2,2]
 			   }
 		  ],
 		  rootBuild:[
