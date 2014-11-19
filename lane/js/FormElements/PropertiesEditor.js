@@ -43,8 +43,6 @@ PropertiesEditor.prototype._targetChanged = function(){
     if (!target || !this._v.isDrawn){
         return;
     }
-
-
     for (var k in target._baseClass._properties){
         var type = target._baseClass._properties[k].params.type;
         if (!type){
@@ -54,7 +52,6 @@ PropertiesEditor.prototype._targetChanged = function(){
         if (!target._baseClass._properties[k].params.hideFromEditor){
             this._data.add(record);
         }
-
     }
 };
 PropertiesEditor.prototype._cellEdit = function(name, row){

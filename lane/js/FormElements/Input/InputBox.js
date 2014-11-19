@@ -94,12 +94,6 @@ InputBox.prototype.updateValueList = function(){
 	}
 };
 
-InputBox.prototype._focusBeforeChanged = function(focus){
-	if (focus && !this._v.focus){
-		this.trigger("editStart");
-	}
-};
-
 InputBox.prototype.updatePassword = function(){
 	if (this._v.isDrawn) {
 		var old = this._input.htmlElement;
@@ -116,7 +110,6 @@ InputBox.prototype.updatePassword = function(){
 			} else {
 				style = old.currentStyle;
 			}
-			
 			for (var k in style){
 				try{
 					newInput.style[k] = style[k];
@@ -164,7 +157,7 @@ InputBox.prototype._inputBoxKeyListener = function(evt){
 			break;
 	}
 };
-InputBox.on("focusBeforeChanged", InputBox.prototype._focusBeforeChanged);
+
 InputBox.on("afterDraw", InputBox.func.afterDraw);
 InputBox.on("valueChanged", InputBox.prototype.updateValues);
 InputBox.on("passwordChanged", InputBox.prototype.updatePassword);
