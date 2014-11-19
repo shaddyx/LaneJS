@@ -2,12 +2,6 @@
  * @@@dependsOn: InputBox
  */
 
-InputBox.prototype._focusBeforeChanged = function(focus){
-	if (focus && !this._v.focus){
-		this.trigger("editStart");
-	}
-};
-
 /**
  * function calls when item in dropdown selected (private function)
  * @param col - column
@@ -17,8 +11,7 @@ InputBox.prototype._itemSelected = function(col, row){
 	this.value(row.data.field);
 	this._elements.gridContainer.visible(false);
 	this.currentFocus(true);
-	debugger;
-	this.trigger("editEnd");
+	this.trigger("selectionEnd");
 };
 
 
@@ -52,6 +45,10 @@ InputBox.prototype.updateValueList = function(){
 		this.editable(true);
 	}
 };
+InputBox.on("selectionStart", function(){
+	this._elements.gridContainer.visible(this._v.values.length);
+});
 
-
-InputBox.on("focusBeforeChanged", InputBox.prototype._focusBeforeChanged);
+InputBox.prototype.startSelection = function(){
+	this.trigger("selectionStart");
+};

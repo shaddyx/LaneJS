@@ -22,6 +22,7 @@ InputBox.func.afterDraw = function() {
 	this.updatePassword();
 	this.updateValueList();
 	this._updateEditable();
+	this._elements.selectStartButton.on("click", this.startSelection, this);
 };
 InputBox.prototype.updateValues = function() {
 	if (this._v.isDrawn && this._elements.input.htmlInnerElement.value !== this._v.value){
@@ -97,14 +98,12 @@ InputBox.prototype._dataTypeChanged = function(){
 		this.values(this._v.dataType.enumerable);
 	}
 };
-InputBox.on("editStart", function(){
-	this._elements.gridContainer.visible(this._v.values.length);
-});
+
 InputBox.prototype._inputBoxKeyListener = function(evt){
 	var key = evt.keyCode || evt.which;
 	switch (key){
 		case 13:
-			this.trigger("editEnd");
+			this.trigger("selectionEnd");
 			break;
 	}
 };
@@ -126,6 +125,5 @@ InputBox.on("dataTypeChanged", InputBox.prototype._dataTypeChanged);
 InputBox.on("dataTypeBeforeChanged", InputBox.prototype._dataTypeBeforeChanged);
 InputBox.on("keydown", InputBox.prototype._inputBoxKeyListener);
 InputBox.on(["keydown", "keyup", "keypress"], function(e){
-
 	this._grid && this._grid.trigger(e.type, e);
 });
