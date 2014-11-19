@@ -244,25 +244,32 @@ BoxElement.prototype.remove = function() {
 		return;
 	}
 	if (this._rootElements){
+		debugger;
 		for (var k in this._rootElements){
 			this._rootElements[k].remove();
 		}
 	}
-	this._removed = true;
+	if (!elements[this.id]){
+		debugger;
+	}
 	delete elements[this.id];
-	this.parent.htmlElement.removeChild(this.htmlElement);
+	this.htmlElement.parentNode.removeChild(this.htmlElement);
 	var index = this.neibourIndex;
 	this.parent.c.splice(index,1);
+	this._removed = true;
 	for (var k in this.parent.c){
 		this.parent.c[k].neibourIndex = k;
 	}
-	var toRemove = [];
+	while (this.c[0]){
+		this.c[0].remove();
+	}
+	/*var toRemove = [];
 	for ( var k in this.c) {
 		toRemove.push(this.c[k]);
 	}
 	for ( var k in toRemove) {
 		toRemove[k].remove();
-	}
+	}*/
 	this.trigger("removed");
 	
 };

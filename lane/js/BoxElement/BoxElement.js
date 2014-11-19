@@ -46,6 +46,7 @@ var BoxElement = function(params){
 	/**
 	 * @type {HTMLElement}
 	 */
+
 	this.htmlElement = document.createElement(params.tag || 'div');
 	if (params.css){
 		
@@ -54,9 +55,10 @@ var BoxElement = function(params){
 	this.htmlElement.boxElement = this;
 	this.htmlElement.setAttribute("id",this.id);
 
-	/*
-	 * for standard element we don't need create 2 elements
-	 */
+	//
+	//  for standard element we don't need create 2 elements
+	//
+
 	this.htmlInnerElement = this.htmlElement;
 	this.parent = false;
 	this.c = [];
@@ -65,6 +67,9 @@ var BoxElement = function(params){
 	this.__updateHorizontal();
 	this._marginDx = 0;
 	this._marginDy = 0;
+	if (this.id == 264){
+		debugger;
+	}
 };
 
 Util.extend(BoxElement,BaseObject);

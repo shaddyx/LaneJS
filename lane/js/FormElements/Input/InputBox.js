@@ -58,6 +58,7 @@ InputBox.prototype._updateListeners = function(){
  */
 InputBox.prototype._itemSelected = function(col, row){
 	this.value(row.data.field);
+	debugger;
 	this._elements.gridContainer.visible(false);
 	this.currentFocus(true);
 	this.trigger("editEnd");
@@ -102,14 +103,14 @@ InputBox.prototype._focusBeforeChanged = function(focus){
 
 InputBox.prototype.updatePassword = function(){
 	if (this._v.isDrawn) {
-		var old = this._input.htmlInnerElement;
+		var old = this._input.htmlElement;
 		var oldType = old.getAttribute("type") || "text";
 		var newValue = this._v.password?"password":"text";
 		if (oldType != newValue){
 			var container = old.parentNode;
 			var newInput = document.createElement("input");
 			newInput.setAttribute("type",newValue);
-			this._input.htmlInnerElement = newInput;
+			this._input.htmlElement = newInput;
 			var style;
 			if (old.getComputedStyle){
 				style = old.getComputedStyle();
