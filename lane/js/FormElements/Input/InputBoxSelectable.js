@@ -9,11 +9,8 @@
  */
 InputBox.prototype._itemSelected = function(col, row){
 	this.value(row.data.field);
-	this._elements.gridContainer.visible(false);
-	this.currentFocus(true);
-	this.trigger("selectionEnd");
+	this.endSelection();
 };
-
 
 InputBox.prototype.updateValueList = function(){
 	if (this._v.values.length){
@@ -23,6 +20,7 @@ InputBox.prototype.updateValueList = function(){
 			this._grid = FormElement.build(InputBoxSkin.__grid,this._elements.gridContainer);
 			this._grid.on("cellClicked", this._itemSelected, this);
 			this._grid.on("cellEdit", this._itemSelected, this);
+			this._grid.on("focusChanged", this._selectionFocusChange, this);
 			this._grid.focusParent(this);
 		}
 		var dataGrid = new DataGrid();
@@ -45,10 +43,25 @@ InputBox.prototype.updateValueList = function(){
 		this.editable(true);
 	}
 };
-InputBox.on("selectionStart", function(){
-	this._elements.gridContainer.visible(this._v.values.length);
-});
 
 InputBox.prototype.startSelection = function(){
-	this.trigger("selectionStart");
+	if (this._grid){
+		this._elements.gridContainer.visible(this._v.values.length);
+		this._grid.currentFocus(true);
+		this.trigger("selectionStart");
+	}
 };
+
+InputBox.prototype._selectionFocusChange = function(value){
+	if (!value){
+		this.endSelection();
+	}
+};
+
+InputBox.prototype.endSelection = function(){
+	if (this._grid) {
+		this._elements.gridContainer.visible(false);
+		this.currentFocus(true);
+		this.trigger("selectionEnd");
+	}
+}

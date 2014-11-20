@@ -9,7 +9,8 @@ var PropertiesEditorSkin = {
         c:[
             {
                 hs:true,
-                vs:true
+                vs:true,
+                name:"gridContainer"
             }
         ]
     }

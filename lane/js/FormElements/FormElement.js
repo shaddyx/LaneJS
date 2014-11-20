@@ -63,14 +63,6 @@ FormElement.prototype.enumParents = function(callBack){
 		return this._v.parent.enumParents(callBack);
 	}
 };
-FormElement.prototype.enumFocusParents = function(callBack){
-	if (callBack.call(this, this) === false) {
-		return false;
-	}
-
-	var parent = this._v.focusParent || this._v.parent;
-	parent && parent.enumFocusParents(callBack);
-};
 
 FormElement.prototype.addPropertyTranslator = function(property){
 	if (property instanceof Array){
@@ -168,7 +160,13 @@ FormElement.prototype.draw = function(opts){
 	this.applyHint();
 	this.applyFocusStyle();
 	this._v.outer.on("click", function(e){
-		if (!this._v.focus){
+		if (FormElement._focusLock){
+			return;
+		}
+		FormElement._focusLock = setTimeout(function(){
+			FormElement._focusLock = false;
+		}, 0);
+		if (!this._v.currentFocus){
 			this.currentFocus(true);
 		}
 	},this);
@@ -257,9 +255,6 @@ FormElement.prototype.refreshEnabled = function(){
 	}
 };
 
-FormElement.prototype.applyFocusStyle = function(){
-	this.styleClass(this._v.focus ? "focused" : "unFocused");
-};
 
 FormElement.prototype.applyHint = function(){
 	if (this._v.isDrawn){
@@ -280,52 +275,7 @@ FormElement.prototype.applyStyleClass = function(){
 	});
 };
 
-FormElement.prototype.applyCurrentFocus = function(value){
-	if (value){
-		if (FormElement.currentFocus && FormElement.currentFocus !== this && FormElement.currentFocus._v.currentFocus){
-			FormElement.currentFocus.currentFocus(false);
-		}
-		FormElement.currentFocus = this;
-		this.enumFocusParents(function(){
-			this.focus(true);
-		});
-	} else {
-		this.enumFocusParents(function(){
-			this.focus(false);
-		});
-		if (FormElement.currentFocus === this){
-			FormElement.currentFocus = false;
-		}
-	}
-};
-
-FormElement.prototype.releaseFocus = function(){
-	if (this._v.focus){
-		this.enumChilds(function(el){
-			if (el._v.focus){
-				el.focus(false);
-			}
-			if (el._v.currentFocus){
-				el.currentFocus(false);
-			}
-		});
-		var my = this;
-		this.enumFocusParents(function(el){
-			if (el === my){
-				el.currentFocus(true);
-				return false;
-			}
-		});
-	}
-};
-
-FormElement.on("visibleChanged", function(value){
-	if (!value) this.releaseFocus();
-});
-
 FormElement.on("hintChanged", FormElement.prototype.applyHint);
-FormElement.on("currentFocusChanged", FormElement.prototype.applyCurrentFocus);
-FormElement.on("focusChanged", FormElement.prototype.applyFocusStyle);
 FormElement.on("imgChanged", FormElement.prototype.applyImg);
 FormElement.on("styleClassChanged",FormElement.prototype.applyStyleClass);
 FormElement.on("enabledChanged",FormElement.prototype.refreshEnabled);

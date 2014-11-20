@@ -29,7 +29,7 @@ PropertiesEditor.type = "PropertiesEditor";
 PropertiesEditor.prototype.target = PropertiesEditor.addProperty("target",false);
 
 PropertiesEditor.prototype._afterDraw = function(){
-    this._grid.draw({target:this._v.inner});
+    this._grid.draw({target:this._elements.gridContainer});
     this._targetChanged();
 };
 
@@ -61,17 +61,19 @@ PropertiesEditor.prototype._cellEdit = function(name, row){
     editor.hs(true);
     editor.value(row.data.value);
     editor.draw({target:container});
+    editor.focusParent(this._grid);
     editor.currentFocus(true);
-    editor.focusParent(this);
-    var focusFunc = function(value){
+
+    /*var focusFunc = function(value){
         if (!value){
+            debugger;
             editor.remove();
         } else {
             editor.currentFocus(true);
         }
     };
-    this.on("focusChanged", focusFunc);
-    editor.on("editEnd", function(value){
+    this.on("focusChanged", focusFunc);*/
+    /*editor.on("endSelection", function(value){
         if (!editor){
             return;
         }
@@ -82,7 +84,7 @@ PropertiesEditor.prototype._cellEdit = function(name, row){
         editor = false;
         my.removeListener("focusChanged",focusFunc);
         my._grid.currentFocus(true);
-    });
+    });*/
 };
 /**
  * returns editor
@@ -106,7 +108,6 @@ PropertiesEditor.prototype.getEditor = function(type){
             return new InputBox();
     }
 };
-
 PropertiesEditor.on("afterDraw",PropertiesEditor.prototype._afterDraw);
 PropertiesEditor.on("targetChanged",PropertiesEditor.prototype._targetChanged);
 

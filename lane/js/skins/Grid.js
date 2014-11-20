@@ -100,7 +100,8 @@ GridSkin.def = {
 			borderWidth:[1,1,1,1],
 			style:{
 				focused:{
-					borderColor:"#79B7E7",
+					//borderColor:"#79B7E7"
+					borderColor:"#FF0000"
 				},
 				unFocused:{
 					borderColor:"#cccccc"

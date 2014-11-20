@@ -17,6 +17,7 @@ InputBoxSkin.def = {
 	horizontal:true,
 	cursor:"pointer",
 	vAlign:BoxElement.ALIGN.middle,
+	backgroundColor:"#FFFFFF",
 	c:[
 	   {
 		   name:"caption"
