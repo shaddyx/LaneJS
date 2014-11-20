@@ -325,4 +325,12 @@ Util.cloneType = function(name, parentType, checkFunction){
 	}
 	return newType;
 };
+Util.lastUniqId = new Date().getTime();
+Util.uniqId = function(){
+	var id = (new Date()).getTime();
+	if (id <= Util.lastUniqId){
+		id = ++Util.lastUniqId;
+	}
+	return id.toString(16);
+};
 

@@ -43,6 +43,7 @@ PropertiesEditor.prototype._targetChanged = function(){
     if (!target || !this._v.isDrawn){
         return;
     }
+    this._data.clear();
     for (var k in target._baseClass._properties){
         var type = target._baseClass._properties[k].params.type;
         if (!type){

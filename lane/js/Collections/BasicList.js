@@ -55,6 +55,8 @@ BasicList.prototype.clear = function(){
 
 BasicList.prototype.each = function(callBack){
 	for (var i = 0; i < this._data.length; i++){
-		callBack(this._data[i]);
+		if (callBack(this._data[i]) === false){
+			return false;
+		}
 	}
 };

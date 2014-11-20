@@ -5,6 +5,7 @@
 var FormElement = function(){
 	BaseObject.call(this);
 	this.id = FormElement.idCounter++;
+	//this.id = Util.uniqId();
 	this.outer(new BoxElement());
 	this.inner(this.outer());
 	this._propertyTranslators = {};
@@ -19,12 +20,12 @@ FormElement.funcs = {};
 FormElement.idCounter = 0;
 FormElement.prototype.opacity = FormElement.addProperty("opacity", true, {type:"int"});
 FormElement.prototype.name = FormElement.addProperty("name","");
-FormElement.prototype.parent = FormElement.addProperty("parent",false,{hideFromEditor:true});
-FormElement.prototype.inner = FormElement.addProperty("inner",false,{hideFromEditor:true});
+FormElement.prototype.parent = FormElement.addProperty("parent",false,{hideFromEditor:true, export:false});
+FormElement.prototype.inner = FormElement.addProperty("inner",false,{hideFromEditor:true, export:false});
 FormElement.prototype.img = FormElement.addProperty("img", false, {type:"image"});
 FormElement.prototype.hint = FormElement.addProperty("hint", false, {type:"string"});
-FormElement.prototype.outer = FormElement.addProperty("outer",false,{hideFromEditor:true});
-FormElement.prototype.isDrawn = FormElement.addProperty("isDrawn",false, {type:"string", hideFromEditor:true});
+FormElement.prototype.outer = FormElement.addProperty("outer",false,{hideFromEditor:true, export:false});
+FormElement.prototype.isDrawn = FormElement.addProperty("isDrawn",false, {type:"string", hideFromEditor:true, export:false});
 FormElement.prototype.width = FormElement.addProperty("width",0, {type: "number"});
 FormElement.prototype.height = FormElement.addProperty("height",20, {type: "number"});
 FormElement.prototype.minWidth = FormElement.addProperty("minWidth",0, {type:"number"});
@@ -39,11 +40,11 @@ FormElement.prototype.sizeRatio = FormElement.addProperty("sizeRatio",100,{type:
 FormElement.prototype.margin = FormElement.addProperty("margin",[0,0,0,0]);
 FormElement.prototype.enabled = FormElement.addProperty("enabled",true,{type:"boolean"});
 FormElement.prototype.contextMenu = FormElement.addProperty("contextMenu",false);
-FormElement.prototype.styleClass = FormElement.addProperty("styleClass",false, {type:"string"});
-FormElement.prototype.logicalParent = FormElement.addProperty("logicalParent",false);
-FormElement.prototype.focus = FormElement.addProperty("focus",false, {type: "boolean", hideFromEditor:true});
-FormElement.prototype.focusParent = FormElement.addProperty("focusParent",false);
-FormElement.prototype.currentFocus = FormElement.addProperty("currentFocus",false);
+FormElement.prototype.styleClass = FormElement.addProperty("styleClass",false, {type:"string", export:false});
+FormElement.prototype.logicalParent = FormElement.addProperty("logicalParent",false, {export:false});
+FormElement.prototype.focus = FormElement.addProperty("focus",false, {type: "boolean", hideFromEditor:true, export:false});
+FormElement.prototype.focusParent = FormElement.addProperty("focusParent",false, {export:false});
+FormElement.prototype.currentFocus = FormElement.addProperty("currentFocus",false, {export:false});
 
 
 FormElement.currentFocus = false;
@@ -237,16 +238,7 @@ FormElement.prototype.triggerRec = function(name, event){
 	}
 	this.trigger(name,event);
 };
-FormElement.prototype.enumChilds = function(callBack){
-	for(var k in this.c){
-		var res = callBack(this.c[k]);
-		if (res === undefined){
-			this.c[k].enumChilds(callBack);
-		} else if (res === false) {
-			break;
-		}
-	}
-};
+
 
 FormElement.prototype.refreshEnabled = function(){
 	if (this._v.isDrawn){

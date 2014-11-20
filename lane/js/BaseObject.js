@@ -230,3 +230,43 @@ BaseObject.prototype.applyValues = function(struct) {
 		}
 	}
 };
+
+BaseObject.prototype.export = function(props){
+	var my = this;
+	props = props || {};
+	var obj = {
+		type:this.type
+	};
+	for (var k in this._baseClass._properties){
+		if (this._baseClass._properties[k].params.export === false){
+			continue;
+		}
+		if (this._baseClass._properties[k].def !== this._v[k]){
+			obj[k] = this._v[k];
+		}
+	}
+	if (this instanceof FormElement){
+		if (props.id){
+			obj.id = this.id;
+		}
+	}
+	if (this instanceof Container){
+		var c = [];
+		this._v.children.each(function(elem){
+			c.push(elem.export(props))
+		});
+		if (c.length){
+			obj.c = c;
+		}
+	} else if (this instanceof BoxElement){
+		var c = [];
+		for (var k in this.c){
+			c.push(this.c[k].export(props))
+		}
+		if (c.length){
+			obj.c = c;
+		}
+	}
+
+	return obj;
+};

@@ -1,7 +1,7 @@
 <html>
     <head>
     	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    	<link href="css/style.css" rel="stylesheet">
+		<link href="/lane/css/style.css" rel="stylesheet" >
     </head>
     <body>
     <!-- includeLaneExample -->
@@ -134,7 +134,7 @@
 <script type="text/javascript" src="/lane/js/FormElements/Grid/GridKeyboard.js"></script>    
 <script type="text/javascript" src="/lane/js/FormElements/Charts/Curve.js"></script>    
 <!-- /includeLaneExample -->
-    	
+	<script type="text/javascript" src="/case/case008-builder/js/main.js"></script>
     </body>
     <script type="text/javascript">
     	var OldErrorObject = Error;
@@ -145,150 +145,106 @@
     	SpeedUtil.start("main cycle");
     	var rootElement = BoxElement.virtualizeBody();
     	var win;
-    	var dataGrid = new DataGrid();
-    	var columns = DataColumn.build([{
-			   name:"a",
-			   caption:"blablabla",
-			   columnType:"img"
-		   },
-		   {
-			   name:"cb",
-			   caption:"Checkbox",
-			   columnType:"checkbox"
-		   },
-		   {
-			   name:"c",
-			   caption:"blablablb",
-			   width:50
-		   },
-		   {
-			   name:"d",
-			   caption:"blablablb",
-			   width:300
-		   },
-		   {
-			   name:"e",
-			   caption:"blablablb"
-		   },
-		   {
-			   name:"f",
-			   caption:"blablablb"
-		   },
-		   {
-			   name:"g",
-			   caption:"blablablb"
-		   }
-		]);
-    	dataGrid.columns(columns);
-    	for (var i = 0; i<10; i++){
-    		dataGrid.add({a:"https://cdn2.iconfinder.com/data/icons/crystalproject/Open-Office-Icons/stock_3d-apply-16.png", cb:Math.random() * 2 > 1, c:i, d:i, e:i, f:i, g:i});
-    	}
-		var ib = new InputBox();
     	browser.imageBase("../../lane/");
     	browser.on("ready",function(){
 	    	win = FormElement.build({
-	    		type:"FieldSet",
-	    		caption:"lane.js window",
-	    		/*width:1900,
-	    		height:1000,*/
+	    		type:"Container",
 	    		hs:true,
 	    		vs:true,
+				horizontal:true,
 	    		c:[
-	    			{
-	    				type:"Container",
-	    				hs:true,
-	    				horizontal:true,
-	    				c:[
-		    				{
-		    					type:"Label",
-		    					width:200,
-		    					value:"lane.js label element"
-		    				},
-		    				{
-		    					type:"Button",
-		    					width:200,
-		    					caption:"lane.js button"
-		    				},
-                        ]
-	    			},
-	    			{
-	    				type:"Container",
-	    				hs:true,
-	    				horizontal:true,
-	    				c:[
-		    				{
-		    					type:"Label",
-		    					width:400,
-		    					value:"look at the page source to see how it is done :)"
-		    				}
-                        ]
-	    			},
-	    			{
-	    				type:"Panel",
-	    				hs:true,
-	    				borderColor:"#000",
-	    				borderWidth:[1,1,1,1],
-	    				overflow:BoxElement.OVERFLOW_MODE.overflowX,
-	    				c:[
+					{
+						type:"Container",
+						width:300,
+						vs:true,
+						c:[
 							{
-								type:"Button",
-								width:600,
-								//hs:true,
-								caption:"test for overflowed button"
+								type:"FieldSet",
+								caption:"Component tree",
+								hs:true,
+								vs:true,
+								c:[
+									{
+										type:"TreeList",
+										name:"componentTree",
+										hs:true,
+										vs:true
+									}
+								]
 							},
 							{
-								type:"InputBox",
-								width:200,
-								caption:"InputBox with values",
-								values:[
-									1,
-									2,
-									3,
-									4,
-									5,
-									6,
-									7,8,9,0,1,2,3,4,5,6
+								type:"PropertiesEditor",
+								caption:"Component properties",
+								name:"componentProperties",
+								hs:true,
+								vs:true,
+								contextMenu:{
+									type:"PopupMenu",
+									c:[
+										{
+											type:"MenuItem",
+											caption:"Add component",
+											name:"add"
+
+										},
+										{
+											type:"MenuItem",
+											caption:"remove component",
+											name:"remove"
+										}
+									]
+								}
+							}
+						]
+					},
+					{
+						type:"FieldSet",
+						hs:true,
+						vs:true,
+						caption:"Application model",
+						margin:[5,5,5,5],
+						c:[
+							{
+								type:"Container",
+								name:"mainContainer",
+								hs:true,
+								vs:true,
+								c:[
+									{
+										type:"Button",
+										caption:"Test button",
+										hs:true
+									},
+									{
+										type:"Button",
+										caption:"Test button1",
+										hs:true
+									},
+									{
+										type:"FieldSet",
+										name:"testFS",
+										c:[
+											{
+												type:"InputBox",
+												width:300,
+												name:"input1",
+												value:"adgshfjkadjsghfadkjsf"
+											},
+											{
+												type:"InputBox",
+												width:300,
+												name:"input2",
+												value:"adgshfjkadjsghfadkjsf"
+											}
+										]
+									}
 								]
 							}
-	    				]
-	    			},
-	    			{
-	    				type:"Grid",
-	    				name:"grid",
-	    				hs:true,
-	    				vs:true
-	    			},
-	    			{
-	    				type:"Panel",
-	    				hs:true,
-	    				c:[
-	    				   {
-	    					   type:"Button",
-	    					   caption:"Test",
-	    					   on:{
-	    						   click:function(){
-	    							   var container = grid.getCellContainer(1,"b");
-	    							   FormElement.build({
-	    								   type:"InputBox",
-	    								   hs:true,
-	    								   on:{
-	    									   focusChanged:function(value){
-	    										   if (!value){
-	    											   grid.releaseCell();
-	    										   }
-	    									   }
-	    								   }
-	    							   }, container);
-	    							   
-	    						   }
-	    					   }
-	    				   }
-	    				]
-	    			}
+						]
+					}
 	    		]
 	    	}, rootElement);
-	    	win.elements.grid.data(dataGrid);
-	    	window.grid = win.elements.grid;
+			init();
 	    });
 	    
     </script>
