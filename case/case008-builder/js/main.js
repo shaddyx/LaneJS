@@ -1,27 +1,31 @@
 function init(){
-    //win.elements.componentTree
-    //win.elements.mainContainer
     var componentTree = new ComponentTree();
-    win.elements.componentTree.on("selectedNodeChanged", function(value){
-        var component = win.elements.mainContainer.getElementById(value.id);
-        win.elements.componentProperties.target(component);
+    mainWin.elements.componentTree.on("selectedNodeChanged", function(value){
+        var component = mainWin.elements.mainContainer.getElementById(value.id);
+        mainWin.elements.componentProperties.target(component);
     });
     componentTree.refresh();
+
 };
 
 
 var ComponentTree = function(){
+    mainWin.elements.addButton.on("click", this.openAddWindow, this);
+};
 
+
+ComponentTree.prototype.openAddWindow = function(){
+    FormElement.build(addWindow, rootElement);
 };
 
 ComponentTree.prototype.refresh = function(){
     var data = this.buildDataForCt();
     console.log(data);
-    win.elements.componentTree.setData(data);
+    mainWin.elements.componentTree.setData(data);
 };
 
 ComponentTree.prototype.buildDataForCt = function(){
-    var data = win.elements.mainContainer.export({id:true});
+    var data = mainWin.elements.mainContainer.export({id:true});
     var obj = {};
     this._getDataFromComponent(data, obj);
     return obj;
