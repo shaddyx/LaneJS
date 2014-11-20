@@ -168,7 +168,23 @@
 										type:"TreeList",
 										name:"componentTree",
 										hs:true,
-										vs:true
+										vs:true,
+										contextMenu:{
+											type:"PopupMenu",
+											c:[
+												{
+													type:"MenuItem",
+													caption:"Add component",
+													name:"add"
+
+												},
+												{
+													type:"MenuItem",
+													caption:"Remove component",
+													name:"remove"
+												}
+											]
+										}
 									}
 								]
 							},
@@ -177,23 +193,7 @@
 								caption:"Component properties",
 								name:"componentProperties",
 								hs:true,
-								vs:true,
-								contextMenu:{
-									type:"PopupMenu",
-									c:[
-										{
-											type:"MenuItem",
-											caption:"Add component",
-											name:"add"
-
-										},
-										{
-											type:"MenuItem",
-											caption:"remove component",
-											name:"remove"
-										}
-									]
-								}
+								vs:true
 							}
 						]
 					},
