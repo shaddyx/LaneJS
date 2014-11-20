@@ -76,6 +76,3 @@ InputBox.prototype._selectButtonClicked = function(){
 	this.startSelection();
 };
 InputBox.on("showSelectChanged", InputBox.prototype.updateSelectButtonVisibility);
-/*InputBox.on(["keydown", "keyup", "keypress"], function(e){
-	this._grid && this._elements.gridContainer._v.visible && this._grid.trigger(e.type, e);
-});*/

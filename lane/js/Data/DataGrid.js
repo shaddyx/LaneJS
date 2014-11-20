@@ -25,6 +25,13 @@ DataGrid.prototype._columnsChanged = function(value){
 	}
 };
 
+
+DataGrid.prototype.clear = function(){
+	this._data = [];
+	this._currentRow = 0;
+	this._visible = 0;
+};
+
 DataGrid.prototype.getByIndex = function(index){
 	return this._data[index];
 };

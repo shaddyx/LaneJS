@@ -62,7 +62,6 @@ PropertiesEditor.prototype.showEditor = function(){
     this._editor = this.getEditor(row.data.type);
     this._editor.hs(true);
     this._editor.value(row.data.value);
-    this._editor.editable(false);
     this._editor.draw({target:container});
 
     this._editor.focusParent(this._grid);
@@ -104,6 +103,7 @@ PropertiesEditor.prototype.getEditor = function(type){
         case "boolean":
         case Types.boolean:
             var obj = new InputBox();
+            obj.editable(false);
             obj.dataType("boolean");
             return obj;
         default:
