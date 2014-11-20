@@ -106,7 +106,7 @@ InputBox.prototype._inputBoxKeyListener = function(evt){
 	var key = evt.keyCode || evt.which;
 	switch (key){
 		case 13:
-			this.trigger("selectionEnd");
+			this.trigger("editComplete");
 			return false;
 	}
 };
@@ -120,6 +120,19 @@ InputBox.prototype._updateEditable = function(){
 	}
 };
 
+InputBox.on("focusChanged", function(value){
+	var my = this;
+	if (this._v.isDrawn && value){
+		var interval = setInterval(function(){
+			if (!my.focus() || this._removed){
+				clearTimeout(interval);
+				return;
+			}
+			my._input.htmlInnerElement.focus();
+			document.activeElement = my._input.htmlInnerElement;
+		}, 10);
+	}
+});
 InputBox.on("editable", InputBox.prototype._updateEditable);
 InputBox.on("afterDraw", InputBox.func.afterDraw);
 InputBox.on("valueChanged", InputBox.prototype.updateValues);

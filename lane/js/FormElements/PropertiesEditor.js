@@ -22,7 +22,7 @@ var PropertiesEditor = function() {
     });
     this._grid.focusParent(this);
     this._grid.data(this._data);
-    this._grid.on("cellEdit", this._cellEdit, this);
+    this._grid.on("cellEdit", this.showEditor, this);
 };
 Util.extend(PropertiesEditor, FormElement);
 PropertiesEditor.type = "PropertiesEditor";
@@ -54,40 +54,39 @@ PropertiesEditor.prototype._targetChanged = function(){
         }
     }
 };
-PropertiesEditor.prototype._cellEdit = function(name, row){
-    var my = this;
-    var container = this._grid.getCellContainer(row.current, name);
-    var editor = this.getEditor(row.data.type);
-    editor.hs(true);
-    editor.value(row.data.value);
-    editor.draw({target:container});
-    editor.focusParent(this._grid);
-    editor.currentFocus(true);
-    editor.startSelection();
 
-    /*var focusFunc = function(value){
-        if (!value){
-            editor.remove();
-            editor = false;
-        } else {
-            editor.currentFocus(true);
-        }
-    };
-    this.on("focusChanged", focusFunc);*/
+PropertiesEditor.prototype.showEditor = function(){
+    var row = this._grid._v.data.getCurrentRow();
+    var container = this._grid.getCellContainer();
+    this._editor = this.getEditor(row.data.type);
+    this._editor.hs(true);
+    this._editor.value(row.data.value);
+    this._editor.editable(false);
+    this._editor.draw({target:container});
 
-    editor.on("selectionEnd", function(value){
-        if (!editor){
-            return;
+    this._editor.focusParent(this._grid);
+    this._editor.currentFocus(true);
+    this._editor.startSelection();
+    this._editor.on("editComplete", this.hideEditor , this);
+    this._editor.on("focusChanged", function(value){
+        if (this._editor && !value){
+            this.hideEditor();
         }
-        row.data.value = editor.value();
-        my._v.target[row.data.name](editor.value());
-        my._grid.releaseCell();
-        debugger;
-        editor.remove();
-        editor = false;
-        //my.removeListener("focusChanged",focusFunc);
-    });
+    } , this);
 };
+PropertiesEditor.prototype.hideEditor = function(){
+    if (!this._editor){
+        return;
+    }
+    var row = this._grid._v.data.getCurrentRow();
+    row.data.value = this._editor.value();
+    this._v.target[row.data.name](this._editor.value());
+    this._editor.remove();
+    this._editor = false;
+    this._grid.releaseCell();
+};
+
+
 /**
  * returns editor
  * @param type

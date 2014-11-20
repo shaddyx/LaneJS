@@ -393,18 +393,25 @@ Grid.prototype.render = function(){
 };
 /**
  * returns physical cell by row number (in dataSource) and column name
- * @param dataRowindex
+ * @param dataRowIndex
  * @param colName
  */
-Grid.prototype.getCellContainer = function(dataRowindex, colName){
+Grid.prototype.getCellContainer = function(dataRowIndex, colName){
 	var my = this;
 	var data = this._v.data;
-	data.moveTo(dataRowindex);
+	if (dataRowIndex != undefined) {
+		data.moveTo(dataRowIndex);
+	} else {
+		dataRowIndex = data.getCurrentRow().current;
+	}
+ 	if (colName == undefined) {
+		colName = this.selectedColumn();
+	}
 	this.render();
 	var found = false;
 	for (var k in this._rows){
 		var row = this._rows[k];
-		if (row._v.currentRow && row._v.currentRow.current == dataRowindex){
+		if (row._v.currentRow && row._v.currentRow.current == dataRowIndex){
 			found = row;
 			break;
 		}

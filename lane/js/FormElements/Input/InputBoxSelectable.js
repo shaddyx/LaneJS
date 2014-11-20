@@ -67,6 +67,7 @@ InputBox.prototype.endSelection = function(){
 		this._elements.gridContainer.visible(false);
 		this.currentFocus(true);
 		this.trigger("selectionEnd");
+		this.trigger("editComplete");
 	}
 };
 
