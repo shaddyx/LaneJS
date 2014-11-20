@@ -5,7 +5,7 @@ Grid.prototype.mouseWheel = function(e){
 	if (this._v.locked || !this._v.data){
 		return;
 	}
-	if ((-e.direction > 0 && this._v.data.visibleDown() > 1)
+	if ((-e.direction > 0 && this._v.data.visibleDown() > 0)
 		||(-e.direction < 0 && this._v.data.visibleUp())){
 		this._v.data.moveCurrentRow( -e.direction );
 		this.render();
