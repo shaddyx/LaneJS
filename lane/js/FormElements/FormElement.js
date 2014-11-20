@@ -159,19 +159,19 @@ FormElement.prototype.draw = function(opts){
 	this.trigger("afterDraw",opts);
 	this.applyHint();
 	this.applyFocusStyle();
-	this._v.outer.on("click", function(e){
-		if (FormElement._focusLock){
-			return;
-		}
-		FormElement._focusLock = setTimeout(function(){
-			FormElement._focusLock = false;
-		}, 0);
-		if (!this._v.currentFocus){
-			this.currentFocus(true);
-		}
-	},this);
+	this._v.outer.on("click", this.tryToFocus,this);
 };
-
+FormElement.prototype.tryToFocus = function(){
+	if (FormElement._focusLock){
+		return;
+	}
+	FormElement._focusLock = setTimeout(function(){
+		FormElement._focusLock = false;
+	}, 0);
+	if (!this._v.currentFocus){
+		this.currentFocus(true);
+	}
+};
 FormElement.prototype.remove = function(){
 	this._removed = true;
 	if (this.trigger("beforeRemove") !== false){

@@ -45,8 +45,9 @@ InputBox.prototype.updateValueList = function(){
 };
 
 InputBox.prototype.startSelection = function(){
-	if (this._grid){
+	if (this._grid && !this._elements.gridContainer._v.visible){
 		this._elements.gridContainer.visible(this._v.values.length);
+		this._grid.focusParent(this);
 		this._grid.currentFocus(true);
 		this.trigger("selectionStart");
 	}
@@ -59,9 +60,18 @@ InputBox.prototype._selectionFocusChange = function(value){
 };
 
 InputBox.prototype.endSelection = function(){
-	if (this._grid) {
+	if (this._grid && this._elements.gridContainer._v.visible) {
 		this._elements.gridContainer.visible(false);
 		this.currentFocus(true);
 		this.trigger("selectionEnd");
 	}
-}
+};
+
+InputBox.prototype._selectButtonClicked = function(){
+	this.tryToFocus();
+	this.startSelection();
+};
+
+/*InputBox.on(["keydown", "keyup", "keypress"], function(e){
+	this._grid && this._elements.gridContainer._v.visible && this._grid.trigger(e.type, e);
+});*/

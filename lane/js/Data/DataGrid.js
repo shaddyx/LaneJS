@@ -110,7 +110,7 @@ DataGrid.prototype.getCurrentRow = function(){
  * @returns
  */
 DataGrid.prototype.visibleDown = function(){
-	return this._data.length - this._currentRow;
+	return this._data.length - this._currentRow - 1;
 };
 
 

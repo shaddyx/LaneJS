@@ -54,7 +54,7 @@ FormElement.prototype.releaseFocus = function(){
 
 		var my = this;
 		this.enumFocusParents(function(el){
-			if (el === my){
+			if (el !== my){
 				el.currentFocus(true);
 				return false;
 			}
