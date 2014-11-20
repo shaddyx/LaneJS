@@ -24,6 +24,7 @@ InputBox.func.afterDraw = function() {
 	this.updatePassword();
 	this.updateValueList();
 	this._updateEditable();
+	this.updateSelectButtonVisibility();
 	this._elements.selectStartButton.on("click", this._selectButtonClicked, this);
 };
 InputBox.prototype.updateValues = function() {

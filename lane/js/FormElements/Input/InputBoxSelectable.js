@@ -2,6 +2,9 @@
  * @@@dependsOn: InputBox
  */
 
+InputBox.prototype.updateSelectButtonVisibility = function(){
+	this._v.isDrawn && this._elements.selectStartButton.visible(this._v.showSelect);
+};
 /**
  * function calls when item in dropdown selected (private function)
  * @param col - column
@@ -14,7 +17,7 @@ InputBox.prototype._itemSelected = function(col, row){
 
 InputBox.prototype.updateValueList = function(){
 	if (this._v.values.length){
-		this.editable(false);
+		//this.editable(false);
 		if (!this._grid){
 			/** @type Grid */
 			this._grid = FormElement.build(InputBoxSkin.__grid,this._elements.gridContainer);
@@ -40,7 +43,7 @@ InputBox.prototype.updateValueList = function(){
 		this._elements.gridContainer.height(h + 4);
 	} else {
 		this._grid && this._grid.remove();
-		this.editable(true);
+		//this.editable(true);
 	}
 };
 
@@ -71,7 +74,7 @@ InputBox.prototype._selectButtonClicked = function(){
 	this.tryToFocus();
 	this.startSelection();
 };
-
+InputBox.on("showSelectChanged", InputBox.prototype.updateSelectButtonVisibility);
 /*InputBox.on(["keydown", "keyup", "keypress"], function(e){
 	this._grid && this._elements.gridContainer._v.visible && this._grid.trigger(e.type, e);
 });*/
