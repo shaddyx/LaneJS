@@ -19,7 +19,7 @@ InputBox.func = {};
 InputBox.func.afterDraw = function() {
 	var my = this;
 	this._input = this._elements.input;
-	this.updateValues();
+	this.updateValue();
 	this._updateListeners();
 	this.updatePassword();
 	this.updateValueList();
@@ -27,7 +27,7 @@ InputBox.func.afterDraw = function() {
 	this.updateSelectButtonVisibility();
 	this._elements.selectStartButton.on("click", this._selectButtonClicked, this);
 };
-InputBox.prototype.updateValues = function() {
+InputBox.prototype.updateValue = function() {
 	if (this._v.isDrawn && this._elements.input.htmlInnerElement.value !== this._v.value){
 		this._elements.input.htmlInnerElement.value = this._v.value.toString();
 	}
@@ -56,18 +56,17 @@ InputBox.prototype._updateListeners = function(){
 	});
 };
 
-
-
 InputBox.prototype.updatePassword = function(){
 	if (this._v.isDrawn) {
 		var old = this._input.htmlElement;
-		var oldType = old.getAttribute("type") || "text";
+		var oldType = old.getAttribute("type") || old.type || "text";
 		var newValue = this._v.password?"password":"text";
 		if (oldType != newValue){
 			var container = old.parentNode;
 			var newInput = document.createElement("input");
 			newInput.setAttribute("type",newValue);
 			this._input.htmlElement = newInput;
+			this._input.htmlInnerElement = newInput;
 			var style;
 			if (old.getComputedStyle){
 				style = old.getComputedStyle();
@@ -83,6 +82,7 @@ InputBox.prototype.updatePassword = function(){
 			}
 			container.replaceChild(newInput, old);
 			this._updateListeners();
+			this.updateValue();
 		}
 	}
 };
@@ -135,7 +135,7 @@ InputBox.on("focusChanged", function(value){
 });
 InputBox.on("editable", InputBox.prototype._updateEditable);
 InputBox.on("afterDraw", InputBox.func.afterDraw);
-InputBox.on("valueChanged", InputBox.prototype.updateValues);
+InputBox.on("valueChanged", InputBox.prototype.updateValue);
 InputBox.on("passwordChanged", InputBox.prototype.updatePassword);
 InputBox.on("dataTypeChanged", InputBox.prototype._dataTypeChanged);
 InputBox.on("dataTypeBeforeChanged", InputBox.prototype._dataTypeBeforeChanged);

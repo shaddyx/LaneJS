@@ -19,7 +19,7 @@ TextArea.func.afterDraw = function() {
 	 * @private
 	 */
 	this._input = this._elements.input;
-	this.updateValues();
+	this.updateValue();
 	this.updateEnabled();
 	Util.addListener(this._elements.input.htmlElement, "keyup", function(){
 		my.value(this.value);
@@ -32,12 +32,12 @@ TextArea.prototype.updateEnabled = function() {
 		this._v.enabled && this._input.htmlElement.removeAttribute("disabled");
 	}
 };
-TextArea.prototype.updateValues = function() {
+TextArea.prototype.updateValue = function() {
 	if (this._v.isDrawn){
 		this._elements.input.htmlElement.value = this._v.value;
 	}
 };
 
 TextArea.on("afterDraw", TextArea.func.afterDraw);
-TextArea.on("valueChanged", TextArea.prototype.updateValues);
+TextArea.on("valueChanged", TextArea.prototype.updateValue);
 TextArea.on("enabledChanged", TextArea.prototype.updateEnabled);

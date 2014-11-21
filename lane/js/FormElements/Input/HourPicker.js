@@ -8,7 +8,7 @@ HourPicker.setDefault("value", "", {type:"int"});
 HourPicker.func = {};
 HourPicker.func.afterDraw = function() {
 	var my = this;
-	this.updateValues();
+	this.updateValue();
 	this._input = this._elements.input;
 	this._elements.input.htmlElement.setAttribute("readonly","");
 	
@@ -52,11 +52,11 @@ HourPicker.func.afterDraw = function() {
 	
 };
 
-HourPicker.prototype.updateValues = function() {
+HourPicker.prototype.updateValue = function() {
 	if (this._v.isDrawn){
 		this._elements.input.htmlElement.value = parseInt(this._v.value) + ":00";
 	}
 };
 
 HourPicker.on("afterDraw", HourPicker.func.afterDraw);
-HourPicker.on("valueChanged", HourPicker.prototype.updateValues);
+HourPicker.on("valueChanged", HourPicker.prototype.updateValue);
