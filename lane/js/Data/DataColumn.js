@@ -23,6 +23,9 @@ DataColumn.build = function(columns){
 			var obj = new DataColumn();
 			obj.name(k);
 			for (var x in columnData){
+				if (x == "type"){
+					continue;
+				}
 				obj[x](columnData[x]);
 			}
 			result.push(obj);

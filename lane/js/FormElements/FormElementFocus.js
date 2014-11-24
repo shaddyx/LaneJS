@@ -46,13 +46,12 @@ FormElement.prototype.applyCurrentFocus = function(value){
 
 FormElement.prototype.releaseFocus = function(){
 	if (this._v.focus){
-		if (this instanceof Container){
-			this.enumChilds(function(el){
-				if (el._v.focus){
-					el.focus(false);
-				}
-			});
-		}
+		this.enumChilds(function(el){
+			if (el._v.focus){
+				el.focus(false);
+			}
+		});
+
 		var my = this;
 		this.enumFocusParents(function(el){
 			if (el !== my){

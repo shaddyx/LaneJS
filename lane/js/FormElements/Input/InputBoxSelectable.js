@@ -67,7 +67,6 @@ InputBox.prototype.endSelection = function(){
 		this._elements.gridContainer.visible(false);
 		this.currentFocus(true);
 		this.trigger("selectionEnd");
-		this.trigger("editComplete");
 	}
 };
 
@@ -76,3 +75,6 @@ InputBox.prototype._selectButtonClicked = function(){
 	this.startSelection();
 };
 InputBox.on("showSelectChanged", InputBox.prototype.updateSelectButtonVisibility);
+/*InputBox.on(["keydown", "keyup", "keypress"], function(e){
+	this._grid && this._elements.gridContainer._v.visible && this._grid.trigger(e.type, e);
+});*/

@@ -230,6 +230,38 @@ DataGrid.prototype.remove = function(index){
 	}
 };
 
+
+DataGrid.prototype.export = function(){
+	var resultObject = {
+		data:[],
+		columns:[]
+	}
+	for (var x in this._columnsCache){
+		/** @type {DataColumn} */
+		var dataColumn = this._columnsCache[x];
+		resultObject.columns.push(dataColumn.export());
+	}
+	for (var k in this._data){
+		/** @type {DataRow} */
+		var dataRow = this._data[k];
+		var obj = {};
+		for (var x in resultObject.columns){
+			var column = resultObject.columns[x];
+			obj[column.name] = dataRow.data[column.name];
+		}
+		resultObject.data.push(obj);
+	}
+	return resultObject;
+};
+
+DataGrid.prototype.load = function(obj){
+	this.clear();
+	this.columns(DataColumn.build(obj.columns));
+	for (var k in obj.data){
+		this.add(obj.data[k]);
+	}
+};
+
 DataGrid.on("columnsChanged", DataGrid.prototype._columnsChanged);
 
 /**
