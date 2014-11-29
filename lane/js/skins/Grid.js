@@ -319,7 +319,6 @@ GridHelperSkin = {
 		   style:{
 				dragStarted:{
 					borderWidth:[0,0,0,1]
-					
 				},
 				dragEnded:{
 					borderWidth:[0,0,0,0]
