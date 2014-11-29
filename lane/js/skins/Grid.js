@@ -16,6 +16,9 @@ GridSkin._parts = {
    				   backgroundColor:"#cccccc",
    				   width:15,
    				   height:15,
+				   backgroundImage:"img/Grid/up.png",
+				   backgroundPosition:"center center",
+				   backgroundRepeat:"no-repeat",
    				   name:"scrollUp"
    			   },
    			   {
@@ -39,6 +42,9 @@ GridSkin._parts = {
    				   backgroundColor:"#cccccc",
    				   width:15,
    				   height:15,
+				   backgroundImage:"img/Grid/down.png",
+				   backgroundPosition:"center center",
+				   backgroundRepeat:"no-repeat",
    				   name:"scrollDn"
    				   
    			   }
