@@ -75,7 +75,7 @@ PropertiesEditor.prototype._cellEdit = function(name, row){
     };
     this.on("focusChanged", focusFunc);*/
 
-    editor.on("selectionEnd", function(value){
+    editor.on(["selectionEnd", "editComplete"], function(value){
         if (!editor){
             return;
         }

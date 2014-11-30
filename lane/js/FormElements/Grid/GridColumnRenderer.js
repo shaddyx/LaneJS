@@ -39,7 +39,8 @@ Grid.prototype.reDrawColumns = function(){
         var i;
         for (i = 0; i < toStretch.length - 1; i++) {
             var col = toStretch[i];
-            lastSpace -= col.width(Math.floor(col._v.width * ratio));
+            var colW = Math.floor(col._v.width * ratio);
+            lastSpace -= col.width(colW);
         }
         toStretch[i] && toStretch[i].width(lastSpace);
     }
