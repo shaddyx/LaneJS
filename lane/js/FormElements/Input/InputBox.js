@@ -125,7 +125,7 @@ InputBox.on("focusChanged", function(value){
 	if (this._v.isDrawn && value){
 		var interval = setInterval(function(){
 			if (!my.focus() || this._removed){
-				clearTimeout(interval);
+				clearInterval(interval);
 				return;
 			}
 			my._input.htmlInnerElement.focus();
