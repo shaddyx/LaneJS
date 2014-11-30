@@ -110,6 +110,7 @@ InputBox.prototype._inputBoxKeyListener = function(evt){
 			return false;
 	}
 };
+
 InputBox.prototype._updateEditable = function(){
 	if (this._v.isDrawn){
 		if (!this._v.editable){
@@ -122,16 +123,23 @@ InputBox.prototype._updateEditable = function(){
 
 InputBox.on("focusChanged", function(value){
 	var my = this;
-	if (this._v.isDrawn && value){
-		var interval = setInterval(function(){
-			if (!my.focus() || this._removed){
-				clearInterval(interval);
-				return;
-			}
-			my._input.htmlInnerElement.focus();
-			document.activeElement = my._input.htmlInnerElement;
-		}, 10);
+	if (this._v.isDrawn){
+		if (value){
+			var interval = setInterval(function(){
+				if (!my.focus() || this._removed){
+					clearInterval(interval);
+					return;
+				}
+				my._input.htmlInnerElement.focus();
+				document.activeElement = my._input.htmlInnerElement;
+			}, 10);
+		} else {
+			this.trigger("editComplete");
+		}
 	}
+});
+InputBox.on("selectionEnd", function(){
+	this.trigger("editComplete");
 });
 InputBox.on("editable", InputBox.prototype._updateEditable);
 InputBox.on("afterDraw", InputBox.func.afterDraw);

@@ -64,18 +64,7 @@ PropertiesEditor.prototype._cellEdit = function(name, row){
     editor.focusParent(this._grid);
     editor.currentFocus(true);
     editor.startSelection();
-
-    /*var focusFunc = function(value){
-        if (!value){
-            editor.remove();
-            editor = false;
-        } else {
-            editor.currentFocus(true);
-        }
-    };
-    this.on("focusChanged", focusFunc);*/
-
-    editor.on(["selectionEnd", "editComplete"], function(value){
+    editor.on("editComplete", function(value){
         if (!editor){
             return;
         }
@@ -85,7 +74,6 @@ PropertiesEditor.prototype._cellEdit = function(name, row){
         debugger;
         editor.remove();
         editor = false;
-        //my.removeListener("focusChanged",focusFunc);
     });
 };
 /**
