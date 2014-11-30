@@ -9,9 +9,10 @@ Grid.prototype.reDrawColumns = function(){
     if (!this._elements.content._v.width){
         return;
     }
-    if (this._rowWidth < this._elements.content._v.width){
-        this._rowWidth = this._elements.content._v.width;
-    }
+    /*if (this._rowWidth < this._elements.content._v.width){
+
+    }*/
+    this._rowWidth = this._elements.content._v.width;
 
     //
     //	calculating initial values
@@ -28,7 +29,7 @@ Grid.prototype.reDrawColumns = function(){
             columnsNonStretchWidth += col._v.width;
         }
     }
-
+    this._elements.content.width(columnsNonStretchWidth + columnsStretchableWidth);
     //
     //	reDrawing widths
     //

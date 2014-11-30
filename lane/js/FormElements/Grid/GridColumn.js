@@ -60,5 +60,4 @@ GridColumn.prototype._dragEnded = function(){
 	var newW = this._v.width + (newL - this._oldL);
 	var w = this.width(newW);
 	this._grid.scheduleReDraw();
-	//this.rightBoundPos(newL + (w - newW));
 };

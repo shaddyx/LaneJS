@@ -261,6 +261,12 @@ BoxElement.prototype._draggableChanged = function(value){
 					};
 				}
 			},
+			rootMouseOut:function(evt){
+				console.log(evt);
+				if (this._dragStartPoint && (!evt.toElement || evt.toElement.tagName === "HTML")){
+					this._dragListeners.stopDragging.call(this);
+				}
+			},
 			mouseMove:function(){
 				if (this._dragStartPoint) {
 					var newX = browser.mouseX() - this._dragStartPoint.x;
@@ -297,11 +303,13 @@ BoxElement.prototype._draggableChanged = function(value){
 				this.removeListener("mousedown", this._dragListeners.mouseDown, this);
 				rootElement.removeListener("mousemove", this._dragListeners.mouseMove, this);
 				rootElement.removeListener("mouseup", this._dragListeners.stopDragging, this);
+				rootElement.removeListener("mouseout", this._dragListeners.rootMouseOut, this);
 			}
 		};
 		this.on("mousedown", this._dragListeners.mouseDown, this);
 		rootElement.on("mousemove", this._dragListeners.mouseMove, this);
 		rootElement.on("mouseup", this._dragListeners.stopDragging, this);
+		rootElement.on("mouseout", this._dragListeners.rootMouseOut, this);
 		this.on("removed", function(){
 			this._dragListeners.removeListeners.call(this);
 		}, this);
