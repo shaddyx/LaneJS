@@ -262,7 +262,6 @@ BoxElement.prototype._draggableChanged = function(value){
 				}
 			},
 			rootMouseOut:function(evt){
-				console.log(evt);
 				if (this._dragStartPoint && (!evt.toElement || evt.toElement.tagName === "HTML")){
 					this._dragListeners.stopDragging.call(this);
 				}

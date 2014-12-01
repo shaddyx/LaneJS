@@ -28,7 +28,7 @@ var Types = {};
 	
 	Types.int = Util.cloneType("int", Types.object, {
 		check : function(value, strict) {
-			if (typeof value == "number") {
+			if (typeof value == "number" && !isNaN(value)) {
 				return Math.floor(value);
 			}
 			newValue = parseInt(value);

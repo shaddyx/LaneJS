@@ -140,6 +140,9 @@ BaseObject.on = function(name,func,obj,first){
  */
 BaseObject.prototype.trigger = function(name){
 	//if no events 
+	if (BaseObject.debugEvents){
+		console.log("event:" + name, arguments);
+	}
 	if (!this._events[name] && !this._baseClass._events[name]){
 		return;
 	}

@@ -4,7 +4,7 @@ var Slider = function() {
 Util.extend(Slider, InputElement);
 Slider.type = "Slider";
 Slider.setDefault("value",0);
-Slider.prototype.range = Slider.addProperty("range",0);
+Slider.prototype.range = Slider.addProperty("range",100);
 
 Slider.prototype.afterDraw = function(){
 	this._elements.sliderContainer.on(["widthChanged","heightChanged"], this.updateRange, this);

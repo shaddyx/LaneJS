@@ -188,7 +188,7 @@ BoxElement.addProperty = function(name,defValue,props){
 	var html = props.html;
 	var rm = props.rm;
 	var rmCache = BoxElement.REDRAW_MODE;
-	BaseObject.addProperty.call(this, name, defValue);
+	BaseObject.addProperty.call(this, name, defValue, props);
 	this._properties[name].html = props.html;
 	this._properties[name].rm = rm;
 	this._properties[name].type = props.type || BoxElement.PROPERTY_TYPE.none;
@@ -213,7 +213,7 @@ BoxElement.addProperty = function(name,defValue,props){
 	var o = this.prototype[name]; 
 	this.prototype[name] = function(value){
 		var changed = value != this._v[name];
-		if (!changed && props.type == BoxElement.PROPERTY_TYPE.array){
+		if (!changed && props.type == Types.array){
 			for (var i = 0; i < value.length; i++){
 				if (value[i] != this._v[name][i]){
 					changed = true;
@@ -312,7 +312,7 @@ BoxElement.prototype.name = BoxElement.addProperty("name",false);
  */
 BoxElement.addProperty("_dx",0);
 BoxElement.addProperty("_dy",0);
-BoxElement.addProperty("_vMargin",[0,0,0,0],{rm:BoxElement.REDRAW_MODE.full, type:BoxElement.PROPERTY_TYPE.array});
+BoxElement.addProperty("_vMargin",[0,0,0,0],{rm:BoxElement.REDRAW_MODE.full, type:Types.array});
 BoxElement.addProperty("_hDelta",0,{rm:BoxElement.REDRAW_MODE.full});
 BoxElement.addProperty("_vDelta",0,{rm:BoxElement.REDRAW_MODE.full});
 BoxElement.addProperty("_alignDelta",0,{rm:BoxElement.REDRAW_MODE.full});
@@ -330,8 +330,8 @@ BoxElement.prototype.vMinHeight = BoxElement.addProperty("vMinHeight",0);
 BoxElement.prototype.caption = BoxElement.addProperty("caption","",{html:true, rm:BoxElement.REDRAW_MODE.applyOnly});
 BoxElement.prototype.floating = BoxElement.addProperty("floating",false,{rm:BoxElement.REDRAW_MODE.full});
 BoxElement.prototype.visible = BoxElement.addProperty("visible",true,{html:true, rm:BoxElement.REDRAW_MODE.redrawParent, defaultApply:true});
-BoxElement.prototype.left = BoxElement.addProperty("left",0,{html:true, rm:BoxElement.REDRAW_MODE.applyOnly, defaultApply:true});
-BoxElement.prototype.top = BoxElement.addProperty("top",0,{html:true, rm:BoxElement.REDRAW_MODE.applyOnly, defaultApply:true});
+BoxElement.prototype.left = BoxElement.addProperty("left",0,{type:Types.int, html:true, rm:BoxElement.REDRAW_MODE.applyOnly, defaultApply:true});
+BoxElement.prototype.top = BoxElement.addProperty("top",0,{type:Types.int, html:true, rm:BoxElement.REDRAW_MODE.applyOnly, defaultApply:true});
 BoxElement.prototype.scrollLeft = BoxElement.addProperty("scrollLeft",0,{html:true, rm:BoxElement.REDRAW_MODE.render, htmlEnding:'px',defaultApply:true});
 BoxElement.prototype.scrollTop = BoxElement.addProperty("scrollTop",0,{html:true, rm:BoxElement.REDRAW_MODE.render, htmlEnding:'px',defaultApply:true});
 BoxElement.prototype.hs = BoxElement.addProperty("hs",false,{rm:BoxElement.REDRAW_MODE.full});
@@ -360,10 +360,10 @@ BoxElement.prototype.fontFamily = BoxElement.addProperty("fontFamily","Arial",{h
 BoxElement.prototype.color = BoxElement.addProperty("color","",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
 BoxElement.prototype.cursor = BoxElement.addProperty("cursor",false,{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
 BoxElement.prototype.selectable = BoxElement.addProperty("selectable",false,{html:true,rm:BoxElement.REDRAW_MODE.applyOnly,defaultApply:true});		//,defaultApply:true
-BoxElement.prototype.borderWidth = BoxElement.addProperty("borderWidth",[0,0,0,0],{html:true,rm:BoxElement.REDRAW_MODE.full, type:BoxElement.PROPERTY_TYPE.array, defaultApply:true, recalcDxDy:true});
-BoxElement.prototype.padding = BoxElement.addProperty("padding",[0,0,0,0],{html:true,rm:BoxElement.REDRAW_MODE.fullAndRenderMe, type:BoxElement.PROPERTY_TYPE.array, recalcDxDy:true});
-BoxElement.prototype.margin = BoxElement.addProperty("margin",[0,0,0,0],{rm:BoxElement.REDRAW_MODE.full, type:BoxElement.PROPERTY_TYPE.array});
-BoxElement.prototype.borderRadius = BoxElement.addProperty("borderRadius",[0,0,0,0],{html:true,rm:BoxElement.REDRAW_MODE.applyOnly, type:BoxElement.PROPERTY_TYPE.array});
+BoxElement.prototype.borderWidth = BoxElement.addProperty("borderWidth",[0,0,0,0],{html:true,rm:BoxElement.REDRAW_MODE.full, type:Types.array, defaultApply:true, recalcDxDy:true});
+BoxElement.prototype.padding = BoxElement.addProperty("padding",[0,0,0,0],{html:true,rm:BoxElement.REDRAW_MODE.fullAndRenderMe, type:Types.array, recalcDxDy:true});
+BoxElement.prototype.margin = BoxElement.addProperty("margin",[0,0,0,0],{rm:BoxElement.REDRAW_MODE.full, type:Types.array});
+BoxElement.prototype.borderRadius = BoxElement.addProperty("borderRadius",[0,0,0,0],{html:true,rm:BoxElement.REDRAW_MODE.applyOnly, type:Types.array});
 BoxElement.prototype.borderColor = BoxElement.addProperty("borderColor","#000",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly});
 BoxElement.prototype.borderStyle = BoxElement.addProperty("borderStyle","solid",{html:true,rm:BoxElement.REDRAW_MODE.applyOnly, defaultApply:true});
 BoxElement.prototype.overflow = BoxElement.addProperty("overflow",BoxElement.OVERFLOW_MODE.none,{html:true, rm:BoxElement.REDRAW_MODE.full});
