@@ -256,7 +256,7 @@ DataGrid.prototype.export = function(){
 
 DataGrid.prototype.load = function(obj){
 	this.clear();
-	this.columns(DataColumn.build(obj.columns));
+	obj.columns && this.columns(DataColumn.build(obj.columns));
 	for (var k in obj.data){
 		this.add(obj.data[k]);
 	}

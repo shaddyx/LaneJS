@@ -359,8 +359,12 @@ FormElement.fillForm = function(topElement, data, options){
 		var targetPropName = k;
 		if (options.map && options.map[k]) {
 			targetPropName = options.map[k];
-		} 
-		elements[targetPropName].value(data[propName]);
+		}
+		if (elements[targetPropName] instanceof Grid){
+			elements[targetPropName].data().load({data:data[propName]});
+		} else {
+			elements[targetPropName].value(data[propName]);
+		}
 	}
 };
 
