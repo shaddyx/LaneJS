@@ -371,16 +371,17 @@ FormElement.fillForm = function(topElement, data, options){
 FormElement.getData = function(topElement, options, data){
 	options = options || {};
 	data = data || {};
-	
 	if (topElement instanceof Container) {
 		for (var k in topElement._v.children._data){
 			var el = topElement._v.children._data[k];
 			FormElement.getData(el, options, data);
 		}
-	}
-	if ((topElement instanceof InputElement) && topElement._v.name) {
+	} else if ((topElement instanceof InputElement) && topElement._v.name) {
 		data[topElement._v.name] = topElement._v.value;
+	} else if (topElement instanceof Grid){
+		data[topElement._v.name] = topElement.data().export();
 	}
+	
 	return data;
 };
 FormElement.func.contextMenu = function(e){
