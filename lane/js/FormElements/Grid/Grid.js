@@ -417,7 +417,7 @@ Grid.on("rowRender", function(row, dataRow){
 });
 
 
-
+Grid.on(["widthChanged", "heightChanged"], Grid.prototype.scheduleReDraw);
 Grid.on("_scrollerShownChanged", Grid.prototype._updateScrollerVisibility);
 Grid.on(["showHeaderChanged", "showFooterChanged"], Grid.prototype.scheduleReDraw);
 Grid.on("afterDraw", Grid.prototype._afterDraw);
