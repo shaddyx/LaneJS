@@ -47,7 +47,7 @@ Grid.prototype._afterDraw = function() {
 	if (!GridRowSkin[this._rowSkin]){
 		throw new Error("No skin " + this._rowSkin + " for GridRow!");
 	}
-	this._v.rowHeight || this.rowHeight(this._rowSkin.height);
+	this._v.rowHeight || this.rowHeight(GridRowSkin[this._rowSkin].height);
 	
 	this._elements.vertScroll.on("dragEnded", this._vScrollerMoved, this);
 	this._elements.horzScroll.on("drag", this._hScrollerMoved, this);	
@@ -166,7 +166,7 @@ Grid.prototype._removeLastRow = function(){
 	if (this._rows.length > 0){
 		var last = this._rows[this._rows.length - 1];
 		last.remove();
-		this._rowsHeight -= this._rowSkin.height;
+		this._rowsHeight -= GridRowSkin[this._rowSkin].height;
 		this._rows.length = this._rows.length - 1;
 	}
 };
