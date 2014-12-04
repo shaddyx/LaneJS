@@ -62,8 +62,8 @@ GridCell.prototype.build = function(){
 	}
 	this._element.build(st);
 	this._element.drawRec({target:this._row._element});
-	this._element.removeListener("click", this._cellClicked, this);
-	this._element.on("click", this._cellClicked, this);
+	this._element.removeListener("mousedown", this._cellClicked, this);
+	this._element.on("mousedown", this._cellClicked, this);
 	this._element.removeListener("dblclick", this._cellDblClicked, this);
 	this._element.on("dblclick", this._cellDblClicked, this);
 	this.updateSelected();
