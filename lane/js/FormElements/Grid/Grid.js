@@ -89,6 +89,9 @@ Grid.prototype.updateHeaderFooterVisibility = function(){
 	this._elements.header.visible(this._v.showHeader);
 	this._elements.footer.visible(this._v.showFooter);
 }
+/**
+ * function calculates row count fit in current viewport
+ */
 Grid.prototype.calcVisibleRows = function(){
 	this._visibleRows = 0;
 	var h = this._elements.content.height();
