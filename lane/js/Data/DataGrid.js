@@ -109,6 +109,9 @@ DataGrid.prototype.getCurrentRow = function(){
 	if (this._currentRow == undefined && this._data.length){
 		this._currentRow = 0;
 	}
+	if (this._currentRow < this._data.length - 1){
+		this._currentRow = this._data.length - 1;
+	}
 	return this._data[this._currentRow];
 };
 

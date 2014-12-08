@@ -419,8 +419,20 @@ Grid.on("rowRender", function(row, dataRow){
 	}
 });
 
-
-Grid.on(["widthChanged", "heightChanged"], Grid.prototype.scheduleReDraw);
+//
+// TODO:remove this
+// this is a gtidBlankColumn hack
+//
+Grid.on("parentBecomesVisible", function(){
+	var my = this;
+	setTimeout(function(){
+		my.scheduleReDraw();
+	}, 200);
+});
+//
+//listeners
+//
+Grid.on(["widthChanged", "heightChanged", "parentBecomesVisible"], Grid.prototype.scheduleReDraw);
 Grid.on("_scrollerShownChanged", Grid.prototype._updateScrollerVisibility);
 Grid.on(["showHeaderChanged", "showFooterChanged"], Grid.prototype.scheduleReDraw);
 Grid.on("afterDraw", Grid.prototype._afterDraw);
