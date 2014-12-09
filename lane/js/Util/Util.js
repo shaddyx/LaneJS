@@ -30,6 +30,15 @@ if (typeof Object.create !== 'function') {
         return new F();
     };
 }
+/**
+ * function xors 2 numbers
+ * @param a
+ * @param b
+ * @returns
+ */
+Util.xor = function(a, b){
+	return a ^ b;
+};
 Util.getScrollbarWidth = function () {
     var outer = document.createElement("div");
     outer.style.visibility = "hidden";

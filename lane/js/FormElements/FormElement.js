@@ -267,6 +267,21 @@ FormElement.prototype.applyStyleClass = function(){
 	});
 };
 
+FormElement.funcs.visibleChanged = function(value){
+	if (value){
+		var my = this;
+		this.trigger("parentBecomesVisible", my);
+		if (this instanceof Container){
+			this.enumChilds(function(elem){
+				elem.trigger("parentBecomesVisible", my);
+			});
+		}
+	}
+};
+
+
+FormElement.on("visibleChanged", FormElement.funcs.visibleChanged);
+//FormElement.on("visibleBeforeChanged", FormElement.funcs.visibleBeforeChanged);
 FormElement.on("hintChanged", FormElement.prototype.applyHint);
 FormElement.on("imgChanged", FormElement.prototype.applyImg);
 FormElement.on("styleClassChanged",FormElement.prototype.applyStyleClass);
@@ -408,7 +423,10 @@ FormElement._eventListener = function(e){
 		});
 	}
 };
+
+
 Util.addListener(document, "keydown", FormElement._eventListener);
 Util.addListener(document, "keyup", FormElement._eventListener);
 Util.addListener(document, "keypress", FormElement._eventListener);
+
 
