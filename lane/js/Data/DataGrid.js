@@ -91,6 +91,9 @@ DataGrid.prototype.refreshView = function(){
  * @param index
  */
 DataGrid.prototype.moveTo = function(index){
+	if (typeof index === "object"){
+		index = index.current;
+	}
 	if (index < 0 ){
 		throw new DataOutOfRangeError("Cant moveCurrentRow to negative index");
 	}
@@ -108,9 +111,6 @@ DataGrid.prototype.moveTo = function(index){
 DataGrid.prototype.getCurrentRow = function(){
 	if (this._currentRow == undefined && this._data.length){
 		this._currentRow = 0;
-	}
-	if (this._currentRow < this._data.length - 1){
-		this._currentRow = this._data.length - 1;
 	}
 	return this._data[this._currentRow];
 };

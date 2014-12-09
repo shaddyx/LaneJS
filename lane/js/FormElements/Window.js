@@ -8,7 +8,7 @@ Window.buttons = {
 	CLOSE:1,
 	MINIMIZE:2,
 	check:function(value){
-		if (value != 1 && value != 2){
+		if (value & Util.xor(255, this.CLOSE | this.MINIMIZE)){
 			throw new CoreException("Value: [" + value + "] is not in type Window.buttons");
 		}
 		return value;
