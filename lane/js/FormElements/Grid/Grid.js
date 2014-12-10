@@ -397,7 +397,7 @@ Grid.prototype._updateHorzScrollerVisibility = function(){
 };
 /**
  * returns column by name
- * @param name
+ * @param {string} name
  * @returns {GridColumn}
  */
 Grid.prototype.getColumnByName = function(name){
