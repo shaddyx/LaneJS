@@ -88,7 +88,7 @@ BoxElement.on("scrollTopChanged", function(){
 //
 
 BoxElement.addPropertyApplyer("caption",function(value){
-	this.htmlInnerElement.innerHTML = value;
+	this.htmlInnerElement.innerHTML = value.split(" ").join("&nbsp;");
 });
 
 BoxElement.addPropertyApplyer("margin",function(value){
