@@ -262,7 +262,9 @@ BoxElement.prototype._draggableChanged = function(value){
 				}
 			},
 			rootMouseOut:function(evt){
-				if (this._dragStartPoint && (!evt.toElement || evt.toElement.tagName === "HTML")){
+				var target = evt.toElement || evt.relatedTarget;
+				if (this._dragStartPoint && (!target || target.tagName === "HTML")){
+					console.log("Target:", target);
 					this._dragListeners.stopDragging.call(this);
 				}
 			},
