@@ -281,25 +281,25 @@ Grid.prototype.render = function(){
 	//
 	this._updateHorzScrollerVisibility();
 	var current = data.getCurrentRow();
-	if (!current){
-		return false;
-	}
-	if (!this._v.topLine){
-		this.topLine(current);
-	}
-	
-	if (current.visibleUp() < this._v.topLine.visibleUp()){
-		this.topLine(current);
-	} else if (current.visibleUp() > this._v.topLine.visibleUp() + this._visibleRows - 1){
-		my.topLine(current.getRelative( - this._visibleRows + 1));
-	};
+	if (current) {
+		if (!this._v.topLine) {
+			this.topLine(current);
+		}
 
-	data.getRows(this._v.topLine, Math.min(this._visibleRows, this._v.topLine.visibleDown()),function(dataRow){
-		my._rows[rowIndex].selected(dataRow.current == dataRow.dataGrid.getCurrentRow().current);
-		my._rows[rowIndex].render(dataRow);
-		my._rows[rowIndex].rowIndex(dataRow.current);
-		rowIndex ++;
-	});
+		if (current.visibleUp() < this._v.topLine.visibleUp()) {
+			this.topLine(current);
+		} else if (current.visibleUp() > this._v.topLine.visibleUp() + this._visibleRows - 1) {
+			my.topLine(current.getRelative(-this._visibleRows + 1));
+		}
+		;
+
+		data.getRows(this._v.topLine, Math.min(this._visibleRows, this._v.topLine.visibleDown()), function (dataRow) {
+			my._rows[rowIndex].selected(dataRow.current == dataRow.dataGrid.getCurrentRow().current);
+			my._rows[rowIndex].render(dataRow);
+			my._rows[rowIndex].rowIndex(dataRow.current);
+			rowIndex++;
+		});
+	}
 	//
 	//	cleaning last rows
 	//

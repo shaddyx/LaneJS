@@ -30,6 +30,7 @@ DataGrid.prototype.clear = function(){
 	this._data = [];
 	this._currentRow = 0;
 	this._visible = 0;
+	this.trigger("dataUpdate");
 };
 
 DataGrid.prototype.getByIndex = function(index){
@@ -97,8 +98,13 @@ DataGrid.prototype.moveTo = function(index){
 	if (index < 0 ){
 		throw new DataOutOfRangeError("Cant moveCurrentRow to negative index");
 	}
-	if (index > this._data.length - 1 ){
-		throw new DataOutOfRangeError("Move index out of range");
+	if (index > this._data.length - 1){
+		if (this._data.length){
+			console.log("There is no such index:" + index + " moving to " + (this._data.length - 1));
+			index = this._data.length - 1;
+		} else {
+			index = 0;
+		}
 	}
 	this._currentRow = index;
 	this.trigger("dataCursorMoved", this._currentRow);
