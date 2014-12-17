@@ -52,7 +52,6 @@ Grid.prototype._afterDraw = function() {
 	this._elements.vertScroll.on("dragEnded", this._vScrollerMoved, this);
 	this._elements.horzScroll.on("drag", this._hScrollerMoved, this);	
 	this.reBuild();
-	//this.initKeyboard();
 };
 
 Grid.prototype.reBuild = function(){

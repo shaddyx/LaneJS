@@ -6,14 +6,15 @@
  * reCalculates columns width's if columns sum size is lower than free space size
  */
 Grid.prototype.reDrawColumns = function(){
-    debugger;
     if (!this._elements.content._v.width){
         return;
     }
-    /*if (this._rowWidth < this._elements.content._v.width){
+    if (window.stopRefresh){
+        debugger;
+        return;
+    }
 
-    }*/
-    this._rowWidth = this._elements.content._v.width;
+    var preferredWidth = this._elements.gridContentContainer._v.width;
 
     //
     //	calculating initial values
@@ -30,7 +31,20 @@ Grid.prototype.reDrawColumns = function(){
             columnsNonStretchWidth += col._v.width;
         }
     }
-    this._elements.content.width(columnsNonStretchWidth + columnsStretchableWidth);
+    var calculatedRowWidth = columnsNonStretchWidth + columnsStretchableWidth;
+    this._rowWidth = Math.max(this._elements.gridContentContainer._v.width, calculatedRowWidth);
+    this._elements.content.vMinWidth(0);
+    this._elements.header.vMinWidth(0);
+    this._elements.footer.vMinWidth(0);
+    this._elements.content.width(this._rowWidth);
+    this._elements.header.width(this._rowWidth);
+    this._elements.footer.width(this._rowWidth);
+
+    if (this.oldWidth != this._rowWidth){
+        console.log("rowWidth", this._rowWidth);
+    }
+    this.oldWidth = this._rowWidth;
+
     //
     //	reDrawing widths
     //
