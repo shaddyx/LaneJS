@@ -6,6 +6,7 @@
  * reCalculates columns width's if columns sum size is lower than free space size
  */
 Grid.prototype.reDrawColumns = function(){
+    debugger;
     if (!this._elements.content._v.width){
         return;
     }

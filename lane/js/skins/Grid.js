@@ -161,7 +161,7 @@ GridRowSkin.def = {
     borderWidth:[0,0,1,0],
 	borderColor:"#79B7E7",
 	styleClass:"clean",
-	overflow:BoxElement.OVERFLOW_MODE.hidden,
+	//overflow:BoxElement.OVERFLOW_MODE.hidden,
 	style:{
 		normal:{
 			backgroundColor:"inherit",
