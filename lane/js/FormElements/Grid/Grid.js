@@ -392,7 +392,13 @@ Grid.prototype._updateScrollerVisibility = function(){
 };
 
 Grid.prototype._updateHorzScrollerVisibility = function(){
-	this._elements.horzScrollContainer && this._elements.horzScrollContainer.visible(this._elements.gridContentContainer.isOverflowedX());
+	if (this._elements.horzScrollContainer) {
+		this._elements.horzScrollContainer.visible(this._elements.gridContentContainer.isOverflowedX());
+		if (!this._elements.gridContentContainer.isOverflowedX()){
+			this._elements.horzScroll.left(0);
+			this._hScrollerMoved();
+		}
+	}
 };
 /**
  * returns column by name

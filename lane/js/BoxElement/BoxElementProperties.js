@@ -249,7 +249,6 @@ BoxElement.prototype._draggableChanged = function(value){
 		}
 		var dragByX = value.axis.indexOf("x") != -1;
 		var dragByY = value.axis.indexOf("y") != -1;
-		
 		this.floating(true);
 		this._dragListeners = {
 			mouseDown:function(){
@@ -265,7 +264,8 @@ BoxElement.prototype._draggableChanged = function(value){
 						floating:true,
 						width:rootElement.width(),
 						height:rootElement.height(),
-						zIndex:Constants.maxZindex
+						zIndex:Constants.maxZindex,
+						cursor:"move"
 					});
 				}
 			},
