@@ -259,6 +259,14 @@ BoxElement.prototype._draggableChanged = function(value){
 						x:browser.mouseX() - this._v.left,
 						y:browser.mouseY() - this._v.top
 					};
+					this.dragShutter = rootElement.buildTo({
+						left:0,
+						top:0,
+						floating:true,
+						width:rootElement.width(),
+						height:rootElement.height(),
+						zIndex:Constants.maxZindex
+					});
 				}
 			},
 			rootMouseOut:function(evt){
@@ -296,6 +304,7 @@ BoxElement.prototype._draggableChanged = function(value){
 			},
 			stopDragging:function(){
 				if (this._dragStartPoint && this._dragListeners && this.trigger('dragEnded') !== false){
+					this.dragShutter.remove();
 					this.setStyleClassRec("dragEnded");
 					this._dragStartPoint = false;
 				}
