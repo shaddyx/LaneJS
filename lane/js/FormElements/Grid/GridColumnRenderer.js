@@ -25,7 +25,7 @@ Grid.prototype.reDrawColumns = function(){
     for (i = 0; i < this._columns.length; i++) {
         var col = this._columns[i];
         if (col._v.hs){
-            columnsStretchableWidth += col._v.width
+            columnsStretchableWidth += col._v.width;
             toStretch.push(col);
         } else {
             columnsNonStretchWidth += col._v.width;
@@ -33,17 +33,6 @@ Grid.prototype.reDrawColumns = function(){
     }
     var calculatedRowWidth = columnsNonStretchWidth + columnsStretchableWidth;
     this._rowWidth = Math.max(this._elements.gridContentContainer._v.width, calculatedRowWidth);
-    this._elements.content.vMinWidth(0);
-    this._elements.header.vMinWidth(0);
-    this._elements.footer.vMinWidth(0);
-    this._elements.content.width(this._rowWidth);
-    this._elements.header.width(this._rowWidth);
-    this._elements.footer.width(this._rowWidth);
-
-    if (this.oldWidth != this._rowWidth){
-        console.log("rowWidth", this._rowWidth);
-    }
-    this.oldWidth = this._rowWidth;
 
     //
     //	reDrawing widths
@@ -70,12 +59,27 @@ Grid.prototype.reDrawColumns = function(){
         this._columns[i].rightBoundPos(right);
         this._columns[i].helperHeight(this._elements.gridContentContainer._v.height);
     }
-
+    //
+    //
+    //
+    this._rowWidth = right;
     //
     //		assigning columns sizes to cells
     //
+    //
+    //			Applying header and footer cell sizes
+    //
+    for (i = 0; i < this._columns.length; i++) {
+        this._headerRow && this._headerRow._cells[i].width(this._columns[i]._v.width);
+        this._footerRow && this._footerRow._cells[i].width(this._columns[i]._v.width);
+    }
+
+    this._elements.gridContentContainer.recalcMinSizes();
     this._headerRow && this._headerRow.width(this._rowWidth);
     this._footerRow && this._footerRow.width(this._rowWidth);
+    this._elements.content.width(this._rowWidth);
+    //console.log("rowWidth", this._rowWidth);
+
     for (var ri = 0; ri < this._rows.length; ri++ ){
         var row = this._rows[ri];
         row.width(this._rowWidth);
@@ -84,13 +88,7 @@ Grid.prototype.reDrawColumns = function(){
         }
     }
 
-    //
-    //			Applying header and footer cell sizes
-    //
-    for (i = 0; i < this._columns.length; i++) {
-        this._headerRow && this._headerRow._cells[i].width(this._columns[i]._v.width);
-        this._footerRow && this._footerRow._cells[i].width(this._columns[i]._v.width);
-    }
+
 
     this.scheduleRender();
 };

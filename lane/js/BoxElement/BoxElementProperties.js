@@ -267,6 +267,12 @@ BoxElement.prototype._draggableChanged = function(value){
 						zIndex:Constants.maxZindex,
 						cursor:"move"
 					});
+					/*var mouseButtonChanged = function(value){
+						console.log("buttonChanged",value);
+						this.dragShutter.remove();
+						browser.removeListener("mouseButtonChanged", mouseButtonChanged);
+					};
+					browser.on("mouseButtonChanged", mouseButtonChanged, this);*/
 				}
 			},
 			rootMouseOut:function(evt){

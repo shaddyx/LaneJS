@@ -31,6 +31,7 @@ BrowserObject.prototype.width = BrowserObject.addProperty("width", false);
 BrowserObject.prototype.height = BrowserObject.addProperty("height", false);
 BrowserObject.prototype.mouseX = BrowserObject.addProperty("mouseX", false);
 BrowserObject.prototype.mouseY = BrowserObject.addProperty("mouseY", false);
+BrowserObject.prototype.mouseButton = BrowserObject.addProperty("mouseButton", 0);
 
 BrowserObject.prototype.init = function() {
 	this.initialized = true;
@@ -148,6 +149,7 @@ BrowserObject.mouseMoveFunction = function(e) {
 		tmpE.type = "mousemove";
 		browser.mouseX(x);
 		browser.mouseY(y);
+		browser.mouseButton(e.button)
 		browser.trigger(tmpE);
 		return true;
 };
