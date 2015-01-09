@@ -156,7 +156,7 @@ GridSkin.def = {
 
 GridRowSkin = {};
 GridRowSkin.def = {
-	height:Constants.rowHeight,
+	height:Constants.rowHeight + 1,
 	horizontal:true,
     borderWidth:[0,0,1,0],
 	borderColor:"#79B7E7",

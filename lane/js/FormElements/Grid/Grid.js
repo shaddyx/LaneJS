@@ -48,6 +48,11 @@ Grid.prototype._afterDraw = function() {
 	if (!GridRowSkin[this._rowSkin]){
 		throw new Error("No skin " + this._rowSkin + " for GridRow!");
 	}
+
+	//
+	//		TODO: make the automatic row height determinition
+	//
+
 	this._v.rowHeight || this.rowHeight(GridRowSkin[this._rowSkin].height);
 	
 	this._elements.vertScroll.on("dragEnded", this._vScrollerMoved, this);
@@ -88,19 +93,19 @@ Grid.prototype.reDraw = function(){
 Grid.prototype.updateHeaderFooterVisibility = function(){
 	this._elements.header.visible(this._v.showHeader);
 	this._elements.footer.visible(this._v.showFooter);
-}
+};
 /**
  * function calculates row count fit in current viewport
  */
 Grid.prototype.calcVisibleRows = function(){
 	this._visibleRows = 0;
-	var h = this._elements.content.height();
+	var h = this._elements.content._v.height - this._elements.content._v._dy;
 	var rowH = 0;
 	
 	for (var ri = 0; ri < this._rows.length; ri++ ){
 		var row = this._rows[ri];
-		rowH += row._v.height
-		if (rowH > h){
+		rowH += row._v.height;
+		if (rowH >= h){
 			break;
 		}
 		this._visibleRows ++;
