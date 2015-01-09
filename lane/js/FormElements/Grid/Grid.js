@@ -36,6 +36,7 @@ Grid.prototype.showFooter = Grid.addProperty("showFooter", false);
 Grid.prototype.rowHeight = Grid.addProperty("rowHeight", 0);
 Grid.prototype.selectedColumn = Grid.addProperty("selectedColumn", false);
 Grid.prototype.topLine = Grid.addProperty("topLine", false);
+Grid.prototype.vertScrollMinHeight = Grid.addProperty("vertScrollMinHeight", 10);
 Grid.addProperty("_scrollerShown", false);
 Grid.addProperty("_horzScrollerShown", false);
 
@@ -310,10 +311,20 @@ Grid.prototype.render = function(){
 	//
 	
 	this._updateScrollerVisibility();
+	this._updateVertScrollerSizeAndPos();
+};
+
+
+Grid.prototype._updateVertScrollerSizeAndPos = function(){
 	var contH = this._elements.vertScroll.parent._v.height;
-	var h = this._elements.vertScroll._v.height;
-	//var scrollTop = Math.floor((data.visibleUp() / (data.visible() - this._visibleRows)) * (contH - h));
-	var scrollTop = Math.floor((data.visibleUp() / (data.visible() - 1)) * (contH - h));
+	/** @type DataGrid **/
+	var h = contH * (this._visibleRows / this._v.data.visible());
+	console.log("Vertical scroller height:", h);
+	this._elements.vertScroll.height(h);
+	if (h < this._v.vertScrollMinHeight && contH >= this._v.vertScrollMinHeight){
+		h = this._v.vertScrollMinHeight;
+	}
+	var scrollTop = Math.floor((this._v.data.visibleUp() / (this._v.data.visible() - 1)) * (contH - h));
 	this._elements.vertScroll.top(scrollTop);
 	window.grids = window.grids || {};
 	window.grids[this.id] = this;

@@ -96,6 +96,7 @@ BaseObject.addProperty = function(name,defValue,params){
 			return this._v[name];
 		};
 	}
+
 	return this.prototype[name];
 };
 BaseObject.setParams = function(name,params){

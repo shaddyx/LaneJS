@@ -267,18 +267,13 @@ BoxElement.prototype._draggableChanged = function(value){
 						zIndex:Constants.maxZindex,
 						cursor:"move"
 					});
-					/*var mouseButtonChanged = function(value){
-						console.log("buttonChanged",value);
-						this.dragShutter.remove();
-						browser.removeListener("mouseButtonChanged", mouseButtonChanged);
-					};
-					browser.on("mouseButtonChanged", mouseButtonChanged, this);*/
+					console.log("DragShutter created", this.dragShutter);
 				}
 			},
 			rootMouseOut:function(evt){
 				var target = evt.toElement || evt.relatedTarget;
 				if (this._dragStartPoint && (!target || target.tagName === "HTML")){
-					console.log("Target:", target);
+					console.log("Root mouse out, target:", target);
 					this._dragListeners.stopDragging.call(this);
 				}
 			},
@@ -311,6 +306,7 @@ BoxElement.prototype._draggableChanged = function(value){
 			stopDragging:function(){
 				if (this._dragStartPoint && this._dragListeners && this.trigger('dragEnded') !== false){
 					this.dragShutter.remove();
+					console.log("Drag shutter removed", this.dragShutter);
 					this.setStyleClassRec("dragEnded");
 					this._dragStartPoint = false;
 				}
