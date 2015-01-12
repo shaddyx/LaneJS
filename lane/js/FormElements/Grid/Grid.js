@@ -322,8 +322,15 @@ Grid.prototype.render = function(){
 
 Grid.prototype._updateVertScrollerSizeAndPos = function(){
 	var contH = this._elements.vertScroll.parent._v.height;
+	if (!contH || !this._v.data) {
+		return;
+	}
 	/** @type DataGrid **/
 	var h = contH * (this._visibleRows / this._v.data.visible());
+	if (isNaN(h)){
+		debugger;
+	}
+
 	console.log("Vertical scroller height:", h);
 	this._elements.vertScroll.height(h);
 	if (h < this._v.vertScrollMinHeight && contH >= this._v.vertScrollMinHeight){
