@@ -63,7 +63,9 @@ GridCell.prototype.build = function(){
 	this._element.build(st);
 	this._element.drawRec({target:this._row._element});
 	this._element.removeListener("mousedown", this._cellClicked, this);
+	this._element.removeListener("mouseup", this._cellMouseUp, this);
 	this._element.on("mousedown", this._cellClicked, this);
+	this._element.on("mouseup", this._cellMouseUp, this);
 	this._element.removeListener("dblclick", this._cellDblClicked, this);
 	this._element.on("dblclick", this._cellDblClicked, this);
 	this.updateSelected();
@@ -106,6 +108,11 @@ GridCell.prototype._cellClicked = function(){
 	}
 	this.trigger("click",this, row);
 	this._grid.trigger("cellClicked",this, row);
+};
+
+GridCell.prototype._cellMouseUp = function(e){
+	var row = this._grid._v.data.getByIndex(this._row._v.rowIndex);
+	this._grid.trigger("cellMouseUp", this, row);
 };
 
 GridCell.prototype.width = function(value){

@@ -21,7 +21,8 @@ InputBox.prototype.updateValueList = function(){
 		if (!this._grid){
 			/** @type Grid */
 			this._grid = FormElement.build(InputBoxSkin.__grid,this._elements.gridContainer);
-			this._grid.on("cellClicked", this._itemSelected, this);
+			//this._grid.on("cellClicked", this._itemSelected, this);
+			this._grid.on("cellMouseUp", this._itemSelected, this);
 			this._grid.on("cellEdit", this._itemSelected, this);
 			this._grid.on("focusChanged", this._selectionFocusChange, this);
 			this._grid.focusParent(this);
