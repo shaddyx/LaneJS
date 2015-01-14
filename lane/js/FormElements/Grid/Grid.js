@@ -28,7 +28,16 @@ Grid.type = "Grid";
  * @function
  * @return @DataGrid
  */
+/**
+ * @function
+ * @return DataGrid
+ * @param DataGrid
+ */
 Grid.prototype.data = Grid.addProperty("data", false);
+/**
+ * returns {boolean} locked state (if locked - no redraw process can initiate
+ * @function
+ */
 Grid.prototype.locked = Grid.addProperty("locked", false);
 Grid.prototype.rowWidth = Grid.addProperty("rowWidth", 0);
 Grid.prototype.showHeader = Grid.addProperty("showHeader", true);

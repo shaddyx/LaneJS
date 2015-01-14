@@ -146,15 +146,29 @@ BoxElement.addPropertyApplyer("padding",function(value){
 BoxElement.addPropertyApplyer("backgroundImage",function(value){
 	if (value){
 		if (value != 'none'){
-			if (value.indexOf("http://") == -1 && value.indexOf("https://") == -1){
+			if (typeof(value) === "object"){
+				var orientationProperty = value.horizontal ? ["left", "left top", "right top"] : ["top", "left top", "left bottom"];
+				if (browser.ie) {
+					if (value.horizontal) {
+						this.htmlElement.style.filter = "progid:DXImageTransform.Microsoft.gradient(startColorstr='" + value.from + "', endColorstr='" + value.to + "')";
+					}
+				}
+				else if (browser.chrome || browser.safari) {
+					this.htmlElement.style.backgroundImage = "-webkit-gradient(linear, " + orientationProperty[1] + ", " + orientationProperty[2] + ", from(" + value.from + "), to(" + value.to + "))";
+				}
+				else if (browser.firefox) {
+					this.htmlElement.style.backgroundImage = "-moz-linear-gradient(" + orientationProperty[0] + ",  " + value.from + ",  " + value.to + ")";
+				}
+				else if (browser.opera) {
+					this.htmlElement.style.backgroundImage = "-o-linear-gradient(" + value.from + ",  " + value.to + ")";
+				}
+			} else if (value.indexOf("http://") == -1 && value.indexOf("https://") == -1){
 				value = value.split(' ').join('');
 				this.htmlElement.style.backgroundImage = "url(" + browser._v.imageBase + value + ")";
 			} else {
 				this.htmlElement.style.backgroundImage = "url(" + value + ")";
 			}
-			
-		}
-		else{
+		} else {
 			this.htmlElement.style.backgroundImage = "none";
 		}
 	}

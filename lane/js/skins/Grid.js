@@ -129,7 +129,8 @@ GridSkin.def = {
 					    {
 					    	name:"header",
 					    	height:Constants.lineHeight,
-					    	hs:true
+					    	hs:true,
+							backgroundImage:{from:"#EBEDEF",to:"#F7F7F8"}
 					    },
 					    {
 					   		name:"content",
