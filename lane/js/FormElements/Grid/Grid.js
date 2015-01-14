@@ -415,11 +415,18 @@ Grid.prototype._updateScrollerVisibility = function(){
 };
 
 Grid.prototype._updateHorzScrollerVisibility = function(){
-	if (this._elements.horzScrollContainer) {
+	if (this._elements.horzScrollContainer){
 		this._elements.horzScrollContainer.visible(this._elements.gridContentContainer.isOverflowedX());
-		if (!this._elements.gridContentContainer.isOverflowedX()){
-			this._elements.horzScroll.left(0);
-			this._hScrollerMoved();
+		if (this._elements.horzScrollContainer._v.innerWidth) {
+
+			var container = this._elements.gridContentContainer;
+			var w = this._elements.horzScrollContainer.innerWidth() * ((container.width() - container._dx()) / container.innerWidth());
+			this._elements.horzScroll.width(w);
+
+			if (!this._elements.gridContentContainer.isOverflowedX()){
+				this._elements.horzScroll.left(0);
+				this._hScrollerMoved();
+			}
 		}
 	}
 };
