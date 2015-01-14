@@ -27,7 +27,7 @@ GridSkin._parts = {
    				  c:[
 	   				   {
 		   				   backgroundColor:"#79B7E7",
-		   				   width:10,
+		   				   width:12,
 		   				   height:30,
 		   				   left:2,
 		   				   cursor:"pointer",
@@ -79,8 +79,8 @@ GridSkin._parts = {
 			  },
 			  c:[
 			   {
-   				   backgroundColor:"#cccccc",
-   				   height:10,
+				   backgroundColor:"#79B7E7",
+   				   height:12,
    				   width:30,
    				   top:2,
    				   cursor:"pointer",
