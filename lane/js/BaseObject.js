@@ -274,3 +274,14 @@ BaseObject.prototype.export = function(props){
 
 	return obj;
 };
+
+BaseObject.prototype.toString = function(){
+	var name = "";
+	if (typeof this.name === "function" && this._v.name){
+		name = ", name:" + this._v.name;
+	}
+	var str = "[LaneJS object:" + this.type +
+		name +
+		"]";
+	return str;
+};

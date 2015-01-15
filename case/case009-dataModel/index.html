@@ -149,135 +149,41 @@
     	SpeedUtil.start("main cycle");
     	var rootElement = BoxElement.virtualizeBody();
     	var win;
-    	var dataGrid = new DataGrid();
-    	var columns = DataColumn.build([{
-			   name:"a",
-			   caption:"blablabla",
-			   columnType:"img"
-		   },
-		   {
-			   name:"b",
-			   caption:"blablablb"
-		   },
-		   {
-			   name:"c",
-			   caption:"blablablb",
-			   width:50
-		   },
-		   {
-			   name:"d",
-			   caption:"blablablb",
-			   width:300
-		   },
-		   {
-			   name:"e",
-			   caption:"blablablb"
-		   },
-		   {
-			   name:"f",
-			   caption:"blablablb"
-		   },
-		   {
-			   name:"g",
-			   caption:"blablablb"
-		   }
-		]);
-    	dataGrid.columns(columns);
-    	for (var i = 0; i<10; i++){
-    		dataGrid.add({a:"https://cdn2.iconfinder.com/data/icons/crystalproject/Open-Office-Icons/stock_3d-apply-16.png", b:"testb" + i, c:i, d:i, e:i, f:i, g:i});
-    	}
-    	
-    	
     	browser.imageBase("../../lane/");
     	browser.on("ready",function(){
 	    	win = FormElement.build({
 	    		type:"FieldSet",
 	    		caption:"lane.js window",
-	    		/*width:1900,
-	    		height:1000,*/
 	    		hs:true,
 	    		vs:true,
 	    		c:[
-	    			{
-	    				type:"Container",
-	    				hs:true,
-	    				horizontal:true,
-	    				c:[
-		    				{
-		    					type:"Label",
-		    					width:200,
-		    					value:"lane.js label element"
-		    				},
-		    				{
-		    					type:"Button",
-		    					width:200,
-		    					caption:"lane.js button"
-		    				},
-                        ]
-	    			},
-	    			{
-	    				type:"Container",
-	    				hs:true,
-	    				horizontal:true,
-	    				c:[
-		    				{
-		    					type:"Label",
-		    					width:400,
-		    					value:"look at the page source to see how it is done :)"
-		    				}
-                        ]
-	    			},
-	    			{
-	    				type:"Panel",
-	    				hs:true,
-	    				borderColor:"#000",
-	    				borderWidth:[1,1,1,1],
-	    				overflow:BoxElement.OVERFLOW_MODE.overflowX,
-	    				c:[
-							{
-								type:"Button",
-								width:600,
-								//hs:true,
-								caption:"test for overflowed button"
-							}
-	    				]
-	    			},
-	    			{
-	    				type:"Grid",
-	    				name:"grid",
-	    				hs:true,
-	    				vs:true
-	    			},
-	    			{
-	    				type:"Panel",
-	    				hs:true,
-	    				c:[
-	    				   {
-	    					   type:"Button",
-	    					   caption:"Test",
-	    					   on:{
-	    						   click:function(){
-	    							   var container = grid.getCellContainer(1,"b");
-	    							   FormElement.build({
-	    								   type:"InputBox",
-	    								   hs:true,
-	    								   on:{
-	    									   focusChanged:function(value){
-	    										   if (!value){
-	    											   grid.releaseCell();
-	    										   }
-	    									   }
-	    								   }
-	    							   }, container);
-	    							   
-	    						   }
-	    					   }
-	    				   }
-	    				]
-	    			}
+					{
+						type:"InputBox",
+						name:"data1",
+						caption:"data1",
+						hs:true
+					},
+					{
+						type:"InputBox",
+						name:"data2",
+						caption:"data2",
+						hs:true
+
+					},
+					{
+						type:"InputBox",
+						name:"data3",
+						caption:"data3",
+						hs:true
+					},
+					{
+						type:"InputBox",
+						name:"data4",
+						caption:"data4",
+						hs:true
+					}
 	    		]
 	    	}, rootElement);
-	    	win.elements.grid.data(dataGrid);
 	    	window.grid = win.elements.grid;
 	    });
 	    
