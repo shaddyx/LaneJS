@@ -31,7 +31,6 @@ DataModel.prototype._removeProperty = function(){
 };
 
 DataModel.prototype.updateInputValues = function(){
-    debugger;
     for (var k in this.____modelInputElements){
         var el = this.____modelInputElements[k];
         this[k](el._v.value);
@@ -70,3 +69,19 @@ DataModel.attachToInputElements = function(topElement, model){
     }
     return model;
 };
+
+
+DataModel.prototype.save = function(){
+    var data = {};
+    for (var k in this._v){
+        data[k] = this._v[k];
+    }
+    return data;
+};
+
+DataModel.prototype.load = function(data){
+    for (var k in data){
+        this[k](data);
+    }
+};
+

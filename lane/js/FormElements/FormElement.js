@@ -299,8 +299,9 @@ FormElement._apply = function(el, struct){
 	}
 };
 
-FormElement.build = function(struct, target, map, topElement){
+FormElement.build = function(struct, target, params, map, topElement){
 	var topLevel = false;
+	params = params || {};
 	if (!map) {
 		topLevel = true;
 		map = {};
@@ -351,12 +352,15 @@ FormElement.build = function(struct, target, map, topElement){
 	el.draw({ target: target });
 	if (struct.c) {
 		for (var k in struct.c){
-			this.build(struct.c[k], el, map, topElement);
+			this.build(struct.c[k], el, params, map, topElement);
 		}
 	}
 	el.elements = map;
 	if (topLevel) {
 		el.triggerRec("buildFinished", el);
+	}
+	if (params.dataModelName){
+		el.elements[params.dataModelName] = DataModel.attachToInputElements(el);
 	}
 	return el;
 };
