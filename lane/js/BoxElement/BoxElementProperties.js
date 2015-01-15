@@ -268,6 +268,7 @@ BoxElement.prototype._draggableChanged = function(value){
 						cursor:"move"
 					});
 					console.log("DragShutter created", this.dragShutter);
+					return false;
 				}
 			},
 			rootMouseOut:function(evt){

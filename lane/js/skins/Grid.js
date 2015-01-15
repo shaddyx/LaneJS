@@ -27,9 +27,9 @@ GridSkin._parts = {
    				  c:[
 	   				   {
 		   				   backgroundColor:"#79B7E7",
-		   				   width:12,
+		   				   width:13,
 		   				   height:30,
-		   				   left:2,
+		   				   left:1,
 		   				   cursor:"pointer",
 		   				   name:"vertScroll",
 		   				   draggable:{
@@ -82,7 +82,7 @@ GridSkin._parts = {
 				   backgroundColor:"#79B7E7",
    				   height:12,
    				   width:30,
-   				   top:2,
+   				   top:1,
    				   cursor:"pointer",
    				   name:"horzScroll",
    				   draggable:{
