@@ -17,9 +17,9 @@ DataModel.prototype._addProperty = function(name, def, options){
     this._v[name] = def;
     this[name] = function(value){
         if (value != undefined && my._v[name] !== value){
-            this.trigger(name + 'BeforeChanged', value);
+            this.trigger(name + 'BeforeChanged', value, name);
             my._v[name] = value;
-            this.trigger(name + 'Changed', value);
+            this.trigger(name + 'Changed', value, name);
         }
         return my._v[name];
     };

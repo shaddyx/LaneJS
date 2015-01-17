@@ -58,6 +58,7 @@ GridColumn.prototype._dragStarted = function(){
 GridColumn.prototype._dragEnded = function(){
 	var newL = this._helper._v.left;
 	var newW = this._v.width + (newL - this._oldL);
-	var w = this.width(newW);
+	this.width(newW);
+	this._grid._makeNonStretchableColumnsToIndex(this._v.index);
 	this._grid.scheduleReDraw();
 };

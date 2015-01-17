@@ -72,9 +72,9 @@ BaseObject.addProperty = function(name,defValue,params){
 					val = params.type.check(val, strict, this._v[name]);
 				}
 				if (val !== this._v[name]){
-					if (this.trigger(name + "BeforeChanged" , val) !== false){
+					if (this.trigger(name + "BeforeChanged" , val, name) !== false){
 						this._v[name] = val;
-						this.trigger(name + "Changed" , val);
+						this.trigger(name + "Changed" , val, name);
 					};
 				}
 			}
@@ -88,9 +88,9 @@ BaseObject.addProperty = function(name,defValue,params){
 				if (params.type) {
 					val = params.type.check(val, strict);
 				}
-				if (this.trigger(name + "BeforeChanged" , val) !== false){
+				if (this.trigger(name + "BeforeChanged" , val, name) !== false){
 					this._v[name] = val;
-					this.trigger(name + "Changed" , val);
+					this.trigger(name + "Changed" , val, name);
 				};
 			}
 			return this._v[name];

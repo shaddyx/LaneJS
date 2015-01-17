@@ -24,10 +24,11 @@ Grid.prototype.reDrawColumns = function(){
         toStretch = [];
     for (i = 0; i < this._columns.length; i++) {
         var col = this._columns[i];
-        if (col._v.hs){
+        if (col._v.hs && !col.__temporaryNotStretchable){
             columnsStretchableWidth += col._v.width;
             toStretch.push(col);
         } else {
+            delete col.__temporaryNotStretchable;
             columnsNonStretchWidth += col._v.width;
         }
     }

@@ -30,12 +30,16 @@ DirectDropDown.prototype.open = function() {
 	if (!this.enabled()) {
 		return false;
 	}
+	if (this.floatingElement._v.visible){
+		this.close();
+		return false;
+	}
 	this.floatingElement.visible(true);
 	var my = this;
 	setTimeout(function(){
 		rootElement.on("click", DirectDropDown.prototype.close, my);
 	},100);
-	
+	return false;
 };
 
 DirectDropDown.prototype.close = function() {

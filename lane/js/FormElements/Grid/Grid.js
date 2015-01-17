@@ -260,7 +260,7 @@ Grid.prototype.scheduleReBuild = function(time){
 
 Grid.prototype.scheduleRender = function(){
 	if (!this.renderTimer){
-		console.log("Render scheduled");
+		//console.log("Render scheduled");
 		var my = this;
 		this.renderTimer = setTimeout(function(){
 			my.renderTimer = false;
@@ -335,12 +335,11 @@ Grid.prototype._updateVertScrollerSizeAndPos = function(){
 		return;
 	}
 	/** @type DataGrid **/
-	var h = contH * (this._visibleRows / this._v.data.visible());
+	var h = Math.ceil(contH * (this._visibleRows / this._v.data.visible()));
 	if (isNaN(h)){
 		debugger;
 	}
 
-	console.log("Vertical scroller height:", h);
 	this._elements.vertScroll.height(h);
 	if (h < this._v.vertScrollMinHeight && contH >= this._v.vertScrollMinHeight){
 		h = this._v.vertScrollMinHeight;
@@ -349,6 +348,14 @@ Grid.prototype._updateVertScrollerSizeAndPos = function(){
 	this._elements.vertScroll.top(scrollTop);
 	window.grids = window.grids || {};
 	window.grids[this.id] = this;
+};
+
+Grid.prototype._makeNonStretchableColumnsToIndex = function(index){
+	for (var k in this._columns){
+		if (k <= index){
+			this._columns[k].__temporaryNotStretchable = true;
+		}
+	}
 };
 /**
  * returns physical cell by row number (in dataSource) and column name

@@ -342,4 +342,48 @@ Util.uniqId = function(){
 	}
 	return id.toString(16);
 };
+/**
+ * links objects to each other
+ * @param options
+ */
+Util.linkObjects = function(options){
+	if (typeof options !== "object"){
+		throw new Error("options must be an object");
+	}
+	if (!options.props){
+		throw new Error("properties for transfer must be set");
+	}
 
+	if (!options.from){
+		throw new Error("object to transfer from must be set");
+	}
+
+	if (!options.to){
+		throw new Error("object to transfer from must be set");
+	}
+	if (options.from.__link){
+		throw new Error("From object already linked:" + options.from );
+	}
+
+	if (options.to.__link){
+		throw new Error("To object already linked:" + options.to );
+	}
+	var changedFunctionFrom = function(value, name){
+		options.to[name](value);
+	};
+
+	var changedFunctionTo = function(value, name){
+		options.from[name](value);
+	};
+	var link = [];
+	for (var k in options.props){
+		var propName = options.props[k];
+		link.push([propName + "Changed", changedFunctionFrom, changedFunctionTo]);
+		options.from.on(propName + "Changed", changedFunctionFrom);
+		if (!options.obeDirection) {
+			options.to.on(propName + "Changed", changedFunctionTo);
+		}
+	}
+	options.from.__link = link;
+	options.to.__link = link;
+};

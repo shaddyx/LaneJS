@@ -304,14 +304,15 @@ GridCellSkin.def = {
 
 GridHelperSkin = {
 	zIndex:3,
-	width:5,
+	width:10,
 	height:100,
 	floating:true,
 	cursor:"col-resize",
 	draggable:{
 		axis:"x"
 	},
-	margin:[0,0,0,0],
+	margin:[0,0,0,-5],
+	padding:[0,0,0,5],
 	c:[
 	   {
 		   width:1,
