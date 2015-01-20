@@ -219,6 +219,12 @@ Grid.prototype._dataChanged = function(){
 		col.caption(dataCol.caption());
 		col.width(dataCol.width());
 		col.name(dataCol.name());
+		dataCol.removeListener("visibleChanged", this._dataChanged, this);
+		dataCol.on("visibleChanged", this._dataChanged, this);
+		if (!dataCol.visible()){
+			console.log("dataCol isn't visible");
+			continue;
+		}
 		if (col._v.name === this._v.selectedColumn){
 			selectedFound = true;
 		}
@@ -351,9 +357,11 @@ Grid.prototype._updateVertScrollerSizeAndPos = function(){
 };
 
 Grid.prototype._makeNonStretchableColumnsToIndex = function(index){
-	for (var k in this._columns){
-		if (k <= index){
-			this._columns[k].__temporaryNotStretchable = true;
+	if (index !== this._columns.length - 1){
+		for (var k in this._columns){
+			if (k <= index){
+				this._columns[k].__temporaryNotStretchable = true;
+			}
 		}
 	}
 };
