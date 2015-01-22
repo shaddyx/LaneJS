@@ -67,6 +67,11 @@ var BoxElement = function(params){
 	this.__updateHorizontal();
 	this._marginDx = 0;
 	this._marginDy = 0;
+	/*this.on("_vDeltaChanged", function(value){
+		if (this.id == 98 && value == 2){
+			debugger;
+		}
+	});*/
 };
 
 Util.extend(BoxElement,BaseObject);

@@ -52,20 +52,16 @@ BoxElement.on("overflowChanged",function(value){
 	}
 });
 
-BoxElement.__listeners.recalcInnerWidth = function(){
+BoxElement.prototype.recalcInnerWidth = function(){
 	if (!this._horzOverflow) {
 		this.innerWidth(this._v.width - this._v._dx);
 	} 
 };
-BoxElement.__listeners.recalcInnerHeight= function(){
+BoxElement.prototype.recalcInnerHeight= function(){
 	if (!this._vertOverflow){
 		this.innerHeight(this._v.height - this._v._dy);
 	}
 };
-
-BoxElement.on("heightChanged",BoxElement.__listeners.recalcInnerHeight);
-
-
 
 BoxElement.__listeners.vMinWidthChanged =function(value){
 	this.width(Math.max(this._v.width,value));
@@ -351,7 +347,8 @@ BoxElement.on("vMinWidthChanged",BoxElement.__listeners.vMinWidthChanged);
 //BoxElement.on("minHeightChanged",BoxElement.__listeners.minHeightChanged);
 //BoxElement.on("minWidthChanged",BoxElement.__listeners.minWidthChanged);
 BoxElement.on("horizontalChanged",BoxElement.prototype.__updateHorizontal);
-BoxElement.on("widthChanged",BoxElement.__listeners.recalcInnerWidth);
+BoxElement.on("widthChanged",BoxElement.prototype.recalcInnerWidth);
+BoxElement.on("heightChanged",BoxElement.prototype.recalcInnerHeight);
 BoxElement.on(["borderWidthChanged","paddingChanged","marginChanged"],BoxElement.prototype.__recalcDxDy);
 /*BoxElement.on("_dxChanged",BoxElement.__listeners._dxChanged);
 BoxElement.on("_dyChanged",BoxElement.__listeners._dyChanged);*/

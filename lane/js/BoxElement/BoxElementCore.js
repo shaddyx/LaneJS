@@ -217,6 +217,8 @@ BoxElement.prototype.__recalcDxDy = function() {
 	var pCache = this._v.padding;
 	this._dx(bCache[1] + bCache[3] + pCache[1] + pCache[3]);
 	this._dy(bCache[0] + bCache[2] + pCache[0] + pCache[2]);
+	this.recalcInnerWidth();
+	this.recalcInnerHeight();
 };
 
 BoxElement.prototype.__updateHorizontal = function() {
