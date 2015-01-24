@@ -288,7 +288,3 @@ DataGrid.build = function(struct){
 	}
 	return dataGrid;
 };
-
-
-
-

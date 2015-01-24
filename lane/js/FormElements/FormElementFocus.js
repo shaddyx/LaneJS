@@ -23,7 +23,7 @@ FormElement.prototype.applyCurrentFocus = function(value){
 			//
 			//	removing focus
 			//
-			FormElement.currentFocus.currentFocus(false);
+			FormElement.currentFocus.currentFocus(false);f
 		}
 		FormElement.currentFocus = this;
 		this.enumFocusParents(function(){

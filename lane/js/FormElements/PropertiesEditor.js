@@ -43,16 +43,19 @@ PropertiesEditor.prototype._targetChanged = function(){
     if (!target || !this._v.isDrawn){
         return;
     }
+
+    var data = {
+        data:[]
+    };
     for (var k in target._baseClass._properties){
         var type = target._baseClass._properties[k].params.type;
         if (!type){
             type = "string";
         }
         var record = {name:k, value:target[k](), type:type};
-        if (!target._baseClass._properties[k].params.hideFromEditor){
-            this._data.add(record);
-        }
+        data.data.push(record);
     }
+    this._grid._v.data.load(data);
 };
 PropertiesEditor.prototype._cellEdit = function(name, row){
     var my = this;
