@@ -37,7 +37,7 @@ InputBox.prototype.updateValueList = function(){
 		}
 
 		this._grid.data(dataGrid);
-		var h = Constants.rowHeight * this._v.values.length;
+		var h = Constants.gridRowHeightForSelectable * this._v.values.length;
 		if (h > Constants.maxInputDropDownHeightinRows * Constants.rowHeight){
 			h = Constants.maxInputDropDownHeightinRows * Constants.rowHeight;
 		}
