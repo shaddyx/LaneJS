@@ -74,7 +74,6 @@ PropertiesEditor.prototype._cellEdit = function(name, row){
         row.data.value = editor.value();
         my._v.target[row.data.name](editor.value());
         my._grid.releaseCell();
-        debugger;
         editor.remove();
         editor = false;
     });
