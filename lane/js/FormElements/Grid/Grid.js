@@ -63,8 +63,8 @@ Grid.prototype._afterDraw = function() {
 	//
 
 	this._v.rowHeight || this.rowHeight(GridRowSkin[this._rowSkin].height);
-	
 	this._elements.vertScroll.on("dragEnded", this._vScrollerMoved, this);
+	this._elements.vertScroll.on("drag", this._vScrollerMoved, this);
 	this._elements.horzScroll.on("drag", this._hScrollerMoved, this);	
 	this.reBuild();
 };
@@ -421,7 +421,7 @@ Grid.prototype._vScrollerMoved = function(){
 			(data.visible() * (currTop / (contH - h)));
 	dataPos = Math.floor(dataPos);
 	this._v.data.moveTo(dataPos);
-	this.render();
+	this.scheduleRender();
 };
 
 Grid.prototype._hScrollerMoved = function(){
@@ -467,7 +467,7 @@ Grid.prototype.getColumnByName = function(name){
 		}
 	}
 	return false;
-}
+};
 Grid.on("rowRender", function(row, dataRow){
 	if (dataRow == undefined) {
 		row.setStyleClass("clean");
