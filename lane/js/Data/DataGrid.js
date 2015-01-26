@@ -264,10 +264,33 @@ DataGrid.prototype.export = function(){
 };
 
 DataGrid.prototype.load = function(obj){
+	if (!obj) {
+		throw new Error("Data must be an object");
+	}
+	var skipCells = false;
+	if (obj.skipCells){
+		if (obj.skipCells instanceof Array){
+			skipCells = {};
+			for (var k in obj.skipCells){
+				skipCells[obj.skipCells[k]] = 1;
+			}
+		} else {
+			skipCells = obj.skipCells;
+		}
+	}
 	this.clear();
 	obj.columns && this.columns(DataColumn.build(obj.columns));
 	for (var k in obj.data){
-		this.add(obj.data[k]);
+		var object = obj.data[k];
+		if (skipCells){
+			object = {};
+			for (var x in obj.data[k]){
+				if (!skipCells[x]){
+					object[x] = obj.data[k][x];
+				}
+			}
+		}
+		this.add(object);
 	}
 };
 
