@@ -358,17 +358,8 @@ BoxElement.prototype.isOverflowedY = function(){
 	return this._v.height - this._v._dy < this._v.innerheight;
 };
 
-BoxElement.build = function(struct, target){
-	var el = new BoxElement();
-	el.build(struct);
-	if (target) {
-		el.drawRec({target:target});
-	}
-	return el;
-};
-
-BoxElement.on("mouseover",function(){
-	if (this._v.hovered && !this._hovered){
+BoxElement.prototype.startHovered = function(){
+	if (this._v.hovered && !this._hovered && !this._pressed){
 		if (!this._backup){
 			this._backup = {};
 		}
@@ -378,23 +369,24 @@ BoxElement.on("mouseover",function(){
 		this.setPropertiesWithBackup(this._v.hovered, this._backup.hover);
 		this._hovered = true;
 	}
-});
+};
 
-BoxElement.on("mouseout",function(){
+BoxElement.prototype.stopHovered = function(){
 	if (this._hovered) {
 		this._hovered = false;
 		this.restoreProperties(this._backup.hover);
 	}
-});
+};
 
-
-
-
-BoxElement.on("mousedown",function(){
+BoxElement.prototype.startPressed = function(){
 	if (this._pressed) {
 		return;
 	}
 	if (this._v.pressed) {
+		if (this._hovered){
+			this.restoreProperties(this._backup.hover);
+			this._hovered = false;
+		}
 		if (!this._backup){
 			this._backup = {};
 		}
@@ -403,13 +395,27 @@ BoxElement.on("mousedown",function(){
 		}
 		this.setPropertiesWithBackup(this._v.pressed, this._backup.pressed);
 		this._pressed = true;
+		rootElement.on("mouseup", this.stopPressed, this);
 	}
-});
-
-BoxElement.on("mouseup",function(){
+};
+BoxElement.prototype.stopPressed = function(){
 	if (this._pressed) {
+		rootElement.removeListener("mouseup", this.stopPressed, this);
 		this._pressed = false;
 		this.restoreProperties(this._backup.pressed);
 	}
-});
+};
+
+BoxElement.build = function(struct, target){
+	var el = new BoxElement();
+	el.build(struct);
+	if (target) {
+		el.drawRec({target:target});
+	}
+	return el;
+};
+
+BoxElement.on("mouseover", BoxElement.prototype.startHovered);
+BoxElement.on("mouseout", BoxElement.prototype.stopHovered);
+BoxElement.on("mousedown", BoxElement.prototype.startPressed);
 

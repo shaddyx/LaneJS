@@ -13,29 +13,13 @@ ButtonSkin.def = {
 	defaults:{
 		captionWidth:false,
 		minWidth:30,
-		minHeight:30,
+		minHeight:30
 	},
+	borderColor:"#ccc",
+	backgroundColor:"#f6f6f6",
 	hovered:{
-		style:{
-			disabled:{
-				borderColor:"#ccc",
-				backgroundColor:"#f6f6f6"
-			},
-			enabled:{
-				backgroundColor:"#fdf5ce",
-				borderColor:"#c77405"
-			}
-		}
-	},
-	style:{
-		disabled:{
-			borderColor:"#ccc",
-			backgroundColor:"#f6f6f6"
-		},
-		enabled:{
-			borderColor:"#ccc",
-			backgroundColor:"#f6f6f6"
-		}
+		backgroundColor:"#fdf5ce",
+		borderColor:"#c77405"
 	},
 	c:[
 	   {
@@ -45,8 +29,8 @@ ButtonSkin.def = {
 		   color:"#1c94c4",
 		   hs:true
 	   }
-	  ],
-	  styleClass:"enabled"
+	],
+	styleClass:"enabled"
 };
 
 ButtonSkin.img = {
@@ -59,31 +43,13 @@ ButtonSkin.img = {
 			minWidth:30,
 			minHeight:30,
 		},
+		borderColor:"#ccc",
+		color:"#ccc",
+		backgroundColor:"#f6f6f6",
 		hovered:{
-			style:{
-				disabled:{
-					borderColor:"#ccc",
-					color:"#ccc",
-					backgroundColor:"#f6f6f6"
-				},
-				enabled:{
-					borderColor:"#c77405",
-					color:"#ccc",
-					backgroundColor:"#fdf5ce"
-				}
-			}
-		},
-		style:{
-			disabled:{
-				borderColor:"#ccc",
-				color:"#ccc",
-				backgroundColor:"#f6f6f6"
-			},
-			enabled:{
-				borderColor:"#ccc",
-				color:"#ccc",
-				backgroundColor:"#f6f6f6"
-			}
+			borderColor:"#c77405",
+			color:"#ccc",
+			backgroundColor:"#fdf5ce"
 		},
 		name:"img",
 		backgroundPosition:"center center",

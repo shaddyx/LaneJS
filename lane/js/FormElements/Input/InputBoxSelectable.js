@@ -38,10 +38,10 @@ InputBox.prototype.updateValueList = function(){
 
 		this._grid.data(dataGrid);
 		var h = Constants.gridRowHeightForSelectable * this._v.values.length;
-		if (h > Constants.maxInputDropDownHeightinRows * Constants.rowHeight){
-			h = Constants.maxInputDropDownHeightinRows * Constants.rowHeight;
+		if (h > Constants.maxInputDropDownHeightinRows * Constants.gridRowHeightForSelectable){
+			h = Constants.maxInputDropDownHeightinRows * Constants.gridRowHeightForSelectable;
 		}
-		this._elements.gridContainer.height(h + 4);
+		this._elements.gridContainer.height(h + Constants.gridInnerPadding);
 	} else {
 		this._grid && this._grid.remove();
 		//this.editable(true);

@@ -74,7 +74,7 @@ GridSkin._parts = {
 			  on:{
 					horzScrollerMoved:function(percentage, grid){
 						var diff = grid._elements.gridContentContainer._v.innerWidth - grid._elements.gridContentContainer._v.width;
-						grid._elements.gridContentContainer.scrollLeft(- diff *percentage / 100);
+						grid._elements.gridContentContainer.scrollLeft(- diff * percentage / 100);
 					}
 			  },
 			  c:[
@@ -136,7 +136,7 @@ GridSkin.def = {
 					   		name:"content",
 					   		hs:true,
 					   		vs:true,
-					   		borderWidth:[1,1,1,1],
+					   		borderWidth:[1,0,1,0],
 					   		borderColor:"#79B7E7",
 					   		overflow:BoxElement.OVERFLOW_MODE.hidden
 				   		},
@@ -183,7 +183,7 @@ GridHeaderSkin.def = {
 	height:Constants.lineHeight,
 	horizontal:true,
     borderWidth:[0,0,0,0],
-    padding:[0,0,0,2],
+    padding:[0,0,0,0],
 	borderColor:"#79B7E7",
 	//overflow:BoxElement.OVERFLOW_MODE.hidden
 };
@@ -192,8 +192,8 @@ GridFooterSkin = {};
 GridFooterSkin.def = {
 	height:Constants.lineHeight,
 	horizontal:true,
-    borderWidth:[0,0,1,0],
-    padding:[1,0,0,1],
+	borderWidth:[0,0,0,0],
+	padding:[0,0,0,0],
 	borderColor:"#79B7E7",
 	//overflow:BoxElement.OVERFLOW_MODE.hidden
 };
@@ -221,7 +221,7 @@ GridFooterCellSkin.def = {
 GridCellContainer = {
 	overflow:BoxElement.OVERFLOW_MODE.hidden,
 	height:Constants.rowHeight,
-	borderWidth:[0,0,0,1],
+	borderWidth:[0,1,0,0],
 	borderColor:"#79B7E7"
 };
 

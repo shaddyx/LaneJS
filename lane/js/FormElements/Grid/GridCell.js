@@ -146,4 +146,9 @@ GridCell.prototype.updateSelected = function(){
 	this._element && this._element.setStyleClassRec(this._v.selected ? "cellSelected" : "cellUnselected");
 };
 
+GridCell.prototype.getElement = function(){
+	return this._element;
+};
+
+
 GridCell.on("selectedChanged", GridCell.prototype.updateSelected);

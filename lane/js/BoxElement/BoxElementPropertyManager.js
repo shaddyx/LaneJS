@@ -82,11 +82,9 @@ BoxElement.on("scrollTopChanged", function(){
 		this.c[k].top(oldVal);
 	}
 });
-
-//
-// ENDTODO: remove this hack
-//
-
+BoxElement.addPropertyApplyer("fontColor",function(value){
+	this.htmlInnerElement.style.color = value;
+});
 BoxElement.addPropertyApplyer("caption",function(value){
 	this.htmlInnerElement.innerHTML = value.split(" ").join("&nbsp;");
 });

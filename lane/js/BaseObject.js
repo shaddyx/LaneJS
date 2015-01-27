@@ -206,7 +206,7 @@ BaseObject.prototype.on = function(name,func,obj,first){
 /**
  * add's event listener to the object
  */
-BaseObject.prototype.removeListener = function(name,func,obj){
+BaseObject.prototype.removeListener = function(name, func, obj){
 	if (!this._events[name]){
 		return false;
 	}
@@ -216,7 +216,7 @@ BaseObject.prototype.removeListener = function(name,func,obj){
 	}
 	for (var k in this._events[name]){
 		var event = this._events[name][k];
-		if (event[0] == func){
+		if (event[0] === func && (obj == undefined || obj == event[1])){
 			this._events[name].splice(k,1);
 			return true;
 		}
