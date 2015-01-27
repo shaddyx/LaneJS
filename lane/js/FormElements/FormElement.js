@@ -247,7 +247,6 @@ FormElement.prototype.refreshEnabled = function(){
 	}
 };
 
-
 FormElement.prototype.applyHint = function(){
 	if (this._v.isDrawn){
 		if (this._v.hint){
@@ -257,6 +256,9 @@ FormElement.prototype.applyHint = function(){
 		}
 	}
 };
+/**
+ * applies styleclass to element and it children
+ */
 FormElement.prototype.applyStyleClass = function(){
 	var my = this;
 	this._v.outer.enumChilds(function(){
@@ -266,7 +268,10 @@ FormElement.prototype.applyStyleClass = function(){
 		this.styleClass(my._v.styleClass);
 	});
 };
-
+/**
+ * function calls when visibility of form element changed
+ * @param value
+ */
 FormElement.funcs.visibleChanged = function(value){
 	if (value){
 		var my = this;
@@ -298,7 +303,14 @@ FormElement._apply = function(el, struct){
 		el[k](struct[k]);
 	}
 };
-
+/**
+ * builds fromElements from structure
+ * @param struct
+ * @param target
+ * @param params
+ * @param map
+ * @param topElement
+ */
 FormElement.build = function(struct, target, params, map, topElement){
 	var topLevel = false;
 	params = params || {};
@@ -386,7 +398,13 @@ FormElement.fillForm = function(topElement, data, options){
 		}
 	}
 };
-
+/**
+ * returns map of data of all dataElements from topElement to bottom
+ * @param topElement
+ * @param options
+ * @param data
+ * @return {*|{}}
+ */
 FormElement.getData = function(topElement, options, data){
 	options = options || {};
 	data = data || {};
@@ -403,6 +421,11 @@ FormElement.getData = function(topElement, options, data){
 	
 	return data;
 };
+/**
+ * function calls on contextMenu pressed
+ * @param e
+ * @return {boolean}
+ */
 FormElement.func.contextMenu = function(e){
 	if (FormElement.func.popupMenu){
 		FormElement.func.popupMenu.hide();
