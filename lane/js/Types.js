@@ -151,4 +151,17 @@ var Types = {};
 					+ objectType.type);
 		}
 	});
+
+	Types.Date = Util.cloneType("Date", Types.object,{
+		check:function(value, strict) {
+			if (value instanceof Date){
+				return value;
+			}
+			value = new Date(value)
+			if (isNaN(value.getTime())){
+				throw new Error("Error date:" + value);
+			}
+			return value;
+		}
+	});
 })();

@@ -86,11 +86,10 @@ InputBox.prototype.updatePassword = function(){
 		}
 	}
 };
-
 InputBox.prototype._dataTypeBeforeChanged = function(value){
 	if (typeof (value) === "string"){
 		this.dataType(Types[value]);
-		return;
+		return false;
 	}
 	if (this._v.dataType && this._v.enumerable){
 		this.values([]);

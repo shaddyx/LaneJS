@@ -74,8 +74,8 @@ BaseObject.addProperty = function(name,defValue,params){
 				if (val !== this._v[name]){
 					if (this.trigger(name + "BeforeChanged" , val, name) !== false){
 						this._v[name] = val;
-						this.trigger(name + "Changed" , val, name);
 					};
+					this.trigger(name + "Changed" , this._v[name], name);
 				}
 			}
 			

@@ -226,6 +226,13 @@ Util.createShutter = function(params){
 	applyProps();
 	return shutter;
 };
+/**
+ * adds lack of symbols symbol to s
+ * @param s
+ * @param symbol
+ * @param n
+ * @return {*|string}
+ */
 Util.padLeft = function(s, symbol, n){
 	s = s.toString();
 	while(s.length < n) {
@@ -386,4 +393,23 @@ Util.linkObjects = function(options){
 	}
 	options.from.__link = link;
 	options.to.__link = link;
+};
+/**
+ * schedules the func to execute after timeout miliseconds, and ignores if token exists
+ * @param token
+ * @param func
+ * @param timeout
+ */
+Util.schedule = function(token, func, timeout){
+	if (timeout == undefined){
+		timeout = 0;
+	}
+	var my = this;
+	this.__schedules = this.__schedules || {};
+	if (!this.__schedules[token]){
+		this.__schedules[token] = setTimeout(function(){
+			delete my.__schedules[token];
+			func();
+		}, timeout);
+	}
 };

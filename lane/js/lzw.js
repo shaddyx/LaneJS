@@ -47,6 +47,9 @@
          * @return {String} str The encoded string
          */
         encode:function(str){
+        	if( str == "" ){
+        		return "";
+        	}
             var index = STARTPOINT, //start at 256, the first 255 are the ascii set
 
             //initialize the dictionary
@@ -61,25 +64,18 @@
             s = str[0]; //lets start
 
             for(var i=1; i < len; i++){
-                var c = str(str[i] || str.charAt(i));
+                var c = str[i] || str.charAt(i);
 
                 if(dictionary[s+c]){ //already in the dictionary
                     s = s+c;
-                }else{ //need to add it to the dictionary
-                    var code = ++index;
-
+                } else { //need to add it to the dictionary
                     outStr.push(String.fromCharCode(dictionary[s]));
-                    dictionary[s+c] = code;
+                    dictionary[s+c] = index++;
                     s = c;
                 }
             }
 
-
-            for(var c in s ){
-                outStr.push(s[c]);
-            }
-
-
+            outStr.push(String.fromCharCode(dictionary[s]));
 
             return outStr.join('');
         },
@@ -129,7 +125,7 @@
 
                  character = buffer[0] || buffer.charAt(0);
                  //add new substring to table
-                 table[++counter] = table[first_code] + character;
+                 table[counter++] = table[first_code] + character;
 
                  //time for the next char
                  first_code = next_code;
