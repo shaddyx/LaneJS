@@ -7,9 +7,12 @@ var TextArea = function() {
 };
 Util.extend(TextArea, InputElement);
 TextArea.type = "TextArea";
+TextArea.addProperty("editable", true);
+TextArea.addProperty("scroller", "");
 TextArea.setDefault("value", "");
 TextArea.setDefault("width", 100);
 TextArea.setDefault("height", 100);
+
 TextArea.func = {};
 TextArea.func.afterDraw = function() {
 	var my = this;

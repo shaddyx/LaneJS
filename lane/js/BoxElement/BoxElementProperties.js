@@ -171,19 +171,22 @@ BoxElement.prototype.recalcRelativity = function(){
 //
 	var relativity = this._v.relativity;
 	var target = this.__adjustRelativityTarget(relativity.target);
+	var relativityResult;
 	if (relativity.anchor) {
 		var chunks = relativity.anchor.split(",");
-		var relativityResult = target.getAbsolutePosition();
-		t = target;
+		relativityResult = target.getAbsolutePosition();
 		//console.log("result is:", relativityResult);
 		delete relativityResult.right;
 		delete relativityResult.bottom;
 		for (var k in chunks) {
-			if (!BoxElement.relativityAnchors[chunks[k]]){
-				throw new Error("No relativity anchor: " + chunks[k]);
+			var chunk = chunks[k].trim();
+			if (!BoxElement.relativityAnchors[chunk]){
+				throw new Error("No relativity anchor: " + chunk);
 			}
-			relativityResult = BoxElement.relativityAnchors[chunks[k]].call(this,target, relativityResult);
+			relativityResult = BoxElement.relativityAnchors[chunk].call(this,target, relativityResult);
 		}
+	} else {
+		relativityResult = {left:0, top:0};
 	}
 	if (relativity.func) {
 		relativityResult = relativity.func.call(this,target, relativityResult);

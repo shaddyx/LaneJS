@@ -17,6 +17,7 @@ var DataGrid = function(){
 Util.extend(DataGrid, DataSource);
 DataGrid.type = "DataGrid";
 DataGrid.prototype.columns = DataGrid.addProperty("columns",[]);
+DataGrid.prototype.loading = DataGrid.addProperty("loading",false);
 
 DataGrid.prototype._columnsChanged = function(value){
 	this._columnsCache = {};
@@ -295,6 +296,7 @@ DataGrid.prototype.load = function(obj){
 };
 
 DataGrid.on("columnsChanged", DataGrid.prototype._columnsChanged);
+DataGrid.on("loadingChanged", DataGrid.prototype.refreshView);
 
 /**
  * builds dataGrid

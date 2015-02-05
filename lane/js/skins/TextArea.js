@@ -25,6 +25,7 @@ TextAreaSkin.def = {
 				   margin:[0,0,0,3],
 				   params:{
 					   tag:"TextArea",
+					   noOverflow:true,
 					   css: 'background-color:white;padding:0;border:0;display:block !important; resize: none; outline: 0;'
 				   },
 				   selectable:true,
@@ -35,6 +36,5 @@ TextAreaSkin.def = {
 			   }
 		  ]
 	   }
-	   
 	  ]
 };

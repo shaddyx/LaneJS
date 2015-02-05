@@ -5,6 +5,21 @@
  * @@@name:ButtonSkin
  */
 var ButtonSkin = {};
+ButtonSkin.__hoverStyle = {
+	enabled:{
+		hovered:{
+			backgroundColor:"#fdf5ce",
+			borderColor:"#c77405"
+		},
+		borderColor:"#ccc",
+		backgroundColor:"#f6f6f6"
+	},
+	disabled:{
+		hovered:false,
+		borderColor:"#ccc",
+		backgroundColor:"#f6f6f6"
+	}
+};
 ButtonSkin.def = {
 	borderWidth:[1,1,1,1],
 	borderRadius:[5,5,5,5],
@@ -17,10 +32,7 @@ ButtonSkin.def = {
 	},
 	borderColor:"#ccc",
 	backgroundColor:"#f6f6f6",
-	hovered:{
-		backgroundColor:"#fdf5ce",
-		borderColor:"#c77405"
-	},
+	style:ButtonSkin.__hoverStyle,
 	c:[
 	   {
 		   hAlign:BoxElement.ALIGN.middle,
@@ -43,27 +55,11 @@ ButtonSkin.img = {
 			minWidth:30,
 			minHeight:30,
 		},
-		borderColor:"#ccc",
-		color:"#ccc",
-		backgroundColor:"#f6f6f6",
-		hovered:{
-			borderColor:"#c77405",
-			color:"#ccc",
-			backgroundColor:"#fdf5ce"
-		},
+		style:ButtonSkin.__hoverStyle,
 		name:"img",
 		backgroundPosition:"center center",
-		backgroundRepeat:"no-repeat"
-		/*c:[
-		   {
-			   vAlign:BoxElement.ALIGN.middle,
-			   hAlign:BoxElement.ALIGN.middle,
-			   name:"img",
-			   width:16,
-			   height:16,
-			   margin:[0,0,0,6]
-		   }
-		]*/
+		backgroundRepeat:"no-repeat",
+		styleClass:"enabled"
 };
 ButtonSkin.link = {
 	defaults:{

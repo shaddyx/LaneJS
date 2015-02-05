@@ -105,7 +105,35 @@ GridSkin._parts = {
 }
 GridSkin.def = {
 	c:[
-	   	{
+		{
+			floating:true,
+			zIndex:10,
+			backgroundColor:"black",
+			opacity:0.2,
+			vAlign:BoxElement.ALIGN.middle,
+			hAlign:BoxElement.ALIGN.middle,
+			name:"loadingSpinner",
+			relativity:{
+				target:function(){
+					return this._topEl;
+				},
+				anchor:"width, height",
+				spyVisible:false,
+				func:function(target, res){
+					res.left = 0;
+					res.top = 0;
+					return res;
+				}
+			},
+			c:[
+				{
+					width:220,
+					height:19,
+					backgroundImage:"/img/Grid/spinner.gif"
+				}
+			]
+		},
+		{
 			horizontal:true,
 			hs:true,
 			vs:true,

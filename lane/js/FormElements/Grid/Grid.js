@@ -219,6 +219,7 @@ Grid.prototype._dataChanged = function(){
 		col.caption(dataCol.caption());
 		col.width(dataCol.width());
 		col.name(dataCol.name());
+		col.hs(dataCol.hs());
 		dataCol.removeListener("visibleChanged", this._dataChanged, this);
 		dataCol.on("visibleChanged", this._dataChanged, this);
 		if (!dataCol.visible()){
@@ -294,6 +295,7 @@ Grid.prototype.render = function(){
 	var my = this;
 	var data = this._v.data;
 	var rowIndex = 0;
+	this._elements.loadingSpinner.visible(data._v.loading);
 	this._headerRow && this._headerRow.render();
 	this._footerRow && this._footerRow.render();
 	//

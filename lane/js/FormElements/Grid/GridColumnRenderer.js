@@ -13,9 +13,6 @@ Grid.prototype.reDrawColumns = function(){
         debugger;
         return;
     }
-
-    var preferredWidth = this._elements.gridContentContainer._v.width;
-
     //
     //	calculating initial values
     //
