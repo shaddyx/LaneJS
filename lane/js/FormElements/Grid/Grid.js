@@ -314,7 +314,6 @@ Grid.prototype.render = function(){
 		} else if (current.visibleUp() > this._v.topLine.visibleUp() + this._visibleRows - 1) {
 			my.topLine(current.getRelative(-this._visibleRows + 1));
 		}
-		;
 
 		data.getRows(this._v.topLine, Math.min(this._visibleRows, this._v.topLine.visibleDown()), function (dataRow) {
 			my._rows[rowIndex].selected(dataRow.current == dataRow.dataGrid.getCurrentRow().current);

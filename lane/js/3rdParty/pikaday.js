@@ -1,3 +1,6 @@
+/*
+ * @@@dependsOn:moment
+ */
 /*!
  * Pikaday
  *

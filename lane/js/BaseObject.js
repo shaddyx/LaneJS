@@ -57,8 +57,7 @@ BaseObject.addProperty = function(name,defValue,params){
 			}
 		}
 	}
-	
-	
+
 	this._properties[name] = {
 		def:defValue,
 		params:params
@@ -71,10 +70,16 @@ BaseObject.addProperty = function(name,defValue,params){
 				if (params.type) {
 					val = params.type.check(val, strict, this._v[name]);
 				}
-				if (val !== this._v[name]){
+				var changed;
+				if (params.cmpFunc){
+					changed = !params.cmpFunc.call(this, val, this._v[name]);
+				} else {
+					changed = val !== this._v[name];
+				}
+				if (changed){
 					if (this.trigger(name + "BeforeChanged" , val, name) !== false){
 						this._v[name] = val;
-					};
+					}
 					this.trigger(name + "Changed" , this._v[name], name);
 				}
 			}
