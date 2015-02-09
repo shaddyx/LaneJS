@@ -28,7 +28,7 @@ Grid.prototype.keyPressed = function(evt){
 		//
 		case 33:
 			var count = Math.min(this._visibleRows, this._v.data.visibleUp());
-			this._v.data.moveCurrentRow( -count);
+			this._v.data.moveCurrentRow( - count);
 			this.render();
 			break;
 		//
@@ -61,7 +61,7 @@ Grid.prototype.keyPressed = function(evt){
 		//	left
 		//
 		case 37:
-
+			debugger;
 			var col = this.getColumnByName(this._v.selectedColumn);
 			if (col){
 				if (col._v.index > 0){
@@ -69,7 +69,6 @@ Grid.prototype.keyPressed = function(evt){
 				} else {
 					this.selectedColumn(this._columns[this._columns.length - 1]._v.name);
 				}
-
 			} else {
 				this.selectedColumn(false);
 			}

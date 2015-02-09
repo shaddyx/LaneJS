@@ -210,22 +210,23 @@ Grid.prototype._dataChanged = function(){
 	}
 	var hsFound = false;
 	var selectedFound = false;
+	var index = 0;
 	for (var k = 0; k < this._v.data._v.columns.length; k++) {
 		var dataCol = this._v.data._v.columns[k];
 		var col = new GridColumn(this);
-		col.index(parseInt(k));
+		if (!dataCol.visible()){
+			console.log("dataCol isn't visible");
+			continue;
+		}
+		dataCol.removeListener("visibleChanged", this._dataChanged, this);
+		dataCol.on("visibleChanged", this._dataChanged, this);
+		col.index(index ++);
 		col.dataColumn(dataCol);
 		col.columnType(dataCol.columnType());
 		col.caption(dataCol.caption());
 		col.width(dataCol.width());
 		col.name(dataCol.name());
 		col.hs(dataCol.hs());
-		dataCol.removeListener("visibleChanged", this._dataChanged, this);
-		dataCol.on("visibleChanged", this._dataChanged, this);
-		if (!dataCol.visible()){
-			console.log("dataCol isn't visible");
-			continue;
-		}
 		if (col._v.name === this._v.selectedColumn){
 			selectedFound = true;
 		}
