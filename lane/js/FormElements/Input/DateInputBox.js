@@ -13,9 +13,11 @@ DateInputBox.addProperty("value", new Date(), {
 	}
 });
 
-DateInputBox.setDefault("editable", false);
-DateInputBox.setDefault("showSelect", true);
-DateInputBox.addProperty("dateFormat", "MM/DD/YY");
+DateInputBox.prototype.editable = DateInputBox.setDefault("editable", false);
+DateInputBox.prototype.showSelect = DateInputBox.setDefault("showSelect", true);
+DateInputBox.prototype.dateFormat = DateInputBox.addProperty("dateFormat", "MM/DD/YY");
+DateInputBox.prototype.maxDate = DateInputBox.addProperty("maxDate", false);
+DateInputBox.prototype.minDate = DateInputBox.addProperty("minDate", false);
 
 DateInputBox.func.afterDraw = function() {
 	var my = this;
@@ -27,10 +29,12 @@ DateInputBox.func.afterDraw = function() {
 		}
 	});
 	this._elements.calendarContainer.htmlElement.appendChild(this._picker.el);
+	this.updateMinMax();
 	this.updateValue();
-
 };
-
+DateInputBox.prototype.stringifyValue = function(){
+	return moment(this._v.value).format(this._v.dateFormat);
+}
 DateInputBox.prototype.startSelection = function(){
 	this._elements.calendarContainer.visible(true);
 	this.updateValue();
@@ -50,11 +54,22 @@ DateInputBox.prototype.updateValue = function(){
 		this._picker.setDate(this._v.value, true);
 	}
 };
+
+DateInputBox.prototype.updateMinMax = function(){
+	if (this._v.isDrawn && this._picker){
+		this._picker.setMaxDate(this._v.maxDate);
+		this._picker.setMinDate(this._v.minDate);
+	}
+};
+
 DateInputBox.on("focusChanged", function(value){
 	value || this._elements.calendarContainer.visible(false);
 });
 DateInputBox.on("remove", function(){
 	this._picker && this._picker.destroy();
 });
+
+
 DateInputBox.on("valueChanged", DateInputBox.prototype.updateValue);
+DateInputBox.on(["minDateChanged", "maxDateChanged"], DateInputBox.prototype.updateMinMax);
 DateInputBox.on("afterDraw", DateInputBox.func.afterDraw);

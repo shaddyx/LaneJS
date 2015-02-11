@@ -297,6 +297,9 @@ Grid.prototype.render = function(){
 	var data = this._v.data;
 	var rowIndex = 0;
 	this._elements.loadingSpinner.visible(data._v.loading);
+	if (this._v.data._v.loading){
+		return;
+	}
 	this._headerRow && this._headerRow.render();
 	this._footerRow && this._footerRow.render();
 	//
