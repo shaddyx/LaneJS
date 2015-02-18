@@ -364,7 +364,7 @@ BoxElement.prototype.reDraw = function(innerCall) {
 				break;
 			}
 		} else {
-			this._alignDelta = 0;
+			this._alignDelta(0);
 		}
 		for (var k = 0; k < this.c.length; k++) {
 			var secondaryDelta = this._v.horizontal ? '_vDelta' : '_hDelta';

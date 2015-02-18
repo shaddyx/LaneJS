@@ -12,6 +12,7 @@ GridColumn.prototype.index = GridColumn.addProperty("index", 0);
 GridColumn.prototype.minWidth = GridColumn.addProperty("minWidth", 10);
 GridColumn.prototype.caption = GridColumn.addProperty("caption", "");
 GridColumn.prototype.hs = GridColumn.addProperty("hs", false);
+GridColumn.prototype.sortable = GridColumn.addProperty("sortable", false);
 GridColumn.prototype.name = GridColumn.addProperty("name", "");
 GridColumn.prototype.rightBoundPos = GridColumn.addProperty("resizeToHeader", false);
 //GridColumn.prototype.rightBoundPos = GridColumn.addProperty("rightBoundPos", 0);

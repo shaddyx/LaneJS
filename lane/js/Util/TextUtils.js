@@ -59,6 +59,10 @@ TextUtils.prototype.getStringWidth = function(text,key){
 	} else if (typeof key != "String"){
 		key = this.getFontKey(key);
 	}
+	if (text.indexOf("&nbsp") != -1){
+		console.log("&nbsp detected in text:", text);
+		debugger;
+	}
 	var fontData = this.determineFontData(key);
 	var textlen = text.length;
 	var width = 0;

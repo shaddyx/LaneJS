@@ -18,6 +18,7 @@ Util.extend(DataGrid, DataSource);
 DataGrid.type = "DataGrid";
 DataGrid.prototype.columns = DataGrid.addProperty("columns",[]);
 DataGrid.prototype.loading = DataGrid.addProperty("loading",false);
+DataGrid.prototype.filter = DataGrid.addProperty("filter",false);
 
 DataGrid.prototype._columnsChanged = function(value){
 	this._columnsCache = {};
@@ -25,13 +26,15 @@ DataGrid.prototype._columnsChanged = function(value){
 		this._columnsCache[value[k]._v.name] = value[k];
 	}
 };
-
-
+/**
+ * clears data of dataGrid
+ */
 DataGrid.prototype.clear = function(){
 	this._data = [];
 	this._currentRow = 0;
 	this._visible = 0;
 	this.trigger("dataUpdate");
+	this.trigger("dataModified");
 };
 
 DataGrid.prototype.getByIndex = function(index){
@@ -72,8 +75,33 @@ DataGrid.prototype.add = function(row){
 	this._data.push(dataUnit);
 	this._visible ++;
 	this.trigger("dataUpdate");
+	this.trigger("dataModified");
 };
 
+DataGrid.prototype.repairIndexes = function(){
+	var previous = -1;
+	var previousVisible = -1;
+	for (var k in this._data){
+		var dataUnit = this._data[k];
+		dataUnit.previous = previous;
+		dataUnit.previousVisible = previousVisible;
+		dataUnit.current = parseInt(k);
+		if (k + 1 != this._data.length){
+			dataUnit.next = parseInt(k) + 1;
+		}
+		previous ++;
+		if (dataUnit.visible){
+			previousVisible ++;
+		}
+	}
+	this._visible = previousVisible + 1;
+};
+
+/*DataGrid.prototype._filterChanged = function(){
+	var data = this.export();
+	this.clear();
+
+};*/
 /**
  * function moves current focused row to current row + count elements
  * @param count
@@ -157,6 +185,15 @@ DataGrid.prototype.find = function(findFunction){
 	return found;
 };
 
+DataGrid.prototype.sort = function(sortFunction){
+
+	this._data.sort(function(/** @type DataRow **/ a, /** @type DataRow **/ b){
+		return sortFunction(a.data, b.data);
+	});
+	this.repairIndexes();
+	this.trigger("dataUpdate");
+};
+
 DataGrid.prototype.each = function(callBack){
 	for (var k in this._data){
 		if (callBack(this._data[k]) === true){
@@ -238,6 +275,7 @@ DataGrid.prototype.remove = function(index){
 		elem.current = i;
 		prev = i;
 	}
+	this.trigger("dataModified");
 };
 
 
@@ -293,8 +331,10 @@ DataGrid.prototype.load = function(obj){
 		}
 		this.add(object);
 	}
+	this.trigger("dataLoaded");
 };
 
+//DataGrid.on("filterChanged", DataGrid.prototype._filterChanged);
 DataGrid.on("columnsChanged", DataGrid.prototype._columnsChanged);
 DataGrid.on("loadingChanged", DataGrid.prototype.refreshView);
 

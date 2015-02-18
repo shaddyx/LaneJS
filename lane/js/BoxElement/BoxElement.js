@@ -320,7 +320,7 @@ BoxElement.addProperty("_dy",0);
 BoxElement.addProperty("_vMargin",[0,0,0,0],{rm:BoxElement.REDRAW_MODE.full, type:Types.array});
 BoxElement.addProperty("_hDelta",0,{rm:BoxElement.REDRAW_MODE.full});
 BoxElement.addProperty("_vDelta",0,{rm:BoxElement.REDRAW_MODE.full});
-BoxElement.addProperty("_alignDelta",0,{rm:BoxElement.REDRAW_MODE.full});
+BoxElement.addProperty("_alignDelta",0,{rm:BoxElement.REDRAW_MODE.render});
 /*
  * reDraw properties
  */

@@ -229,12 +229,37 @@ GridFooterSkin.def = {
 GridHeaderCellSkin = {};
 GridHeaderCellSkin.def = {
 	height:Constants.lineHeight,
-	name:"caption",
-	fontWeight:"bold",
 	borderWidth:[0,1,0,0],
 	borderColor:"#79B7E7",
-	hAlign:BoxElement.ALIGN.middle,
-	overflow:BoxElement.OVERFLOW_MODE.hidden
+	//name:"caption",
+	cursor:"pointer",
+	horizontal:true,
+	c:[
+		{
+			name:"caption",
+			fontWeight:"bold",
+			hs:true,
+			vs:true,
+			overflow:BoxElement.OVERFLOW_MODE.hidden,
+			hAlign:BoxElement.ALIGN.middle
+		},
+		{
+			width:8,
+			height:8,
+			margin:[5,3,0,0],
+			name:"sortElement",
+			visible:false,
+			style:{
+				sortAsk:{
+					backgroundImage:"/img/Grid/downArrow.png"
+				},
+				sortDesk:{
+					backgroundImage:"/img/Grid/upArrow.png"
+				}
+			},
+			styleClass:"sortAsk"
+		}
+	]
 };
 
 GridFooterCellSkin = {};

@@ -45,7 +45,10 @@ Grid.prototype.showFooter = Grid.addProperty("showFooter", false);
 Grid.prototype.rowHeight = Grid.addProperty("rowHeight", 0);
 Grid.prototype.selectedColumn = Grid.addProperty("selectedColumn", false);
 Grid.prototype.topLine = Grid.addProperty("topLine", false);
+Grid.prototype.sortColumn = Grid.addProperty("sortColumn", false);
+Grid.prototype.sortDirection = Grid.addProperty("sortDirection", false);
 Grid.prototype.vertScrollMinHeight = Grid.addProperty("vertScrollMinHeight", 10);
+
 Grid.addProperty("_scrollerShown", false);
 Grid.addProperty("_horzScrollerShown", false);
 
@@ -227,6 +230,7 @@ Grid.prototype._dataChanged = function(){
 		col.width(dataCol.width());
 		col.name(dataCol.name());
 		col.hs(dataCol.hs());
+		col.sortable(dataCol.sortable());
 		if (col._v.name === this._v.selectedColumn){
 			selectedFound = true;
 		}
@@ -246,11 +250,13 @@ Grid.prototype._dataChanged = function(){
 	}
 	this.reBuild();
 	this._v.data.on("dataUpdate", this.scheduleRender,this);
+	this._v.data.on("dataModified", this.scheduleSort,this);
 };
 
 Grid.prototype._dataBeforeChanged = function(data){
 	if (this._v.data){
 		this._v.data.removeListener("dataUpdate", this.scheduleRender);
+		this._v.data.removeListener("dataModified", this.scheduleSort);
 	}
 };
 
@@ -459,6 +465,22 @@ Grid.prototype._updateHorzScrollerVisibility = function(){
 		}
 	}
 };
+
+Grid.prototype.applySort = function(){
+	if (this._v.data && this._v.sortColumn){
+		var my = this;
+		var dirInt = this._v.sortDirection ? 1: -1;
+		this._v.data.sort(function(a, b){
+			if (a[my._v.sortColumn] >= b[my._v.sortColumn]){
+				return dirInt;
+			}
+			if (a[my._v.sortColumn] < b[my._v.sortColumn]){
+				return - dirInt;
+			}
+		});
+	}
+};
+
 /**
  * returns column by name
  * @param {string} name
@@ -472,6 +494,17 @@ Grid.prototype.getColumnByName = function(name){
 		}
 	}
 	return false;
+};
+
+Grid.prototype.scheduleSort = function(){
+	if (this.sortTimer){
+		return
+	}
+	var my = this;
+	this.sortTimer = setTimeout(function(){
+		my.sortTimer = false;
+		my.applySort();
+	}, 0);
 };
 Grid.on("rowRender", function(row, dataRow){
 	if (dataRow == undefined) {
@@ -496,10 +529,11 @@ Grid.on("parentBecomesVisible", function(){
 //
 //listeners
 //
+Grid.on(["sortColumnChanged", "sortDirectionChanged"], Grid.prototype.scheduleSort);
 Grid.on(["widthChanged", "heightChanged", "parentBecomesVisible"], Grid.prototype.scheduleReDraw);
 Grid.on("_scrollerShownChanged", Grid.prototype._updateScrollerVisibility);
 Grid.on(["showHeaderChanged", "showFooterChanged"], Grid.prototype.scheduleReDraw);
 Grid.on("afterDraw", Grid.prototype._afterDraw);
 Grid.on("dataChanged", Grid.prototype._dataChanged);
 Grid.on("dataBeforeChanged", Grid.prototype._dataBeforeChanged);
-Grid.on("selectedColumnChanged", Grid.prototype.scheduleRender)
+Grid.on("selectedColumnChanged", Grid.prototype.scheduleRender);
