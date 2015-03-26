@@ -93,7 +93,7 @@ GridRow.prototype.render = function(dataRow){
 		//	todo: moveCurrentRow this to cells clean/render method
 		//
 		if (dataRow != undefined){
-			if (dataRow.data[name] == undefined){
+			if (dataRow.data[name] === undefined){
 				throw new Error ("Column with name " + name + " exists, but no data!");
 			}
 			this._cells[i].selected(this._v.selected && name === this._grid._v.selectedColumn);

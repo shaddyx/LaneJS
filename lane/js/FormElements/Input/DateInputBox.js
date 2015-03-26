@@ -25,6 +25,7 @@ DateInputBox.func.afterDraw = function() {
 		format:this._v.dateFormat,
 		onSelect: function(date) {
 			my.value(date);
+			my.trigger("selectionEnd", date);
 			my._elements.calendarContainer.visible(false);
 		}
 	});
@@ -61,6 +62,14 @@ DateInputBox.prototype.updateMinMax = function(){
 		this._picker.setMinDate(this._v.minDate);
 	}
 };
+
+DateInputBox.prototype.setDate = function(date){
+	this._v.value = date;
+	this.updateValue();
+}
+DateInputBox.prototype.getDate = function(){
+	return this._v.value;
+}
 
 DateInputBox.on("focusChanged", function(value){
 	value || this._elements.calendarContainer.visible(false);

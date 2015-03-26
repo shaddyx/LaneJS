@@ -299,7 +299,7 @@ GridCellSkin.def = {
 		   {
 			   name:"caption",
 			   height:Constants.rowHeight,
-			   width:4096,
+			   width:1000,
 			   overflow:BoxElement.OVERFLOW_MODE.hidden
 		   }
 		]

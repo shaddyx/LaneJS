@@ -60,6 +60,7 @@ var BoxElement = function(params){
 	//
 
 	this.htmlInnerElement = this.htmlElement;
+	this.htmlElement.style.textAlign = "left";
 	this.parent = false;
 	this.c = [];
 	this._elements = {};

@@ -26,3 +26,21 @@ FieldSetSkin.def = {
 		captionWidth:false
 	}
 };
+FieldSetSkin.withoutBorder = {
+		borderWidth:[0,0,0,0],
+		c:[
+		   {
+			   borderWidth:[0,0,0,0],
+			   name:"caption",
+			   hs:true
+		   },
+		   {
+			   name:"inner",
+			   hs:true,
+			   vs:true
+		   }
+		],
+		defaults:{
+			captionWidth:false
+		}
+	};
