@@ -1,3 +1,7 @@
+/**
+ *
+ * @constructor
+ */
 var ChartField = function() {
 	Canvas.call(this);
 };

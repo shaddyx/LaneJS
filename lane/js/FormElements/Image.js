@@ -1,3 +1,7 @@
+/**
+ * Image element
+ * @constructor
+ */
 var Image = function() {
 	Panel.call(this);
 };

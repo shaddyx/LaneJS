@@ -1,3 +1,7 @@
+/**
+ * Tab for TabBar
+ * @constructor
+ */
 var Tab = function(){
 	Container.call(this);
 };
@@ -6,6 +10,9 @@ Tab.type = "Tab";
 Tab.funcs = {};
 
 Tab.setDefault("visible", false);
+/**
+ * if true - tabbar will be focused
+ */
 Tab.prototype.selected = Tab.addProperty("selected", false,{type:"boolean"});
 Tab.prototype.tabBar = Tab.addProperty("tabBar", false,{type:"TabBar"});
 Tab.prototype.tabVisible = Tab.addProperty("tabVisible", true,{type:"boolean"});

@@ -1,3 +1,7 @@
+/**
+ *
+ * @constructor
+ */
 var PropertiesEditor = function() {
     FormElement.call(this);
     /** @type Grid */

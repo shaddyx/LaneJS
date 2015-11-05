@@ -74,6 +74,7 @@ Grid.prototype._afterDraw = function() {
 
 Grid.prototype.reBuild = function(){
 	if (!this._v.isDrawn || !this._columns.length || !this._elements.content._v.width || !this._elements.content._v.height){
+		//console.log(1);
 		this.scheduleReBuild(100);
 		return;
 	}
@@ -245,23 +246,27 @@ Grid.prototype._dataChanged = function(){
 		col.buildHelper();
 		this._columns.push(col);
 	}
-	if (!selectedFound && this._columns){
+	if (!selectedFound && this._columns && this._columns.length){
 		this.selectedColumn(this._columns[0].name());
 	}
 	this.reBuild();
 	this._v.data.on("dataUpdate", this.scheduleRender,this);
 	this._v.data.on("dataModified", this.scheduleSort,this);
+	this._v.data.on("columnsChanged", this._dataChanged, this);
 };
 
 Grid.prototype._dataBeforeChanged = function(data){
 	if (this._v.data){
 		this._v.data.removeListener("dataUpdate", this.scheduleRender);
 		this._v.data.removeListener("dataModified", this.scheduleSort);
+		this._v.data.removeListener("columnsChanged", this._dataChanged);
 	}
 };
 
 Grid.prototype.scheduleReBuild = function(time){
-	time = time || 0;
+	if (typeof (time) != "number"){
+		time = 0;
+	}
 	if (!this.reBuildTimer){
 		var my = this;
 		//console.log("ReBuild scheduled");

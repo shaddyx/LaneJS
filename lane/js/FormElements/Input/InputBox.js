@@ -1,6 +1,7 @@
 /**
  * @constructor
  * @extends InputElement
+ * @@@dependsOn: inputmask
  */
 var InputBox = function() {
 	InputElement.call(this);
@@ -15,6 +16,8 @@ InputBox.prototype.dataType = InputBox.addProperty("dataType","string");
 InputBox.prototype.editable = InputBox.addProperty("editable",true);
 InputBox.prototype.selectMode = InputBox.addProperty("selectMode",true);
 InputBox.prototype.showSelect = InputBox.addProperty("showSelect",false);
+InputBox.prototype.mask = InputBox.addProperty("mask",false);
+InputBox.prototype.complete = InputBox.addProperty("complete",true);
 InputBox.func = {};
 InputBox.func.afterDraw = function() {
 	var my = this;
@@ -23,10 +26,44 @@ InputBox.func.afterDraw = function() {
 	this._updateListeners();
 	this.updatePassword();
 	this.updateValueList();
-	this._updateEditable();
+	this._updateEditableEnabled();
 	this.updateSelectButtonVisibility();
+	this._updateMask();
 	this._elements.selectStartButton.on("click", this._selectButtonClicked, this);
 };
+
+InputBox.prototype._updateMask = function(){
+	if (this._v.isDrawn) {
+		$(this._input.htmlElement).inputmask('remove');
+		if (this._v.mask){
+			var my = this;
+			var mask = this._v.mask;
+			var onincomplete = function(){
+				my.complete(false);
+			};
+
+			var oncleared = function(){
+				my.complete(true);
+			};
+
+			var oncomplete = function(){
+				my.complete(true);
+			}
+
+			if (typeof mask == "string"){
+				mask = {
+					mask: mask,
+					onincomplete:onincomplete,
+					oncleared:oncleared,
+					oncomplete:oncomplete,
+					clearIncomplete: true
+				};
+			}
+			$(this._input.htmlElement).inputmask(mask);
+		}
+	}
+};
+
 InputBox.prototype.updateValue = function() {
 	if (this._v.isDrawn && this._elements.input.htmlInnerElement.value !== this._v.value){
 		this._elements.input.htmlInnerElement.value = this._v.value.toString();
@@ -110,9 +147,9 @@ InputBox.prototype._inputBoxKeyListener = function(evt){
 	}
 };
 
-InputBox.prototype._updateEditable = function(){
+InputBox.prototype._updateEditableEnabled = function(){
 	if (this._v.isDrawn){
-		if (!this._v.editable){
+		if (!this._v.editable || !this._v.enabled){
 			this._input.htmlInnerElement.setAttribute("readonly","");
 		} else {
 			this._input.htmlInnerElement.removeAttribute("readonly");
@@ -137,10 +174,14 @@ InputBox.on("focusChanged", function(value){
 		}
 	}
 });
+
 InputBox.on("selectionEnd", function(){
 	this.trigger("editComplete");
 });
-InputBox.on("editable", InputBox.prototype._updateEditable);
+//InputBox.on("enabledChanged", InputBox.prototype._updateEnabled);
+InputBox.on("maskChanged", InputBox.prototype._updateMask);
+InputBox.on("enabledChanged", InputBox.prototype._updateEditableEnabled);
+InputBox.on("editableChanged", InputBox.prototype._updateEditableEnabled);
 InputBox.on("afterDraw", InputBox.func.afterDraw);
 InputBox.on("valueChanged", InputBox.prototype.updateValue);
 InputBox.on("passwordChanged", InputBox.prototype.updatePassword);

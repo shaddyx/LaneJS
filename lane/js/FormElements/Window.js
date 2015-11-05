@@ -1,3 +1,7 @@
+/**
+ *
+ * @constructor
+ */
 var Window = function() {
 	FloatingContainer.call(this);
 };

@@ -26,6 +26,7 @@ FieldSetSkin.def = {
 		captionWidth:false
 	}
 };
+
 FieldSetSkin.withoutBorder = {
 		borderWidth:[0,0,0,0],
 		c:[

@@ -17,25 +17,47 @@ Container.prototype.horizontal = Container.addProperty("horizontal", false, {typ
 Container.prototype.hAlign = Container.addProperty("hAlign", BoxElement.ALIGN.begin, {type:BoxElement.ALIGN});
 Container.prototype.vAlign = Container.addProperty("vAlign", BoxElement.ALIGN.begin, {type:BoxElement.ALIGN});
 Container.prototype.padding = Container.addProperty("padding", [0,0,0,0], {type:"intArray", hidden:true});
-
+/**
+ * adds child to this container
+ * @param child
+ */
 Container.prototype.addChild = function(child){
 	if (this._v.children.add(child)){
 		child.parent(this);
 		child.on("removed",this._childRemovedFunction);
 	}
 };
-
+/**
+ * removes given child
+ * @param child
+ */
 Container.prototype.removeChild = function(child){
+	if (this._v.children.indexOf(child)!= -1){
+		this._v.children.removeObject(child);
+	}
+
 	child.removeListener("removed",this._childRemovedFunction);
 	if (!child._removed){
 		child.remove();
 	}
 };
-
+/**
+ * removes all children of this container
+ */
 Container.prototype.clear = function(){
-	this.children.clear();
+	var childs = [];
+	this._v.children.each(function(child){
+		childs.push(child);
+	});
+	for (var k in childs){
+		childs[k].remove();
+	}
 };
-
+/**
+ * searches element by given id
+ * @param id
+ * @returns {*}
+ */
 Container.prototype.getElementById = function(id){
 	var found = false;
 	if (this.id == id){
@@ -58,7 +80,13 @@ Container.prototype.getElementById = function(id){
 	return found;
 };
 
-
+/**
+ * enumerates container childs
+ * note that if callback returns false - enumeration will break
+ * if true - this will skip current nesting level
+ * @param callBack
+ * @returns {boolean}
+ */
 Container.prototype.enumChilds = function(callBack){
 	var children = this._v.children._data;
 	for(var k in children){
@@ -72,4 +100,22 @@ Container.prototype.enumChilds = function(callBack){
 		 	 return false;
 		 }
 	}
+};
+/**
+ * searches element by given id
+ * @param name
+ * @returns {*}
+ */
+Container.prototype.getElementByName = function(name){
+	var found = false;
+	if (this._v.name == name){
+		return this;
+	}
+	this.enumChilds(function(){
+		if (this._v.name === name){
+			found = this;
+			return false;
+		}
+	});
+	return found;
 };

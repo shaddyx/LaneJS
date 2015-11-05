@@ -1,3 +1,7 @@
+/**
+ *
+ * @constructor
+ */
 var FieldSet = function() {
 	Container.call(this);
 };

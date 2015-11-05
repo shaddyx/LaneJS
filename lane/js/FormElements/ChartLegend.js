@@ -1,3 +1,7 @@
+/**
+ *
+ * @constructor
+ */
 var ChartLegend = function() {
 	FormElement.call(this);
 	this._oldCacheString = "";

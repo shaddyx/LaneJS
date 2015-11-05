@@ -1,3 +1,7 @@
+/**
+ *
+ * @constructor
+ */
 var TreeNode = function(params){
 	BaseObject.call(this);
 	this.tree = params.tree;

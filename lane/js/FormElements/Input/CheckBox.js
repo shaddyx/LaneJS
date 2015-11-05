@@ -1,3 +1,7 @@
+/**
+ *
+ * @constructor
+ */
 var CheckBox = function() {
 	InputElement.call(this);
 };

@@ -1,3 +1,7 @@
+/**
+ * html iframe element
+ * @constructor
+ */
 var Iframe = function() {
 	FormElement.call(this);
 };

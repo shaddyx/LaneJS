@@ -7,7 +7,7 @@ var DropBox = function() {
 };
 Util.extend(DropBox, InputElement);
 DropBox.type = "DropBox";
-DropBox.setDefault("value", "");
+DropBox.setDefault("value", undefined);
 /** @method */
 DropBox.prototype.password = DropBox.addProperty("password",false,{type:"boolean"});
 DropBox.prototype.values = DropBox.addProperty("values",[],{type:"array"});
@@ -24,17 +24,33 @@ DropBox.func.afterDraw = function() {
 };
 
 DropBox.prototype._addItem = function(value){
-	console.log("adding:" + value);
 	var element = document.createElement("option");
-	if (this._v.value == value){
+	var itemValue = value;
+	var itemText = value;
+	if (typeof value === "object"){
+		itemValue = value.value;
+		itemText = value.text;
+	}
+
+	if (this._v.value == itemValue){
 		element.setAttribute("selected","selected");
 	}
-	element.innerHTML = value;
+	element.innerHTML = itemText;
 	this._input.htmlElement.appendChild(element);
 };
 
 DropBox.prototype.updateValues = function(){
 	if (this._v.isDrawn){
+		if (this._v.value === undefined){
+			for (var k in this._v.values){
+				if (typeof this._v.values[k] === "object" && this._v.values[k].value !== undefined){
+					this.value(this._v.values[k].value);
+				} else {
+					this.value(this._v.values[k]);
+				}
+				break;
+			}
+		}
 		this._input.htmlElement.innerHTML = "";
 		for (var k in this._v.values){
 			this._addItem(this._v.values[k]);

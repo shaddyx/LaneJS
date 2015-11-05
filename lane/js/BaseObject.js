@@ -17,7 +17,7 @@ var BaseObject = function(){
 	/*
 	 * initializing important variables
 	 */
-	//			this line is harmfull!!!!
+	//			this line is harmful!!!!
 	this._baseClass = this.__proto__?this.__proto__.constructor:this.constructor;
 	this._events = {};
 	this._v = {};
@@ -103,6 +103,25 @@ BaseObject.addProperty = function(name,defValue,params){
 	}
 
 	return this.prototype[name];
+};
+BaseObject.prototype.addProperty = function(name, defValue, params){
+	if (this._v[name] != undefined){
+		throw new Error("parameter with name [" + name + "] already exists");
+	}
+	this._v[name] = defValue;
+	params = params || {};
+	this[name] = function(val){
+		if (val != undefined){
+			if (params.type) {
+				val = params.type.check(val, strict);
+			}
+			if (this.trigger(name + "BeforeChanged" , val, name) !== false){
+				this._v[name] = val;
+				this.trigger(name + "Changed" , val, name);
+			};
+		}
+		return this._v[name];
+	};
 };
 BaseObject.setParams = function(name,params){
 	if (!this._properties[name]) {

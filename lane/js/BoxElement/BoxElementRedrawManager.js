@@ -262,7 +262,7 @@ BoxElement.prototype.reDraw = function(innerCall) {
 		for ( var k = 0; k < this.c.length; k++) {
 			var child = this.c[k];
 			//			
-			// gathering childs information to stretch
+			// gathering children information to stretch
 			//			
 			if (child._v.visible && !child._v.floating) {
 				nonStretchable += child[marginD];
@@ -305,7 +305,7 @@ BoxElement.prototype.reDraw = function(innerCall) {
 				var child = toStretch[k];
 				if (child && child._v.visible && !child._v.floating){
 					ratio = child._v.sizeRatio / 100;
-					var sizeToApply = newSize * ratio;
+					var sizeToApply = Math.floor(newSize * ratio);
 					if (sizeToApply < child._v[stretchvMin]) {
 						child[stretchValue](child._v[stretchvMin]);
 						skipInner += child._v[stretchValue];

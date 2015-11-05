@@ -1,3 +1,7 @@
+/**
+ *
+ * @constructor
+ */
 var TabBar = function() {
 	Container.call(this);
 	this.children().on("beforeAdd", this._beforeadd, this);
@@ -8,7 +12,7 @@ Util.extend(TabBar, Container);
 TabBar.type = "TabBar";
 TabBar.funcs = {};
 
-TabBar.prototype.selectedTab = TabBar.addProperty("selectedTab", false,{type:"Tab"});
+TabBar.prototype.selectedTab = TabBar.addProperty("selectedTab", false);
 
 TabBar.funcs.selectedTabChanged = function(tab){
 	if (tab) {
@@ -28,13 +32,13 @@ TabBar.prototype._beforeadd = function(tab){
 		return false;
 	}
 };
+
 TabBar.prototype._refreshTabs = function(activeTab){
-	for (var k in this._v.children._data){
-		var child = this._v.children._data[k];
+	this._v.children.each(function(child){
 		if (child != activeTab) {
 			child.selected(false);
 		}
-	}
+	});
 };
 TabBar.prototype._added = function(tab){
 	var my = this;
@@ -42,14 +46,13 @@ TabBar.prototype._added = function(tab){
 	el.build(TabButtonSkin[this._v.skin]);
 	el.drawRec({target:this._elements.buttonContainer});
 	el._elements.caption.caption(tab.caption());
-	tab.button = el
+	tab.button = el;
 	el.on("click", function(){
 		tab.selected(true);
 	});
 	
 	tab._selectedBeforeChanged = function(value){
 		tab.button.setStyleClassRec(value ? "selected" : "notSelected");
-		//this._setStyleClass(tab.button, value ? "selected" : "notSelected");
 	};
 	tab.on("selectedBeforeChanged", tab._selectedBeforeChanged);
 	tab.on("tabVisibleChanged", function(val){
@@ -64,8 +67,12 @@ TabBar.prototype._added = function(tab){
 TabBar.prototype._removed = function(tab) {
 	tab.button.remove();
 	tab.removeListener("selectedBeforeChanged", tab._selectedBeforeChanged);
+	if (!this._v.children.size()){
+		this.selectedTab(false);
+	}
+	if (this._v.selectedTab === tab){
+		this._v.children.size() && this._v.children.get(0).selected(true);
+	}
 };
 
 TabBar.on("selectedTabChanged", TabBar.funcs.selectedTabChanged);
-//TabBar.on("collapsableChanged", TabBar.funcs.updateCollapsable);
-//TabBar.prototype.header = TabBar.addProperty("header", true,{type:"boolean"});

@@ -1,3 +1,7 @@
+/**
+ *
+ * @constructor
+ */
 var DirectDropDown = function(){
 	FormElement.call(this);
 	this.childElements = [];

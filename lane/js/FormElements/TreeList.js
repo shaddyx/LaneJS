@@ -1,3 +1,7 @@
+/**
+ *
+ * @constructor
+ */
 var TreeList = function() {
 	Panel.call(this);
 	this.data = {};

@@ -68,10 +68,6 @@ TimeGraph.prototype.refresh = function(){
 		captionList[lineList[k]].caption(lineList[k]);
 		pos += lineHeight;
 	}
-	
-	this.dataMap = dataMap;
-	this.lineList = lineList;
-	this.lineCount = lineCount;
 	this.lineMap = lineMap;
 	this.maxWidth = maxWidth;
 	this.lineHeight = lineHeight;

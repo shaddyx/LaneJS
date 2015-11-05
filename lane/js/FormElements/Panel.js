@@ -1,3 +1,7 @@
+/**
+ *
+ * @constructor
+ */
 var Panel = function() {
 	Container.call(this);
 	this.addPropertyTranslator(["borderRadius", "borderColor", "borderWidth", "backgroundColor"]);

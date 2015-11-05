@@ -16,7 +16,6 @@ RadioButtonSkin.def = {
 		   width:16,
 		   height:16,
 		   vAlign:BoxElement.ALIGN.middle
-		   
 	   },
 	   {
 		   name:"caption"

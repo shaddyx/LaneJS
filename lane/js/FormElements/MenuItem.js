@@ -1,3 +1,7 @@
+/**
+ * Menu item
+ * @constructor
+ */
 var MenuItem = function(){
 	FormElement.call(this);
 };

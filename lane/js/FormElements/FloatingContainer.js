@@ -1,3 +1,7 @@
+/**
+ * container with absolute position
+ * @constructor
+ */
 var FloatingContainer = function(){
 	Container.call(this);
 	this.addPropertyTranslator(['left','top', "zIndex", "relativity"]);

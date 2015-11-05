@@ -1,3 +1,10 @@
+/*
+ * @@@dependsOn: excanvas
+ */
+/**
+ * canvas element
+ * @constructor
+ */
 var Canvas = function() {
 	Panel.call(this);
 	this._ieMode = browser.ie;

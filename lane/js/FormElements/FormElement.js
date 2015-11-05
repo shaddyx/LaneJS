@@ -18,6 +18,9 @@ Util.extend(FormElement,BaseObject);
 FormElement.type = "FormElement";
 FormElement.funcs = {};
 FormElement.idCounter = 0;
+
+FormElement.prototype.name = FormElement.addProperty("context",false);
+FormElement.prototype.name = FormElement.addProperty("controller",false);
 FormElement.prototype.opacity = FormElement.addProperty("opacity", true, {type:"int"});
 FormElement.prototype.name = FormElement.addProperty("name","");
 FormElement.prototype.parent = FormElement.addProperty("parent",false,{hideFromEditor:true, export:false});
@@ -55,7 +58,11 @@ FormElement.prototype.applyImg = function(){
 		this._elements.img.backgroundImage(this._v.img);
 	}
 };
-
+/**
+ * enums all parent, calling callback for each parent
+ * @param callBack
+ * @returns {boolean}
+ */
 FormElement.prototype.enumParents = function(callBack){
 	if (callBack(this) === false) {
 		return false;
@@ -64,7 +71,10 @@ FormElement.prototype.enumParents = function(callBack){
 		return this._v.parent.enumParents(callBack);
 	}
 };
-
+/**
+ * adds an translator of property to inner or outer box element
+ * @param property
+ */
 FormElement.prototype.addPropertyTranslator = function(property){
 	if (property instanceof Array){
 		for (var k in property){
@@ -98,7 +108,10 @@ FormElement.prototype.removePropertyTranslator = function(name){
 	this.removeListener(name + "Changed",this._propertyTranslators[name].propertyTranslator,this);
 	delete this._propertyTranslators[name];
 };
-
+/**
+ * function, that calls when element ready to build, overload this function if you want custom builder
+ * @param opts
+ */
 FormElement.prototype.componentBuilder = function(opts){
 	var skin = FormElement.getSkinForType(this.type, this._v.skin);
 	this.buildComponent(skin);
@@ -138,7 +151,6 @@ FormElement.prototype.draw = function(opts){
 	if (this.trigger("beforeDraw",opts) !== false) {
 		this.componentBuilder(opts);
 	}
-	
 	if (opts.target instanceof Container) {
 		opts.target.addChild(this);
 		opts.target._v.inner.appendChild(this._v.outer);
@@ -162,6 +174,9 @@ FormElement.prototype.draw = function(opts){
 	this.applyFocusStyle();
 	this._v.outer.on("click", this.tryToFocus,this);
 };
+/**
+ * tries to focus this element
+ */
 FormElement.prototype.tryToFocus = function(){
 	if (FormElement._focusLock){
 		return;
@@ -173,8 +188,12 @@ FormElement.prototype.tryToFocus = function(){
 		this.currentFocus(true);
 	}
 };
+/**
+ * removes this element
+ */
 FormElement.prototype.remove = function(){
 	this._removed = true;
+	//this._v.parent && this._v.parent.removeChild(this);
 	if (this.trigger("beforeRemove") !== false){
 		this._v.outer.remove();
 		this.trigger("removed");
@@ -222,7 +241,10 @@ FormElement.funcs.afterDraw = function(){
 	this.applyStyleClass();
 	this.applyImg();
 };
-
+/**
+ * adds logical child, i.e child to focus
+ * @param child
+ */
 FormElement.prototype.addLogicalChild = function(child){
 	this.logicalChildren.push(child);
 	child.logicalParent(this);
@@ -238,7 +260,6 @@ FormElement.prototype.triggerRec = function(name, event){
 	}
 	this.trigger(name,event);
 };
-
 
 FormElement.prototype.refreshEnabled = function(){
 	if (this._v.isDrawn){
@@ -311,7 +332,8 @@ FormElement._apply = function(el, struct){
  * @param map
  * @param topElement
  */
-FormElement.build = function(struct, target, params, map, topElement){
+FormElement.build = function(struct, target, params, map, topElement, controller){
+	controller = controller || false;
 	var topLevel = false;
 	params = params || {};
 	if (!map) {
@@ -344,7 +366,6 @@ FormElement.build = function(struct, target, params, map, topElement){
 			el.on(k, struct.on[k]);
 		}
 	}
-	
 	for (var k in struct){
 		if (k === "type" || k === "c" || k === "importFrom" || k === "on" || k === "defaults"){
 			continue;
@@ -362,9 +383,30 @@ FormElement.build = function(struct, target, params, map, topElement){
 		el[k](struct[k]);
 	}
 	el.draw({ target: target });
+	if (el._v.controller){
+		if (!params.context){
+			throw new Error("Error, FormElement:" + el + " has a controller property:" + el._v.controller + " but context is not set in opts");
+		}
+		var newController = params.context.initDependency(el._v.controller);
+		newController.root(el);
+		if (controller){
+			newController.parentController  = controller;
+			controller.children.push(newController);
+		}
+		controller = newController;
+		topElement.___controller = topElement.___controller || controller;
+	}
+	if (el._v.name && controller){
+		controller.attach(el);
+	}
 	if (struct.c) {
 		for (var k in struct.c){
-			this.build(struct.c[k], el, params, map, topElement);
+			try{
+				this.build(struct.c[k], el, params, map, topElement, controller);
+			} catch (e){
+				console.error("Cannot build element ", struct.c[k]);
+				throw e;
+			}
 		}
 	}
 	el.elements = map;
@@ -374,7 +416,13 @@ FormElement.build = function(struct, target, params, map, topElement){
 	if (params.dataModelName){
 		el.elements[params.dataModelName] = DataModel.attachToInputElements(el);
 	}
-	return el;
+	if (el.___controller){
+		el.___controller._drawComplete();
+		return el.___controller;
+	} else {
+		return el;
+	}
+
 };
 /**
  * function fills topElement input elements from data

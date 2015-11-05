@@ -1,3 +1,7 @@
+/**
+ * Text label
+ * @constructor
+ */
 var Label = function(){
 	FormElement.call(this);
 };

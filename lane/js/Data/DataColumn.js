@@ -26,6 +26,10 @@ DataColumn.build = function(columns){
 				if (x == "type"){
 					continue;
 				}
+				if (typeof obj[x] !== "function"){
+					debugger;
+					throw new Error("Error, there is no column:" + x);
+				}
 				obj[x](columnData[x]);
 			}
 			result.push(obj);

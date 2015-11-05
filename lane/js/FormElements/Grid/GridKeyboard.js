@@ -61,7 +61,6 @@ Grid.prototype.keyPressed = function(evt){
 		//	left
 		//
 		case 37:
-			debugger;
 			var col = this.getColumnByName(this._v.selectedColumn);
 			if (col){
 				if (col._v.index > 0){

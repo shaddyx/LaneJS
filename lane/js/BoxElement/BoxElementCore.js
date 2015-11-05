@@ -419,3 +419,11 @@ BoxElement.on("mouseover", BoxElement.prototype.startHovered);
 BoxElement.on("mouseout", BoxElement.prototype.stopHovered);
 BoxElement.on("mousedown", BoxElement.prototype.startPressed);
 
+BoxElement.on(["widthChanged", "heightChanged"], function(value){
+	if (isNaN(value)){
+		debugger;
+		throw new Error("Value of width and height cannot be NaN");
+	}
+});
+
+

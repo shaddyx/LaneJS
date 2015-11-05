@@ -1,3 +1,7 @@
+/**
+ *
+ * @constructor
+ */
 var Action = function() {
 	BaseObject.call(this);
 };

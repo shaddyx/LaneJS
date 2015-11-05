@@ -68,11 +68,6 @@ var BoxElement = function(params){
 	this.__updateHorizontal();
 	this._marginDx = 0;
 	this._marginDy = 0;
-	/*this.on("_vDeltaChanged", function(value){
-		if (this.id == 98 && value == 2){
-			debugger;
-		}
-	});*/
 };
 
 Util.extend(BoxElement,BaseObject);
@@ -347,7 +342,7 @@ BoxElement.prototype.vCompress = BoxElement.addProperty("vCompress",false,{rm:Bo
 BoxElement.prototype.vAlign = BoxElement.addProperty("vAlign",BoxElement.ALIGN.begin,{rm:BoxElement.REDRAW_MODE.full});
 BoxElement.prototype.hAlign = BoxElement.addProperty("hAlign",BoxElement.ALIGN.begin,{html:true, rm:BoxElement.REDRAW_MODE.full});
 BoxElement.prototype.width = BoxElement.addProperty("width",0,{html:true, rm:BoxElement.REDRAW_MODE.redrawParent,htmlEnding:'px'});
-BoxElement.prototype.sizeRatio = BoxElement.addProperty("sizeRatio",100,{rm:BoxElement.REDRAW_MODE.full});
+BoxElement.prototype.sizeRatio = BoxElement.addProperty("sizeRatio",100,{rm:BoxElement.REDRAW_MODE.redrawParent});
 BoxElement.prototype.height = BoxElement.addProperty("height",0,{html:true, rm:BoxElement.REDRAW_MODE.redrawParent,htmlEnding:'px'});
 BoxElement.prototype.innerWidth = BoxElement.addProperty("innerWidth",0,{rm:BoxElement.REDRAW_MODE.full});
 BoxElement.prototype.innerHeight = BoxElement.addProperty("innerHeight",0,{rm:BoxElement.REDRAW_MODE.full});

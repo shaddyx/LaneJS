@@ -39,6 +39,17 @@ BasicList.prototype.remove = function(index){
 	return element;
 };
 /**
+ * removes object from list
+ * @param obj
+ */
+BasicList.prototype.removeObject = function(obj){
+	var index = this.indexOf(obj);
+	if (index == -1){
+		throw new Error("No such object in list: " + obj);
+	}
+	return this.remove(index);
+}
+/**
  * returns element count
  */
 BasicList.prototype.count = function(){
@@ -52,11 +63,37 @@ BasicList.prototype.clear = function(){
 		this.remove(0);
 	}
 };
-
+/**
+ * calls callBack for each element in this collection
+ * @param callBack
+ * @returns {boolean}
+ */
 BasicList.prototype.each = function(callBack){
 	for (var i = 0; i < this._data.length; i++){
 		if (callBack(this._data[i]) === false){
 			return false;
 		}
 	}
+};
+/**
+ * returns index of the given element or -1 if not found
+ * @param obj
+ * @returns {number}
+ */
+BasicList.prototype.indexOf = function (obj){
+	return this._data.indexOf(obj);
+}
+/**
+ * returns an array of content
+ * @returns {Array.<T>}
+ */
+BasicList.prototype.toArray = function(){
+	return this._data.slice(0);
+};
+/**
+ * returns the size of the list
+ * @returns {Number}
+ */
+BasicList.prototype.size = function(){
+	return this._data.length;
 };

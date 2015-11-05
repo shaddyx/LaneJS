@@ -63,19 +63,20 @@ DataGrid.prototype.add = function(row){
 		}
 	}
 	
-	var dataUnit = new DataRow();
-	dataUnit.data = row;
-	dataUnit.previous = currentIndex;
-	dataUnit.previousVisible = currentIndex;
-	dataUnit.current = this._data.length;
-	dataUnit.dataGrid = this;
+	var dataRow = new DataRow();
+	dataRow.data = row;
+	dataRow.previous = currentIndex;
+	dataRow.previousVisible = currentIndex;
+	dataRow.current = this._data.length;
+	dataRow.dataGrid = this;
 	if (currentLast){
 		currentLast.next = currentIndex + 1;
 	}
-	this._data.push(dataUnit);
+	this._data.push(dataRow);
 	this._visible ++;
 	this.trigger("dataUpdate");
 	this.trigger("dataModified");
+	return dataRow;
 };
 
 DataGrid.prototype.repairIndexes = function(){
@@ -226,7 +227,6 @@ DataGrid.prototype.getRows = function(from, count, callBack){
 			}
 		}
 	}
-	
 };
 
 /**
@@ -305,6 +305,20 @@ DataGrid.prototype.export = function(){
 DataGrid.prototype.load = function(obj){
 	if (!obj) {
 		throw new Error("Data must be an object");
+	}
+	if (!obj.data && !obj.columns){
+		var newObj = {
+			data:obj,
+		};
+		if (obj[0] && !this._columnsCache.length){
+			newObj.columns = {};
+			for (var k in obj[0]){
+				newObj.columns[k] = {
+					caption:k
+				}
+			}
+			obj = newObj;
+		}
 	}
 	var skipCells = false;
 	if (obj.skipCells){

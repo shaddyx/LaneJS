@@ -1,3 +1,7 @@
+/**
+ *
+ * @constructor
+ */
 var PopupMenu = function() {
 	FloatingContainer.call(this);
 };

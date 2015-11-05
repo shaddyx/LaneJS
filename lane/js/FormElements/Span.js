@@ -1,3 +1,7 @@
+/**
+ *
+ * @constructor
+ */
 var Span = function(){
 	Panel.call(this);
 };

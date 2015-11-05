@@ -1,3 +1,7 @@
+/**
+ * standard button
+ * @constructor
+ */
 var Button = function() {
 	FormElement.call(this);
 };

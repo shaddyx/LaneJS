@@ -3,6 +3,9 @@ var HtmlBlock = function() {
 };
 Util.extend(HtmlBlock, FormElement);
 HtmlBlock.type = "HtmlBlock";
+/**
+ * html of element
+ */
 HtmlBlock.prototype.html = HtmlBlock.addProperty("html","",  {type:"string"});
 HtmlBlock.prototype.updateHTML = function(){
 	if (this._v.isDrawn){

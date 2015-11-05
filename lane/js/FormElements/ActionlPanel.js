@@ -1,3 +1,7 @@
+/**
+ *
+ * @constructor
+ */
 var ActionPanel = function() {
 	Panel.call(this);
 };

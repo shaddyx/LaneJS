@@ -4,6 +4,7 @@ from os.path import isfile, join, isdir
 import re
 import glob
 import fnmatch
+
 from Tools import *
 
 class GraphBuilder:
@@ -28,14 +29,17 @@ class GraphBuilder:
         movedNodes = []
         for node in self.nodeList:
             foundDeps = 0
+            toRemove = []
             for dep in node.depends:
                 for sortedNode in self.sortedNodeList:
                     if dep == sortedNode.name:
-                        foundDeps += 1
-            if len(node.depends) <= foundDeps:
+                        toRemove.append(sortedNode.name)
+            for dep in set(toRemove):
+                node.depends.remove(dep)
+            if len(node.depends) == 0:
                 movedNodes.append(node)
         for node in movedNodes:
-            #print "removing: " + str(node) + " found: " + str(foundDeps) 
+            #print "removing: " + str(node) + " found: " + str(foundDeps)
             self.nodeList.remove(node)
             self.sortedNodeList.append(node)
         return len(movedNodes)
